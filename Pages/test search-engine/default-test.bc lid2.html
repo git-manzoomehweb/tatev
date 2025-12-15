@@ -154,6 +154,8 @@
             border-radius: 1em;
             padding: 5px !important;
             box-shadow: 1px 1px 7px #CCC;
+            max-width: 320px !important;
+            width: 100% !important;
         }
 
         ul.flighttype-items {
@@ -179,7 +181,7 @@
             content: '';
             width: 16px;
             height: 16px;
-            border-radius: 100%;
+            border-radius: 14%;
             border: 4px solid var(--neutral-700);
             display: inline-block;
         }
@@ -261,6 +263,7 @@
         label.label-dates.label-tdate-tour.float-right.w-full.relative,
         label.label-dates.label-fdate-flight.float-right.w-full.relative,
         label.label-dates.label-tdate-flight.float-right.w-full.relative,
+        .label-routes.label-departure-fh.float-right.w-full.cursor-pointer.relative,
         label.label-passengers.label-passengers-flight.float-right.w-full.cursor-pointer {
             width: auto !important;
         }
@@ -279,6 +282,12 @@
 
         .flight-routes.w-2\/5.flex.gap-2.max-xl\:w-full.max-xl\:block.max-xl\:gap-0 {
             width: 35% !important;
+        }
+        .multicity-flight-form .flight-routes.w-2\/5.flex.gap-2.max-xl\:w-full.max-xl\:block.max-xl\:gap-0 {
+            width: 45% !important;
+        }
+        .multicity-flight-form .date__searched__container.Basis_Date_Box.flex.gap-2.max-xl\:w-full.max-xl\:mb-4.w-1\/4 {
+            width: 45% !important;
         }
 
         .date__searched__container.Basis_Date_Box.flex.gap-2.max-xl\:w-full.max-xl\:mb-4.w-1\/5 {
@@ -359,7 +368,7 @@
             right: 0;
             width: fit-content;
             height: fit-content;
-            top: 0;
+            top: 33px;
         }
 
         #search-box .add-routs {
@@ -456,10 +465,10 @@
 
 
 
-
+/* 
         .route-content.w-full.mb-4.relative.set_Date_Box {
             width: 50% !important;
-        }
+        } */
 
 
         .reservation-item>li.reserve-btn.mr-3:last-child {
@@ -508,7 +517,7 @@
             width: 32px !important;
             height: 32px !important;
             top: 18% !important;
-            right: -10% !important;
+            right: -8% !important;
         }
 
         .exchangeRoute:hover {
@@ -538,7 +547,8 @@ color: inherit !important;
 } */
 
 
-.Wrapper-ExteraHoteldate p{
+.Wrapper-ExteraHoteldate p ,
+.addroute-icon , .removeall-icon , .removeroute-icon{
     display: none !important;
 }
 .Wrapper-ExteraHoteldate .label-dates{
@@ -548,7 +558,91 @@ color: inherit !important;
 .Wrapper-ExteraHoteldate .reserve-field .border-type-1.h-full.rounded-type-1.px-2{
     display: flex !important;
 }
-    </style>
+
+.Wrapper-ExteraHoteldate input.pt-12{
+    padding-top: 0.2rem !important;
+  padding-left: 2em !important;
+}
+#search-box #r-flighthotel .Wrapper-ExteraHoteldate .Basis_Date_Box {
+  width: 100% !important;
+  margin-top: 3rem !important;
+}
+
+.flighttype-items > li{
+    height: 20px !important;
+    display: flex !important;
+    justify-content: left !important;
+    align-items: center !important;
+}
+
+
+.flighttype-items {
+    display: flex !important;
+}
+
+
+
+
+.route-minus-btn.text-xl.pr-4.text-red-600.w-1\/4.h-20.leading-\[80px\].max-xl\:absolute.max-xl\:top-0.max-xl\:left-0.max-xl\:h-auto.max-xl\:leading-normal.max-xl\:text-base.max-xl\:text-left.hover\:text-primary.hover\:text-remove-route-hover-color.cursor-pointer{
+width: 50px;
+  height: 25px;
+  background: white;
+  color: var(--primary-500);
+  border-radius: 5px;
+  text-align: center;
+  line-height: 38px;
+  cursor: pointer;
+  display: inline-block;
+  margin-left: 0;
+  border: 1px solid var(--primary-500);
+  font-size: 12px;
+  padding: 0.5em;
+  width: 102px !important;
+}    
+
+
+.search-box-container .route-minus-btn.hover\:text-primary:hover {
+        background: var(--primary-500) !important;
+
+  color: white !important;
+}
+
+
+#r-hotel .date__searched__container.Basis_Date_Box.w-1\/3.flex.border-type-1.rounded-type-1.max-xl\:w-full.max-xl\:mb-4 {
+  gap: 8px;
+}
+
+
+.Add-Remove > .h-full {
+  display: flex;
+  gap: 8px;
+  justify-content: space-between;
+}
+
+
+.Add-Remove.reserve-field.w-1\/4.h-20.relative.max-xl\:w-full.max-xl\:mb-4.max-xl\:h-auto.max-xl\:my-2.max-xl\:text-center {
+  border: none;
+}
+
+.remove-routs > span{
+    font-size: 14px !important;
+}
+.remove-routs {
+  border: 1px solid var(--primary-500) !important;
+  border-radius: 8px;
+}
+.search-box-container .remove-routs.hover\:text-secondary:hover {
+  color: var(--secondary) !important;
+    border: 1px solid var(--secondary) !important;
+
+}
+.search-box-container .deactive-removemc.remove-routs.hover\:text-secondary:hover {
+  color: unset !important;
+    border: 1px solid unset !important;
+
+}
+
+</style>
 </head>
 
 <body>
