@@ -1,0 +1,16 @@
+<basis core="external.fly.ws" source="cmsDbService2" procedurename="dbsource" name="db">
+    <member method="cms"
+        postsql="select replace(replace(replace(replace(result,'None','null'),'undefined','null'),'\xa0','null'),'nan','null') as 'result' from [db.agencylist]"
+        name="agencylist" query='{
+        "name": "db",
+        "mid": "20",
+        "member": [
+            {
+                "type": "list",
+                "name": "q",
+                "request": "agencylist",
+               "lid":"[##cms.query.lid|(1)##]"
+            }
+        ]
+    }' preview="true" />
+</basis>

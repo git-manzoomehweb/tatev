@@ -1,0 +1,805 @@
+<basis core="dbsource" source="basiscore" mid="20" name="db" lid="2">
+    <member name="tour-cat" type="tree" request="cat" parentid="" preview="" order="ord" />
+</basis>
+<basis core="dbsource" source="basiscore" mid="20" name="db" lid="2">
+    <member name="tour-count-1" type="list" link="tour.bc" catid="152929" />
+</basis>
+
+<basis core='dbsource' name='captcha' source='trust_login'>
+    <member name='code' type='scalar' request='captcha'></member>
+</basis>
+
+
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="tatev">
+    <meta property="og:image" content="[##cms.cms.cdn##]/images/logo.png">
+    <meta property="og:image:width" content="240" />
+    <meta property="og:image:height" content="60" />
+    <meta property="og:image:secure_url" content="[##cms.cms.cdn##]/images/logo.png" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:alt" content="tatev" />
+    <meta property="og:description" content="tatev" />
+    <title>tatev</title>
+    <meta charset="UTF-8" />
+    <meta name="author" content="BasisCore" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <meta name="description" content="tatev" />
+    <link rel="apple-touch-icon" sizes="57x57" href="[##cms.cms.cdn##]/images/logo.png" />
+    <link rel="shortcut icon" sizes="57x57" href="[##cms.cms.cdn##]/images/logo.png" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <!----------------CSS FILE---------------->
+    <!----CSS MAIN STYLE---->
+    <link href="[##cms.cms.cdn##]/css/style.css" type="text/css" rel="stylesheet" />
+    <!----CSS FONT AWESOME---->
+    <link href="[##cms.cms.cdn##]/css/font_awesome.css" type="text/css" rel="stylesheet" />
+    <!----CSS CALENDAR---->
+    <link href="[##cms.cms.cdn##]/css/calendar.css" type="text/css" rel="stylesheet" />
+    <!----CSS DATEPICKER---->
+    <link href="[##cms.cms.cdn##]/css/datepicker.css" type="text/css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900|Raleway:400,500,600,700" type="text/css"
+        rel="stylesheet" />
+    <!----------------JS FILE---------------->
+    <script src="[##cms.cms.cdn##]/js/library.js" type="text/javascript"></script>
+
+
+
+    <link rel="stylesheet" href="./css/customized.ui.min.css">
+    <style>
+        .search-box-container {
+            height: 590px !important;
+            background-image: url(../images/search-bg.jpg);
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            position: relative;
+        }
+
+        div#search-box {
+            position: relative;
+            z-index: 2;
+            margin-top: 12em;
+        }
+
+
+        .reservation-item {
+            display: inline-block;
+            border-radius: 2em;
+            box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.5);
+            padding: 0.3em 0.5em;
+            background-color: #fff;
+        }
+
+        .reservation-item li {
+            width: 157px;
+            display: inline-block;
+            border-radius: 2em;
+            padding: 0 0.18em;
+        }
+
+        .active-module {
+            background-color: var(--primary-500);
+            color: #fff;
+        }
+
+        span.module-icon.inline-block {
+            display: inline-block;
+            margin-top: 2px;
+        }
+
+        .module-icon-deactive {
+            stroke: var(--primary-500);
+        }
+
+        .auto-fit {
+            display: none !important;
+        }
+
+        .reserve-field {
+            height: 55px !important;
+            padding: 0 0.25em;
+            border: 1px solid #e1e1e1;
+            border-radius: 5px;
+        }
+
+        .createChildDropdown.mb-4.w-full.float-right.clear-both {
+            box-shadow: none !important;
+            padding: unset !important;
+        }
+
+        .search-box-container .r-hotel .departure-date::after {
+            content: unset !important;
+            display: none !important;
+        }
+
+        select#select-age1 {
+            border: 1px solid var(--primary-800);
+            border-radius: 1em;
+        }
+
+        #search-box .m-auto.w-full .clear-both.float-right.w-full {
+            background-color: #fff !important;
+            margin: 0 auto;
+            box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.5);
+            padding: 1em;
+            border-radius: 1em !important;
+        }
+
+        .searchList .flex.relative.mb-2.float-right.w-full.clear-both {
+            box-shadow: unset !important;
+            padding: 0 !important;
+        }
+
+
+        .reserve-field.CheckHotelDate.mb-4.mt-5.clear-both.float-right.w-full {
+            background-color: #fff !important;
+            margin: unset !important;
+            box-shadow: unset !important;
+            padding: 1em !important;
+            border-radius: unset !important;
+            border: unset !important;
+        }
+
+        .passengerbox,
+        .searchList {
+            max-height: 320px;
+            overflow-y: auto;
+            scrollbar-width: thin;
+            border-radius: 1em;
+            padding: 5px !important;
+            box-shadow: 1px 1px 7px #CCC;
+        }
+
+        ul.flighttype-items {
+            /* display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+    align-content: center; */
+            height: 38px !important;
+            line-height: 38px !important;
+            /* margin: 1em auto; */
+        }
+
+        .active-r-btn#oneway::before,
+        .active-r-btn#backtoback::before,
+        .active-r-btn#multi::before {
+            border: 4px solid var(--primary);
+        }
+
+        #oneway::before,
+        #backtoback::before,
+        #multi::before {
+            content: '';
+            width: 16px;
+            height: 16px;
+            border-radius: 100%;
+            border: 4px solid var(--neutral-700);
+            display: inline-block;
+        }
+
+        .search-box-container .active-r-btn {
+            background-color: unset !important;
+        }
+
+        .search-box-container .active-r-btn>label>span {
+            color: var(--primary) !important;
+        }
+
+
+
+        #search-box .Basis_Date_Box .reserve-field div.px-2 {
+            padding: 0 !important;
+        }
+
+        #search-box #r-flight .adult-count,
+        #search-box #r-flighthotel .room-count,
+        #search-box #r-hotel .room-count,
+        #search-box #r-tour .room-count {
+            padding-left: 8px;
+        }
+
+        #search-box #r-flighthotel .Wrapper-ExteraHoteldate .Basis_Date_Box {
+            width: 100% !important;
+            margin-top: 6rem !important;
+        }
+
+        #search-box .FlightClass-text,
+        #search-box .add-routs,
+        #search-box .reserve-field.flightclass-field div.border-type-1.cursor-pointer.h-full.rounded-type-1.px-2 * {
+            font-size: 14px !important;
+        }
+
+        #search-box .minus-count,
+        #search-box .plus-count {
+            background-color: var(--primary-500) !important;
+            border-radius: 8px;
+            color: #fff !important;
+            box-shadow: 0 4px 4px 0 #00000040;
+        }
+
+        #search-box .minus-count:hover,
+        #search-box .plus-count:hover {
+            background-color: var(--secondary-900) !important;
+        }
+
+        #search-box .reserve-field.flightclass-field div.border-type-1.cursor-pointer.h-full.rounded-type-1.px-2 {
+            display: flex;
+            position: relative;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        #search-box .reserve-field.flightclass-field div.border-type-1.cursor-pointer.h-full.rounded-type-1.px-2 label {
+            width: fit-content;
+            display: flex;
+            height: 100%;
+            align-items: center;
+        }
+
+        label.label-routes.label-destination-flight.float-right.w-full.cursor-pointer.relative,
+        label.label-routes.label-departure-tour.float-right.w-full.cursor-pointer.relative,
+        label.label-passengers.label-passengers-tour.float-right.w-full.cursor-pointer,
+        label.label-passengers.label-passengers-hotel.float-right.w-full.cursor-pointer label.label-routes.label-departure-fh.float-right.w-full.cursor-pointer.relative,
+        label.label-routes.label-destination-fh.float-right.w-full.cursor-pointer.relative,
+        label.label-passengers.label-passengers-fh.float-right.w-full.cursor-pointer,
+        label.label-routes.label-departure-hotel.float-right.w-full.cursor-pointer.relative,
+        label.label-routes.label-departure-flight.float-right.w-full.cursor-pointer.relative,
+        label.label-passengers.label-passengers-hotel.float-right.w-full.cursor-pointer,
+        label.label-dates.label-fdate-hotel.float-right.w-full.relative,
+        label.label-dates.label-tdate-hotel.float-right.w-full.relative,
+        label.label-dates.label-tdate-fh.float-right.w-full.relative,
+        label.label-dates.label-fdate-fh.float-right.w-full.relative,
+        label.label-dates.label-fdate-tour.float-right.w-full.relative,
+        label.label-dates.label-tdate-tour.float-right.w-full.relative,
+        label.label-dates.label-fdate-flight.float-right.w-full.relative,
+        label.label-dates.label-tdate-flight.float-right.w-full.relative,
+        label.label-passengers.label-passengers-flight.float-right.w-full.cursor-pointer {
+            width: auto !important;
+        }
+
+        .reserve-field.departure-date.w-auto.h-20.relative {
+            width: 48% !important;
+        }
+
+        .Flightclass-Passenger.w-2\/5.flex.gap-2.max-xl\:w-full.max-xl\:block.max-xl\:gap-0 {
+            width: 30% !important;
+        }
+
+        .reserve-field.passengers-field.passengers-field-f.cursor-pointer.w-2\/3.h-20.relative.max-xl\:w-full.max-xl\:mb-4 {
+            width: 63% !important;
+        }
+
+        .flight-routes.w-2\/5.flex.gap-2.max-xl\:w-full.max-xl\:block.max-xl\:gap-0 {
+            width: 35% !important;
+        }
+
+        .date__searched__container.Basis_Date_Box.flex.gap-2.max-xl\:w-full.max-xl\:mb-4.w-1\/5 {
+            width: 30% !important;
+        }
+
+        .reserve-search {
+            display: flex;
+            align-items: center;
+            height: 55px !important;
+            padding: 8px !important;
+            border-radius: 8px !important;
+            background: var(--secondary);
+            width: 100px !important;
+        }
+
+        .reserve-search>button>svg {
+            display: none !important;
+        }
+
+        .reserve-search>button>span {
+            color: white !important;
+        }
+
+        .Basis_Date {
+            padding-top: 0 !important;
+            padding-left: 0.5em;
+            position: static !important;
+        }
+
+        .departure-date .border-type-1.h-full.rounded-type-1.px-2,
+        .departure-date .h-full.px-2.mr-\[40px\],
+        .return-date .border-type-1.h-full.rounded-type-1.px-2,
+        .return-date .h-full.px-2 {
+            display: flex !important;
+            justify-content: left;
+            align-items: center;
+        }
+
+        /* #search-box
+  .reserve-field.flightclass-field
+  div.border-type-1.cursor-pointer.h-full.rounded-type-1.px-2
+  label
+  .down-icon {
+  display: flex !important;
+  position: absolute;
+  right: -5px;
+} */
+        /* #search-box
+  .reserve-field.flightclass-field
+  div.border-type-1.cursor-pointer.h-full.rounded-type-1.px-2
+  label
+  span {
+  color: #51569f !important;
+} */
+        #search-box .active-FlightClass {
+            font-weight: 700 !important;
+            color: var(--secondary-500) !important;
+        }
+
+        #search-box label span {
+            white-space: nowrap !important;
+        }
+
+        /* #search-box #r-hotel .Basis_Date_Box input {
+  padding-left: 53px;
+}
+#search-box #r-tour .Basis_Date_Box input {
+  padding-left: 53px;
+} */
+        /* #search-box #r-flighthotel .passengers-field,
+#search-box #r-flight .passengers-field,
+#search-box .multicity-flight-form .departure-date {
+  width: 100% !important;
+} */
+        #search-box .route-minus-btn {
+            position: absolute;
+            right: 0;
+            width: fit-content;
+            height: fit-content;
+            top: 0;
+        }
+
+        #search-box .add-routs {
+            height: 56px !important;
+            background-color: var(--primary-500) !important;
+            color: #fff !important;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px !important;
+        }
+
+        #search-box .add-routs:hover {
+            background-color: var(--secondary-800) !important;
+            box-shadow: 0 4px 4px 0 #00000040;
+        }
+
+        #search-box .FlightClass.hidden-box {
+            padding: 10px 16px !important;
+        }
+
+        #search-box .multi-route-tlt {
+            font-weight: 600;
+            color: var(--primary-400) !important;
+        }
+
+        .down-icon {
+            display: none !important;
+        }
+
+        /* .click-content {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+} */
+
+        /* span.label-text {
+    position: absolute;
+    top: -8px;
+
+    background-color: white;
+    line-height: 12px;
+} */
+
+        #search-box .click-content label span {
+            position: absolute;
+            top: -26px;
+            left: -4px;
+            background: white;
+            height: 10px;
+        }
+
+        .label-flightclass .label-text {
+            position: absolute;
+            top: -9px;
+            left: 0;
+            background: white;
+            height: 10px;
+        }
+
+        #search-box .Basis_Date_Box .reserve-field label span {
+            position: absolute;
+            top: -26px;
+            left: -4px;
+            background: white;
+            height: 10px;
+
+        }
+
+        #search-box .reserve-field.passengers-field .border-type-1.cursor-pointer.h-full.rounded-type-1.px-2 label span {
+            position: absolute;
+            top: -9px;
+            left: 4px;
+            background: white;
+            height: 10px;
+
+        }
+
+
+
+        #search-box .Basis_Date_Box .reserve-field,
+        #search-box .click-content,
+        #search-box .reserve-field.passengers-field .border-type-1.cursor-pointer.h-full.rounded-type-1.px-2 {
+            display: flex;
+            align-items: center;
+            height: 55px;
+            padding: 8px;
+            border-radius: 8px !important;
+            column-gap: 0.25em !important;
+        }
+
+
+
+
+
+
+
+        .route-content.w-full.mb-4.relative.set_Date_Box {
+            width: 50% !important;
+        }
+
+
+        .reservation-item>li.reserve-btn.mr-3:last-child {
+            margin-right: unset !important;
+        }
+
+        .reservation-item>li.reserve-btn.h-8 {
+            height: 37px !important;
+        }
+
+        .reservation-item>li.reserve-btn:hover {
+            background: var(--primary) !important;
+        }
+
+        .reservation-item>li.reserve-btn:hover>span.module-name {
+            color: white !important;
+        }
+        .reservation-item > li.reserve-btn > span.module-name {
+            line-height: 37px !important ;
+        }
+
+
+
+
+        .ul-list li:not(:first-child)::before {
+            content: "\f041";
+
+            position: absolute;
+
+            font-family: "fontawesome";
+
+            right: 0.2em;
+
+            top: 0 !important;
+
+            color: #2d348e;
+
+        }
+
+        .exchangeRoute {
+            background: var(--primary-500) !important;
+            border-radius: 100% !important;
+            display: flex !important;
+            justify-content: center !important;
+            align-items: center !important;
+            width: 32px !important;
+            height: 32px !important;
+            top: 18% !important;
+            right: -10% !important;
+        }
+
+        .exchangeRoute:hover {
+            background: var(--primary-800) !important;
+        }
+
+        #search-box .exchangeRoute svg {
+            height: 11px !important;
+        }
+
+
+        .module-icon-deactive,
+        .module-icon-active {
+            width: 34px;
+            height: 30px;
+        }
+
+        .flighthotel-btn .module-icon-deactive,
+        .flighthotel-btn .module-icon-active {
+            width: 33px;
+  height: 35px;
+  margin-top: -3px;
+        }
+
+        /* .search-box-container .module-name.hover\:text-primary:hover{
+color: inherit !important;
+} */
+
+
+.Wrapper-ExteraHoteldate p{
+    display: none !important;
+}
+.Wrapper-ExteraHoteldate .label-dates{
+    float:  none !important;    
+}
+
+.Wrapper-ExteraHoteldate .reserve-field .border-type-1.h-full.rounded-type-1.px-2{
+    display: flex !important;
+}
+    </style>
+</head>
+
+<body>
+    <basis core="list" dataMemberName="db.tour-count-1">
+        <else-layout>
+            <div class="input-content"><input type="hidden" value="0" data-catid="152929" /></div>
+        </else-layout>
+        <face filter="RowNumber = Max(RowNumber)">
+            <div class="input-content"><input type="hidden" value="@RowNumber" data-catid="152929" /></div>
+        </face>
+    </basis>
+    <main>
+        <basis core="call" file="header-en.inc" />
+        <section class="content">
+            <section class="loginRegister"></section>
+            <section class="search-box-container en search-banner dir-ltr background-color_body p-relative">
+                <div class="pageBgBlue"></div>
+                <div class="pageBgLight"></div>
+                <div class="bc-main">
+                    <h1 style="opacity: 0;">online ticket,tatev</h1>
+                    <p class="title color_white text-left font_20">Discover amazing places at exclusive
+                        deals</p>
+                    <div id="search-box" class="dir-ltr">
+
+                    </div>
+                    <div class="clr"></div>
+                </div>
+                <!-- <div class="search-img">
+                    <img src="[##cms.cms.cdn##]/images/search-bg.jpg" data-src="[##cms.cms.cdn##]/images/search-bg.jpg"
+                        class="cover-image lozad" width="1920" height="296" alt="" />
+                </div> -->
+            </section>
+            <section class="item-container background-color_body">
+                <div class="bc-main p-relative">
+                    <div class="title-container text-center">
+                        <div class="title-content color_gray">Inbound <span class="color_3 p-relative">Tours</span>
+                        </div>
+                    </div>
+                    <basis core="tree" dataMemberName="tour.cat" idCol="catid" parentidCol="ParentID"
+                        nullvalue="214072">
+                        <layout>
+                            <ul class="nav-tour-cat text-center">
+                                @child
+                            </ul>
+                        </layout>
+                        <face>
+                            <li class="border-radius btn" onclick="select_tour(this,'@catid')" data-catid="@catid">
+                                @title</li>
+                        </face>
+                    </basis>
+
+
+                    <div class="tour-list-load">
+                    </div>
+                </div>
+            </section>
+            <basis core="tree" dataMemberName="tour.cat" idCol="catid" parentidCol="ParentID" nullvalue="152907">
+                <layout>
+                    <section class="item-container">
+                        <div class="bc-main p-relative ">
+                            <div class="title-container text-center">
+                                <div class="title-content color_gray"> Outbound <span
+                                        class="color_3 p-relative">Tours</span>
+                                </div>
+                            </div>
+                            <div class="tour-cat-container owl-carousel">
+                                @child
+                            </div>
+                        </div>
+                    </section>
+                </layout>
+                <face filter="link is null">
+                    <div class="tour-cat-content width_90" data-catid="@catid">
+                        <article class="inner">
+                            <div class="p-relative border-radius card">
+                                <a href="/tour-list-en.bc?catid=@catid">
+                                    <figure class="border-radius"><img src="@image" width="275" height="365"
+                                            alt="@title" class="cover-image border-radius lozad" />
+                                        <div class="effect"></div>
+                                    </figure>
+                                </a>
+                                <div class="p-absolute color_white desc">
+                                    <header>
+                                        <button class="color_white font_15 background-color_2  btn">View
+                                            Detail</button>
+                                    </header>
+                                </div>
+                            </div>
+                            <footer>
+                                <h2 class="color_gray title font_20">@title</h2>
+                                <div class=""><i class="icon fa fa-map-marker-alt color_3"></i><span
+                                        class="count color_gray tour-count">
+                                    </span> <span class="font_11 text"> City </span></div>
+                            </footer>
+                        </article>
+                    </div>
+                </face>
+                <face>
+                    <div class="tour-cat-content width_90" data-catid="@catid">
+                        <article class="inner">
+                            <div class="p-relative border-radius card">
+                                <a href="/@link">
+                                    <figure class="border-radius"><img src="@image" width="275" height="365"
+                                            alt="@title" class="cover-image border-radius lozad" />
+                                        <div class="effect"></div>
+                                    </figure>
+                                </a>
+                                <div class="p-absolute color_white desc">
+                                    <header>
+                                        <button class="color_white font_15 background-color_2  btn">View
+                                            Detail</button>
+                                    </header>
+                                </div>
+                            </div>
+                            <footer>
+                                <h2 class="color_gray title font_20">@title</h2>
+                                <div class=""><i class="icon fa fa-map-marker-alt color_3"></i><span
+                                        class="count color_gray tour-count">
+                                    </span> <span class="font_11 text"> City </span></div>
+                            </footer>
+                        </article>
+                    </div>
+                </face>
+            </basis>
+
+            <section class="item-container">
+                <div class="bc-main p-relative">
+                    <div class="services-container text-center color_gray ">
+                        <div class="service-content">
+                            <div class="inner width_90">
+                                <div class="service-icon color_1 p-relative">
+                                    1
+                                </div>
+                                <div class="service-text">
+                                    <h2 class="font_15 color_gray">find the best ferry ticket</h2>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="service-content">
+                            <div class="inner width_90">
+                                <div class="service-icon color_1 p-relative">
+                                    2
+                                </div>
+                                <div class="service-text">
+                                    <p class="font_15 color_gray">4 steps resigistration</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="service-content">
+                            <div class="inner width_90">
+                                <div class="service-icon color_1 p-relative">
+                                    3
+                                </div>
+                                <div class="service-text">
+                                    <p class="font_15 color_gray">waiting for your trip</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item-container subscribe p-relative">
+                        <div class="dot-pattern p-absolute"></div>
+                        <div class="title-container text-center">
+                            <p class="title-content color_white white">subscribe & <br />get special discount </span>
+                            </p>
+
+                        </div>
+                        <form method="post" action="/newsletter-get.bc"
+                            class="newsletter-form width_60 p-relative form-content font_14 background-color_white color_gray border-radius">
+                            <i class="fa fa-envelope color_1 font_20"></i>
+                            <input type="text" name="email" placeholder="Email Address" required />
+                            <i class="fa fa-sync color_1 font_20 cursor-pointer"
+                                onclick="refresh_captcha(this,event)"></i>
+                            <input type="text" name="Captcha" placeholder="Captcha" required />
+                            <span class="field-captcha">
+                                <span class="load-captcha">
+                                    <img class="captcha lozad" alt="captcha" src="[##captcha.code.captcha##]"
+                                        data-src="[##captcha.code.captcha##]" width="80" height="35">
+                                    <input type="hidden" value="[##captcha.code.captcha##]" name="Captchaid">
+                                </span>
+                            </span>
+                            <button type="submit"
+                                class="background-color_1 btn color_white font_17 transition float-right">subscribe</button>
+                            <div class="clr"></div>
+
+                            <div class="Loading_Form unvisible text-center">
+                                <div id="ballsWaveG">
+                                    <div id="ballsWaveG_1" class="ballsWaveG"></div>
+                                    <div id="ballsWaveG_2" class="ballsWaveG"></div>
+                                    <div id="ballsWaveG_3" class="ballsWaveG"></div>
+                                    <div id="ballsWaveG_4" class="ballsWaveG"></div>
+                                    <div id="ballsWaveG_5" class="ballsWaveG"></div>
+                                    <div id="ballsWaveG_6" class="ballsWaveG"></div>
+                                    <div id="ballsWaveG_7" class="ballsWaveG"></div>
+                                    <div id="ballsWaveG_8" class="ballsWaveG"></div>
+                                </div>
+                            </div>
+                            <div class="Message-Form text-center font_16"></div>
+                        </form>
+                    </div>
+                </div>
+            </section>
+        </section>
+    </main>
+
+
+    <script>
+        function fetchEngine() {
+            try {
+                var xhrobj = new XMLHttpRequest();
+                xhrobj.open('GET', 'search_engine.bc?lid=2');
+                xhrobj.send();
+
+
+                xhrobj.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+                        var container = document.getElementById('search-box');
+                        container.innerHTML = xhrobj.responseText;
+
+
+                        var scripts = container.getElementsByTagName("script");
+                        for (var i = 0; i < scripts.length; i++) {
+                            var scriptTag = document.createElement("script");
+                            if (scripts[i].src) {
+                                scriptTag.src = scripts[i].src;
+                                scriptTag.async = false;
+                            } else {
+                                scriptTag.text = scripts[i].textContent;
+                            }
+                            document.head.appendChild(scriptTag).parentNode.removeChild(scriptTag);
+                        }
+                    }
+                };
+            } catch (error) {
+                console.error('مشکلی رخ داده است لطفا صبور باشید.', error);
+            }
+        }
+        function waitForFiles() {
+            fetchEngine();
+            /* if (checkAllResourcesLoaded()) {
+                fetchEngine();
+            } else {
+                setTimeout(waitForFiles, 500);
+            } */
+        }
+
+
+        waitForFiles();
+        // });
+    </script>
+
+    <script src="[##cms.cms.cdn##]/js/lozad.min.js"></script>
+</body>
+
+</html>

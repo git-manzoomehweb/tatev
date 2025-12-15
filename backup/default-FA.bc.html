@@ -1,0 +1,23 @@
+<basis core="dbsource" source="basiscore" mid="20" name="db" lid="1" catid="0">
+    <member name="tour-list" type="list" link="tour.bc" size="290x280"  propertyid="10000504,8077,8181,8076,77191,77192,77193,77267"  order="date desc" typeid="159"  perpage="3" />
+</basis>
+<basis core="dbsource" source="basiscore" mid="1" name="db" lid="1" catid="0">
+    <member name="article-list" type="list" link="article.bc" size="350x280" propertyid="7244,7248,7249" order="date desc" typeid="159" />
+</basis>
+ <basis core="dbsource" source="basiscore" mid="20" name="db" lid="1">
+    <member name="procat"  type="tree" request="cat"  parentid="0" preview="" order="ord"/>
+     <member  name="catID"  type="tree" request="cat"  parentid="0" preview="" order="ord"  postsql="select catID from [db.catID] where Title= 'تورها'" />
+  </basis>
+<basis core="dbsource" source="basiscore" mid="1" name="db" lid="1" catid="152921">
+    <member name="news-list" type="list" link="article.bc" propertyid="" order="date desc" typeid="159" />
+</basis>
+ <basis core="dbsource" source="basiscore" name="db" mid="1" lid="1" usedforid="2312162">
+    <member name="view" type="view" />
+</basis>
+ <!DOCTYPE html>
+<html>
+<head>
+<title>آژانس مسافرتی tatev </title>
+<meta name="samandehi" content=""/>
+<meta name="description" content="" />
+<basis core="call" file="Tem1_Default.bc" />

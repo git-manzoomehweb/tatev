@@ -1,0 +1,357 @@
+<basis core="dbsource" source="basiscore" name="db" mid="1" lid="2" usedforid="[##cms.query.id##]">
+    <member name="view" type="view" />
+    <member name="related-tour" type="list" blgid="18" link="tour-en.bc" propertyid="8181,8076,8077,10000504" typeid="159" />
+    <member name="related-article" type="list" blgid="218" link="article-en.bc" propertyid="7246" typeid="159" />
+    <member name="data" type="view" request="rdfa" />
+</basis>
+
+<basis core="dbsource" source="media" lid="2" name="db" usedforid="[##cms.query.id##]" sourcemid="product">
+    <member name="gallery" type="list" format="4"/>
+</basis>
+<basis core="dbsource" source="basiscore" name="db" lid="2" request="seo">
+    <member name="list" type="list" request="cat" id="[##cms.query.id##]"></member>
+</basis>
+<basis core='dbsource' name='captcha' source='trust_login'>
+    <member name='code' type='scalar' request='captcha'></member>
+</basis>
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>[##cms.seo.title|db.list.title##]</title>
+    <meta charset="UTF-8" />
+    <meta name="author" content="BasisCore" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <meta name="description" content="[##cms.seo.title|db.list.title##]" />
+    <link rel="apple-touch-icon" sizes="57x57" href="" />
+    <link rel="shortcut icon" sizes="57x57" href="" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <!----------------CSS FILE---------------->
+    <!----CSS MAIN STYLE---->
+    <link href="[##cms.cms.cdn##]/css/style.css" type="text/css" rel="stylesheet" />
+    <!----CSS FONT AWESOME---->
+    <link href="[##cms.cms.cdn##]/css/font_awesome.css" type="text/css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900|Raleway:400,500,600,700" type="text/css"
+        rel="stylesheet" />
+    <!----------------JS FILE---------------->
+    <script src="[##cms.cms.cdn##]/js/library.js" type="text/javascript"></script>
+</head>
+
+<body>
+    <main>
+        <basis core="call" file="header-en.inc" />
+        <section class="content pages">
+            <section class="loginRegister"></section>
+            <section class="item-container">
+                <div class="bc-main p-relative">
+                    <div class="width_70 float-left info-container">
+                        <div class="title-container text-left">
+                            <basis core="print" datamembername="db.view">
+                                <face filter="typeid=150">
+                                    <div class="title font_color_1">
+                                        <h1 class="title-content color_gray" itemprop="@vocabulary"> @answer </h1>
+                                    </div>
+                                </face>
+                            </basis>
+                      
+                            <div class="tour-info color_gray font_14">
+                                <ul>
+                                    <basis core="view" datamembername="db.view">
+                                        <face level="1" filter="prpid=7248">
+                                            <li><span><i class="fa fa-pencil-alt font_12"></i>@child</span></li>
+                                        </face>
+                                        <face level="2" >
+                                            <span itemprop="@vocabulary">@answer</span>
+                                        </face>
+                                    </basis>
+                                    <basis core="view" datamembername="db.view">
+                                        <face level="1" filter="prpid=7249">
+                                            <li><span><i class="far fa-calendar-alt  font_12"></i>@child</span></li>
+                                        </face>
+                                        <face level="2" >
+                                            <span itemprop="@vocabulary">@answer</span>
+                                        </face>
+                                    </basis>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="tour-gallery-content">
+                            <basis core="print" datamembername="db.gallery">
+                                <face filter="RowNumber in ('1')">
+                                    <div class="img_original"><img src="/@largeIMG" width="800" height="500"
+                                        alt="@title"></div>
+                                </face>
+                            </basis>
+                            <basis core="print" datamembername="db.gallery">
+                                <layout>
+                                    <div class="demo-gallery">
+                                        <ul id="lightgallery" class="list-unstyled row">
+                                           @child
+                                        </ul>
+                                    </div>
+                                </layout>
+                                <face>
+                                    <li class="col-xs-6 col-sm-4 col-md-3" data-responsive=""
+                                    data-src="/@largeIMG" data-sub-html="">
+                                    <a href="">
+                                        <img class="img-responsive" src="/@largeIMG">
+                                    </a>
+                                </li>
+                                </face>
+                            </basis>
+                           
+                        </div>
+                        <div class="tour-info-content">
+                            <ul class="nav-item">
+                                <li class="selected cursor-pointer" onclick="select_nav_tour(this,'description')"><a
+                                        class="color_black border-radius">Description</a></li>
+                            </ul>
+                            <div class="tour-info">
+                                <basis core="view" datamembername="db.view">
+                                    <layout> 
+                                        <div id="description"class="tour-info-section border-radius background-color_body">
+                                          @child
+                                        </div>
+                                    </layout>
+                                    <face filter="typeid not in(159,150,160,161,162) and prpid not in (7249,7248,7244)"
+                                        replace="true">
+                                        <div class="color_gray font_14 text-justify text" itemprop="@vocabulary">@answer</div>
+                                    </face>
+                                    <replace tagname="img">
+                                        <img src="@val2" alt="@val3" style="max-width: 95%;margin: 15px;height: auto;"
+                                            float="@val4">
+                                    </replace>
+                                    <replace tagname="link"> <a style="color:@val4;" href="@val3">@val2</a> </replace>
+                                    <replace tagname="style"><a href="/@val3" style="color:@val4;font-size:@val5;font-weight:@val6;font-style:@val7">@val2</a></replace>
+                                    <replace tagname="bold"><b style="font-weight:@val3;color:@val4">@val2</b></replace>
+                                </basis>
+                            </div>
+                        </div>
+                    </div>
+                    <aside class="width_30 float-right side-bar-container">
+                        <div class="side-bar inner width_90 float-right">
+                            <div class="side-bar-content form-content">
+                                <p class="title font_18 text-left">Write A Review</p>
+                                <div class="booking-form">
+                                    <form method="post" action="/message-get.bc" class="color_gray font_15 width_100 form-content">
+                                    <input type="text" class="form-control width_100 float-right" name="name" placeholder="Full Name*" required/>
+                                    <input type="text" class="form-control width_100 " name="phone" placeholder="phone*" required/>
+                                    <input type="text" class="form-control width_50 float-left" name="Captcha" placeholder="captcha*" required>
+                                    <span class="field-captcha width_50 float-right text-right">
+                                        <i class="fa fa-sync color_1 font_20 cursor-pointer" onclick="refresh_captcha(this,event)"></i>
+                                        <span class="load-captcha">
+                                            <img class="captcha lozad" alt="captcha" src="[##captcha.code.captcha##]" data-src="[##captcha.code.captcha##]" width="80"
+                                                height="35">
+                                            <input type="hidden" value="[##captcha.code.captcha##]" name="Captchaid">
+                                        </span>
+                                    </span>
+                                    <div class="clr"></div>
+                                    <button type="submit" class="background-color_1 btn_1 cursor-pointer width_100 color_white"><i class="fa fa-location-arrow"></i> Send Message</button>
+                                    <div class="clr"></div>
+                                    <div class="Loading_Form unvisible text-center">
+                                        <div id="ballsWaveG">
+                                            <div id="ballsWaveG_1" class="ballsWaveG"></div>
+                                            <div id="ballsWaveG_2" class="ballsWaveG"></div>
+                                            <div id="ballsWaveG_3" class="ballsWaveG"></div>
+                                            <div id="ballsWaveG_4" class="ballsWaveG"></div>
+                                            <div id="ballsWaveG_5" class="ballsWaveG"></div>
+                                            <div id="ballsWaveG_6" class="ballsWaveG"></div>
+                                            <div id="ballsWaveG_7" class="ballsWaveG"></div>
+                                            <div id="ballsWaveG_8" class="ballsWaveG"></div>
+                                        </div>
+                                    </div>
+                                    <div class="Message-Form text-center font_16"></div>
+                                </form>
+                               </div>
+                            </div>
+                            <div class="side-bar-content support-content">
+                                <p class="title font_18 text-left">Need Help</p>
+                                <div class="info text-center border-radius">
+                                    <i class="icon background-color_white fa fa-phone-volume"></i>
+                                    <basis core="print" datamembername="db.info">
+                                        <face filter="prpid = 8000 and rownumber=5"> 
+                                            <div class="inner-info"><a href="tel:@answer" class="color_black font_18">@answer</a>
+                                                <p class="font_14 color_gray">Toll Free & 24/7 Available</p>
+                                            </div>
+                                        </face>
+                                    </basis>
+                                  
+                                    <div class="clr"></div>
+                                </div>
+                                <div class="social-icon text-center"> 
+                                    <a href="#" class="icon"><i class="fab fa-facebook-f"></i></a> 
+                                    <a href="#" class="icon"><i class="fab fa-twitter"></i></a> 
+                                    <a href="#" class="icon"><i class="fab fa-linkedin-in"></i></a>
+                                    <a href="#" class="icon"><i class="fas fa-basketball-ball"></i></a> 
+                                    <a href="#" class="icon"><i class="fab fa-pinterest-p"></i></a> 
+                                  </div>
+                            </div>
+                       
+                        </div>
+                    </aside>
+                    <div class="clr"></div>
+                </div>
+            </section>
+            <basis core="list" datamembername="db.related-tour">
+                <layout>
+                    <section class="item-container background-color_body">
+                        <div class="bc-main p-relative">
+                            <div class="title-container text-center">
+                                <h1 class="title-content color_gray">Related <span class="color_3 p-relative">Tours</span>
+                                </h1>
+                                <p class="font_16">Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                                </p>
+                            </div>
+                            <div class="tour-list-container tour-list">
+                               @child
+                            </div>
+                        </div>
+                    </section>
+                </layout>
+                <face filter="link is null">
+                    <div class="tour-list-content">
+                        <article class="inner border-radius card background-color_white width_90">
+                            <a href="/tour.bc?id=@id">
+                                <figure class="p-relative border-radius"><img src="/@type_159"
+                                    width="380" height="245" alt="@title" class="cover-image border-radius transition" />
+                                <div class="effect"></div>
+                            </figure>
+                            <div class="desc">
+                                <header class="text-left">
+                                    <h2 class="color_gray title font_18 min-title">@title</h2>
+                                    <div class="d-flex">
+                                        <div class="info">
+                                            <p><i class="icon font_12 text-center far fa-clock"></i><span
+                                                    class="font_13 slice">@prp_8076</span></p>
+                                            <p><i class="icon font_12 text-center far fa-calendar-check"></i><span
+                                                    class="font_13">@prp_8077</span></p>
+                                        </div>
+                                        <div class="price">
+                                            <p class="color_black">Price</p>
+                                            <p class="color_3 price-text slice">@prp_8181</p>
+                                        </div>
+                                    </div>
+                                </header>
+                                <footer class="text-left"><button
+                                        class="color_white font_15 background-color_2 btn">View
+                                        Detail</button></footer>
+                            </div>
+                            </a>
+                    
+                        </article>
+                    </div>
+                </face>
+                <face>
+                    <div class="tour-list-content">
+                        <article class="inner border-radius card background-color_white  width_90">
+                            <a href="/@link">
+                                <figure class="p-relative border-radius"><img src="/@type_159"
+                                    width="380" height="245" alt="@title" class="cover-image border-radius transition" />
+                                <div class="effect"></div>
+                            </figure>
+                            <div class="desc">
+                                <header class="text-left">
+                                    <h2 class="color_gray title font_18 min-title">@title</h2>
+                                    <div class="d-flex">
+                                        <div class="info">
+                                            <p><i class="icon font_12 text-center far fa-clock"></i><span
+                                                    class="slice font_13">@prp_8076</span></p>
+                                            <p><i class="icon font_12 text-center far fa-calendar-check"></i><span
+                                                    class="font_13">@prp_8077</span></p>
+                                        </div>
+                                        <div class="price">
+                                            <p class="color_black">Price</p>
+                                            <p class="color_3 price-text slice">@prp_8181</p>
+                                        </div>
+                                    </div>
+                                </header>
+                                <footer class="text-left"><button
+                                        class="color_white font_15 background-color_2 btn">View
+                                        Detail</button></footer>
+                            </div>
+                            </a>
+                    
+                        </article>
+                    </div>
+                </face>
+            </basis>
+            <basis core="list" datamembername="db.related-article">
+                <layout>
+                    <section class="item-container">
+                        <div class="bc-main p-relative">
+                            <div class="title-container text-center">
+                                <h1 class="title-content color_gray">Related <span class="color_3 p-relative">Article</span>
+                                </h1>
+                                <p class="font_16">Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                                </p>
+                            </div>
+                            <div class="article-list-container article-list">
+                                @child
+                            </div>
+                        </div>
+                    </section>
+                </layout>
+                <face filter="link is null">
+                    <div class="article-list-content">
+                        <article class="inner border-radius card background-color_white  width_90">
+                            <a href="/article-en.bc?id=@id">
+                                <figure class="p-relative border-radius"><img src="/@type_159"
+                                    width="380" height="245" alt="@title" class="cover-image border-radius transition" />
+                                <div class="effect"></div>
+                            </figure>
+                            <div class="desc">
+                                <header class="text-left">
+                                    <div class="d-flex">
+                                        <div class="info">
+                                            <p><i class="icon font_12 text-center far fa-calendar-check"></i><span
+                                                    class="font_13">@cdate</span></p>
+                                        </div>
+                                    </div>
+                                    <h2 class="color_gray title font_18 min-title">@title</h2>
+                                    <p class="info font_13 mini-text"> @prp_7246</p>
+                                </header>
+                                <footer class="text-left"><button
+                                        class="color_gray font_15 info">Read more<i class="fa fa-angle-right"></i></button></footer>
+                            </div>
+                            </a>
+                        </article>
+                    </div>
+                </face>
+                <face>
+                    <div class="article-list-content">
+                        <article class="inner border-radius card background-color_white  width_90">
+                            <a href="/@link">
+                                <figure class="p-relative border-radius"><img src="/@type_159"
+                                    width="380" height="245" alt="@title" class="cover-image border-radius transition" />
+                                <div class="effect"></div>
+                            </figure>
+                            <div class="desc">
+                                <header class="text-left">
+                                    <div class="d-flex">
+                                        <div class="info">
+                                            <p><i class="icon font_12 text-center far fa-calendar-check"></i><span
+                                                    class="font_13">@cdate</span></p>
+                                        </div>
+                                    </div>
+                                    <h2 class="color_gray title font_18 min-title">@title</h2>
+                                    <p class="info font_13 mini-text"> @prp_7246</p>
+                                </header>
+                                <footer class="text-left"><button
+                                        class="color_gray font_15 info">Read more<i class="fa fa-angle-right"></i></button></footer>
+                            </div>
+                            </a>
+                        </article>
+                    </div>
+                </face>
+            </basis>
+            
+        </section>
+        <basis core="call" file="footer-en.inc" />
+    </main>
+    <!----------------JS GALLERY---------------->
+    <script type="text/javascript" src="[##cms.cms.cdn##]/js/lightgallery.js"></script>
+</body>
+
+</html>

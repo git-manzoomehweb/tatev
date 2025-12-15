@@ -1,0 +1,1711 @@
+<basis core="tracking" name="tracking" source="Monitoring" collectionname="activity" dbname="tracking" addcookie="true" />
+<basis core="cookie" name="trackingid" value="[##tracking.inserted.id|(0)##]" />
+<basis core="dbsource" source="trust_login8" mid="24" name="db" lid="1" rkey="[##cms.cookie.rkey##]">
+    <member name="userid" type="scalar" request="userid" preview="" />
+</basis>
+<basis core="external.fly.ws" source="cmsDbService2" name="db" procedurename="dbsource" >
+    <member method="cms" name="Panel_Invoice" query= '{
+        "name": "db",
+        "mid": "20",
+        "member": [
+            {
+                "type": "scalar",
+                "name": "q",
+                "request": "agencycatid"
+            }
+        ]
+    } ' />
+</basis>
+<basis core="group" name="Delay_1" >
+<basis core="dbsource" source="trust_login" lid="1" name="db" catid="[##db.Panel_Invoice.result##]" userid= "[##db.userid.userid##]" ownerid="[##cms.cms.ownerid##]" >
+    <member name="checkuser" type="scalar"  request="checkagencyuser" />
+</basis>
+<basis core="group" name="Delay_2" >
+    <basis core="external.fly.ws" source="cmsDbService2" procedurename="dbsource" name="db">
+     <member method="cms" name="chagencyuser" query='{
+        "name": "db",
+        "mid": "20",
+        "member": [
+            {
+                "type": "scalar",
+                "name": "q",
+                "request": "checkagencyuser",
+                "counter": "[##db.checkuser.Column1##]",
+                "userid": "[##db.userid.userid##]"
+            }
+        ]
+    }'/>
+    </basis>
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>هتل</title>
+    <meta charset="utf-8">
+    <meta name="author" content="BasisCore">
+    <meta name="viewport" content="width=device-width, minimum-scale=0.25, maximum-scale=1.0, initial-scale=1.0">
+    <!----CSS LIBRARY---->
+    <link href="https://cdn.basiscore.net/basisfly.com/css/reservation_mob_calendar.css" type="text/css" rel="stylesheet" />
+    <link href="https://cdn.basiscore.net/basisfly.com/css/reservation_mob_style.css" type="text/css" rel="stylesheet" />
+    <link href="https://cdn.basiscore.net/basisfly.com/css/reservation_font_awesome.css" type="text/css" rel="stylesheet" />
+    <!----CSS CUSTOMIZE---->
+    <link href="[##cms.cms.cdn##]/css/style_mob.css" type="text/css" rel="stylesheet" />
+    <!----JS LIBRARY---->
+    <script src="https://cdn.basiscore.net/basisfly.com/js/reservation_js_library.js" type="text/javascript"></script>
+</head>
+
+<body onload="onloadFunc();">
+    <div id="Container" class="p-relative">
+        <div id="bg-popup" class="unvisible"></div>
+        <div class="message_box message_box_timeout unvisible font_13 p-absolute">
+            <i class="fas fa-clock icon_message_box font-color_2 "></i>
+            <div class="line-one font_18">
+                <span>اعتبار جستجوی شما پایان یافت.</span>
+            </div>
+            <div class="line-two">
+                <div> لطفا برای دریافت بهترین قیمت ها و بررسی مجدد ظرفیت روی دکمه زیر کلیک کنید.</div>
+                <button class="background-color_2 font-weight" onClick="window.location='/'">صفحه
+                    اصلی</button>
+                <button class="background-color_2 font-weight" onclick="location.reload()">جستجوی
+                    مجدد</button>
+            </div>
+        </div>
+        <div id="Container-resize">
+            <div class="loginRegister"></div>
+            <basis core="call" file="M_Header.inc" />
+            <div class="clr"></div>
+            <div id="content">
+                <div class="section-research background-color_1 font_13">
+                    <div class="section-research-right float_right">
+                        <div>
+                            <span>[##cms.form.coHotel##]</span>
+                        </div>
+                        <div class="clr"></div>
+                        <div class="float_right">
+                            <span>[##cms.form.fdate##]</span>
+                            <span class="">-</span>
+                            <span>[##cms.form.tdate##]</span>
+                        </div>
+                        <div class="section-research-left float_left">
+                            <form method="post" data-read="0" action="M_Research.bc" class="form_research">
+                                <input type="hidden" value="3" name="type" />
+                                <input type="hidden" value="[##cms.form.persiancurrent##]" class="persiancurrent" name="persiancurrent" />
+                                <input type="hidden" value="[##cms.form.cityid##]" name="cityid" />
+                                <input type="hidden" value="[##cms.form.fdate##]" name="fdate" class="departuredate"/>
+                                <input type="hidden" value="[##cms.form.tdate##]" name="tdate" class="returndate" />
+                                <input type="hidden" value="[##cms.form.mstring_fdate##]" name="mstring_fdate" class="departureMdate" />
+                                <input type="hidden" value="[##cms.form.mstring_tdate##]" name="mstring_tdate" class="returnMdate" />
+                                <input type="hidden" value="[##cms.form.coHotel##]" name="coHotel" />
+                                <input type="hidden" value="" name="roomcount" class="roomcount" />
+                                <input type="hidden" value="" name="adult" class="adult" />
+                                <input type="hidden" value="" name="childage" class="childage" />
+                                <button type="submit"><span>تغییر </span><span class="fa fa-search"></span></button>
+                            </form>
+                            <form method="post" action="M_Hotel_Search.bc" class="form_research_date">
+                                <input type="hidden" value="[##cms.form.persiancurrent##]" class="persiancurrent" name="persiancurrent" />
+                                <input type="hidden" value="[##cms.form.cityid##]" name="cityid" />
+                                <input type="hidden" value="[##cms.form.fdate##]" name="fdate" class="departuredate"/>
+                                <input type="hidden" value="[##cms.form.tdate##]" name="tdate" class="returndate" />
+                                <input type="hidden" value="[##cms.form.mstring_fdate##]" name="mstring_fdate" class="departureMdate" />
+                                <input type="hidden" value="[##cms.form.mstring_tdate##]" name="mstring_tdate" class="returnMdate" />
+                                <input type="hidden" value="[##cms.form.coHotel##]" name="coHotel" />
+                                <input type="hidden" value='[##cms.json.header|cms.form.roomSearch##]' name="roomSearch" />
+                            </form>
+                        </div>
+                        <div class="clr"></div>
+                    </div>
+                  
+                    <div class="clr"></div>
+                    <div class="content-research unvisible">
+                        <div class="Loading-box">
+                            <div class="lds-spinner">
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clr"></div>
+                </div>
+                <div class="wrapper-95">
+                    <span class="before-btn background-color_1  font_12"><i
+                            class="fa fa-arrow-right float_right"></i>روز قبل</span>
+                    <span class="after-btn background-color_1   font_12">روز بعد<i
+                            class="fa fa-arrow-left float_left"></i></span>
+                </div>
+                <div class="wating-search">
+                    <span>در حال جستجوی بهترین هتل ها ...</span>
+                    <div class="loading-progress"></div>
+                    <img src="/images/M_Hotel.gif" alt="" width="170" height="" />
+                </div>
+                <div id="app" class="unvisible"></div>
+            </div>
+            <basis core="call" file="M_Footer.inc" />
+        </div>
+    </div>
+
+    <!----JS LIBRARY---->
+    <script type="text/javascript">
+    $(document).ready(function () {
+    fetch('/Client_Hotel_Json.bc', {
+    method: 'POST',
+    body: 'cityid=[##cms.form.cityid##]&fdate=[##cms.form.fdate##]&tdate=[##cms.form.tdate##]&userid=[##db.userid.userid##]&rooms=[##cms.json.header|cms.form.roomSearch##]'
+})
+    .then(response => response.text())
+    .then(text => {
+        let Maindata = JSON.parse(text.replace(/\'/g, '"'))
+        let LenMaindata = Maindata.length
+        if (LenMaindata !== undefined) {
+            Maindata.sort((a, b) => b.hotelinfo.hotelsearch.star - a.hotelinfo.hotelsearch.star);
+        }
+        $('.wating-search').hide()
+        $('#app').show()
+        load_data(Maindata)
+        
+    }).catch(error => console.error(error))
+    })
+
+    
+    </script>
+    <script type="text/babel">
+        function load_data(load_data) {
+            class App extends React.Component {
+                constructor(props) {
+                    super(props);
+                    this.state = {
+                        data: [],
+                        data_provider: [],
+                        data_currency: [],
+                        library: null,
+                        librarySecond: null,
+                        perPage: 20,
+                        currentPage: 1,
+                        currentPage2: 2,
+                        currentPage3: 3,
+                        maxPage: null,
+                        filterName: "",
+                        filterTotalF: "",
+                        filterTotalS: "",
+                        rangevalTotalF: "",
+                        rangevalTotalS: "",
+                        visibleRoom: {},
+                        loadingVisible: {},
+                        resultruleRoom: {},
+                        ruleRoomVisibles: {},
+                        show_rooms_data: {},
+                        priceS: {},
+                        defaultactive: {},
+                        priceactive: {},
+                        starSort: {},
+                        staractive: {},
+                        checkkeyprice: 0,
+                        checkkeystar: 0,
+                        activedefault: "active",
+                        activeprice: "",
+                        activestar: "",
+                        state_service: "",
+                        state_stars: "",
+                        state_availability: "",
+                        state_checktype: "",
+                        state_checkkey: "",
+                        state_active_btn : "",
+                        state_currency_unit: "",
+                        state_currency_cost: 1,
+                        state_floatdigit: ""
+                    };
+                    this.stars = [];
+                    this.service = [];
+                    this.availability = [];
+                    this.handleClick = this.handleClick.bind(this);
+                    this.handleReset = this.handleReset.bind(this);
+                }
+                componentDidMount() {
+                    this.setState(state => ({
+                        ...state,
+                        data: load_data
+                    }), () => {
+                        this.reorganiseLibrary()
+                    })
+                    $(document).on('update_result', (event, service, stars, availability, checktype, checkkey) => {
+                        this.reorganiseLibrary(service, stars, availability, checktype, checkkey)
+                    })
+                    if ([##db.chagencyuser.result##] == 1) {
+                        fetch('/Client_Provider_Library.bc')
+                            .then(response => response.json())
+                            .then(provider => {
+                                this.setState({ data_provider: provider })
+                            }).catch(error => console.error(error))
+                    }
+                    let getCurrencyObject = localStorage.getItem('currencyObject');
+            let jsonCurrency = JSON.parse(getCurrencyObject);
+            if (jsonCurrency) {
+                this.setState({
+                    state_currency_unit: jsonCurrency.currency_unit,
+                    state_currency_cost: jsonCurrency.currency_cost,
+                    state_floatdigit: jsonCurrency.floatdigit,
+                })
+            }
+                }
+                componentDidUpdate() {
+                    $(".night_hotel").text($(".nightLink").val())
+                    $(".unit_content").each(function () {
+                        if ($(this).text() == 'ریالريال' || $(this).text() == 'ريالریال') {
+                            $(this).text('ریال')
+                        }
+                    })
+                    $(".grade_filter").sort(function (a, b) {
+                        a = $(".stars", a).val().replace(/,/g, '');
+                        b = $(".stars", b).val().replace(/,/g, '');
+                        return b - a;
+                    }).appendTo(".grade_results");
+        
+                    $(document).on('click', function (event) {
+                        if (!$(event.target).closest('.section-filter-icon,.section-filter-content').length) {
+                            $(".section-filter").removeClass('section-filter-open')
+                            $(".section-filter-content").animate({ right: '-100%' }, 350);
+                        }
+        
+                    })
+        
+                }
+                reorganiseLibrary = (service, stars, availability, checktype, checkkey) => {
+                    const { filterName, filterTotalF, filterTotalS, perPage, data } = this.state;
+                    let library = data;
+                    let librarySecond = data;
+                    librarySecond = _.chunk(librarySecond, perPage);
+                    this.setState({
+                        librarySecond,
+                        currentPage: 1,
+                        maxPage: librarySecond.length === 0 ? 1 : librarySecond.length
+                    })
+        
+                    let defaultFilterTotalF = null;
+                    defaultFilterTotalF = filterTotalF
+                        ? (filterTotalF)
+                        : (this.renderMinFilterTotal(librarySecond));
+                    let defaultFilterTotalS = null;
+                    defaultFilterTotalS = filterTotalS
+                        ? (filterTotalS)
+                        : (this.renderMaxFilterTotal(librarySecond));
+                    if (filterTotalF !== "" || filterTotalS !== "") {
+                        let lenLibraryDef = library.length
+                        if (lenLibraryDef !== undefined) {
+                            library = library.filter(item =>
+                                item.totalCom >= defaultFilterTotalF && item.totalCom <= defaultFilterTotalS
+                            )
+                            let lenLibrary = library.length
+                            $('.list_count').text(lenLibrary)
+                        }
+                    }
+        
+                    if (checktype == 'default') {
+                        library.sort((a, b) => a.total - b.total);
+                        this.setState({ activedefault: "active" })
+                        this.setState({ activeprice: "" })
+                        this.setState({ activestar: "" })
+        
+                        if (this.state.priceS[0] == true) {
+                            this.setState(prevState => ({
+                                priceS: { ...prevState.priceS, [0]: !prevState.priceS[0] }
+                            }))
+                        }
+                        if (this.state.starSort[0] == true) {
+                            this.setState(prevState => ({
+                                starSort: { ...prevState.starSort, [0]: !prevState.starSort[0] }
+                            }))
+                        }
+        
+        
+                    }
+        
+                    if (checktype == 'price') {
+                        if (checkkey == 0) {
+        
+                            library.sort((a, b) => b.total - a.total);
+                            this.setState({ checkkeyprice: 1 });
+                        } else {
+                            library.sort((a, b) => a.total - b.total);
+                            this.setState({ checkkeyprice: 0 });
+                        }
+                        this.setState(prevState => ({
+                            priceS: { ...prevState.priceS, [0]: !prevState.priceS[0] }
+                        }))
+                        this.setState({ activeprice: "active" })
+                        this.setState({ activedefault: "" })
+                        this.setState({ activestar: "" })
+                        if (this.state.starSort[0] == true) {
+                            this.setState(prevState => ({
+                                starSort: { ...prevState.starSort, [0]: !prevState.starSort[0] }
+                            }))
+                        }
+        
+                    }
+        
+                    if (checktype == 'star') {
+                        if (checkkey == 0) {
+                            library.sort((a, b) => b.hotelinfo.hotelsearch.star - a.hotelinfo.hotelsearch.star);
+                            this.setState({ checkkeystar: 1 });
+                        } else {
+                            library.sort((a, b) => a.hotelinfo.hotelsearch.star - b.hotelinfo.hotelsearch.star);
+                            this.setState({ checkkeystar: 0 });
+                        }
+                        this.setState(prevState => ({
+                            starSort: { ...prevState.starSort, [0]: !prevState.starSort[0] }
+                        }))
+                        this.setState({ activeprice: "" })
+                        this.setState({ activedefault: "" })
+                        this.setState({ activestar: "active" })
+                        if (this.state.priceS[0] == true) {
+                            this.setState(prevState => ({
+                                priceS: { ...prevState.priceS, [0]: !prevState.priceS[0] }
+                            }))
+                        }
+                    }
+        
+                    if (filterName !== "") {
+                        library = library.filter(item =>
+                            item.hotelinfo.name.toLowerCase().includes(filterName)
+                        )
+                        let lenLibrary = library.length
+                        $('.list_count').text(lenLibrary)
+                    }
+        
+        
+                    if (stars !== undefined) {
+                        if (stars !== "") {
+                            stars = stars.split(",");
+        
+                            library = library.filter(item => {
+                                if (stars.includes(this.renderStarFilter(item.hotelinfo.hotelsearch.star))) return item;
+                            })
+                        }
+                        let lenLibrary = library.length
+                        $('.list_count').text(lenLibrary)
+                    }
+        
+        
+                    if (service !== undefined) {
+                        if (service !== "") {
+                            service = service.split(",");
+                            library = library.filter(item => {
+                                if (service.includes(item.families[0].services)) return item;
+                            })
+                        }
+                        let lenLibrary = library.length
+                        $('.list_count').text(lenLibrary)
+                    }
+        
+                    if (availability !== undefined) {
+                        if (availability !== "") {
+                            availability = availability.split(",");
+                            library = library.filter(item => {
+                                if (this.render_availability_filter(item.families[0]).some(r => availability.includes(r))) return item;
+        
+                            })
+                        }
+        
+                        let lenLibrary = library.length
+                        $('.list_count').text(lenLibrary)
+        
+                    }
+        
+                    let lenLibrary = library.length
+                    if (lenLibrary == undefined) {
+                        $('.list_count').text(0)
+                    } else {
+                        $('.list_count').text(lenLibrary)
+                    }
+        
+                    library = _.chunk(library, perPage);
+                    this.setState({
+                        library,
+                        currentPage: 1,
+                        maxPage: library.length === 0 ? 1 : library.length
+                    })
+                }
+        
+        
+                renderMinFilterTotal = (librarySecond) => {
+                    return librarySecond.reduce((acc, lib) => {
+                        const libMin = Math.min(...lib.map(item => item.totalCom))
+                        return acc === undefined ? libMin : libMin < acc ? libMin : acc
+                    }, undefined)
+                }
+                renderMaxFilterTotal = (librarySecond) => {
+                    return librarySecond.reduce((acc, lib) => {
+                        const libMax = Math.max(...lib.map(item => item.totalCom))
+                        return libMax > acc ? libMax : acc
+                    }, 0)
+                }
+        
+        
+                renderStarFilter(element) {
+                    let elementToSting = element.toString()
+                    return elementToSting
+                }
+                render_availability_filter(element) {
+                    let elementAdd = []
+                    for (let i = 0; i < element.availablerooms.length; i++) {
+                        elementAdd.push(element.availablerooms[i].info.availability)
+                    }
+        
+                    return elementAdd
+                }
+        
+                // Previous Page
+                previousPage = event => {
+                    this.handleReset(event);
+                    this.handleClick(event);
+                    this.setState({
+                        currentPage: this.state.currentPage - 1,
+                        currentPage2: this.state.currentPage2 - 1,
+                        currentPage3: this.state.currentPage3 - 1
+                    })
+                }
+        
+                // Next Page 
+                nextPage = event => {
+                    this.handleReset(event);
+                    this.handleClick(event);
+                    this.setState({
+                        currentPage: this.state.currentPage + 1,
+                        currentPage2: this.state.currentPage2 + 1,
+                        currentPage3: this.state.currentPage3 + 1
+                    })
+                }
+        
+                // Next Page3
+                nextPage3 = event => {
+                    this.handleReset(event);
+                    this.handleClick(event);
+                    this.setState({
+                        currentPage: this.state.currentPage3,
+                        currentPage2: this.state.currentPage3 + 1,
+                        currentPage3: this.state.currentPage3 + 2
+                    })
+                }
+                // handle filter name
+                handlerFilterName = (event) => {
+                    this.handleReset(event);
+                    const { state_service, state_stars, state_availability, state_checktype, state_checkkey } = this.state
+                    this.setState(
+                        {
+                            filterName: event.target.value.toLowerCase()
+                        },
+                        () => {
+                            this.reorganiseLibrary(state_service, state_stars, state_availability, state_checktype, state_checkkey);
+                        }
+                    )
+                }
+                // start handler filter price
+                handlerFilterTotal = (event) => {
+                    this.handleReset(event);
+                    const { state_service, state_stars, state_availability, state_checktype, state_checkkey } = this.state
+                    let renderMax = this.renderMaxTotal()
+                    let value = event.target.value
+                    let key = event.target.getAttribute("data-key")
+                    if (key == '1') {
+                        this.setState(
+                            {
+                                filterTotalF: event.target.value,
+                                rangevalTotalF: event.target.value,
+                            },
+                            () => {
+                                this.reorganiseLibrary(state_service, state_stars, state_availability, state_checktype, state_checkkey);
+                            }
+                        )
+                    } else if (key == '2') {
+                        event.target.max = renderMax
+                        this.setState(
+                            {
+                                filterTotalS: event.target.value,
+                                rangevalTotalS: event.target.value,
+                            },
+                            () => {
+                                this.reorganiseLibrary(state_service, state_stars, state_availability, state_checktype, state_checkkey);
+                            }
+                        )
+                    }
+                } // end handler filter price
+        
+        
+                // handler per page
+                handlePerPage = (evt) =>
+                    this.setState({
+                        perPage: evt.target.value
+                    }, () => this.reorganiseLibrary());
+        
+                // handler render of library
+                renderLibrary = () => {
+                    const { library, currentPage } = this.state;
+                    if (!library || (library && library.length === 0)) {
+                        return <div><div className="message_box message_box_nodata font_13 no-data">
+                            <i className="fas fa-exclamation-triangle icon_message_box font-color_2"></i>
+                            <div className="line-one font_18">
+                                <span>برای جستجوی شما نتیجه ای یافت نشد .</span>
+                            </div>
+                            <div className="line-two">
+                                <div> لطفا برای دریافت بهترین قیمت ها و بررسی مجدد ظرفیت روی دکمه زیر کلیک کنید.</div>
+                                <button className="background-color_2 font-weight" onClick={this.renderhomepage}>صفحه اصلی</button>
+                                <button className="background-color_2 font-weight" onClick={this.renderResearch}  >جستجوی مجدد</button>
+                            </div>
+                        </div></div>
+                    }
+                    return library[currentPage - 1].map((item, i) => (
+                        <div className="search-item transition">
+                            <form method="post" action={this.renderAction(item)}>
+                                <input type="hidden" value={this.state.state_currency_unit} name="rate-unit" className="rate-unit" />
+                                <input type="hidden" value={this.state.state_currency_cost} name="rate-cost" className="rate-cost" />
+                                <input type="hidden" value={this.state.state_floatdigit} name="rate-floatdigit" className="rate-floatdigit" />
+                                <input type="hidden" value="[##cms.form.cityid##]" name="cityid" />
+                                <input type="hidden" value="[##cms.form.coHotel##]" name="coHotel" />
+                                <input type="hidden" value="[##cms.form.hotelname##]" name="hotelname" />
+                                <input type="hidden" value='[##cms.json.header|cms.form.roomSearch##]' name="roomSearch" />
+                                <input type="hidden" value="[##cms.form.fdate##]" name="fdate" />
+                                <input type="hidden" value="[##cms.form.tdate##]" name="tdate" />
+                                <input type="hidden" value={item.nights} name="nightLink" className="nightLink" />
+                                <input type="hidden" value={item.supplier} name="supplier" />
+                                <input type="hidden" value={item.hotelinfo.hotelsearch.hotelid} name="hotelid" />
+                                {this.renderOptionIdFirst(item)}
+                                {this.renderproviderId(item.id)}
+                                {this.renderprovider(item)}
+                                {this.renderid(item)}
+                                {this.renderadultsFirst(item)}
+                                {this.renderchildwithbedFirst(item)}
+                                {this.renderchildwithoutbedFirst(item)}
+                                {this.renderinfantFirst(item)}
+                                {this.renderroomidFirst(item)}
+                                <div className="item-result">
+                                    <div className="item-result-top  p-relative">
+                                        <div className="item-result-top-right float_right p-relative back_img">
+                                            {this.renderImgHotel(item)}
+                                        </div>
+                                        <div className="item-result-top-left hotel float_left font_13">
+                                            <div>
+                                                <div className="hotel-name">
+                                                    <h1 className="font_13">{item.hotelinfo.name}</h1>
+                                                </div>
+                                                <div><img src={(`https://cdn.basiscore.net/basisfly.com/images/reservation_${item.hotelinfo.hotelsearch.star}-rate.png`)} alt="" width="70"
+                                                    height="14" />
+                                                    {this.renderProviderName(item)}
+                                                </div>
+                                                <div className="clr"></div>
+                                            </div>
+                                            <div>
+                                                <span className="Qu-info-hotel font_12"> اتاق: </span>
+                                                {this.renderRoomtypeFirst(item)}
+                                            </div>
+                                            <div>
+                                                <span className="Qu-info-hotel font_12">وضعیت : </span>
+                                                {this.renderavailabFirst(item)}
+                                            </div>
+                                            {this.renderHotelidLink(item)}
+                                        </div>
+                                        <div className="clr"></div>
+                                    </div>
+                                    <div className="item-result-bottom">
+                                        <div className="item-result-bottom-right float_right font_13">
+                                            <div className="col-price">
+                                                <div>قیمت :</div>
+                                                <div><span className="total-cost font_15">{new Intl.NumberFormat().format(this.renderTotal(item.total, this.state.state_currency_cost, this.state.state_floatdigit))}</span><span className="money-type font_10">{this.renderUnit(item.moneytype, this.state.state_currency_unit)}</span>
+                                            </div>
+                                            <div className="clr"></div>
+                                            </div>
+                                        </div>
+                                        <div className="item-result-bottom-left float_left">
+                                            <button type="button" className="details-button font_13 background-color_2" data-active = {`${this.state.state_active_btn[i] ? "1" : "0"}`} onClick={e => this.select_room(e, item, i)}><span>تغییر اتاق</span></button>
+                                            <button type="submit" className="reserve-button font_13 background-color_1"><span>رزرو هتل</span></button>
+                                        </div>
+                                        <div className="item-result-bottom-100  font_13">
+                                            {this.renderCommission(item)}
+                                            {this.renderTotalcom(item)}
+                                            <div className="clr"></div>
+                                        </div>
+                                        <div className="clr"></div>
+                                    </div>
+                                    <div key={i} className={`${!this.state.loadingVisible[i] ? "unvisible" : "visible"}`}>
+                                        <div id="ballsWaveG">
+                                            <div id="ballsWaveG_1" className="ballsWaveG"></div>
+                                            <div id="ballsWaveG_2" className="ballsWaveG"></div>
+                                            <div id="ballsWaveG_3" className="ballsWaveG"></div>
+                                            <div id="ballsWaveG_4" className="ballsWaveG"></div>
+                                            <div id="ballsWaveG_5" className="ballsWaveG"></div>
+                                            <div id="ballsWaveG_6" className="ballsWaveG"></div>
+                                            <div id="ballsWaveG_7" className="ballsWaveG"></div>
+                                            <div id="ballsWaveG_8" className="ballsWaveG"></div>
+                                        </div>
+                                    </div>
+                                    <div key={i} className={`item-result-details ${!this.state.visibleRoom[i] ? "unvisible" : "visible"}`}>
+                                        <div className="close-details-box float_left font_11" onClick={() => this.closeRooms(i)}>بستن</div>
+                                        <div className="details-item backgroud-color" >
+                                            <div className="section-details">
+                                                <div className="section-cost-table hotel font_12">
+                                                    {this.show_rooms(i, item)}
+                                                </div></div>
+                                            <div className="clr"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                        </form>
+                        </div>
+                    ))
+                }
+        
+        
+                render() {
+                    const { library, currentPage, perPage, maxPage, rangevalTotalF, rangevalTotalS, librarySecond } = this.state;
+                    let defaultRangeTotalF = null;
+                    defaultRangeTotalF = rangevalTotalF
+                        ? (<span>{new Intl.NumberFormat().format(rangevalTotalF)}</span>)
+                        : (<span>{new Intl.NumberFormat().format(this.renderMinTotal())}</span>);
+                    let defaultRangeTotalS = null;
+                    defaultRangeTotalS = rangevalTotalS
+                        ? (<span>{new Intl.NumberFormat().format(rangevalTotalS)}</span>)
+                        : (<span>{new Intl.NumberFormat().format(this.renderMaxTotal())}</span>);
+        
+                    return (<div>
+                        <div className="sort-box">
+                            <ul className="sort-items row font_13">
+                                <li className="sort-title p-relative"> مرتب‌سازی</li>
+                                <li className={`p-relative ${this.state.activedefault}`} data-type="default" data-key="0" onClick={((e) => this.handleChange(e))}> پیشفرض<i className="fa fa-sort-amount-up"></i></li>
+                                <li className={`p-relative ${this.state.activeprice}`} data-type="price" data-key={this.state.checkkeyprice} onClick={((e) => this.handleChange(e))}> قیمت<i className={`fa ${!this.state.priceS[0] ? "fa-sort-amount-up" : "fa-sort-amount-down"}`}></i></li>
+                                <li className={`p-relative ${this.state.activestar}`} data-type="star" data-key={this.state.checkkeystar} onClick={((e) => this.handleChange(e))}> درجه<i className={`fa  ${!this.state.starSort[0] ? "fa-sort-amount-up" : "fa-sort-amount-down"}`}></i></li>
+                            </ul>
+                        </div>
+                        <p className="section-top-info font_11"><span className="font-color_1 font-weight list_count">{this.renderCount()}</span> هتل پیدا شد.</p>
+                        <p className="section-top-info font_12">مدت زمان باقی مانده : <span id="timer" className="font-color_2 font-weight EnNum font_20">00:00:00</span></p>
+                        <div className="section-top-facility">
+                        <basis core="group" if="[##cms.cms.domainid##] in ('4592','4564','4603')" name="check-has-currency">
+                         <div className="currency-content-list font_13 p-relative">
+                            <span class="currency-loading p-absolute unvisible"><i class="fas fa-spinner fa-spin"></i></span>
+                            <div className="currency-selected font-color_4 background-color_3" data-active="0" onClick={() => this.currency_selected_list()}><span>{this.localStorage_getCurrency()}{this.localStorage_expire()}</span></div>
+                            <div class="currency-list unvisible font_12 p-absolute"><ul>{this.renderCurrencyRate()}</ul></div>
+                        </div>
+                    </basis>
+                        <div className="section-filter-icon" onClick={((e) => this.showFilter(e))}>
+                            <button type="button" className="background-color_1"><i className="fa fa-sliders-h" aria-hidden="true"></i>فیلترها
+                            </button>
+                        </div>
+                       </div>
+                        <div className="section-items">
+                            {this.renderLibrary()}
+                        </div>
+                        <div className="section-filter">
+                            <div className="section-filter-content p-absolute">
+                                <div className="top-menu">فیلتر هتل براساس . . .</div>
+                                <div className="hideFilter_icon" onClick={((e) => this.hideFilter(e))}><i className="fa fa-times cursor"></i></div>
+                                <div className="run_filter section-filter-icon" onClick={((e) => this.hideFilter(e))}><button type="button" className=" background-color_1">اعمال فیلتر</button></div>
+                                <div className="row-filter">
+                                    {this.ShowFilterHotel()}
+                                    <div className="section-filter-items font_13">
+                                        <div className="filter-items-title font-color_1">نام هتل</div>
+                                        <div className="filter-items">
+                                            <input value={this.state.filterName} onChange={this.handlerFilterName} placeholder="نام هتل مورد نظر را وارد نمائید" className="font_12 hotelName" />
+                                        </div>
+                                    </div>
+                                    <div className="section-filter-items font_13">
+                                        <div className="filter-items-title font-color_1">قیمت</div>
+                                        <div className="filter-items">
+                                            <div className="wrappertime p-relative">
+                                                <fieldset>
+                                                    <hr />
+                                                    <div class="slider-wrapper">
+                                                        <input id="min" type="range" min={this.renderMinTotal() || 0} max='999999999' defaultValue='999999999' step="1000" onChange={this.handlerFilterTotal} data-key="2" data-value="2_T" />
+                                                        <input id="max" type="range" min={this.renderMinTotal()} max={this.renderMaxTotal()} defaultValue={this.renderMinTotal()} step="1000" onChange={this.handlerFilterTotal} data-key="1" data-value="1_T" />
+                                                    </div>
+                                                </fieldset>
+                                                <div className="rangevalSecond_2 p-absolute font_12 font-color_1">{defaultRangeTotalS}<span className="font_11 margin-right unit_content">{this.moneytype()}</span>
+                                                </div>
+                                                <div className="rangevalFirst_2 p-absolute font_12 font-color_1">{defaultRangeTotalF}<span className="font_11 margin-right unit_content">{this.moneytype()}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="clr"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="section-paging">
+                            <ul id="page-numbers" className="unvisible">
+                                <li className="nexprevPage nexprevPage-left p-relative">
+                                    {currentPage !== 1 && (
+                                        <button onClick={this.previousPage}><i className="fa fa-angle-double-left  transition"></i></button>
+                                    )}
+                                </li>
+                                <li className="controlsPage activePage background-color_2">{this.state.currentPage}</li>
+                                {(this.state.currentPage2 < maxPage) && (<li className="controlsPage" onClick={this.nextPage}>{this.state.currentPage2}</li>
+                                )}
+                                {(this.state.currentPage3 < maxPage) && (<li className="controlsPage" onClick={this.nextPage3}>{this.state.currentPage3}</li>
+                                )}
+                                <li className="restControls">...</li>
+                                <li className="controlsPage">{this.state.maxPage}</li>
+                                <li className="nexprevPage p-relative">
+                                    {(this.state.currentPage < maxPage) && (<button onClick={this.nextPage}><i className="fa fa-angle-double-right transition"></i></button>
+                                    )}
+                                </li>
+                            </ul>
+                            <div className="clr"></div>
+                        </div>
+                    </div>
+                    )
+                }
+        
+                renderMinTotal = () => {
+            const { librarySecond, state_currency_cost, state_floatdigit } = this.state;
+            if (!librarySecond || (librarySecond && librarySecond.length === 0)) {
+                return ''
+            }
+            return librarySecond.reduce((acc, lib) => {
+                if (state_floatdigit == '') {
+                    const libMin = Math.min(...lib.map(item => item.totalCom))
+                    return acc === undefined ? libMin : libMin < acc ? libMin : acc
+                } else {
+                    const libMin = Math.min(...lib.map(item => this.renderTotal(item.totalCom, state_currency_cost, state_floatdigit)))
+                    return acc === undefined ? libMin : libMin < acc ? libMin : acc
+                }
+
+            }, undefined)
+        }
+        renderMaxTotal = () => {
+            const { librarySecond, state_currency_cost, state_floatdigit } = this.state;
+            if (!librarySecond || (librarySecond && librarySecond.length === 0)) {
+                return ''
+            }
+            return librarySecond.reduce((acc, lib) => {
+                if (state_floatdigit == '') {
+                    const libMax = Math.max(...lib.map(item => item.totalCom))
+                    return libMax > acc ? libMax : acc
+                } else {
+                    const libMax = Math.max(...lib.map(item => this.renderTotal(item.totalCom, state_currency_cost, state_floatdigit)))
+                    return libMax > acc ? libMax : acc
+                }
+
+            }, 0)
+        }
+        
+                ShowFilterHotel() {
+                    let element = this.state.data;
+                    if (!element) return null;
+                    return <div><div className="section-filter-items font_13">
+                        <div className="filter-items-title font-color_1">درجه</div>
+                        <div className="filter-items grade_results">
+                            {this.renderstars(element)}
+                        </div>
+                    </div>
+                        <div className="section-filter-items font_13">
+                            <div className="filter-items-title font-color_1">سرویس</div>
+                            <div className="filter-items">
+                                {this.renderservice(element)}
+                            </div>
+                        </div>
+                        <div className="section-filter-items font_13 has-border">
+                            <div className="filter-items-title font-color_1">وضعیت</div>
+                            <div className="filter-items">
+                                {this.renderAllavailability(element)}
+                            </div>
+                        </div>
+                    </div>
+                }
+        
+                renderstars(element) {
+                    if (element.length !== undefined) {
+                        let sentences = [...(new Set(element.map(d => d['hotelinfo']['hotelsearch']['star']).flat()))]
+                        let singleSentence = sentences.map(s => <React.Fragment><div className="body-filter grade_filter"><div className="section-input_2 p-relative" data-index="1"><input type="checkbox" value={s} className="stars p-absolute" onChange={((e) => this.handleChange(e))} defaultChecked={this.props.defaultChecked} /><label className="font_12"><span className="checkbox"><div className="text-checkbox float_right"><img src={(`https://cdn.basiscore.net/basisfly.com/images/reservation_${s}-rate.png`)} width="70" height="14" alt="" /></div></span><span className="total_content font_11 float_left">از <span className="min_total">{new Intl.NumberFormat().format(this.min_totalByGrade(element, s))}</span><span className="unit_content">{[...(new Set(element.map(x => this.renderUnit(x.moneytype, this.state.state_currency_unit))))]}</span></span></label><div className="clr"></div></div><div className="clr"></div></div></React.Fragment>);
+                        let output = singleSentence
+                        return (
+                            output
+                        )
+                    }
+                }
+        
+                min_totalByGrade = (data, name) => {
+            const { state_currency_cost, state_floatdigit } = this.state;
+            const totals = data
+                .filter(x =>
+                    x.hotelinfo.hotelsearch.star === name)
+                .map(x => x.total);
+            let new_totals = new Array();
+            for (const element of totals) {
+                if (state_floatdigit == '') {
+                    new_totals.push(element * state_currency_cost);
+                } else {
+                    let toString_element = (element * state_currency_cost).toString();
+                    if (toString_element.indexOf('.') > -1) {
+                        let parseFloat_element = parseFloat(toString_element).toFixed(state_floatdigit).toString();
+                        let parseFloat_element_split = parseFloat_element.split('.');
+                        if (parseFloat_element_split[1].indexOf('0') > -1) {
+                            new_totals.push(parseFloat(element * state_currency_cost).toFixed(1).toString())
+                        } else {
+                            new_totals.push(parseFloat(element * state_currency_cost).toFixed(state_floatdigit).toString())
+                        }
+                    } else {
+                        new_totals.push(parseFloat(element * state_currency_cost).toFixed(state_floatdigit).toString())
+                    }
+                }
+
+            }
+            return Math.min(...new_totals);
+        }
+        renderTotal(element, currency_cost, floatdigit) {
+            if (floatdigit == '') {
+                return element * currency_cost;
+            } else {
+                let toString_element = (element * currency_cost).toString();
+                if (toString_element.indexOf('.') > -1) {
+                    let parseFloat_element = parseFloat(toString_element).toFixed(floatdigit).toString();
+                    let parseFloat_element_split = parseFloat_element.split('.');
+                    if (parseFloat_element_split[1].indexOf('0') > -1) {
+                        return parseFloat(element * currency_cost).toFixed(1).toString();
+                    } else {
+                        return parseFloat(element * currency_cost).toFixed(floatdigit).toString();
+                    }
+                } else {
+                    return parseFloat(element * currency_cost).toFixed(floatdigit).toString();
+                }
+            }
+        }
+        renderUnit(element, currency_unit) {
+            if (currency_unit == '') {
+                return element;
+            } else {
+                return currency_unit;
+            }
+
+        }
+                renderservice(element) {
+                    if (element.length !== undefined) {
+                        let sentences = [...(new Set(element.map(d => d['families']).flat().map(info => info['services'])))]
+                        let singleSentence = sentences.map(s => <React.Fragment><div className="body-filter"><div className="section-input_2 p-relative" data-index="1"><input type="checkbox" value={s} className="service p-absolute" onChange={((e) => this.handleChange(e))} defaultChecked={this.props.defaultChecked} /><label className="font_12"><span className="checkbox"><div className="text-checkbox">{s}</div></span></label><div className="clr"></div></div><div className="clr"></div></div></React.Fragment>);
+                        let output = singleSentence
+                        return (
+                            output
+                        )
+                    }
+                }
+                renderAllavailability(element) {
+                    if (element.length !== undefined) {
+                        let sentences = [...(new Set(element.map(d => d['families']).flat().map(info => info['availablerooms']).flat().map(info => info['info']['availability'])))]
+                        let singleSentence = sentences.map(s => <React.Fragment><div className="body-filter"><div className="section-input_2 p-relative" data-index="1"><input type="checkbox" value={s} className="all_availability p-absolute" onChange={((e) => this.handleChange(e))} defaultChecked={this.props.defaultChecked} /><label className="font_12"><span className="checkbox"><div className="text-checkbox">{s}</div></span></label><div className="clr"></div></div><div className="clr"></div></div></React.Fragment>);
+                        let output = singleSentence
+                        return (
+                            output
+                        )
+                    }
+                }
+                handleChange = (e) => {
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                    this.handleReset(event);
+                    let checktype = e.target.getAttribute("data-type")
+                    let checkkey = e.target.getAttribute("data-key")
+                    let isChecked = e.target.checked
+                    let valu = e.target.value
+                    let classname = e.target.getAttribute("class");
+                    switch (classname) {
+                        case 'service p-absolute':
+                            if (isChecked) {
+                                this.service.push(valu + ',')
+                            } else {
+                                this.service.splice(this.service.indexOf(valu + ','), 1)
+                            }
+                            break;
+                        case 'stars p-absolute':
+                            if (isChecked) {
+                                this.stars.push(valu + ',')
+                            } else {
+                                this.stars.splice(this.stars.indexOf(valu + ','), 1)
+                            }
+                            break;
+                        case 'all_availability p-absolute':
+                            if (isChecked) {
+                                this.availability.push(valu + ',')
+                            } else {
+                                this.availability.splice(this.availability.indexOf(valu + ','), 1)
+                            }
+                            break;
+        
+                    }
+                    $(document).trigger('update_result', [this.service.join(), this.stars.join(), this.availability.join(), checktype, checkkey])
+                    this.setState({
+                        state_service: this.service.join(),
+                        state_stars: this.stars.join(),
+                        state_availability: this.availability.join(),
+                        state_checktype: checktype,
+                        state_checkkey: checkkey,
+                    })
+                }
+        
+        
+                renderCount() {
+                    let maxPage = this.state.maxPage
+                    let len = this.renderLibrary().length
+                    let sum = len * maxPage
+                    sum = sum || 0
+                    if (sum == '0') {
+                        $("#page-numbers").hide()
+                        $(".message_box_nodata").show()
+        
+                    } else {
+                        $("#page-numbers").show()
+                        $(".message_box_nodata").hide()
+                    }
+        
+                }
+                renderhomepage = event => {
+                    return window.location = '/'
+                }
+                renderResearch = event => {
+                    return location.reload()
+                }
+                showLoading = (e, elem, val) => {
+                    this.setState(prevState => ({
+                        loadingVisible: { ...prevState.loadingVisible, [val]: !prevState.loadingVisible[val] }
+                    }))
+                };
+                select_room = (e, element, i) => {
+                    let active_btn = this.state.state_active_btn[i];
+                    let provider = element.id.provider
+                    let optionId = element.families[0].optionId
+                    let mainprovider = 0
+                    if (provider == undefined) {
+                        mainprovider = "0"
+                    } else {
+                        mainprovider = element.id.provider
+                    }
+                    if(active_btn == '' ||  active_btn == undefined){
+                        this.setState(prevState => ({
+                          state_active_btn: { ...prevState.state_active_btn, [i]: !prevState.state_active_btn[i] },
+                        }))
+                    this.showLoading(e, element, i);
+                    setTimeout(() => {
+                        fetch('/Client_Hotel_ShowAllRooms.bc', {
+                            method: 'POST',
+                            body: 'mainprovider=' + JSON.stringify(mainprovider) + '&optionId=' + encodeURIComponent(optionId) + ''
+                        })
+                            .then(response => response.text())
+                            .then(text => {
+                                let Maindata = JSON.parse(text.replace(/\'/g, '"'))
+                                this.setState(prevState => ({
+                                    show_rooms_data: {
+                                        ...prevState.show_rooms_data,
+                                        [i]: Maindata,
+                                    },
+                                    visibleRoom: { ...prevState.visibleRoom, [i]: !prevState.visibleRoom[i] },
+                                    loadingVisible: { ...prevState.loadingVisible, [i]: "" }
+                                }))
+                            }).catch(error => console.error(error))
+        
+                    }, 1000);
+                 }
+
+                }
+                show_rooms(i, item) {
+                    let element = this.state.show_rooms_data[i];
+                    if (!element) return null;
+                    if (element.families !== undefined) {
+                        let lenfamilies = element.families.length
+                        let indents = [];
+                        for (let j = 0; j < lenfamilies; j++) {
+                            let index = 0;
+                            let numF = i;
+                            let numS = j;
+                            let stingF = numF.toString();
+                            let stingS = numS.toString();
+                            index = stingF + stingS
+                            indents.push(<div className="room_item">
+                                <form method="post" action={this.renderAction(element.families[j])}>{this.renderOptionId(element.families[j])}
+                                    {this.renderadults(element.families[j])}
+                                    {this.renderchildwithbed(element.families[j])}
+                                    {this.renderchildwithoutbed(element.families[j])}
+                                    {this.renderinfant(element.families[j])}
+                                    {this.renderroomid(element.families[j])}
+                                    {this.renderid(element.families[j])}
+                                    {this.renderproviderId(element.families[j].id)}
+                                    {this.renderprovider(element.families[j])}
+                                    {this.renderhotelidRooms(element.families[j])}
+                                    {this.rendernightsRooms(element.families[j])}
+                                    {this.rendersupplierRooms(element.families[j])}
+                                    <input type="hidden" value={this.state.state_currency_unit} name="rate-unit" className="rate-unit" />
+                                    <input type="hidden" value={this.state.state_currency_cost} name="rate-cost" className="rate-cost" />
+                                    <input type="hidden" value={this.state.state_floatdigit} name="rate-floatdigit" className="rate-floatdigit" />
+                                    <input type="hidden" value="[##cms.form.cityid##]" name="cityid" />
+                                    <input type="hidden" value="[##cms.form.coHotel##]" name="coHotel" />
+                                    <input type="hidden" value="[##cms.form.hotelname##]" name="hotelname" />
+                                    <input type="hidden" value='[##cms.json.header|cms.form.roomSearch##]' name="roomSearch" className="roomSearch" />
+                                    <input type="hidden" value="[##cms.form.fdate##]" name="fdate" />
+                                    <input type="hidden" value="[##cms.form.tdate##]" name="tdate" />
+                                    <div className="room_item_top">
+                                        <span className="Qu-info-hotel font_12"> اتاق: </span>
+                                        {this.renderRoomtype(element.families[j])}
+                                        <div className="clr"></div>
+                                        <span className="Qu-info-hotel font_12">وضعیت : </span>
+                                        {this.renderavailability(element.families[j])}
+                                        <div className="clr"></div>
+                                        <span className="Qu-info-hotel font_12">نما : </span>{this.renderviewnameRooms(element.families[j])}
+                                        <span className="Qu-info-hotel font_12"> سرویس : </span>{this.renderservices(element.families[j])}
+                                        {this.renderProviderName_room(element.families[j])}
+                                        <div className="clr"></div>
+                                        {this.renderRule_link(element.families[j], index)}
+        
+                                        <div key={index} className={`${!this.state.loadingVisible[index] ? "unvisible" : "visible"}`}>
+                                            <div id="ballsWaveG">
+                                                <div id="ballsWaveG_1" className="ballsWaveG"></div>
+                                                <div id="ballsWaveG_2" className="ballsWaveG"></div>
+                                                <div id="ballsWaveG_3" className="ballsWaveG"></div>
+                                                <div id="ballsWaveG_4" className="ballsWaveG"></div>
+                                                <div id="ballsWaveG_5" className="ballsWaveG"></div>
+                                                <div id="ballsWaveG_6" className="ballsWaveG"></div>
+                                                <div id="ballsWaveG_7" className="ballsWaveG"></div>
+                                                <div id="ballsWaveG_8" className="ballsWaveG"></div>
+                                            </div>
+                                        </div>
+                                        <div dir="auto" key={index} className="max-height" dangerouslySetInnerHTML={{ __html: this.state.resultruleRoom[index] }}></div>
+                                    </div>
+                                    <div className="room_item_bottom">
+                                <span className="font_12">قیمت برای {element.families[j].nights} شب اقامت : </span>
+                                <span className="total-cost font_15">{new Intl.NumberFormat().format(this.renderTotal(element.families[j].totalPrice, this.state.state_currency_cost, this.state.state_floatdigit))}</span><span
+                                    className="money-type font_10">{this.renderUnit(item.moneytype, this.state.state_currency_unit)}</span>
+                                <div className="clr"></div>
+                                {this.renderBtn(element, j, index)}
+                            </div>
+                </form>
+                            </div>
+                            )
+                        }
+                        return (
+                            indents
+                        )
+                    }
+        
+                    else {
+                        return null
+                    }
+                }
+        
+                closeRooms = (elem) => {
+                    this.setState(prevState => ({
+                        visibleRoom: { ...prevState.visibleRoom, [elem]: "" },
+                        state_active_btn: { ...prevState.state_active_btn, [elem]: "" },
+                    }))
+                }
+
+                renderAction(element) {
+                  if ('[##cms.cms.ownerid##]' == '9252'){
+                   return ''
+                  } else {
+                   return  '/HotelView.bc'
+                  }
+                }
+                renderImgHotel(element) {
+                    let imghotel_garanti = element.hotelinfo.hotelsearch.hotelimage
+                    let imghotel_ws = element.hotelinfo.hotelsearch.webserviceimage
+                    if (imghotel_garanti == '') {
+                        return <img src={imghotel_ws} className="image-hotel float_right" width="200" height="200" alt={element.hotelinfo.hotelsearch.realname} />
+                    } else {
+                        return <img src={imghotel_garanti} className="image-hotel float_right" width="200" height="200" alt={element.hotelinfo.hotelsearch.realname} />
+                    }
+                }
+                renderRoomtype(element) {
+                    let lenavailablerooms = element.availablerooms.length
+                    let indents = [];
+                    for (let i = 0; i < lenavailablerooms; i++) {
+                        indents.push(<span className="An-info-hotel font_11">{element.availablerooms[i].info.room}</span>)
+                    }
+                    return (indents)
+                }
+                renderavailability(element) {
+                    let lenavailablerooms = element.availablerooms.length
+                    let indents = [];
+                    for (let i = 0; i < lenavailablerooms; i++) {
+                        let elem = element.availablerooms[i].info.availability
+        
+                        indents.push(<span className="An-info-hotel font_11">{element.availablerooms[i].info.availability}</span>)
+        
+        
+                    }
+                    return (indents)
+        
+                }
+                renderservices(element) {
+                    return <span className="An-info-hotel font_11">{element.services}</span>
+                }
+                renderProviderName_room(element) {
+                    if (this.state.data_provider.length == 0) {
+                        return ''
+                    } else {
+                        if (element.id.provider == undefined) {
+                            const providerName = this.state.data_provider
+                                .filter((x) => x.id === 0)
+                                .map((x) => x.name);
+                            return <div><span className="Qu-info-hotel font_12"> وب سرویس : </span><span className="An-info-hotel font_11">{providerName}</span></div>;
+                        } else {
+                            const providerName = this.state.data_provider
+                                .filter((x) => x.id === parseInt(element.id.provider.provider_id))
+                                .map((x) => x.name);
+                            return <div><span className="Qu-info-hotel font_12"> وب سرویس : </span><span className="An-info-hotel font_11">{providerName}</span></div>;
+                        }
+                    }
+                }
+                renderOptionId(element) {
+                    return <input type="hidden" value={element.optionId} name="optionId" />
+                }
+                renderOptionIdFirst(element) {
+                    let indents = [];
+                    indents.push(<input type="hidden" value={element.families[0].optionId} name="optionId" />)
+        
+                    return (indents)
+                }
+                rendertotalPrice(element) {
+                    return new Intl.NumberFormat().format(element.totalPrice)
+                }
+        
+                renderProviderName(element) {
+                    if (this.state.data_provider.length == 0) {
+                        return ''
+                    } else {
+                        if (element.id.provider == undefined) {
+                            const providerName = this.state.data_provider
+                                .filter((x) => x.id === 0)
+                                .map((x) => x.name);
+                            return <span className="font_11 font-color_1">({providerName})</span>;
+                        } else {
+                            const providerName = this.state.data_provider
+                                .filter((x) => x.id === parseInt(element.id.provider.provider_id))
+                                .map((x) => x.name);
+                            return <span className="font_11 font-color_1">({providerName})</span>;
+                        }
+                    }
+                }
+                renderRoomtypeFirst(element) {
+                    let lenavailablerooms = element.families[0].availablerooms.length
+                    let indents = [];
+                    for (let i = 0; i < lenavailablerooms; i++) {
+                        indents.push(<span className="An-info-hotel font_11">{element.families[0].availablerooms[i].info.room}</span>)
+        
+                    }
+                    return (indents)
+        
+                }
+                renderavailabFirst(element) {
+                    let lenavailablerooms = element.families[0].availablerooms.length
+                    let indents = [];
+                    for (let i = 0; i < lenavailablerooms; i++) {
+                        let elem = element.families[0].availablerooms[i].info.availability
+        
+                        indents.push(<span className="An-info-hotel font_11">{element.families[0].availablerooms[i].info.availability}</span>)
+        
+        
+        
+                    }
+                    return (indents)
+                }
+                renderservicesFirst(element) {
+                    let indents = [];
+                    indents.push(<span className="An-info-hotel font_11">{element.families[0].services}</span>)
+                    return (
+                        indents
+                    )
+        
+                }
+                renderadultsFirst(element) {
+                    let lenavailablerooms = element.families[0].availablerooms.length
+                    let indents = [];
+                    for (let i = 0; i < lenavailablerooms; i++) {
+                        let idx = i
+                        indents.push(<input type="hidden" name={`_root.rooms__${idx}.adults`} value={element.families[0].availablerooms[i].info.adults} />)
+                    }
+                    return (indents)
+        
+                }
+                renderchildwithbedFirst(element) {
+                    let lenavailablerooms = element.families[0].availablerooms.length
+                    let indents = [];
+                    for (let i = 0; i < lenavailablerooms; i++) {
+                        let idx = i
+                        indents.push(<input type="hidden" name={`_root.rooms__${idx}.childwithbed`} value={element.families[0].availablerooms[i].info.withbed} />)
+                    }
+                    return (indents)
+                }
+                renderchildwithoutbedFirst(element) {
+                    let lenavailablerooms = element.families[0].availablerooms.length
+                    let indents = [];
+                    for (let i = 0; i < lenavailablerooms; i++) {
+                        let idx = i
+                        indents.push(<input type="hidden" name={`_root.rooms__${idx}.childwithoutbed`} value={element.families[0].availablerooms[i].info.withoutbed} />)
+                    }
+                    return (indents)
+        
+                }
+                renderinfantFirst(element) {
+                    let lenavailablerooms = element.families[0].availablerooms.length
+                    let indents = [];
+                    for (let i = 0; i < lenavailablerooms; i++) {
+                        let idx = i
+                        indents.push(<input type="hidden" name={`_root.rooms__${idx}.infant`} value={element.families[0].availablerooms[i].info.infant} />)
+                    }
+                    return (indents)
+        
+                }
+                renderroomidFirst(element) {
+                    let lenavailablerooms = element.families[0].availablerooms.length
+                    let indents = [];
+                    for (let i = 0; i < lenavailablerooms; i++) {
+                        let idx = i
+                        indents.push(<input type="hidden" name={`_root.rooms__${idx}.roomid`} value={element.families[0].availablerooms[i].info.roomid} />)
+                    }
+                    return (indents)
+        
+                }
+        
+                renderadults(element) {
+                    let lenavailablerooms = element.availablerooms.length
+                    let indents = [];
+                    for (let i = 0; i < lenavailablerooms; i++) {
+                        let idx = i
+                        indents.push(<input type="hidden" name={`_root.rooms__${idx}.adults`} value={element.availablerooms[i].info.adults} />)
+                    }
+                    return (indents)
+        
+                }
+                renderchildwithbed(element) {
+                    let lenavailablerooms = element.availablerooms.length
+                    let indents = [];
+                    for (let i = 0; i < lenavailablerooms; i++) {
+                        let idx = i
+                        indents.push(<input type="hidden" name={`_root.rooms__${idx}.childwithbed`} value={element.availablerooms[i].info.withbed} />)
+                    }
+                    return (indents)
+        
+                }
+                renderchildwithoutbed(element) {
+                    let lenavailablerooms = element.availablerooms.length
+                    let indents = [];
+                    for (let i = 0; i < lenavailablerooms; i++) {
+                        let idx = i
+                        indents.push(<input type="hidden" name={`_root.rooms__${idx}.childwithoutbed`} value={element.availablerooms[i].info.withoutbed} />)
+                    }
+                    return (indents)
+                }
+                renderinfant(element) {
+                    let lenavailablerooms = element.availablerooms.length
+                    let indents = [];
+                    for (let i = 0; i < lenavailablerooms; i++) {
+                        let idx = i
+                        indents.push(<input type="hidden" name={`_root.rooms__${idx}.infant`} value={element.availablerooms[i].info.infant} />)
+                    }
+                    return (indents)
+        
+                }
+                renderroomid(element) {
+                    let lenavailablerooms = element.availablerooms.length
+                    let indents = [];
+                    for (let i = 0; i < lenavailablerooms; i++) {
+                        let idx = i
+                        indents.push(<input type="hidden" name={`_root.rooms__${idx}.roomid`} value={element.availablerooms[i].info.roomid} />)
+                    }
+                    return (indents)
+                }
+                renderprovider(element) {
+                    let provider = element.id.provider
+                    if (provider == undefined) {
+                        return '';
+                    } else {
+                        return <input type="hidden" value={JSON.stringify(provider)} name="mainprovider" />
+                    }
+                }
+                renderproviderId(element) {
+                    let provider = element.provider
+                    if (provider == undefined) {
+                        return <input type="hidden" value="0" name="provider" />;
+                    }
+                    else {
+                        let providerId = element.provider.provider_id
+                        return <input type="hidden" value={providerId} name="provider" />;
+                    }
+                }
+                renderid(element) {
+                    let id = element.id
+                    if (typeof id === 'string') {
+                        return <input type="hidden" value={id} name="productid" />
+                    } else if (typeof id === 'object') {
+                        return <input type="hidden" value={id.hotelId} name="productid" />
+                    }
+                }
+                renderhotelidRooms(element) {
+                    let hotelIdFamily = element.id.hotelId
+                    if (hotelIdFamily == undefined) {
+                        return <input type="hidden" value={element.hotelid} name="hotelid" />
+                    } else {
+                        return <input type="hidden" value={hotelIdFamily} name="hotelid" />
+                    }
+                }
+                rendernightsRooms(element) {
+                    return <input type="hidden" value={element.nights} name="nightLink" />
+                }
+                rendersupplierRooms(element) {
+                    return <input type="hidden" value={element.supplier} name="supplier" />
+                }
+        
+                renderviewnameRooms(element) {
+                    let lenavailablerooms = element.availablerooms.length
+                    let indents = [];
+                    for (let i = 0; i < lenavailablerooms; i++) {
+                        let elem = element.availablerooms[i].info.viewname
+                        indents.push(<span className="An-info-hotel font_11">{element.availablerooms[i].info.viewname}</span>)
+                    }
+                    return (indents)
+        
+                }
+        
+                renderBtn(BtnFlight, j, index) {
+                    if (j == 0) {
+                        return <button type="submit" className="font_12 selected">انتخاب شده</button>
+                    } else {
+                        return <button type="submit" className="font_12">رزرو این اتاق</button>
+                    }
+                }
+                renderRule_link(DetailsRoomJ, index) {
+                    let mainprovider = DetailsRoomJ.id.provider
+                    if (mainprovider == undefined) {
+                        return <span className="rule-room  notactive_rule">قوانین اتاق</span>
+                    } else {
+                        return <span className="rule-room font-color_2" key={index} onClick={e => this.handelruleRoom(e, DetailsRoomJ, index)}>قوانین اتاق</span>
+                    }
+        
+                }
+                handelruleRoom = (e, DetailsRoomJ, index) => {
+                    let provider = DetailsRoomJ.id.provider
+                    let optionId = DetailsRoomJ.optionId
+                    let mainprovider = 0
+                     if (provider == undefined) {
+                           mainprovider = "0"
+                      } else {
+                        mainprovider = DetailsRoomJ.id.provider
+                      }
+                    this.showLoading(e, DetailsRoomJ, index);
+                    setTimeout(() => {
+                        let return_rule = function () {
+                            let tmp = null;
+                            $.ajax({
+                                'async': false,
+                                'type': "POST",
+                                'global': false,
+                                'dataType': 'html',
+                                'url': "Client_Room_Rule.bc",
+                                'data': { 'mainprovider': JSON.stringify(mainprovider), 'optionId': optionId, },
+                                'success': (response) => {
+                                    tmp = response;
+                                }
+                            });
+        
+                            return tmp;
+                        }();
+                        return this.setState(prevState => ({
+                            resultruleRoom: { ...prevState.resultruleRoom, [index]: return_rule },
+                            loadingVisible: { ...prevState.loadingVisible, [index]: "" }
+                        }))
+        
+                    }, 1000);
+                }
+        
+                renderpassenger(passenger) {
+                    let info = [##cms.json.header | cms.form.roomSearch##]
+                    let valueAdded = 0;
+                    let valueAdded2 = 0;
+                    let sum = 0;
+                    for (let i = 0; i < info.rooms.length; i++) {
+                        let adultcount = parseInt(info.rooms[i].adultcount);
+                        valueAdded += adultcount;
+                        let childcountandage = info.rooms[i].childcountandage
+                        let spl = childcountandage.split(",");
+                        let childcount = parseInt(spl[0]);
+                        valueAdded2 += childcount;
+                    }
+                    valueAdded = parseInt(valueAdded)
+                    valueAdded2 = parseInt(valueAdded2)
+                    sum = valueAdded2 + valueAdded
+                    return sum
+                }
+        
+        
+                closeruleRoom = (index) => {
+                    this.setState(prevState => ({
+                        ruleRoomVisibles: { [index]: !prevState.ruleRoomVisibles[index] }
+                    }))
+                };
+        
+                renderHotelidLink(element) {
+                    return <form method="post" action='/Client_Hotel_Information.bc' target="_blank">
+                        {this.renderproviderid_hotelInfo(element)}
+                        <input type="hidden" value={element.families[0].optionId} name="optionId-hotel" />
+                        <input type="hidden" value={element.hotelinfo.hotelsearch.hotelid} name="hotelid" />
+                        <input type="hidden" value="[##cms.form.cityid##]" name="cityid" />
+                        <input type="hidden" value="[##cms.form.coHotel##]" name="coHotel" />
+                        <input type="hidden" value='[##cms.json.header|cms.form.roomSearch##]' name="roomSearch" />
+                        <input type="hidden" value="[##cms.form.fdate##]" name="fdate" />
+                        <input type="hidden" value="[##cms.form.tdate##]" name="tdate" />
+                        <button type="submit" className="LinkToHotelInfo font_10 font-color_1" ><i className="fa fa-info-circle font-color_1"></i>توضیحات بیشتر</button>
+                        </form>
+                }
+        
+                renderproviderid_hotelInfo(element) {
+                    let provider = element.id.provider
+                    if (provider == undefined) {
+                        return <input type="hidden" value="0" name="provider-hotel" />;
+                    }
+                    else {
+                        let providerId = element.id.provider.provider_id
+                        return <input type="hidden" value={providerId} name="provider-hotel" />;
+                    }
+                }
+                renderCommission(element) {
+            if (element.commissioncost == 0) {
+                return '';
+            } else {
+                return <div className="col-price-50 float_right"><div>کمیسیون
+                    :</div><div><span className="total-cost font_15">{new Intl.NumberFormat().format(this.renderTotal(element.commissioncost, this.state.state_currency_cost, this.state.state_floatdigit))}
+                    </span><span className="money-type font_10">{this.renderUnit(element.moneytype, this.state.state_currency_unit)}</span></div></div>
+              }
+            }
+            renderTotalcom(element) {
+            if (element.commissioncost == 0) {
+                return '';
+            } else {
+                return <div className="col-price-50 float_right"><div>مبلغ نهایی
+                    :</div><div><span className="total-cost font_15">{new Intl.NumberFormat().format(this.renderTotal(element.totalCom, this.state.state_currency_cost, this.state.state_floatdigit))}</span><span className="money-type font_10">{this.renderUnit(element.moneytype, this.state.state_currency_unit)}</span></div></div>
+            }
+        }
+        moneytype() {
+            let element = this.state.data;
+            if (!element) return null;
+            if (element.length !== undefined) {
+                let sentences = [...(new Set(element.map(d => d['moneytype']).flat()))]
+                return this.renderUnit(sentences, this.state.state_currency_unit)
+            }
+
+        }
+        localStorage_getCurrency = () => {
+            let getCurrencyObject = localStorage.getItem('currencyObject');
+            let jsonCurrency = JSON.parse(getCurrencyObject);
+            if (jsonCurrency) {
+                return jsonCurrency.currency_unit
+            } else {
+                return '--واحد پول--'
+            }
+        }
+    localStorage_expire = () => {
+    const { state_currency_unit, state_currency_cost, state_floatdigit} = this.state
+    let getCurrencyObject = localStorage.getItem('currencyObject');
+    let jsonCurrency = JSON.parse(getCurrencyObject);
+    if (jsonCurrency) {
+        var timer =  setInterval(()=>{
+                if(new Date().getTime() - jsonCurrency.time >= jsonCurrency.expire){
+                 localStorage.removeItem('currencyObject');
+                 document.querySelector(".currency-selected").innerText = '--واحد پول--';
+                 document.querySelector(".currency-selected").setAttribute("data-active", 0);
+                 clearInterval(timer);
+                 this.setState({
+                    state_currency_unit: "",
+                    state_currency_cost:1,
+                    state_floatdigit: "",
+                  });
+                 console.log('localStorage has ex pired');
+                }
+        },1000)
+    }
+    }
+
+
+
+        currency_selected_list = () => {
+            if (document.querySelector(".currency-selected").getAttribute("data-active") == 0) {
+                document.querySelector(".currency-loading").classList.toggle("unvisible");
+                fetch('/Client_Currency_Rate.bc')
+                    .then(response => response.text())
+                    .then(text => {
+                        this.setState({ data_currency: JSON.parse(text.replace(/\'/g, '"')) });
+                        document.querySelector(".currency-loading").classList.toggle("unvisible");
+                        document.querySelector(".currency-selected").setAttribute("data-active", 1);
+                        document.querySelector(".currency-list").classList.toggle("unvisible");
+                    }).catch(error => console.error(error))
+
+            } else {
+                document.querySelector(".currency-list").classList.toggle("unvisible");
+            }
+
+        }
+        renderCurrencyRate() {
+            let element = this.state.data_currency;
+            if (!element) return null;
+            return this.renderRate(element.rate, element.floatdigit)
+        }
+        renderRate(element, floatdigit) {
+            if (element !== undefined) {
+                let indents = [];
+                for (let i = 0; i < element.length; i++) {
+                    indents.push(<li className="" onClick={e => this.select_currency_list(e, element[i], floatdigit)}>{element[i].rate_unit}</li>)
+                }
+                return (
+                    indents
+                )
+            }
+        }
+
+        select_currency_list = (e, element, floatdigit) => {
+            this.setState({
+                state_currency_unit: element.rate_unit,
+                state_currency_cost: element.rate_cost,
+                state_floatdigit: floatdigit,
+            })
+            document.querySelector(".currency-list").classList.toggle("unvisible");
+            document.querySelector(".currency-selected").innerText = element.rate_unit;
+            this.localStorage_setCurrency(element.rate_unit, element.rate_cost, floatdigit);
+
+        }
+
+        localStorage_setCurrency = (currency_unit, currency_cost, floatdigit) => {
+            let currencyObject = {
+        'currency_unit': currency_unit,
+        'currency_cost': currency_cost,
+        'floatdigit': floatdigit,
+        'time':new Date().getTime(),
+        'expire':1200000,
+      };
+            localStorage.setItem('currencyObject', JSON.stringify(currencyObject));
+        }
+        
+                handleClick(event) {
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth',
+                    })
+                    this.setState({
+                        currentPage: Number(event.target.id)
+                    })
+                }
+                handleReset(event){
+                    let maxPage = this.state.maxPage
+                    let len = this.renderLibrary().length
+                    let Multi = len * maxPage
+                    for (let i = 0; i <= Multi; i++) {
+                        this.setState(prevState => ({
+                           visibleRoom: { ...prevState.visibleRoom, [i]: "" },
+                           state_active_btn: { ...prevState.state_active_btn, [i]: "" },
+                         }))
+                    }
+                }
+                showFilter = (e) => {
+                    $(".section-filter").addClass('section-filter-open')
+                    $(".section-filter-content").animate({ right: '0' }, 350);
+                }
+                hideFilter = (e) => {
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                    $(".section-filter").removeClass('section-filter-open')
+                    $(".section-filter-content").animate({ right: '-100%' }, 350);
+                }
+            }
+            ReactDOM.render(<App />, document.getElementById('app'))
+        }
+        </script>
+    <script src="https://cdn.basiscore.net/basisfly.com/js/reservation_react.production.min.js"></script>
+    <script src="https://cdn.basiscore.net/basisfly.com/js/reservation_react_dom.production.min.js"></script>
+    <script src="https://cdn.basiscore.net/basisfly.com/js/reservation_babel.min.js"></script>
+    <script src="https://cdn.basiscore.net/basisfly.com/js/reservation_react_paging.js"></script>
+    <script src="https://cdn.basiscore.net/basisfly.com/js/reservation_progress_bar.js" type="text/javascript"></script>
+    <script src="https://cdn.basiscore.net/basisfly.com/js/reservation_mob_calendar.js" type="text/javascript" ></script>
+    <script type="text/javascript">
+        <basis core = "call" file="Client_Basis_Calendar_js.inc"/>
+        var progress = $(".loading-progress").progressTimer({
+        timeLimit: 40,
+        onFinish: function () {
+        }
+       });
+       $(".form_research").each(function () {
+        var json = [##cms.json.header | cms.form.roomSearch##]
+        var room = json.rooms.length
+        var ad = ""
+        var ch = ""
+        for (var i = 0; i < room; i++) {
+            ad = ad + json.rooms[i].adultcount + ','
+            ch = ch + json.rooms[i].childcountandage + '*'
+        }
+        ad = ad.slice(0, -1)
+        ch = ch.slice(0, -1)
+        $(this).find(".roomcount").val(room)
+        $(this).find(".adult").val(ad)
+        $(this).find(".childage").val(ch)
+        $(this).submit(function (e) {
+            e.preventDefault()
+            if ($(this).attr('data-read') == 0) {
+                $(".content-research").show()
+                $.ajax({
+                    url: $(this).attr("action"),
+                    type: $(this).attr("method"),
+                    data: $($(this)).serialize(),
+                    success: function (response) {
+                        $('.content-research').empty().show().html(response);
+                        $(this).attr('data-read', '1')
+                    }
+                 });
+            } else {
+                $(".content-research").show()
+            }
+
+        });
+    });
+    function onloadFunc() {
+        var counter = 600;
+        setInterval(function () {
+            counter--;
+            var m = parseInt(counter / 60);
+            var s = counter % 60;
+            if (counter >= 0) {
+                var timer = document.getElementById("timer");
+                if(timer !== null){
+                    if (s < 10) {
+                    s = "0" + s;
+                }
+                if (m < 10) {
+                    m = "0" + m;
+                }
+                if (m < 2) {
+                    document.getElementById("timer").classList.add("blink_me")
+                }
+                timer.innerHTML = "00:" + m + ":" + s;
+                }
+            }
+            if (counter === 0) {
+                $(".message_box_timeout,#bg-popup").fadeIn();
+                $(".message_box_timeout").css("top", "200px")
+                clearInterval(counter)
+            }
+        }, 1000)
+    }
+    $(document).on('click', function (event) {
+          if(document.querySelector(".currency-list")){
+           if (!$(event.target).closest('.currency-selected,.currency-list').length) {
+            document.querySelector(".currency-list").classList.add("unvisible");
+          }
+        }
+   })
+    </script>
+    <!----JS LIBRARY---->
+
+
+</body>
+
+</html>

@@ -1,0 +1,925 @@
+<basis core="dbsource" source="basiscore" name="db" mid="20" lid="2" usedforid="[##cms.query.id##]">
+    <member name="view" type="view"></member>
+    <member name="related-tour" type="list" blgid="18" link="tour-en.bc" propertyid="8181,8076,8077,10000504"
+        typeid="159"></member>
+    <member name="related-article" type="list" blgid="218" link="article-en.bc" propertyid="7246" typeid="159"></member>
+    <member name="data" type="view" request="rdfa"></member>
+</basis>
+
+<basis core="dbsource" source="media" lid="2" name="db" usedforid="[##cms.query.id##]" sourcemid="product">
+    <member name="gallery" type="list" format="4"></member>
+    <member name="pdf" type="list" format="pdf"></member>
+</basis>
+<basis core="dbsource" source="basiscore" name="db" lid="2" request="seo">
+    <member name="list" type="list" request="cat" id="[##cms.query.id##]"></member>
+</basis>
+<basis core="external.fly.ws" source="cmsDbService2" name="db" procedurename="dbsource">
+    <member method="cms" name="inventoryview" query='{
+        "name": "db",
+        "mid": "20",
+        "member": [
+            {
+                "type": "list",
+                "name": "q",
+                "request": "inventoryview",
+                "pid": "[##cms.query.id##]",
+                "pagename": "hotel-en.bc"
+            }
+        ]
+    }'></member>
+</basis>
+<basis core="group" name="list">
+    <basis core="inlinesource" name="db">
+        <member name="inventoryjson" format="json" preview="">{"root":[##db.inventoryview.result##]}</member>
+    </basis>
+    <!DOCTYPE html>
+    <html>
+
+    <head>
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="tatev">
+        <meta property="og:image" content="[##cms.cms.cdn##]/images/logo.png">
+        <meta property="og:image:width" content="240" />
+        <meta property="og:image:height" content="60" />
+        <meta property="og:image:secure_url" content="[##cms.cms.cdn##]/images/logo.png" />
+        <meta property="og:image:type" content="image/png" />
+        <meta property="og:image:alt" content="tatev" />
+        <meta property="og:description" content="tatev" />
+        <title>[##cms.seo.title|db.list.title##]</title>
+        <meta charset="UTF-8" />
+        <meta name="author" content="BasisCore" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+        <meta name="description" content="[##cms.seo.title|db.list.title##]" />
+        <link rel="apple-touch-icon" sizes="57x57" href="" />
+        <link rel="shortcut icon" sizes="57x57" href="" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+        <meta name="mobile-web-app-capable" content="yes" />
+        <!----------------CSS FILE---------------->
+        <!----CSS MAIN STYLE---->
+        <link href="[##cms.cms.cdn##]/css/style.css" type="text/css" rel="stylesheet" />
+        <!----CSS FONT AWESOME---->
+        <link href="[##cms.cms.cdn##]/css/font_awesome.css" type="text/css" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900|Raleway:400,500,600,700"
+            type="text/css" rel="stylesheet" />
+        <!----------------JS FILE---------------->
+        <script src="[##cms.cms.cdn##]/js/library.js" type="text/javascript"></script>
+    </head>
+
+    <body>
+        <main>
+            <basis core="call" file="header-en.inc"></basis>
+            <section class="content pages">
+                <section class="loginRegister"></section>
+                <section class="item-container">
+                    <div class="bc-main p-relative">
+                        <div class="width_70 float-left info-container">
+                            <div class="title-container text-left">
+                                <basis core="print" datamembername="db.view">
+                                    <face filter="typeid=150">
+                                        <div class="title font_color_1">
+                                            <h1 class="title-content color_gray" itemprop="@vocabulary"> @answer </h1>
+                                        </div>
+                                    </face>
+                                </basis>
+                                <basis core="print" datamembername="db.view">
+                                    <face filter="prpid=8181">
+                                        <div class="tour-rating">
+                                            <ul>
+                                                <li>
+                                                    <span class="border-radius color_white background-color_1">@answer</span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </face>
+                                </basis>
+
+                                <div class="tour-info color_gray font_14">
+                                    <ul>
+                                        <basis core="view" datamembername="db.view">
+                                            <face level="1" filter="prpid=10000504">
+                                                <li><span><i class="fa fa-plane font_12"></i>@child</span></li>
+                                            </face>
+                                            <face level="2">
+                                                <span itemprop="@vocabulary">@answer</span>
+                                            </face>
+                                        </basis>
+                                        <basis core="view" datamembername="db.view">
+                                            <face level="1" filter="prpid=8074">
+                                                <li><span><i class="far fa-calendar-alt  font_12"></i>@child</span></li>
+                                            </face>
+                                            <face level="2">
+                                                <span itemprop="@vocabulary">@answer</span>
+                                            </face>
+                                        </basis>
+                                        <basis core="view" datamembername="db.view">
+                                            <face level="1" filter="prpid=8076">
+                                                <li><span><i class="far fa-clock font_12"></i>@child</span></li>
+                                            </face>
+                                            <face level="2">
+                                                <span itemprop="@vocabulary">@answer</span>
+                                            </face>
+                                        </basis>
+
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="tour-feature-content">
+                                <basis core="view" datamembername="db.view">
+                                    <face level="1" filter="prpid=8077">
+                                        <div class="tour-feature-item d-flex">
+                                            <div class="tour-feature-icon"><i class="far fa-calendar-alt"></i></div>
+                                            <div class="tour-feature-title">
+                                                <div class="title">Duration</div>
+                                                <div class="sub-title color_gray font_13"> @child </div>
+                                            </div>
+                                        </div>
+                                    </face>
+                                    <face level="2">
+                                        <span itemprop="@vocabulary">@answer</span>
+                                    </face>
+                                    <face level="1" filter="prpid=8076">
+                                        <div class="tour-feature-item d-flex">
+                                            <div class="tour-feature-icon"><i class="far fa-clock"></i></div>
+                                            <div class="tour-feature-title">
+                                                <div class="title">Length of Stay</div>
+                                                <div class="sub-title color_gray font_13"> @child </div>
+                                            </div>
+                                        </div>
+                                    </face>
+                                    <face level="2">
+                                        <span itemprop="@vocabulary">@answer</span>
+                                    </face>
+                                    <face level="1" filter="prpid=8074">
+                                        <div class="tour-feature-item d-flex">
+                                            <div class="tour-feature-icon"><i class="fa fa-calendar-day"></i></div>
+                                            <div class="tour-feature-title">
+                                                <div class="title">Departure Days</div>
+                                                <div class="sub-title color_gray font_13"> @child </div>
+                                            </div>
+                                        </div>
+                                    </face>
+                                    <face level="2">
+                                        <span itemprop="@vocabulary">@answer</span>
+                                    </face>
+                                    <face level="1" filter="prpid=8075">
+                                        <div class="tour-feature-item d-flex">
+                                            <div class="tour-feature-icon"><i class="fa fa-calendar-day"></i></div>
+                                            <div class="tour-feature-title">
+                                                <div class="title">Returning Days</div>
+                                                <div class="sub-title color_gray font_13"> @child </div>
+                                            </div>
+                                        </div>
+                                    </face>
+                                    <face level="2">
+                                        <span itemprop="@vocabulary">@answer</span>
+                                    </face>
+                                    <face level="1" filter="prpid=8082">
+                                        <div class="tour-feature-item d-flex">
+                                            <div class="tour-feature-icon"><i class="far fa-home"></i></div>
+                                            <div class="tour-feature-title">
+                                                <div class="title">Accommodation</div>
+                                                <div class="sub-title color_gray font_13"> @child </div>
+                                            </div>
+                                        </div>
+                                    </face>
+                                    <face level="2">
+                                        <span itemprop="@vocabulary">@answer</span>
+                                    </face>
+                                    <face level="1" filter="prpid=8083">
+                                        <div class="tour-feature-item d-flex">
+                                            <div class="tour-feature-icon"><i class="far fa-car"></i></div>
+                                            <div class="tour-feature-title">
+                                                <div class="title">Transportation</div>
+                                                <div class="sub-title color_gray font_13"> @child </div>
+                                            </div>
+                                        </div>
+                                    </face>
+                                    <face level="2">
+                                        <span itemprop="@vocabulary">@answer</span>
+                                    </face>
+                                </basis>
+
+                            </div>
+                            <div class="tour-gallery-content">
+                                <basis core="print" datamembername="db.gallery">
+                                    <face filter="RowNumber in ('1')">
+                                        <div class="img_original"><img src="/@largeIMG" width="800" height="500"
+                                                alt="@title"></div>
+                                    </face>
+                                </basis>
+                                <basis core="print" datamembername="db.gallery">
+                                    <layout>
+                                        <div class="demo-gallery">
+                                            <ul id="lightgallery" class="list-unstyled row">
+                                                @child
+                                            </ul>
+                                        </div>
+                                    </layout>
+                                    <face>
+                                        <li class="col-xs-6 col-sm-4 col-md-3" data-responsive="" data-src="/@largeIMG"
+                                            data-sub-html="">
+                                            <a href="">
+                                                <img class="img-responsive" src="/@largeIMG">
+                                            </a>
+                                        </li>
+                                    </face>
+                                </basis>
+
+                            </div>
+                            <div class="tour-info-content">
+                                <ul class="nav-item">
+                                    <li class="selected cursor-pointer" onclick="select_nav_tour(this,'itinerary')"><a
+                                            class="color_black border-radius">Itinerary</a></li>
+                                    <li class="cursor-pointer" onclick="select_nav_tour(this,'description')"><a
+                                            class="color_black border-radius">Description</a></li>
+                                    <li class="cursor-pointer" onclick="select_nav_tour(this,'services')"><a
+                                            class="color_black border-radius">Services</a></li>
+                                    <li class="cursor-pointer" onclick="select_nav_tour(this,'necessary-accessories')">
+                                        <a class="color_black border-radius">Necessary Accessories</a>
+                                    </li>
+                                    <li class="cursor-pointer" onclick="select_nav_tour(this,'hotel-inventory')"><a
+                                            class="color_black border-radius">Hotel Information</a></li>
+                                </ul>
+                                <div class="tour-info">
+                                    <basis core="view" datamembername="db.view">
+                                        <layout>
+                                            <div id="description"
+                                                class="tour-info-section border-radius background-color_body unvisible">
+                                                @child
+                                            </div>
+                                        </layout>
+                                        <face filter="prpid=8097" replace="true">
+                                            <div class="color_gray font_14 text-justify text" itemprop="@vocabulary">
+                                                @answer</div>
+                                        </face>
+                                        <replace tagname="img">
+                                            <img src="@val2" alt="@val3"
+                                                style="max-width: 95%;margin: 15px;height: auto;" float="@val4">
+                                        </replace>
+                                        <replace tagname="link"> <a style="color:@val4;" href="@val3">@val2</a>
+                                        </replace>
+                                        <replace tagname="style"><a href="/@val3"
+                                                style="color:@val4;font-size:@val5;font-weight:@val6;font-style:@val7">@val2</a>
+                                        </replace>
+                                        <replace tagname="bold"><b style="font-weight:@val3;color:@val4">@val2</b>
+                                        </replace>
+                                    </basis>
+                                    <basis core="view" datamembername="db.view">
+                                        <layout>
+                                            <div id="itinerary"
+                                                class="tour-info-section border-radius  background-color_body p-relative">
+                                                @child
+                                            </div>
+                                        </layout>
+                                        <face level="1" replace="true" filter="prpid=8084">
+                                            @child
+                                        </face>
+                                        <face level="2" replace="true" filter="prpid=8084">
+                                            <div class="row-itinerary p-relative">
+                                                <div class="icon-itinerary p-absolute text-center background-color_3">
+                                                    <svg width="28pt" height="28pt" version="1.0" viewBox="0 0 512 512"
+                                                        xmlns="http://www.w3.org/2000/svg">
+                                                        <g transform="translate(0 512) scale(.1 -.1)" fill="#fff">
+                                                            <path
+                                                                d="m3970 5105c-256-47-475-182-624-385-62-84-116-191-116-230 0-61 77-93 120-50 11 11 34 47 51 82 120 237 359 403 634 439 263 34 518-59 707-259 324-344 292-850-86-1372-113-156-391-457-499-540l-27-22-179 179c-251 250-384 425-504 660-85 167-127 310-142 486-5 58-12 84-26 98-24 24-70 24-100 0-22-18-24-26-21-98 10-300 154-630 420-963 42-52 96-117 121-143 42-46 44-48 22-54-50-13-162-74-201-109-126-114-103-268 55-363 135-82 324-123 560-123 413-1 695 132 695 326 0 62-21 105-76 156-42 39-173 110-201 110-25 0-12 22 57 101 361 409 540 844 500 1211-45 411-343 750-743 849-107 26-296 33-397 14zm-18-2372c109-100 155-133 188-133 26 0 48 17 225 174l44 39 48-12c62-16 148-55 190-87 45-35 43-64-8-107-87-75-276-120-504-120s-418 46-506 121c-63 54-49 92 51 143 50 25 146 58 172 58 9 1 54-33 100-76z">
+                                                            </path>
+                                                            <path
+                                                                d="m3989 4546c-80-32-120-59-172-115-236-252-93-662 253-723 209-36 430 108 485 318 58 225-66 451-290 528-74 25-206 21-276-8zm266-150c179-83 219-321 78-462-54-54-114-78-198-78-86 0-146 25-204 84-146 150-80 410 119 471 55 16 153 10 205-15z">
+                                                            </path>
+                                                            <path
+                                                                d="m1065 3566c-466-77-851-405-999-851-79-238-79-530 0-806 95-333 321-709 636-1060 44-49 79-91 77-94-2-2-42-17-88-34-248-91-366-247-301-398 68-159 319-274 682-313 393-42 848 61 999 226 67 73 88 176 53 259-35 86-158 175-319 234l-74 27 67 75c69 76 214 253 245 299 34 50 14 115-38 120-46 5-59-5-152-122-151-188-340-386-530-555l-63-55-47 38c-81 66-320 303-417 414-601 686-783 1316-531 1836 256 529 880 762 1427 534 172-71 369-233 475-390 144-214 200-414 190-675-9-231-61-410-194-673-88-173-93-197-50-227 36-25 72-19 103 18 42 50 170 319 210 442 20 61 45 148 55 195 26 115 36 342 19 462-71 527-469 953-995 1063-105 23-336 28-440 11zm-77-3009c156-148 232-207 268-207 38 0 99 46 256 191l96 89 89-26c181-52 293-127 293-196 0-101-231-210-520-243-69-8-162-15-206-15-161 0-386 33-499 73-137 49-245 129-245 180 0 64 128 153 291 201 46 14 87 25 92 25 4 1 42-32 85-72z">
+                                                            </path>
+                                                            <path
+                                                                d="m1124 2854c-33-8-93-34-134-57-60-34-76-48-84-74-7-25-5-38 8-58 28-42 60-42 140-2 85 43 134 57 201 57 154 0 293-89 359-230 28-59 31-74 31-165s-3-106-31-165c-120-249-441-304-636-109-90 90-130 218-108 346 11 64 11 75-4 98-29 44-92 45-122 1-8-13-20-61-26-107-22-165 33-321 156-445 343-343 925-105 926 380 0 152-52 278-160 386-135 135-327 189-516 144z">
+                                                            </path>
+                                                            <path
+                                                                d="m3063 2732c-46-10-73-36-73-71 0-40 29-72 65-74 131-5 178 14 178 72 0 47-31 73-90 77-26 1-63-1-80-4z">
+                                                            </path>
+                                                            <path
+                                                                d="m2758 2594c-40-21-98-102-98-135 0-39 32-69 74-69 29 0 42 9 85 56 59 65 66 100 26 139-27 28-48 31-87 9z">
+                                                            </path>
+                                                            <path
+                                                                d="m2620 2253c-39-14-50-36-50-98 0-72 15-121 40-135 30-16 69-11 91 11 19 19 21 30 17 100-2 62-7 83-23 98-23 22-53 32-75 24z">
+                                                            </path>
+                                                            <path
+                                                                d="m2742 1880c-35-33-29-79 16-121 77-74 110-84 156-48 22 17 26 28 24 57-3 31-12 44-63 84-65 53-98 60-133 28z">
+                                                            </path>
+                                                            <path
+                                                                d="m3130 1758c-70-26-67-112 5-136 50-17 140-9 166 14s25 85 0 108-124 30-171 14z">
+                                                            </path>
+                                                            <path
+                                                                d="m3534 1763c-54-10-76-85-37-124 26-26 114-35 168-17 46 15 65 51 49 96-14 41-96 62-180 45z">
+                                                            </path>
+                                                            <path
+                                                                d="m3927 1760c-56-17-75-77-38-117 42-44 175-42 211 4 26 33 25 56-3 88-18 22-33 27-82 30-33 3-73 0-88-5z">
+                                                            </path>
+                                                            <path
+                                                                d="m4320 1757c-70-24-67-111 5-135 54-18 142-9 168 17 25 25 25 78 0 102-24 23-126 33-173 16z">
+                                                            </path>
+                                                            <path
+                                                                d="m4671 1654c-41-52-24-87 67-145 58-37 94-38 121-3 39 50 27 82-50 134-70 48-108 52-138 14z">
+                                                            </path>
+                                                            <path
+                                                                d="m4960 1387c-52-26-55-68-10-171 30-70 97-80 136-20 17 25 17 29-6 95-31 93-68 122-120 96z">
+                                                            </path>
+                                                            <path
+                                                                d="m4991 993c-26-22-57-137-47-176 4-19 17-33 38-41 57-25 91 1 114 85 19 75 18 96-11 124-28 29-64 32-94 8z">
+                                                            </path>
+                                                            <path
+                                                                d="m4813 654c-45-23-113-99-113-127 0-32 40-67 77-67s127 70 141 109c23 65-41 116-105 85z">
+                                                            </path>
+                                                            <path
+                                                                d="m4418 491c-64-8-90-31-86-78 5-59 39-77 128-68 84 8 110 27 110 79 0 25-7 40-26 55-27 21-41 23-126 12z">
+                                                            </path>
+                                                            <path
+                                                                d="m3190 483c-52-20-68-85-30-123 17-17 33-20 100-20 93 0 120 16 120 73 0 52-28 71-108 74-37 1-74 0-82-4z">
+                                                            </path>
+                                                            <path
+                                                                d="m3573 478c-48-23-51-103-4-127 11-6 53-11 94-11 64 0 76 3 95 23 29 31 28 72-3 102-21 22-33 25-92 24-37 0-78-5-90-11z">
+                                                            </path>
+                                                            <path
+                                                                d="m3955 465c-14-13-25-36-25-50s11-37 25-50c21-22 33-25 94-25 38 0 77 3 86 6 24 10 46 60 39 89-10 41-40 55-122 55-64 0-76-3-97-25z">
+                                                            </path>
+                                                            <path
+                                                                d="m2377 469c-48-28-38-110 15-128 71-25 176-6 192 34 12 32 6 62-17 83-20 19-35 22-98 22-41 0-82-5-92-11z">
+                                                            </path>
+                                                            <path
+                                                                d="m2760 458c-26-28-26-68 0-96 41-44 168-42 208 3 27 32 28 55 1 89-19 24-26 26-104 26-74 0-87-3-105-22z">
+                                                            </path>
+                                                        </g>
+                                                    </svg>
+
+                                                </div>
+                                                <div class="color_1 font_15 title">@text</div>
+                                                <div class="color_gray font_14 text-justify text">@largetext</div>
+                                            </div>
+                                        </face>
+                                    </basis>
+                                    <basis core="view" datamembername="db.view">
+                                        <layout>
+                                            <div id="services"
+                                                class="tour-info-section border-radius unvisible background-color_body ">
+                                                @child
+                                            </div>
+                                        </layout>
+                                        <face level="1" filter="prpid=8080">
+                                            @child
+                                        </face>
+                                        <face level="2" filter="prpid=8080">
+                                            <div class="row-services">
+
+                                                <div class="color_gray font_14 text-justify text"
+                                                    itemprop="@vocabulary"><i class="fas fa-check"></i>@answer</div>
+                                            </div>
+                                        </face>
+                                    </basis>
+                                    <basis core="view" datamembername="db.view">
+                                        <layout>
+                                            <div id="necessary-accessories"
+                                                class="tour-info-section border-radius unvisible background-color_body ">
+                                                @child
+                                            </div>
+                                        </layout>
+                                        <face level="1" filter="prpid=8085">
+                                            @child
+                                        </face>
+                                        <face level="2" filter="prpid=8085">
+                                            <div class="row-accessories">
+                                                <div class="color_gray font_14 text-justify text"
+                                                    itemprop="@vocabulary"><i class="fas fa-check"></i>@answer</div>
+                                            </div>
+                                        </face>
+                                    </basis>
+                                    <basis core="group" name="hotel-exist" if="'[##db.inventoryjson.RowNumber##]'<>'1'">
+                                        <div id="hotel-inventory"
+                                            class="tour-info-section border-radius background-color_body unvisible">
+                                            <basis core="tree" datamembername="db.inventoryjson" idcol="id"
+                                                parentidcol="parentid" nullvalue="null">
+                                                <layout>
+                                                    <table class="hotel_table font_13 text-center">
+                                                        <thead>
+                                                            <tr class="tbl-head">
+                                                                <td class="first-th tbl-th">
+                                                                    <table class="hotel-info text-center width_100">
+                                                                        <tr>
+                                                                            <td class="tbl-th11 color_1">Hotel </td>
+                                                                            <td class="tbl-th12 color_1">Star </td>
+                                                                            <td class="tbl-th13 color_1">Service </td>
+                                                                        </tr>
+                                                                    </table>
+                                                                </td>
+                                                                <td class="tbl-th color_1">Double room rate</td>
+                                                                <td class="tbl-th color_1">Single room rate</td>
+                                                                <td class="tbl-th color_1">Triple room rate</td>
+                                                                <td class="tbl-th color_1">6 to 12 years with a bed</td>
+                                                                <td class="tbl-th color_1">6 to 12 years without a bed
+                                                                </td>
+                                                                <td class="tbl-th color_1">Location</td>
+                                                                <td class="tbl-th color_1">Description</td>
+                                                            </tr>
+                                                        </thead>
+                                                        @child
+                                                    </table>
+                                                </layout>
+                                                <face filter="parentid in ('1')">
+                                                    <tr class="tbl-body color_gray"> @child </tr>
+                                                </face>
+                                                <face filter="field in ('hotelinfo')">
+                                                    <td class="first-th tbl-td">
+                                                        <table class="hotel-info text-center width_100">
+                                                            <tbody>
+                                                                @child
+                                                            </tbody>
+                                                        </table>
+                                                    </td>
+                                                </face>
+                                                <face filter="field in ('hotel')">
+                                                    <tr>
+                                                        <td class="tbl-td">
+                                                            <div class="td-hotel"> @child </div>
+                                                        </td>
+                                                    </tr>
+                                                </face>
+                                                <face filter="field in ('hotelid')">
+                                                    <input type="hidden" class="loc-input" value="@value"></_input>
+                                                </face>
+                                                <face filter="field in ('hotelname')">
+                                                    <section class="part1 float-left"><a target="_blank"
+                                                            class="name-link">@value</a> </section>
+                                                </face>
+                                                <face filter="field in ('star')">
+                                                    <section class="part2 float-left"> <img class="lozad"
+                                                            data-src="[##cms.cms.cdn##]/images/@value-rate.png"
+                                                            alt="@value" width="" height="" /> </section>
+                                                </face>
+                                                <face filter="field in ('service') and type = 'scalar.string'">
+                                                    <section class="part3 float-left"> <span>@value</span> </section>
+                                                </face>
+                                                <face filter="field in ('doublecost') and type ='array'">
+                                                    <td class="tbl-td hotel-cost">@child</td>
+                                                </face>
+                                                <face filter="field in ('singlecost') and type ='array'">
+                                                    <td class="tbl-td hotel-cost">@child</td>
+                                                </face>
+                                                <face filter="field in ('triplecost') and type ='array'">
+                                                    <td class="tbl-td hotel-cost">@child</td>
+                                                </face>
+                                                <face filter="field in ('childwithbed') and type ='array'">
+                                                    <td class="tbl-td hotel-cost">@child</td>
+                                                </face>
+                                                <face filter="field in ('childwithoutbed') and type ='array'">
+                                                    <td class="tbl-td hotel-cost">@child</td>
+                                                </face>
+                                                <face filter="field in ('locationf')">
+                                                    <td class="tbl-td">@value</td>
+                                                </face>
+                                                <face filter="field in ('descriptionf')">
+                                                    <td class="tbl-td">@value</td>
+                                                </face>
+                                                <face
+                                                    filter="field in ('triplecost','doublecost','singlecost','childwithbed','childwithoutbed') and type ='object'">
+                                                    @child
+                                                </face>
+                                                <face
+                                                    filter="field in ('triplecostf','doublecostf','singlecostf','childwithbedf','childwithoutbedf')">
+                                                    <span class="hotel-cost slice">@value</span>
+                                                </face>
+                                                <face
+                                                    filter="field in ('tripleunit','doubleunit','childwithoutbedunit','childwithbedunit','singleunit')">
+                                                    <span>@value</span>
+                                                </face>
+                                                <face filter="type in ('array','object')"> @child </face>
+                                            </basis>
+
+                                            <basis core="tree" datamembername="db.inventoryjson" idcol="id"
+                                                parentidcol="parentid" nullvalue="null">
+                                                <layout>
+                                                    <div class="hotel_table_mob unvisible">
+                                                        @child
+                                                        <div class="clr"></div>
+                                                    </div>
+
+                                                </layout>
+                                                <face filter="parentid in ('1')">
+                                                    <div class="hotel-section text-center background-color_white">
+
+                                                        @child </div>
+                                                </face>
+                                                <face filter="field in ('hotel')"> @child </face>
+                                                <face filter="field in ('hotelid')">
+                                                    <input type="hidden" class="loc-input" value="@value"></_input>
+                                                </face>
+                                                <face filter="field in ('hotelname')">
+                                                    <div
+                                                        class="mobile-hotel background-color_1 font_13 color_white border-radius">
+                                                        <a target="_blank" class="name-link font_14">@value</a>
+                                                    </div>
+                                                </face>
+                                                <face filter="field in ('star')">
+                                                    <div class="mobile-hotel-info">
+                                                        <section class="hotel-qu float-left width_50 color_1"> Star
+                                                        </section>
+                                                        <section class="hotel-ans float-right width_50 color_gray"> <img
+                                                                class="lozad"
+                                                                data-src="[##cms.cms.cdn##]/images/@value-rate.png"
+                                                                alt="@value" width="53" height="12"> </section>
+                                                        <div class="clr"></div>
+                                                    </div>
+                                                </face>
+                                                <face filter="field in ('service') and type = 'scalar.string'">
+                                                    <div class="mobile-hotel-info">
+                                                        <section class="hotel-qu float-left width_50 color_1 ">Service
+                                                        </section>
+                                                        <section class="hotel-ans float-right width_50 color_gray">
+                                                            @value </section>
+                                                        <div class="clr"></div>
+                                                    </div>
+                                                </face>
+                                                <face filter="field in ('doublecost') and type ='array'">
+                                                    <div class="mobile-hotel-info">
+                                                        <section class="hotel-qu float-left width_50 color_1"> Double
+                                                            room rate</section>
+                                                        <section class="hotel-ans float-right width_50 color_gray">
+                                                            @child </section>
+                                                        <div class="clr"></div>
+                                                    </div>
+                                                </face>
+                                                <face filter="field in ('singlecost') and type ='array'">
+                                                    <div class="mobile-hotel-info">
+                                                        <section class="hotel-qu float-left width_50 color_1">Single
+                                                            room rate</section>
+                                                        <section class="hotel-ans float-right width_50 color_gray">
+                                                            @child</section>
+                                                        <div class="clr"></div>
+                                                    </div>
+                                                </face>
+                                                <face filter="field in ('triplecost') and type ='array'">
+                                                    <div class="mobile-hotel-info">
+                                                        <section class="hotel-qu float-left width_50 color_1">Triple
+                                                            room rate</section>
+                                                        <section class="hotel-ans float-right width_50 color_gray">
+                                                            @child</section>
+                                                        <div class="clr"></div>
+                                                    </div>
+                                                </face>
+                                                <face filter="field in ('childwithbed') and type ='array'">
+                                                    <div class="mobile-hotel-info">
+                                                        <section class="hotel-qu float-left width_50 color_1">6 to 12
+                                                            years with a bed
+                                                        </section>
+                                                        <section class="hotel-ans float-right width_50 color_gray">
+                                                            @child </section>
+                                                        <div class="clr"></div>
+                                                    </div>
+                                                </face>
+                                                <face filter="field in ('childwithoutbed') and type ='array'">
+                                                    <div class="mobile-hotel-info">
+                                                        <section class="hotel-qu float-left width_50 color_1">6 to 12
+                                                            years without a bed</section>
+                                                        <section class="hotel-ans float-right width_50 color_gray">
+                                                            @child </section>
+                                                        <div class="clr"></div>
+                                                    </div>
+                                                </face>
+                                                <face filter="field in ('locationf')">
+                                                    <div class="mobile-hotel-info">
+                                                        <section class="hotel-qu float-left width_50 color_1">Location
+                                                        </section>
+                                                        <section class="hotel-ans float-right width_50 color_gray">
+                                                            @value</section>
+                                                        <div class="clr"></div>
+                                                    </div>
+                                                </face>
+                                                <face filter="field in ('descriptionf')">
+                                                    <div class="mobile-hotel-info">
+                                                        <section class="hotel-qu float-left width_50 color_1">
+                                                            Description</section>
+                                                        <section class="hotel-ans float-right width_50 color_gray">
+                                                            @value </section>
+                                                        <div class="clr"></div>
+                                                    </div>
+                                                </face>
+                                                <face
+                                                    filter="field in ('triplecost','doublecost','singlecost','childwithbed','childwithoutbed') and type ='object'">
+                                                    <p> @child </p>
+                                                </face>
+                                                <face
+                                                    filter="field in ('triplecostf','doublecostf','singlecostf','childwithbedf','childwithoutbedf')">
+                                                    <span class="hotel-cost slice">@value</span>
+                                                </face>
+                                                <face
+                                                    filter="field in ('tripleunit','doubleunit','childwithoutbedunit','childwithbedunit','singleunit')">
+                                                    <span>@value</span>
+                                                </face>
+                                                <face filter="type in ('array','object')"> @child </face>
+                                            </basis>
+                                            <div class="clr"></div>
+                                        </div>
+                                    </basis>
+                                </div>
+                            </div>
+                        </div>
+                        <aside class="width_30 float-right side-bar-container">
+                            <div class="side-bar inner width_90 float-right">
+                                <div class="side-bar-content map-content">
+                                    <p class="title font_18 text-left">Location</p>
+                                    <div class="map text-center border-radius">
+                                    </div>
+                                </div>
+                                <div class="side-bar-content">
+                                    <p class="title font_18 text-left">Tour Booking</p>
+                                    <div class="booking-form">
+                                        <div class="color_gray font_15 width_100">
+                                            <div class="schema-content">
+                                            <basis core="schema" run="atclient"
+                                                schemaurl="/schema/domainform/C424C642-9F1F-4302-9DDE-73BAE01380F6/3A1A9566-5688-4424-9532-C4F9321F965F/en/Daily-Group-Tours"
+                                                displaymode="new" button="[data-btn-tourBookingForm]"
+                                                resultsourceid="tourBookingForm.data"
+                                                onrendered="onrenderedSchemaTourBookingForm">
+                                            </basis>
+                                        </div>
+                                            <basis core="api" if="{##db.tourBookingForm.run|(false)##}" run="atclient"
+                                                url="/schema/domainform/C424C642-9F1F-4302-9DDE-73BAE01380F6/en/editobject"
+                                                method="post"
+                                                body="object_edit={##db.tourBookingForm.value##}&captcha={##db.tourBookingForm.captcha##}&captchaid={##db.tourBookingForm.captchaid##}"
+                                                content-type="application/x-www-form-urlencoded"
+                                                triggers='db.tourBookingForm' OnProcessed="OnProcessedTourBookingForm">
+                                            </basis>
+                                            <basis core="callback" run="atclient" method="callbackSourceTourBookingForm"
+                                                triggers="tourBookingForm.data">
+                                            </basis>
+                                            <basis core="dbsource" source="trust_login" name="db">
+                                                <member name="tourBookingForm" type="scalar" request="captcha" />
+                                            </basis>
+                                            <ul class="passenger__form__container">
+                                                <li>
+                                                    <div>
+                                                        <span class="question__container"></span>
+                                                    </div>
+                                                    <div class="answer__container">
+                                                        <span class="btn__count__container"
+                                                            onclick="toggleCount(this,'plus','1','adult')">+</span>
+                                                        <span class="count__container adult__count__container">1</span>
+                                                        <span class="btn__count__container"
+                                                            onclick="toggleCount(this,'minus','1','adult')">-</span>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div>
+                                                        <span class="question__container"></span>
+                                                    </div>
+                                                    <div class="answer__container">
+                                                        <span class="btn__count__container"
+                                                            onclick="toggleCount(this,'plus','0','child')">+</span>
+                                                        <span class="count__container child__count__container">0</span>
+                                                        <span class="btn__count__container"
+                                                            onclick="toggleCount(this,'minus','0','child')">-</span>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div>
+                                                        <span class="question__container"></span>
+                                                    </div>
+                                                    <div class="answer__container">
+                                                        <span class="btn__count__container"
+                                                            onclick="toggleCount(this,'plus','0','infant')">+</span>
+                                                        <span class="count__container infant__count__container">0</span>
+                                                        <span class="btn__count__container"
+                                                            onclick="toggleCount(this,'minus','0','infant')">-</span>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                            <div class="captcha-content">
+                                                <input type="text" class="form-control width_50 float-left"
+                                                    name="captcha" placeholder="Captcha*" required>
+                                                <span class="field-captcha width_50 float-right text-right">
+                                                    <span class="load-captcha captcha__content">
+                                                        <img class="captcha" alt="captcha"
+                                                            src="/[##db.tourBookingForm.captcha##]" loading="lazy"
+                                                            width="80" height="35">
+                                                        <input type="hidden" value="[##db.tourBookingForm.captcha##]"
+                                                            name="captchaid"></span>
+                                                    <i class="fa fa-sync color_1 cursor-pointer font_20"
+                                                        onclick="renderCaptchaCode(this)"></i>
+                                                </span>
+                                                <div class="clr"></div>
+                                            </div>
+                                            <button type="button" data-btn-tourBookingForm=""
+                                                class="background-color_1 btn cursor-pointer width_100 color_white"><i
+                                                    class="fa fa-location-arrow"></i> Send Message</button>
+                                            <div class="clr"></div>
+                                            <div class="Loading_Form unvisible text-center">
+                                                <div id="ballsWaveG">
+                                                    <div id="ballsWaveG_1" class="ballsWaveG"></div>
+                                                    <div id="ballsWaveG_2" class="ballsWaveG"></div>
+                                                    <div id="ballsWaveG_3" class="ballsWaveG"></div>
+                                                    <div id="ballsWaveG_4" class="ballsWaveG"></div>
+                                                    <div id="ballsWaveG_5" class="ballsWaveG"></div>
+                                                    <div id="ballsWaveG_6" class="ballsWaveG"></div>
+                                                    <div id="ballsWaveG_7" class="ballsWaveG"></div>
+                                                    <div id="ballsWaveG_8" class="ballsWaveG"></div>
+                                                </div>
+                                            </div>
+                                            <div class="Message-Form text-center font_16"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="side-bar-content support-content">
+                                    <p class="title font_18 text-left">Need Help</p>
+                                    <div class="info text-center border-radius">
+                                        <i class="icon background-color_white fa fa-phone-volume"></i>
+                                        <basis core="print" datamembername="db.info">
+                                            <face filter="prpid = 8000 and rownumber=5">
+                                                <div class="inner-info"><a href="tel:@answer"
+                                                        class="color_black font_18">@answer</a>
+                                                    <p class="font_14 color_gray">Toll Free & 24/7 Available</p>
+                                                </div>
+                                            </face>
+                                        </basis>
+
+                                        <div class="clr"></div>
+                                    </div>
+                                    <div class="social-icon text-center">
+                                        <a href="#" class="icon"><i class="fab fa-facebook-f"></i></a>
+                                        <a href="#" class="icon"><i class="fab fa-twitter"></i></a>
+                                        <a href="#" class="icon"><i class="fab fa-linkedin-in"></i></a>
+                                        <a href="#" class="icon"><i class="fas fa-basketball-ball"></i></a>
+                                        <a href="#" class="icon"><i class="fab fa-pinterest-p"></i></a>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </aside>
+                        <div class="clr"></div>
+                    </div>
+                </section>
+                <basis core="list" datamembername="db.related-tour">
+                    <layout>
+                        <section class="item-container background-color_body">
+                            <div class="bc-main p-relative">
+                                <div class="title-container text-center">
+                                    <h1 class="title-content color_gray">Related <span
+                                            class="color_3 p-relative">Tours</span>
+                                    </h1>
+                                    <p class="font_16">Lorem Ipsum is simply dummy text of the printing and typesetting
+                                        industry.
+                                    </p>
+                                </div>
+                                <div class="tour-list-container tour-list">
+                                    @child
+                                </div>
+                            </div>
+                        </section>
+                    </layout>
+                    <face filter="link is null">
+                        <div class="tour-list-content">
+                            <article class="inner border-radius card background-color_white width_90">
+                                <a href="/tour.bc?id=@id">
+                                    <figure class="p-relative border-radius"><img src="/@type_159" width="380"
+                                            height="245" alt="@title" class="cover-image border-radius transition" />
+                                        <div class="effect"></div>
+                                    </figure>
+                                    <div class="desc">
+                                        <header class="text-left">
+                                            <h2 class="color_gray title font_18 min-title">@title</h2>
+                                            <div class="d-flex">
+                                                <div class="info">
+                                                    <p><i class="icon font_12 text-center far fa-clock"></i><span
+                                                            class="font_13 slice">@prp_8076</span></p>
+                                                    <p><i
+                                                            class="icon font_12 text-center far fa-calendar-check"></i><span
+                                                            class="font_13">@prp_8077</span></p>
+                                                </div>
+                                                <div class="price">
+                                                    <p class="color_black">Price</p>
+                                                    <p class="color_3 price-text slice">@prp_8181</p>
+                                                </div>
+                                            </div>
+                                        </header>
+                                        <footer class="text-left"><button
+                                                class="color_white font_15 background-color_2 btn">View
+                                                Detail</button></footer>
+                                    </div>
+                                </a>
+
+                            </article>
+                        </div>
+                    </face>
+                    <face>
+                        <div class="tour-list-content">
+                            <article class="inner border-radius card background-color_white  width_90">
+                                <a href="/@link">
+                                    <figure class="p-relative border-radius"><img src="/@type_159" width="380"
+                                            height="245" alt="@title" class="cover-image border-radius transition" />
+                                        <div class="effect"></div>
+                                    </figure>
+                                    <div class="desc">
+                                        <header class="text-left">
+                                            <h2 class="color_gray title font_18 min-title">@title</h2>
+                                            <div class="d-flex">
+                                                <div class="info">
+                                                    <p><i class="icon font_12 text-center far fa-clock"></i><span
+                                                            class="slice font_13">@prp_8076</span></p>
+                                                    <p><i
+                                                            class="icon font_12 text-center far fa-calendar-check"></i><span
+                                                            class="font_13">@prp_8077</span></p>
+                                                </div>
+                                                <div class="price">
+                                                    <p class="color_black">Price</p>
+                                                    <p class="color_3 price-text slice">@prp_8181</p>
+                                                </div>
+                                            </div>
+                                        </header>
+                                        <footer class="text-left"><button
+                                                class="color_white font_15 background-color_2 btn">View
+                                                Detail</button></footer>
+                                    </div>
+                                </a>
+
+                            </article>
+                        </div>
+                    </face>
+                </basis>
+                <basis core="list" datamembername="db.related-article">
+                    <layout>
+                        <section class="item-container">
+                            <div class="bc-main p-relative">
+                                <div class="title-container text-center">
+                                    <h1 class="title-content color_gray">Related <span
+                                            class="color_3 p-relative">Article</span>
+                                    </h1>
+                                    <p class="font_16">Lorem Ipsum is simply dummy text of the printing and typesetting
+                                        industry.
+                                    </p>
+                                </div>
+                                <div class="article-list-container article-list">
+                                    @child
+                                </div>
+                            </div>
+                        </section>
+                    </layout>
+                    <face filter="link is null">
+                        <div class="article-list-content">
+                            <article class="inner border-radius card background-color_white  width_90">
+                                <a href="/article-en.bc?id=@id">
+                                    <figure class="p-relative border-radius"><img src="/@type_159" width="380"
+                                            height="245" alt="@title" class="cover-image border-radius transition" />
+                                        <div class="effect"></div>
+                                    </figure>
+                                    <div class="desc">
+                                        <header class="text-left">
+                                            <div class="d-flex">
+                                                <div class="info">
+                                                    <p><i
+                                                            class="icon font_12 text-center far fa-calendar-check"></i><span
+                                                            class="font_13">@cdate</span></p>
+                                                </div>
+                                            </div>
+                                            <h2 class="color_gray title font_18 min-title">@title</h2>
+                                            <p class="info font_13 mini-text"> @prp_7246</p>
+                                        </header>
+                                        <footer class="text-left"><button class="color_gray font_15 info">Read more<i
+                                                    class="fa fa-angle-right"></i></button></footer>
+                                    </div>
+                                </a>
+                            </article>
+                        </div>
+                    </face>
+                    <face>
+                        <div class="article-list-content">
+                            <article class="inner border-radius card background-color_white  width_90">
+                                <a href="/@link">
+                                    <figure class="p-relative border-radius"><img src="/@type_159" width="380"
+                                            height="245" alt="@title" class="cover-image border-radius transition" />
+                                        <div class="effect"></div>
+                                    </figure>
+                                    <div class="desc">
+                                        <header class="text-left">
+                                            <div class="d-flex">
+                                                <div class="info">
+                                                    <p><i
+                                                            class="icon font_12 text-center far fa-calendar-check"></i><span
+                                                            class="font_13">@cdate</span></p>
+                                                </div>
+                                            </div>
+                                            <h2 class="color_gray title font_18 min-title">@title</h2>
+                                            <p class="info font_13 mini-text"> @prp_7246</p>
+                                        </header>
+                                        <footer class="text-left"><button class="color_gray font_15 info">Read more<i
+                                                    class="fa fa-angle-right"></i></button></footer>
+                                    </div>
+                                </a>
+                            </article>
+                        </div>
+                    </face>
+                </basis>
+
+            </section>
+            <basis core="call" file="footer-en.inc"></basis>
+        </main>
+        <!----------------JS GALLERY---------------->
+        <script type="text/javascript" src="[##cms.cms.cdn##]/js/lightgallery.js"></script>
+    </body>
+
+    </html>

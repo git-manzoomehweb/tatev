@@ -1,0 +1,241 @@
+$(document).ready(function () {
+    $("#search-box").load('/seachbox-MC.bc')
+});
+
+//<!---------------JS MENU RESPONSIVE--------------->//
+var menu = new MmenuLight(
+    document.querySelector('#menu'),
+    'all'
+);
+var navigator = menu.navigation({
+    selectedClass: 'Selected',
+    slidingSubmenus: true,
+    theme: 'light',
+    title: ''
+});
+
+var drawer = menu.offcanvas({
+    position: 'left'
+});
+
+document.querySelector('a[href="#menu"]')
+    .addEventListener('click', evnt => {
+        evnt.preventDefault();
+        drawer.open();
+    });
+
+//<!---------------JS LOGIN--------------->//
+$(document).ready(function (e) {
+    if ($(window).width() <= 1250) {
+        $(".loginRegister").load("/M_Login_Register_en.bc")
+        $(".col2-mobile-header").load('/M_Login_Information_en.bc')
+    } else {
+        $(".Login_Information").load("/Client_Login_Information_En_ver.2.bc")
+    }
+});
+//----------------JS GENERALL----------------//
+$(window).on("scroll", function (e) {
+    if ($(this).scrollTop() > 0) {
+        $(".header").addClass("is-sticky")
+        $('#back-to-top').fadeIn('slow');
+    } else {
+        $(".header").removeClass("is-sticky")
+        $('#back-to-top').fadeOut('slow');
+    }
+});
+$("#back-to-top").on("click", function (e) {
+    $("html, body").animate({
+        scrollTop: 0
+    }, 600);
+    return false;
+});
+$(".mini-about").each(function () {
+    if ($(this).text().length > 170) {
+        $(this).text($(this).text().substr(0, 170) + '...')
+    }
+})
+
+function show_language(element) {
+    $(".dropdown-language").toggleClass('unvisible');
+    $(".default-language").toggleClass('open');
+}
+
+function currency_selected(element) {
+    if (!document.querySelector(".contain-currency")) {
+        if (!document.querySelector(".contain-currency-show")) {
+            if (element.closest(".bc-main").querySelector(".currency-selected").getAttribute("data-active") == 0) {
+                element.closest(".bc-main").querySelector(".currency-loading").classList.toggle("unvisible");
+                fetch('/Client_Currency_Rate.bc')
+                    .then(response => response.text())
+                    .then(text => {
+                        const data_currency = JSON.parse(text.replace(/\'/g, '"'));
+                        for (let i = 0; i < data_currency.rate.length; i++) {
+                            $(".currency-list ul").append(`<li data-cost=${data_currency.rate[i].rate_cost} data-floatdigit=${data_currency.floatdigit} onclick="select_currency(this)">${data_currency.rate[i].rate_unit}</li>`)
+                        }
+                        element.closest(".bc-main").querySelector(".currency-loading").classList.toggle("unvisible");
+                        element.closest(".bc-main").querySelector(".currency-selected").setAttribute("data-active", 1);
+                        element.closest(".bc-main").querySelector(".currency-list").classList.toggle("unvisible");
+                    }).catch(error => console.error(error))
+            } else {
+                element.closest(".bc-main").querySelector(".currency-list").classList.toggle("unvisible");
+            }
+        }
+
+    }
+}
+
+function select_currency(element) {
+    element.closest(".bc-main").querySelector(".currency-list").classList.toggle("unvisible");
+    element.closest(".bc-main").querySelector(".currency-selected").innerText = element.innerText;
+    localStorage_setCurrency(element.innerText, element.getAttribute("data-cost"), element.getAttribute("data-floatdigit"))
+}
+
+function localStorage_setCurrency(currency_unit, currency_cost, floatdigit) {
+    let currencyObject = {
+        'currency_unit': currency_unit,
+        'currency_cost': currency_cost,
+        'floatdigit': floatdigit,
+        'time': new Date().getTime(),
+        'expire': 1200000,
+    };
+    localStorage.setItem('currencyObject', JSON.stringify(currencyObject));
+    localStorage_getCurrency();
+}
+
+function localStorage_getCurrency() {
+    let getCurrencyObject = localStorage.getItem('currencyObject');
+    let jsonCurrency = JSON.parse(getCurrencyObject);
+    if (jsonCurrency) {
+        document.querySelector(".currency-selected").innerText = jsonCurrency.currency_unit;
+        var timer = setInterval(function () {
+            if (new Date().getTime() - jsonCurrency.time >= jsonCurrency.expire) {
+                localStorage.removeItem('currencyObject');
+                document.querySelector(".currency-selected").innerText = '--Select--';
+                document.querySelector(".currency-selected").setAttribute("data-active", 0);
+                clearInterval(timer);
+                console.log('localStorage has ex pired');
+            }
+        }, 1000)
+    }
+}
+$(function () {
+    localStorage_getCurrency();
+});
+
+$(function () {
+    if (document.querySelector(".contain-currency-show")) {
+        document.querySelector(".currency-selected").setAttribute("onclick", "");
+    }
+})
+$(document).on('click', function (event) {
+    if (!$(event.target).closest('.currency-selected,.currency-list').length) {
+        document.querySelector(".currency-list").classList.add("unvisible");
+    }
+})
+
+$(".newsletter-form").submit(function (e) {
+    e.preventDefault(),
+        $(".newsletter-loading").show();
+    $.ajax({
+        url: $(".newsletter-form").attr("action"),
+        type: $(".newsletter-form").attr("method"),
+        data: $($(".newsletter-form")).serialize(),
+        success: function (result) {
+            $(".newsletter-loading").hide();
+            $(".newsletter-result").empty().html(result);
+            setTimeout(function () {
+                $(".newsletter-result").empty();
+            }, 3000);
+        }
+    })
+});
+//<!---------------START JS ARTICLE LIST--------------->//
+$(".mini-text").each(function () {
+    if ($(this).text().length > 190) {
+        $(this).text($(this).text().substr(0, 190) + '...')
+    }
+})
+//<!---------------START JS TOUR LIST--------------->//
+$(".slice").each(function () {
+    if ($(this).text().charAt(0) == ",") {
+        $(this).text($(this).text().substring(1));
+    }
+});
+$(".min-title").each(function () {
+    if ($(this).text().length > 35) {
+        $(this).text($(this).text().substr(0, 35) + '...')
+    }
+})
+//<!---------------START JS TOUR CAT--------------->//
+for (var i = 1; i <= $(".tour-cat-content").length; i++) {
+    for (var j = 1; j <= $(".input-content").length; j++) {
+        if ($(".tour-cat-container .tour-cat-content:nth-child(" + i + ")").attr("data-catid") == $(
+                ".input-content:nth-child(" + j + ")").find("input").attr("data-catid")) {
+            $(".tour-cat-container .tour-cat-content:nth-child(" + i + ")").find(".tour-count").text($(
+                ".input-content:nth-child(" + j + ")").find("input").val())
+        }
+    }
+}
+//----------------START JS TAB TOUR----------------//
+$(".tour-list-load").empty().append('<div id="loader-container" class="p-relative"><div id="loader" class="p-relative"></div></div>').load(`/tour-load-en.bc?catid=52910`)
+
+function select_tour(element, catid) {
+    $(element).addClass('active')
+    $(element).siblings().removeClass('active')
+    $(".tour-list-load").empty().append('<div id="loader-container" class="p-relative"><div id="loader" class="p-relative"></div></div>').load(`/tour-load-en.bc?catid=${catid}`)
+}
+//<!---------------START JS TOUR VIEW--------------->//
+$(function () {
+    if ($(".side-bar").offset() != undefined) {
+        let offset_top = parseInt($(".side-bar").offset().top) - 135
+        $(".side-bar-container").css('top', offset_top + 'px')
+    }
+
+})
+
+function select_nav_tour(element, id) {
+    $(`#${id}`).removeClass('unvisible')
+    $(element).addClass('selected')
+    $(element).siblings().removeClass('selected')
+    $(`#${id}`).siblings().addClass('unvisible')
+}
+$(document).ready(function () {
+$(".hotel-cost").each(function(){
+    $(this).text( $(this).text().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") );
+})
+$(".loc-input").each(function () {
+    var hotelid = $(this).val()
+    if (hotelid == 'undefined') {
+        $(this).closest(".td-hotel").find(".showhotel").removeAttr('href')
+    }
+})
+})
+//<!---------------START JS CONTACT--------------->//
+
+function select_contact(element, id) {
+    $(`#${id}`).removeClass('unvisible')
+    $(element).addClass('active')
+    $(element).siblings().removeClass('active')
+    $(`#${id}`).siblings().addClass('unvisible')
+}
+/*------------------REFRESH CAPTCHA-----------------------*/
+function refresh_captcha(element, event) {
+    $(element).closest("form").find(".load-captcha").load("/Client_Captcha.bc");
+}
+/*------------------SUBMIT FORM-----------------------*/
+$(".form-content").submit(function (e) {
+    var self = $(this);
+    self.closest("form").find(".Loading_Form").show();
+    e.preventDefault();
+    $.ajax({
+        url: self.attr("action"),
+        type: self.attr("method"),
+        data: $(self).serialize(),
+        success: function (response) {
+            self.closest("form").find(".Loading_Form").hide();
+            self.closest("form").find(".Message-Form").empty().show().html(response);
+        },
+    });
+});
+
+

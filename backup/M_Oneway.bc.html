@@ -1,0 +1,2046 @@
+<basis core="tracking" name="tracking" source="Monitoring" collectionname="activity" dbname="tracking" addcookie="true" />
+<basis core="cookie" name="trackingid" value="[##tracking.inserted.id|(0)##]" />
+<basis core="dbsource" source="trust_login8" mid="24" name="db" lid="1" rkey="[##cms.cookie.rkey##]">
+    <member name="userid" type="scalar" request="userid" preview="" />
+</basis>
+<basis core="external.fly.ws" source="cmsDbService2" name="db" procedurename="dbsource" >
+    <member method="cms" name="agencycatid" query= '{
+        "name": "db",
+        "mid": "20",
+        "member": [
+            {
+                "type": "scalar",
+                "name": "q",
+                "request": "agencycatid"
+            }
+        ]
+    } ' />
+</basis>
+<basis core="group" name="Delay_1" >
+<basis core="dbsource" source="trust_login" lid="1" name="db" catid="[##db.agencycatid.result##]" userid= "[##db.userid.userid##]" ownerid="[##cms.cms.ownerid##]" >
+    <member name="checkuser" type="scalar"  request="checkagencyuser" />
+</basis>
+<basis core="group" name="Delay_2" >
+    <basis core="external.fly.ws" source="cmsDbService2" procedurename="dbsource" name="db">
+     <member method="cms" name="chagencyuser" query='{
+        "name": "db",
+        "mid": "20",
+        "member": [
+            {
+                "type": "scalar",
+                "name": "q",
+                "request": "checkagencyuser",
+                "counter": "[##db.checkuser.Column1##]",
+                "userid": "[##db.userid.userid##]"
+            }
+        ]
+    }'/>
+    </basis>
+<basis core="external.fly.ws" source="cmsDbService2" procedurename="dbsource" name="db">
+    <member method="cms" name="dep_city"
+        query='{ "name": "db", "mid": "20", "member":[ { "type":"list", "name": "q", "request": "citySearch",  "functype": "0", "title": "[##cms.query.from##]", "status": "city", "lid": "1"}]}'
+        preview="" />
+</basis>
+<basis core="external.fly.ws" source="cmsDbService2" procedurename="dbsource" name="db">
+    <member method="cms" name="des_city"
+        query='{ "name": "db", "mid": "20", "member":[ { "type":"list", "name": "q", "request": "citySearch", "functype": "0", "title": "[##cms.query.to##]",   "status": "city", "lid": "1"}]}'
+        preview="" />
+</basis>
+<basis core="group" name="search">
+    <basis core="inlinesource" name="db">
+        <member name="dep_city_tree" format="json" preview=""> {"root":[##db.dep_city.result##]} </member>
+        <member name="des_city_tree" format="json" preview=""> {"root":[##db.des_city.result##]}</member>
+    </basis>
+    <!DOCTYPE html>
+    <html>
+
+    <head>
+        <title>پرواز یکطرفه</title>
+        <meta charset="utf-8">
+        <meta name="author" content="BasisCore">
+        <meta name="viewport" content="width=device-width, minimum-scale=0.25, maximum-scale=1.0, initial-scale=1.0">
+        <!----CSS LIBRARY---->
+        <link href="https://cdn.basiscore.net/basisfly.com/css/reservation_mob_calendar.css" type="text/css" rel="stylesheet" />
+        <link href="https://cdn.basiscore.net/basisfly.com/css/reservation_mob_style.css" type="text/css" rel="stylesheet" />
+        <link href="https://cdn.basiscore.net/basisfly.com/css/reservation_font_awesome.css" type="text/css" rel="stylesheet" />
+        <!----CSS CUSTOMIZE---->
+        <link href="[##cms.cms.cdn##]/css/style_mob.css" type="text/css" rel="stylesheet" />
+        <!----JS LIBRARY---->
+        <script src="https://cdn.basiscore.net/basisfly.com/js/reservation_js_library.js" type="text/javascript"></script>
+    </head>
+    <body onload="onloadFunc();">
+        <div id="Container" class="p-relative">
+            <div id="bg-popup" class="unvisible"></div>
+            <div class="message_box message_box_timeout unvisible font_13 p-absolute">
+                <i class="fas fa-clock icon_message_box font-color_2 "></i>
+                <div class="line-one font_18">
+                    <span>اعتبار جستجوی شما پایان یافت.</span>
+                </div>
+                <div class="line-two">
+                    <div> لطفا برای دریافت بهترین قیمت ها و بررسی مجدد ظرفیت روی دکمه زیر کلیک کنید.</div>
+                    <button class="background-color_2 font-weight" onClick="window.location='/'">صفحه
+                        اصلی</button>
+                    <button class="background-color_2 font-weight" onclick="location.reload()">جستجوی
+                        مجدد</button>
+                </div>
+            </div>
+            <basis core="group" name="notice" if="'[##cms.cms.ownerid##]'='9364'">
+                <!-- <div class="notice-wrapper"></div>
+                <div class="notice-container background-color_white border-radius text-justify">
+                    <p class="notice-title text-center">Iran Flights Update</p>
+                    <p class="color_gray font_15"><span>All passengers traveling to Iran must present a negative PCR test result taken within 0-96 hours before the flight. Passengers are subject to quarantine. </span><span>Please <a href="https://www.flypgs.com/en/where-can-i-fly/?*126" target="_blank">read </a> the information regarding entry rules for the country you are visiting, PCR test rules, and the forms to be completed.</span></p>
+                   <br/>
+                    <p class="color_gray font_15"><span>* For our flights from Iran to Turkey, all our passengers are required to fill in the <a href="https://register.health.gov.tr/">Turkey Entry Form</a> within 72 hours before the flight's departure and present a negative PCR test result, performed within 72 hours prior to arrival in Turkey. Passengers who have not completed the form and who do not have such a negative test will not be permitted to board the flight.<br></span></p>
+                    <div class="text-center"><button class="btn_2 background-color_2 color_white hvr-horizontal transition" onclick="close_notice()">خواندم و موافقم‎</button></div>
+                </div> -->
+            </basis>
+            <div id="Container-resize">
+                <div class="loginRegister"></div>
+                <basis core="call" file="M_Header.inc" />
+                <div class="clr"></div>
+                <div id="content">
+                    <div class="section-research background-color_1 font_13">
+                        <div class="section-research-right float_right">
+                            <div>
+                                <basis core="print" datamembername="db.dep_city_tree">
+                                    <face filter="Field = 'title'">
+                                        <span class="label-tlt">مبدا :</span>
+                                        <span class="label-ans">@value</span>
+                                    </face>
+                                </basis>
+                                <basis core="print" datamembername="db.des_city_tree">
+                                    <face filter="Field = 'title'">
+                                        <span class="label-tlt">مقصد :</span>
+                                        <span class="label-ans">@value</span>
+                                    </face>
+                                </basis>
+                            </div>
+                            <div class="clr"></div>
+                            <div class="float_right">
+                                <span class="label-tlt">تاریخ رفت :</span>
+                                <span class="label-ans">[##cms.query.fdate##]</span>
+                            </div>
+                            <div class="section-research-left float_left">
+                                <form method="post" data-read="0" action="M_Research.bc" class="form_research" data-type="1">
+                                    <input type="hidden" value="1" name="type" />
+                                    <input type="hidden" value="[##cms.query.persiancurrent##]" class="persiancurrent"
+                                        name="persiancurrent" />
+                                    <input type="hidden" value="[##cms.query.from##]" name="from" />
+                                    <input type="hidden" value="[##cms.query.to##]" name="to" />
+                                    <input type="hidden" value="[##cms.query.fdate##]" name="fdate" class="departuredate"/>
+                                    <input type="hidden" value="[##cms.query.tdate##]" name="tdate" class="returndate" />
+                                    <input type="hidden" value="[##cms.query.mstring_fdate##]" name="mstring_fdate" class="departureMdate" />
+                                    <input type="hidden" value="[##cms.query.mstring_tdate##]" name="mstring_tdate" class="returnMdate" />
+                                    <input type="hidden" value="[##cms.query.adult##]" name="adult" />
+                                    <input type="hidden" value="[##cms.query.child##]" name="child" />
+                                    <input type="hidden" value="[##cms.query.select-age##]" name="select-age" />
+                                    <input type="hidden" value="[##cms.query.share|(0)##]" name="share" />
+                                    <input type="hidden" value="[##cms.query.FlightClass##]" name="FlightClass" />
+                                    <button type="submit"><span>تغییر</span><i class="fa fa-search"></i></button>
+                                </form>
+                                <form method="get" action="M_Oneway_Search.bc" class="form_research_date">
+                                    <input type="hidden" value="[##cms.query.persiancurrent##]" class="persiancurrent" name="persiancurrent" />
+                                    <input type="hidden" value="[##cms.query.from##]" name="from" />
+                                    <input type="hidden" value="[##cms.query.to##]" name="to" />
+                                    <input type="hidden" value="[##cms.query.fdate##]" name="fdate" class="departuredate"/>
+                                    <input type="hidden" value="[##cms.query.tdate##]" name="tdate" class="returndate" />
+                                    <input type="hidden" value="[##cms.query.mstring_fdate##]" name="mstring_fdate" class="departureMdate" />
+                                    <input type="hidden" value="[##cms.query.mstring_tdate##]" name="mstring_tdate" class="returnMdate" />
+                                    <input type="hidden" value="[##cms.query.adult##]" name="adult" />
+                                    <input type="hidden" value="[##cms.query.child##]" name="child" />
+                                    <input type="hidden" value="[##cms.query.select-age##]" name="select-age" />
+                                    <input type="hidden" value="[##cms.query.share|(0)##]" name="share" />
+                                    <input type="hidden" value="[##cms.query.FlightClass##]" name="FlightClass" />
+                                </form>
+                            </div>
+                            <div class="clr"></div>
+                        </div>
+                       
+                        <div class="clr"></div>
+                        <div class="content-research unvisible">
+                            <div class="Loading-box">
+                                <div class="lds-spinner">
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clr"></div>
+                    </div>
+                    <div class="wrapper-95">
+                        <span class="before-btn background-color_1  font_12"><i
+                                class="fa fa-arrow-right float_right"></i>روز قبل</span>
+                        <span class="after-btn background-color_1   font_12">روز بعد<i
+                                class="fa fa-arrow-left float_left"></i></span>
+                    </div>
+                    <div class="wating-search">
+                        <span>در حال جستجوی بهترین پرواز ها ...</span>
+                        <div class="loading-progress"></div>
+                         <img src="/images/M_Flight.gif" alt="" width="150" height="" />
+                    </div>
+                    <div id="app" class="unvisible"></div>
+
+                </div>
+                <basis core="call" file="M_Footer.inc" />
+            </div>
+        </div>
+         <!----JS LIBRARY---->
+<script type="text/javascript">
+    $(document).ready(function () {
+        fetch('/Client_Oneway_Json.bc?from=[##cms.query.from##]&to=[##cms.query.to##]&fdate=[##cms.query.fdate##]&adult=[##cms.query.adult##]&child=[##cms.query.child##]&select-age=[##cms.query.select-age##]&share=[##cms.query.share|(0)##]&userid=[##db.userid.userid##]&Flightclass=[##cms.query.FlightClass##]', {
+            method: 'get',
+        })
+        .then(response => response.text())
+        .then(text => {
+            let Maindata = JSON.parse(text.replace(/\'/g, '"'))
+            let LenMaindata = Maindata.length
+            if (LenMaindata !== undefined) {
+                Maindata.sort((a, b) => a.total - b.total);
+            }
+            $('.wating-search').hide()
+            $('#app').show()
+            load_data(Maindata)
+            }).catch(error => console.error(error))
+    })
+
+</script>
+<script type="text/babel">
+    function load_data(load_data) {
+    class App extends React.Component {
+        constructor(props) {
+            super(props);
+            this.state = {
+                data: [],
+                data_provider: [],
+                data_currency: [],
+                library: null,
+                librarySecond: null,
+                perPage: 20,
+                currentPage: 1,
+                currentPage2: 2,
+                currentPage3: 3,
+                maxPage: null,
+                filterExitTimeDepF: "00",
+                filterExitTimeDepS: "24",
+                rangevalExitTimeDepF: "00:00",
+                rangevalExitTimeDepS: "24:00",
+                filterTotalF: "",
+                filterTotalS: "",
+                rangevalTotalF: "",
+                rangevalTotalS: "",
+                filterTimeDepF: "",
+                filterTimeDepS: "",
+                rangevalTimeDepF: "",
+                rangevalTimeDepS: "",
+                visibleDetails: {},
+                visibleAll: {},
+                visiblePrice: {},
+                visibleBar: {},
+                visibleRule: {},
+                loadingBarDep: {},
+                loadingRuleDep: {},
+                barDepTxt: {},
+                ruleDepTxt: {},
+                priceS: {},
+                defaultactive: {},
+                priceactive: {},
+                stopS: {},
+                stopactive: {},
+                timeS: {},
+                takeoffS: {},
+                timeactive: {},
+                checkkeyprice: 0,
+                checkkeystop: 0,
+                checkkeytime: 0,
+                checkkeytakeoff: 0,
+                activedefault: "active",
+                activeprice: "",
+                activestop: "",
+                activetime: "",
+                activetakeoff: "",
+                state_airlines: "",
+                state_stops: "",
+                state_isSystemFlight: "",
+                state_checktype: "",
+                state_checkkey: "",
+                state_currency_unit: "",
+                state_currency_cost: 1,
+                state_floatdigit: ""
+            };
+            this.airlines = [];
+            this.stops = [];
+            this.isSystemFlight = [];
+            this.handleClick = this.handleClick.bind(this);
+        }
+        componentDidMount() {
+            this.setState(state => ({
+                ...state,
+                data: load_data
+            }), () => {
+                this.reorganiseLibrary()
+            })
+            $(document).on('update_result', (event, airlines, stops, isSystemFlight, checktype, checkkey) => {
+                this.reorganiseLibrary(airlines, stops, isSystemFlight, checktype, checkkey)
+            })
+
+            if ([##db.chagencyuser.result##] == 1) {
+                fetch('/Client_Provider_Library.bc')
+                    .then(response => response.json())
+                    .then(provider => {
+                        this.setState({ data_provider: provider })
+                    }).catch(error => console.error(error))
+            }
+            let getCurrencyObject = localStorage.getItem('currencyObject');
+        let jsonCurrency = JSON.parse(getCurrencyObject);
+        if(jsonCurrency){
+            this.setState({
+            state_currency_unit: jsonCurrency.currency_unit,
+            state_currency_cost: jsonCurrency.currency_cost,
+            state_floatdigit: jsonCurrency.floatdigit,
+           })
+       }
+
+        }
+        componentDidUpdate() {
+            $(".unit_content").each(function () {
+                if ($(this).text() == 'ریالريال' || $(this).text() == 'ريالریال') {
+                    $(this).text('ریال')
+                }
+            })
+            $(".airline_filter").sort(function (a, b) {
+                a = $(".min_total", a).text().replace(/,/g, '');
+                b = $(".min_total", b).text().replace(/,/g, '');
+                return a - b;
+            }).appendTo(".airline_results");
+
+            $(document).on('click', function (event) {
+                if (!$(event.target).closest('.section-filter-icon,.section-filter-content').length) {
+                    $(".section-filter").removeClass('section-filter-open')
+                    $(".section-filter-content").animate({ right: '-100%' }, 350);
+                }
+
+            })
+
+        }
+        reorganiseLibrary = (airlines, stops, isSystemFlight, checktype, checkkey) => {
+            const { filterExitTimeDepF, filterExitTimeDepS, filterExitTimeDesF, filterExitTimeDesS, filterTotalF, filterTotalS, filterTimeDepF, filterTimeDepS, filterTimeDesF, filterTimeDesS, perPage, data } = this.state;
+            let library = data;
+            let librarySecond = data;
+            librarySecond = _.chunk(librarySecond, perPage);
+            this.setState({
+                librarySecond,
+                currentPage: 1,
+                maxPage: librarySecond.length === 0 ? 1 : librarySecond.length
+            })
+
+            let defaultFilterTimeDepF = null;
+            defaultFilterTimeDepF = filterTimeDepF
+                ? (filterTimeDepF)
+                : (this.renderMinFilterTimeDep(librarySecond));
+            let defaultFilterTimeDepS = null;
+            defaultFilterTimeDepS = filterTimeDepS
+                ? (filterTimeDepS)
+                : (this.renderMaxFilterTimeDep(librarySecond));
+            if (filterTimeDepS !== undefined || filterTimeDepF !== undefined) {
+                if (filterTimeDepS !== "" || filterTimeDepF !== "") {
+                    let lenLibraryDef = library.length
+                    if (lenLibraryDef !== undefined) {
+                        library = library.filter(item =>
+                            parseInt(this.renderStoppinfoF(item.ticketinfooo.stoppinfoo.showtiming)) >= parseInt(defaultFilterTimeDepF) && parseInt(this.renderStoppinfoS(item.ticketinfooo.stoppinfoo.showtiming)) <= parseInt(defaultFilterTimeDepS)
+                        )
+                        let lenLibrary = library.length
+                        $('.list_count').text(lenLibrary)
+                    }
+
+                }
+            }
+            let defaultFilterTotalF = null;
+            defaultFilterTotalF = filterTotalF
+                ? (filterTotalF)
+                : (this.renderMinFilterTotal(librarySecond));
+            let defaultFilterTotalS = null;
+            defaultFilterTotalS = filterTotalS
+                ? (filterTotalS)
+                : (this.renderMaxFilterTotal(librarySecond));
+            if (filterTotalF !== undefined || filterTotalS !== undefined) {
+                if (filterTotalF !== "" || filterTotalS !== "") {
+                    let lenLibraryDef = library.length
+                    if (lenLibraryDef !== undefined) {
+                        library = library.filter(item =>
+                            item.totalCom >= defaultFilterTotalF && item.totalCom <= defaultFilterTotalS
+                        )
+                        let lenLibrary = library.length
+                        $('.list_count').text(lenLibrary)
+                    }
+
+                }
+            }
+            if (filterExitTimeDepF !== undefined || filterExitTimeDepS !== undefined) {
+                if (filterExitTimeDepF !== "00" || filterExitTimeDepS !== "24") {
+                    let lenLibraryDef = library.length
+                    if (lenLibraryDef !== undefined) {
+                        library = library.filter(item =>
+                            this.rendershowexittimeDepF(item.ticketinfooo.exitinfo.showexittime) >= filterExitTimeDepF && this.rendershowexittimeDepS(item.ticketinfooo.exitinfo.showexittime) <= filterExitTimeDepS
+                        )
+                        let lenLibrary = library.length
+                        $('.list_count').text(lenLibrary)
+                    }
+                }
+            }
+            if (checktype == 'default') {
+                library.sort((a, b) => a.total - b.total);
+                this.setState({ activedefault: "active" })
+                this.setState({ activeprice: "" })
+                this.setState({ activestop: "" })
+                this.setState({ activetime: "" })
+                this.setState({ activetakeoff: "" })
+                if (this.state.priceS[0] == true) {
+                    this.setState(prevState => ({
+                        priceS: { ...prevState.priceS, [0]: !prevState.priceS[0] }
+                    }))
+                }
+                if (this.state.stopS[0] == true) {
+                    this.setState(prevState => ({
+                        stopS: { ...prevState.stopS, [0]: !prevState.stopS[0] }
+                    }))
+                }
+                if (this.state.timeS[0] == true) {
+                    this.setState(prevState => ({
+                        timeS: { ...prevState.timeS, [0]: !prevState.timeS[0] }
+                    }))
+                }
+                if (this.state.takeoffS[0] == true) {
+                    this.setState(prevState => ({
+                        takeoffS: { ...prevState.takeoffS, [0]: !prevState.takeoffS[0] }
+                    }))
+                }
+
+            }
+
+            if (checktype == 'price') {
+                if (checkkey == 0) {
+
+                    library.sort((a, b) => b.total - a.total);
+                    this.setState({ checkkeyprice: 1 });
+                } else {
+                    library.sort((a, b) => a.total - b.total);
+                    this.setState({ checkkeyprice: 0 });
+                }
+                this.setState(prevState => ({
+                    priceS: { ...prevState.priceS, [0]: !prevState.priceS[0] }
+                }))
+                this.setState({ activeprice: "active" })
+                this.setState({ activedefault: "" })
+                this.setState({ activestop: "" })
+                this.setState({ activetime: "" })
+                this.setState({ activetakeoff: "" })
+                if (this.state.stopS[0] == true) {
+                    this.setState(prevState => ({
+                        stopS: { ...prevState.stopS, [0]: !prevState.stopS[0] }
+                    }))
+                }
+                if (this.state.timeS[0] == true) {
+                    this.setState(prevState => ({
+                        timeS: { ...prevState.timeS, [0]: !prevState.timeS[0] }
+                    }))
+                }
+                if (this.state.takeoffS[0] == true) {
+                    this.setState(prevState => ({
+                        takeoffS: { ...prevState.takeoffS, [0]: !prevState.takeoffS[0] }
+                    }))
+                }
+            }
+
+            if (checktype == 'stop') {
+                if (checkkey == 0) {
+                    library.sort((a, b) => b.ticketinfooo.stoppinfoo.showstopinfo - a.ticketinfooo.stoppinfoo.showstopinfo);
+                    this.setState({ checkkeystop: 1 });
+                } else {
+                    library.sort((a, b) => a.ticketinfooo.stoppinfoo.showstopinfo - b.ticketinfooo.stoppinfoo.showstopinfo);
+                    this.setState({ checkkeystop: 0 });
+                }
+                this.setState(prevState => ({
+                    stopS: { ...prevState.stopS, [0]: !prevState.stopS[0] }
+                }))
+                this.setState({ activeprice: "" })
+                this.setState({ activedefault: "" })
+                this.setState({ activestop: "active" })
+                this.setState({ activetime: "" })
+                this.setState({ activetakeoff: "" })
+                if (this.state.priceS[0] == true) {
+                    this.setState(prevState => ({
+                        priceS: { ...prevState.priceS, [0]: !prevState.priceS[0] }
+                    }))
+                }
+                if (this.state.timeS[0] == true) {
+                    this.setState(prevState => ({
+                        timeS: { ...prevState.timeS, [0]: !prevState.timeS[0] }
+                    }))
+                }
+                if (this.state.takeoffS[0] == true) {
+                    this.setState(prevState => ({
+                        takeoffS: { ...prevState.takeoffS, [0]: !prevState.takeoffS[0] }
+                    }))
+                }
+            }
+
+            if (checktype == 'Time') {
+                if (checkkey == 0) {
+                    library.sort((a, b) => this.rendertimesorting(b.ticketinfooo.stoppinfoo.showtiming) - this.rendertimesorting(a.ticketinfooo.stoppinfoo.showtiming));
+                    this.setState({ checkkeytime: 1 });
+                } else {
+                    library.sort((a, b) => this.rendertimesorting(a.ticketinfooo.stoppinfoo.showtiming) - this.rendertimesorting(b.ticketinfooo.stoppinfoo.showtiming));
+                    this.setState({ checkkeytime: 0 });
+                }
+                this.setState(prevState => ({
+                    timeS: { ...prevState.timeS, [0]: !prevState.timeS[0] }
+                }))
+                this.setState({ activeprice: "" })
+                this.setState({ activedefault: "" })
+                this.setState({ activestop: "" })
+                this.setState({ activetime: "active" })
+                this.setState({ activetakeoff: "" })
+                if (this.state.priceS[0] == true) {
+                    this.setState(prevState => ({
+                        priceS: { ...prevState.priceS, [0]: !prevState.priceS[0] }
+                    }))
+                }
+                if (this.state.stopS[0] == true) {
+                    this.setState(prevState => ({
+                        stopS: { ...prevState.stopS, [0]: !prevState.stopS[0] }
+                    }))
+                }
+                if (this.state.takeoffS[0] == true) {
+                    this.setState(prevState => ({
+                        takeoffS: { ...prevState.takeoffS, [0]: !prevState.takeoffS[0] }
+                    }))
+                }
+            }
+            if (checktype == 'takeoff') {
+                if (checkkey == 0) {
+                    library.sort((a, b) => this.rendertakeoffsorting(b.ticketinfooo.exitinfo.showexittime) - this.rendertakeoffsorting(a.ticketinfooo.exitinfo.showexittime));
+                    this.setState({ checkkeytakeoff: 1 });
+                } else {
+                    library.sort((a, b) => this.rendertakeoffsorting(a.ticketinfooo.exitinfo.showexittime) - this.rendertakeoffsorting(b.ticketinfooo.exitinfo.showexittime));
+                    this.setState({ checkkeytakeoff: 0 });
+                }
+                this.setState(prevState => ({
+                    takeoffS: { ...prevState.takeoffS, [0]: !prevState.takeoffS[0] }
+                }))
+                this.setState({ activeprice: "" })
+                this.setState({ activedefault: "" })
+                this.setState({ activestop: "" })
+                this.setState({ activetime: "" })
+                this.setState({ activetakeoff: "active" })
+                if (this.state.priceS[0] == true) {
+                    this.setState(prevState => ({
+                        priceS: { ...prevState.priceS, [0]: !prevState.priceS[0] }
+                    }))
+                }
+                if (this.state.stopS[0] == true) {
+                    this.setState(prevState => ({
+                        stopS: { ...prevState.stopS, [0]: !prevState.stopS[0] }
+                    }))
+                }
+                if (this.state.timeS[0] == true) {
+                    this.setState(prevState => ({
+                        timeS: { ...prevState.timeS, [0]: !prevState.timeS[0] }
+                    }))
+                }
+            }
+            if (airlines !== undefined) {
+                if (airlines !== "") {
+                    airlines = airlines.split(",");
+
+                    library = library.filter(item => {
+                        if (
+                            this.renderAirlineFilter(item.routeshow).some(r => airlines.includes(r))
+                        ) return item;
+
+                    })
+                }
+                let lenLibrary = library.length
+                $('.list_count').text(lenLibrary)
+            }
+
+            if (stops !== undefined) {
+                if (stops !== "") {
+                    stops = stops.split(",");
+                    library = library.filter(item => {
+                        if (stops.includes(this.renderStopsFilter(item.ticketinfooo.stoppinfoo.showstopinfo))) return item;
+                    })
+                }
+                let lenLibrary = library.length
+                $('.list_count').text(lenLibrary)
+            }
+
+            if (isSystemFlight !== undefined) {
+                if (isSystemFlight !== "") {
+                    isSystemFlight = isSystemFlight.split(",");
+                    library = library.filter(item => {
+                        let keyToLowerCase = {};
+                        for (var key in item) {
+                            keyToLowerCase[key.toLowerCase()] = item[key];
+                        }
+                        if (isSystemFlight.includes(keyToLowerCase.issystemflight)) return item;
+                    })
+                }
+                let lenLibrary = library.length
+                $('.list_count').text(lenLibrary)
+            }
+            let lenLibrary = library.length
+            if (lenLibrary == undefined) {
+                $('.list_count').text(0)
+            } else {
+                $('.list_count').text(lenLibrary)
+            }
+
+            library = _.chunk(library, perPage);
+            this.setState({
+                library,
+                currentPage: 1,
+                maxPage: library.length === 0 ? 1 : library.length
+            })
+        }
+
+
+        rendershowexittimeDepF(element) {
+            let SplitElement = element.split(':')
+            let SplitElementFirst = SplitElement[0]
+            return SplitElementFirst
+        }
+        rendershowexittimeDepS(element) {
+            let SplitElement = element.split(':')
+            let SplitElementFirst = SplitElement[0]
+            let SplitElementSecond = SplitElement[1]
+            if (SplitElementSecond > 0) {
+                return parseInt(SplitElementFirst) + 1
+            } else {
+                return SplitElementFirst
+            }
+        }
+
+
+        renderMinFilterTotal = (librarySecond) => {
+            return librarySecond.reduce((acc, lib) => {
+                const libMin = Math.min(...lib.map(item => item.totalCom))
+                return acc === undefined ? libMin : libMin < acc ? libMin : acc
+            }, undefined)
+        }
+        renderMaxFilterTotal = (librarySecond) => {
+            return librarySecond.reduce((acc, lib) => {
+                const libMax = Math.max(...lib.map(item => item.totalCom))
+                return libMax > acc ? libMax : acc
+            }, 0)
+        }
+        renderMinFilterTimeDep = (librarySecond) => {
+            return librarySecond.reduce((acc, lib) => {
+                const libMin = Math.min(...lib.map(item => this.renderStoppinfo(item.ticketinfooo.stoppinfoo.showtiming)))
+                return acc === undefined ? libMin : libMin < acc ? libMin : acc
+            }, undefined)
+        }
+        renderMaxFilterTimeDep = (librarySecond) => {
+            return librarySecond.reduce((acc, lib) => {
+                const libMax = Math.max(...lib.map(item => this.renderStoppinfoS(item.ticketinfooo.stoppinfoo.showtiming)))
+                return libMax > acc ? libMax : acc
+            }, 0)
+        }
+
+        renderStopsFilter(element) {
+            let elementToSting = element.toString()
+            return elementToSting
+
+        }
+        renderAirlineFilter(element) {
+            let elementAdd = []
+            for (let i = 0; i < element.routesinfoo.length; i++) {
+                elementAdd.push(element.routesinfoo[i].routesinfoodetails.otherdetails.detailsairline)
+
+            }
+
+            return elementAdd
+        }
+
+        // Previous Page
+        previousPage = event => {
+            let maxPage = this.state.maxPage
+            let len = this.renderLibrary().length
+            let Multi = len * maxPage
+            for (let i = 0; i <= Multi; i++) {
+                this.setState(prevState => ({
+                    visibleDetails: { ...prevState.visibleDetails, [i]: "" },
+                    visibleRule: { ...prevState.visibleRule, [i]: "" },
+                    visibleBar: { ...prevState.visibleBar, [i]: "" },
+                    visiblePrice: { ...prevState.visiblePrice, [i]: "" },
+
+                }))
+            }
+            this.handleClick(event)
+            this.setState({
+                currentPage: this.state.currentPage - 1,
+                currentPage2: this.state.currentPage2 - 1,
+                currentPage3: this.state.currentPage3 - 1
+            })
+        }
+
+        // Next Page 
+        nextPage = event => {
+            let maxPage = this.state.maxPage
+            let len = this.renderLibrary().length
+            let Multi = len * maxPage
+            for (let i = 0; i <= Multi; i++) {
+                this.setState(prevState => ({
+                    visibleDetails: { ...prevState.visibleDetails, [i]: "" },
+                    visibleRule: { ...prevState.visibleRule, [i]: "" },
+                    visibleBar: { ...prevState.visibleBar, [i]: "" },
+                    visiblePrice: { ...prevState.visiblePrice, [i]: "" },
+
+                }))
+            }
+            this.handleClick(event)
+            this.setState({
+                currentPage: this.state.currentPage + 1,
+                currentPage2: this.state.currentPage2 + 1,
+                currentPage3: this.state.currentPage3 + 1
+            })
+        }
+
+        // Next Page3
+        nextPage3 = event => {
+            let maxPage = this.state.maxPage
+            let len = this.renderLibrary().length
+            let Multi = len * maxPage
+            for (let i = 0; i <= Multi; i++) {
+                this.setState(prevState => ({
+                    visibleDetails: { ...prevState.visibleDetails, [i]: "" },
+                    visibleRule: { ...prevState.visibleRule, [i]: "" },
+                    visibleBar: { ...prevState.visibleBar, [i]: "" },
+                    visiblePrice: { ...prevState.visiblePrice, [i]: "" },
+
+                }))
+            }
+            this.handleClick(event)
+            this.setState({
+                currentPage: this.state.currentPage3,
+                currentPage2: this.state.currentPage3 + 1,
+                currentPage3: this.state.currentPage3 + 2
+            })
+        }
+
+        //start handler filter ExitTime
+        handlerFilterExitDep = evt => {
+            const { state_airlines, state_stops, state_isSystemFlight, state_checktype, state_checkkey } = this.state
+            let value = evt.target.value
+            let key = evt.target.getAttribute("data-key")
+            if (key == '1') {
+                if (value < 10) {
+                    this.setState(
+                        {
+                            filterExitTimeDepF: "0" + evt.target.value,
+                            rangevalExitTimeDepF: "0" + evt.target.value + ": 00",
+                        },
+                        () => {
+                            this.reorganiseLibrary(state_airlines, state_stops, state_isSystemFlight, state_checktype, state_checkkey);
+                        }
+                    )
+                }
+                else {
+                    this.setState(
+                        {
+                            filterExitTimeDepF: evt.target.value,
+                            rangevalExitTimeDepF: evt.target.value + ": 00",
+                        },
+                        () => {
+                            this.reorganiseLibrary(state_airlines, state_stops, state_isSystemFlight, state_checktype, state_checkkey);
+                        }
+                    )
+                }
+            } else if (key == '2') {
+                if (value < 10) {
+
+                    this.setState(
+                        {
+                            filterExitTimeDepS: "0" + evt.target.value,
+                            rangevalExitTimeDepS: "0" + evt.target.value + ": 00",
+                        },
+                        () => {
+                            this.reorganiseLibrary(state_airlines, state_stops, state_isSystemFlight, state_checktype, state_checkkey);
+                        }
+                    )
+                }
+                else {
+                    this.setState(
+                        {
+                            filterExitTimeDepS: evt.target.value,
+                            rangevalExitTimeDepS: evt.target.value + ": 00",
+                        },
+                        () => {
+                            this.reorganiseLibrary(state_airlines, state_stops, state_isSystemFlight, state_checktype, state_checkkey);
+                        }
+                    )
+                }
+            }
+
+        }//end handler filter ExitTime
+
+
+
+        // start handler filter price
+        handlerFilterTotal = evt => {
+            const { state_airlines, state_stops, state_isSystemFlight, state_checktype, state_checkkey } = this.state
+            let renderMax = this.renderMaxTotal()
+            let value = evt.target.value
+            let key = evt.target.getAttribute("data-key")
+            if (key == '1') {
+                this.setState(
+                    {
+                        filterTotalF: evt.target.value,
+                        rangevalTotalF: evt.target.value,
+                    },
+                    () => {
+                        this.reorganiseLibrary(state_airlines, state_stops, state_isSystemFlight, state_checktype, state_checkkey);
+                    }
+                )
+            } else if (key == '2') {
+                evt.target.max = renderMax
+                this.setState(
+                    {
+                        filterTotalS: evt.target.value,
+                        rangevalTotalS: evt.target.value,
+                    },
+                    () => {
+                        this.reorganiseLibrary(state_airlines, state_stops, state_isSystemFlight, state_checktype, state_checkkey);
+                    }
+                )
+            }
+        } // end handler filter price
+
+        // start handler filter StopTime
+        handlerFilterTimeDep = evt => {
+            const { state_airlines, state_stops, state_isSystemFlight, state_checktype, state_checkkey } = this.state
+            let value = evt.target.value
+            let key = evt.target.getAttribute("data-key")
+            if (key == '1') {
+                if (value < 10) {
+                    this.setState(
+                        {
+                            filterTimeDepF: evt.target.value,
+                            rangevalTimeDepF: "0" + evt.target.value,
+                        },
+                        () => {
+                            this.reorganiseLibrary(state_airlines, state_stops, state_isSystemFlight, state_checktype, state_checkkey);
+                        }
+                    )
+                } else {
+                    this.setState(
+                        {
+                            filterTimeDepF: evt.target.value,
+                            rangevalTimeDepF: evt.target.value,
+                        },
+                        () => {
+                            this.reorganiseLibrary(state_airlines, state_stops, state_isSystemFlight, state_checktype, state_checkkey);
+                        }
+                    )
+                }
+
+            } else if (key == '2') {
+                if (value < 10) {
+                    this.setState(
+                        {
+                            filterTimeDepS: evt.target.value,
+                            rangevalTimeDepS: "0" + evt.target.value,
+                        },
+                        () => {
+                            this.reorganiseLibrary(state_airlines, state_stops, state_isSystemFlight, state_checktype, state_checkkey);
+                        }
+                    )
+                } else {
+                    this.setState(
+                        {
+                            filterTimeDepS: evt.target.value,
+                            rangevalTimeDepS: evt.target.value,
+                        },
+                        () => {
+                            this.reorganiseLibrary(state_airlines, state_stops, state_isSystemFlight, state_checktype, state_checkkey);
+                        }
+                    )
+                }
+
+            }
+
+        } // end handler filter StopTime
+
+
+        // handler per page
+
+
+        handlePerPage = (evt) =>
+            this.setState({
+                perPage: evt.target.value
+            }, () => this.reorganiseLibrary());
+
+        // handler render of library
+        renderLibrary = () => {
+            const { library, currentPage } = this.state;
+            if (!library || (library && library.length === 0)) {
+                return <div><div className="message_box message_box_nodata  font_13 no-data">
+                    <i className="fas fa-exclamation-triangle icon_message_box font-color_2"></i>
+                    <div className="line-one font_18">
+                        <span>برای جستجوی شما نتیجه ای یافت نشد .</span>
+                    </div>
+                    <div className="line-two">
+                        <div> لطفا برای دریافت بهترین قیمت ها و بررسی مجدد ظرفیت روی دکمه زیر کلیک کنید.</div>
+                        <button className="background-color_2 font-weight" onClick={this.renderhomepage}>صفحه اصلی</button>
+                        <button className="background-color_2 font-weight" onClick={this.renderResearch}  >جستجوی مجدد</button>
+                    </div>
+                </div></div>
+            }
+            return library[currentPage - 1].map((item, i) => (
+                <div className="search-item transition">
+                    <form method="post" action={this.renderAction(item)} key={item._id}>
+                        <input type="hidden" value={this.state.state_currency_unit} name="rate-unit" className="rate-unit" />
+                        <input type="hidden" value={this.state.state_currency_cost} name="rate-cost" className="rate-cost" />
+                        <input type="hidden" value={this.state.state_floatdigit} name="rate-floatdigit" className="rate-floatdigit" />
+                        <input type="hidden" value="[##cms.query.from##]" name="from" />
+                        <input type="hidden" value="[##cms.query.to##]" name="to" />
+                        <input type="hidden" value="[##cms.query.fdate##]" name="fdate" />
+                        <input type="hidden" value="[##cms.query.adult##]" name="adult" />
+                        <input type="hidden" value="[##cms.query.child##]" name="child" />
+                        <input type="hidden" value="[##cms.query.select-age##]" name="select-age" />
+                        <input type="hidden" value="[##cms.query.FlightClass##]" name="FlightClass" />
+                        <input type="hidden" value={item.supplier} name="supplier" />
+                        <input type="hidden" value={item.share} name="share" />
+                        <input type="hidden" value={item.ticketinfooo.classes.classname} name="classname" />
+                        <input type="hidden" value={item._id.value} name="idvalue" />
+                        {this.renderproviderId(item._id)}
+                        {this.renderprovider(item)}
+                        {this.renderid(item)}
+                        {this.renderProductid(item)}
+                        <input type="hidden" value={this.renderChildrenCount(item)} name="childcount" />
+                        <input type="hidden" value={this.renderInfantsCount(item)} name="infants" />
+                        <input type="hidden" value={this.renderAdultsCount(item)} name="adultcount" />
+                        <div className="item-result">
+                            <div className="item-result-top p-relative">
+                                {this.renderisSystemFlight(item)}
+                                <div className="routs-flight">
+                                    <div className="item-result-top-right float_right p-relative">
+                                        <div className="airline-logo"><img src={item.ticketinfooo.showstartairline} width="" height=""
+                                            alt={item.routeshow.routesinfoo[0].routesinfoodetails.otherdetails.detailsairline} /></div>
+                                        <div className="flight-class font_10"><span>{item.ticketinfooo.classes.classname}</span>{this.renderProviderName(item)}</div>
+                                    </div>
+                                    <div className="item-result-top-left float_left font_13">
+                                        <div className="rout-info-dep float_right">
+                                            <div className="exit-time font_15">{item.ticketinfooo.exitinfo.showexittime}</div>
+                                            <div className="short-airline font_10">{item.ticketinfooo.exitinfo.shortstartairport}<span className="start-city">({item.infooo.showstartcity})</span></div>
+
+                                        </div>
+                                        <div className="rout-info float_right">
+                                            <div className="stop-info font_10">{this.renderStopinfo(item.ticketinfooo.stoppinfoo.showstopinfo)}</div>
+                                            <div className="stop-info font_10">{this.renderStoptiming(item.ticketinfooo.stoppinfoo)}</div>
+                                            <div className="rout-shape p-relative">
+                                                <i className="fa fa-plane font_11 float_right"></i>
+                                                <span className="line-solid"></span>
+                                                <i className="circle background-color_2 float_left p-absolute"></i>
+                                            </div>
+                                            <div className="stop-time font_10">{item.ticketinfooo.stoppinfoo.showtiming}</div>
+                                        </div>
+                                        <div className="rout-info-des float_left">
+                                            <div className="arrivel-time font_15">{item.ticketinfooo.arrivalinfo.showarrivaltime}</div>
+                                            <div className="short-airline font_10">{item.ticketinfooo.arrivalinfo.shortendairport}<span className="end-city">({item.infooo.showendcity})</span></div>
+                                        </div>
+                                    </div>
+                                    <div className="clr"></div>
+                                </div>
+                                <div className="clr"></div>
+                            </div>
+                            <div className="item-result-bottom">
+                                <div className="item-result-bottom-right float_right font_13">
+                                    {this.renderprice(item,[##cms.cms.ownerid##])}
+                                </div>
+                                <div className="item-result-bottom-left float_left">
+                                    <button type="button" className="details-button font_13 background-color_2" onClick={((e) => this.showAllDetails(e, i))}><span>جزئیات</span></button>
+                                    <button type="submit" className="reserve-button font_13 background-color_1"><span>خرید بلیط</span></button>
+                                </div>
+                                <div className="clr"></div>
+                            </div>
+                            <div key={i} className={`item-result-details ${!this.state.visibleDetails[i] ? "unvisible" : "visible"}`}>
+                                <div className="close-details-box float_left font_11" onClick={() => this.closeAllDetails(i)}>بستن</div>
+                                <div className="clr"></div>
+                                <div className="section-details">
+                                    {this.renderFlightDetails(item)}
+
+                                    <div className="section-cost-table">
+                                        <table className="font_12">
+                                            <thead>
+                                                <th className="font-color_1">نوع مسافر</th>
+                                                <th className="font-color_1">هر نفر</th>
+                                                <th className="font-color_1">مجموع</th>
+                                            </thead>
+                                            {this.renderCost_table(item)}
+                                            <tr>
+                                                <td colspan="3">
+                                                    <div className="cost-table-item font_12"><span className="cost-title">قیمت کل : </span><span> {new Intl.NumberFormat().format(this.renderTotal(item.total, this.state.state_currency_cost, this.state.state_floatdigit))}</span><span
+                                                        className="money-type font_10">{this.renderUnit(item.moneytype, this.state.state_currency_unit)}</span></div>
+                                                        {this.renderCommission(item)}
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <div className="section-bar">
+                                        <button type="button" onClick={((e) => this.showBar(e, i))} className="font_11">مشاهده بار</button>
+                                    </div>
+                                    <div className="section-rule">
+                                        <button type="button" onClick={((e) => this.showRule(e, i))} className="font_11">مشاهده قوانین</button>
+                                    </div>
+                                    <div key={i} className={`details-row-content ${!this.state.visibleRule[i] ? "unvisible" : "visible"}`}>
+                                        <div className="close-bar-box font_11 float_left" onClick={() => this.closeRule(i)}>بستن</div>
+                                        <div className="clr"></div>
+                                        {this.renderRule(item, i)}
+                                    </div>
+                                    <div key={i} className={`details-row-content ${!this.state.visibleBar[i] ? "unvisible" : "visible"}`}>
+                                        <div className="close-bar-box font_11 float_left" onClick={() => this.closeBar(i)}>بستن</div>
+                                        <div className="clr"></div>
+                                        {this.renderBar(item, i)}
+                                    </div>
+                                    <div className="clr"></div>
+                                </div>
+                            </div>
+                        </div>
+                </form>
+                </div>
+            ))
+        }
+
+
+        render() {
+            const { library, currentPage, perPage, maxPage, rangevalExitTimeDepF, rangevalExitTimeDepS, rangevalTotalF, rangevalTotalS, rangevalTimeDepF, rangevalTimeDepS, librarySecond } = this.state;
+            let defaultRangeTotalF = null;
+            defaultRangeTotalF = rangevalTotalF
+                ? (<span>{new Intl.NumberFormat().format(rangevalTotalF)}</span>)
+                : (<span>{new Intl.NumberFormat().format(this.renderMinTotal())}</span>);
+            let defaultRangeTotalS = null;
+            defaultRangeTotalS = rangevalTotalS
+                ? (<span>{new Intl.NumberFormat().format(rangevalTotalS)}</span>)
+                : (<span>{new Intl.NumberFormat().format(this.renderMaxTotal())}</span>);
+
+            let defaultRangeTimeDepF = null;
+            defaultRangeTimeDepF = rangevalTimeDepF
+                ? (<span>{rangevalTimeDepF}</span>)
+                : (<span>{this.renderMinTimeDep()}</span>);
+            let defaultRangeTimeDepS = null;
+            defaultRangeTimeDepS = rangevalTimeDepS
+                ? (<span>{rangevalTimeDepS}</span>)
+                : (<span>{this.renderMaxTimeDep()}</span>);
+
+            return (<div>
+
+
+                <div className="sort-box">
+                    <ul className="sort-items row font_13">
+                        <li className="sort-title p-relative"> مرتب‌سازی</li>
+                        <li className={`p-relative ${this.state.activedefault}`} data-type="default" data-key="0" onClick={((e) => this.handleChange(e))}> پیشفرض<i className="fa fa-sort-amount-up  font_10"></i></li>
+                        <li className={`p-relative ${this.state.activeprice}`} data-type="price" data-key={this.state.checkkeyprice} onClick={((e) => this.handleChange(e))}> قیمت<i className={`fa font_10 ${!this.state.priceS[0] ? "fa-sort-amount-up" : "fa-sort-amount-down"}`}></i></li>
+                        <li className={`p-relative ${this.state.activestop}`} data-type="stop" data-key={this.state.checkkeystop} onClick={((e) => this.handleChange(e))}> توقف<i className={`fa font_10 ${!this.state.stopS[0] ? "fa-sort-amount-up" : "fa-sort-amount-down"}`}></i></li>
+                        <li className={`p-relative ${this.state.activetime}`} data-type="Time" data-key={this.state.checkkeytime} onClick={((e) => this.handleChange(e))}> مدت پرواز<i className={`fa font_10 ${!this.state.timeS[0] ? "fa-sort-amount-up" : "fa-sort-amount-down"}`}></i></li>
+                        <li className={`p-relative ${this.state.activetakeoff}`} data-type="takeoff" data-key={this.state.checkkeytakeoff} onClick={((e) => this.handleChange(e))}> ساعت پرواز<i className={`fa font_10  ${!this.state.takeoffS[0] ? "fa-sort-amount-up" : "fa-sort-amount-down"}`}></i></li>
+                    </ul>
+                </div>
+                <p className="section-top-info font_12"><span className="font-color_1 font-weight list_count">{this.renderCount()}</span> بلیط پیدا شد.</p>
+                <p className="section-top-info font_12">مدت زمان باقی مانده : <span id="timer" className="font-color_2 font-weight EnNum font_20">00:00:00</span></p>
+                <div className="section-top-facility">
+                <basis core="group" if="[##cms.cms.domainid##] in ('4592','4564','4603')" name="check-has-currency">
+                    <div className="currency-content-list font_13 p-relative">
+                        <span class="currency-loading p-absolute unvisible"><i class="fas fa-spinner fa-spin"></i></span>
+                        <div className="currency-selected font-color_4 background-color_3" data-active="0" onClick={() => this.currency_selected_list()}><span>{this.localStorage_getCurrency()}{this.localStorage_expire()}</span></div>
+                        <div class="currency-list unvisible font_12 p-absolute"><ul>{this.renderCurrencyRate()}</ul></div>
+                    </div>
+                </basis>
+                <div className="section-filter-icon" onClick={((e) => this.showFilter(e))}>
+                    <button type="button" className="background-color_1"><i className="fa fa-sliders-h" aria-hidden="true"></i>فیلترها
+                    </button>
+                </div>
+                </div>
+                <div className="section-items">
+                    {this.renderLibrary()}
+                </div>
+
+                <div className="section-filter">
+                    <div className="section-filter-content p-absolute">
+                        <div className="top-menu">فیلتر پرواز براساس . . .</div>
+                        <div className="hideFilter_icon" onClick={((e) => this.hideFilter(e))}><i className="fa fa-times cursor"></i></div>
+                        <div className="run_filter section-filter-icon" onClick={((e) => this.hideFilter(e))}><button type="button" className=" background-color_1">اعمال فیلتر</button></div>
+                        <div className="row-filter">
+                            {this.ShowFilterFlight()}
+                            <div className="section-filter-items font_13">
+                                <div className="filter-items-title font-color_1"> ساعت حرکت (رفت)</div>
+                                <div className="filter-items">
+                                    <div className="wrappertime p-relative">
+                                        <i className="fa fa-moon-o imgThird p-absolute" aria-hidden="true"></i>
+                                        <fieldset>
+                                            <hr />
+                                            <div class="slider-wrapper">
+                                                <input id="min" type="range" min="0" max="24" defaultValue="24" step="1" onChange={this.handlerFilterExitDep} data-key="2" data-value="2_ETDep" />
+                                                <input id="max" type="range" min="0" max="24" defaultValue="0" step="1" onChange={this.handlerFilterExitDep} data-key="1" data-value="1_ETDep" />
+                                            </div>
+                                        </fieldset>
+                                        <div className="rangevalSecond p-absolute font_12 font-color_1">{this.state.rangevalExitTimeDepS}
+                                        </div>
+                                        <i className="fa fa-sun-o imgFirst p-absolute" aria-hidden="true"></i>
+                                        <div className="rangevalFirst p-absolute font_12 font-color_1">
+                                            {this.state.rangevalExitTimeDepF}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="section-filter-items font_13">
+                                <div className="filter-items-title font-color_1">مدت زمان سفر(رفت)</div>
+                                <div className="filter-items">
+                                    <div className="wrappertime p-relative">
+                                        <fieldset>
+                                            <hr />
+                                            <div class="slider-wrapper">
+                                                <input id="min" type="range" min={this.renderMinTimeDep()} max={this.renderMaxTimeDep()} defaultValue='100' step="1" onChange={this.handlerFilterTimeDep} data-key="2" data-value="2_TDep" />
+                                                <input id="max" type="range" min={this.renderMinTimeDep()} max={this.renderMaxTimeDep()} defaultValue='0' step="1" onChange={this.handlerFilterTimeDep} data-key="1" data-value="1_TDep" />
+                                            </div>
+                                        </fieldset>
+                                        <div className="rangevalFirst_2 p-absolute font_12 font-color_1 ">{defaultRangeTimeDepF} <span>ساعت</span>
+                                        </div>
+                                        <div className="rangevalSecond_2 p-absolute font_12 font-color_1">{defaultRangeTimeDepS} <span>ساعت</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="section-filter-items font_13">
+                                <div className="filter-items-title font-color_1">قیمت</div>
+                                <div className="filter-items">
+                                    <div className="wrappertime p-relative">
+                                        <fieldset>
+                                            <hr />
+                                            <div class="slider-wrapper">
+                                                <input id="min" type="range" min={this.renderMinTotal() || 0} max='999999999' defaultValue='999999999' step="1000" onChange={this.handlerFilterTotal} data-key="2" data-value="2_T" />
+                                                <input id="max" type="range" min={this.renderMinTotal()} max={this.renderMaxTotal()} defaultValue={this.renderMinTotal()} step="1000" onChange={this.handlerFilterTotal} data-key="1" data-value="1_T" />
+                                            </div>
+                                        </fieldset>
+                                        <div className="rangevalSecond_2 p-absolute font_12 font-color_1">{defaultRangeTotalS}<span className="font_11 margin-right unit_content">{this.moneytype()}</span>
+                                        </div>
+                                        <div className="rangevalFirst_2 p-absolute font_12 font-color_1">{defaultRangeTotalF}<span className="font_11 margin-right unit_content">{this.moneytype()}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="clr"></div>
+                        </div>
+
+                    </div>
+                </div>
+                <div className="section-paging">
+                    <ul id="page-numbers" className="unvisible">
+                        <li className="nexprevPage nexprevPage-left p-relative">
+                            {currentPage !== 1 && (
+                                <button onClick={this.previousPage}><i className="fa fa-angle-double-left  transition"></i></button>
+                            )}
+                        </li>
+                        <li className="controlsPage activePage background-color_2">{this.state.currentPage}</li>
+                        {(this.state.currentPage2 < maxPage) && (<li className="controlsPage" onClick={this.nextPage}>{this.state.currentPage2}</li>
+                        )}
+                        {(this.state.currentPage3 < maxPage) && (<li className="controlsPage" onClick={this.nextPage3}>{this.state.currentPage3}</li>
+                        )}
+                        <li className="restControls">...</li>
+                        <li className="controlsPage">{this.state.maxPage}</li>
+                        <li className="nexprevPage p-relative">
+                            {(this.state.currentPage < maxPage) && (<button onClick={this.nextPage}><i className="fa fa-angle-double-right transition"></i></button>
+                            )}
+                        </li>
+                    </ul>
+                    <div className="clr"></div>
+                </div>
+            </div>
+            )
+        }
+        renderMinTotal = () => {
+            const { librarySecond, state_currency_cost, state_floatdigit } = this.state;
+            if (!librarySecond || (librarySecond && librarySecond.length === 0)) {
+                return ''
+            }
+            return librarySecond.reduce((acc, lib) => {
+            if (state_floatdigit == '') {
+                const libMin = Math.min(...lib.map(item => item.totalCom))
+                return acc === undefined ? libMin : libMin < acc ? libMin : acc
+            } else {
+                const libMin = Math.min(...lib.map(item => this.renderTotal(item.totalCom, state_currency_cost, state_floatdigit)))
+                return acc === undefined ? libMin : libMin < acc ? libMin : acc
+            }
+
+        }, undefined)
+        }
+        renderMaxTotal = () => {
+            const { librarySecond, state_currency_cost, state_floatdigit } = this.state;
+
+            if (!librarySecond || (librarySecond && librarySecond.length === 0)) {
+                return ''
+            }
+            return librarySecond.reduce((acc, lib) => {
+            if (state_floatdigit == '') {
+                const libMax = Math.max(...lib.map(item => item.totalCom))
+                return libMax > acc ? libMax : acc
+            } else {
+                const libMax = Math.max(...lib.map(item => this.renderTotal(item.totalCom, state_currency_cost, state_floatdigit)))
+                return libMax > acc ? libMax : acc
+            }
+
+        }, 0)
+        }
+        renderMinTimeDep = () => {
+            const { librarySecond } = this.state;
+            if (!librarySecond || (librarySecond && librarySecond.length === 0)) {
+                return ''
+            }
+            return librarySecond.reduce((acc, lib) => {
+                const libMin = Math.min(...lib.map(item => this.renderStoppinfo(item.ticketinfooo.stoppinfoo.showtiming)))
+                return acc === undefined ? libMin : libMin < acc ? libMin : acc
+            }, undefined)
+        }
+        renderMaxTimeDep = () => {
+            const { librarySecond } = this.state;
+
+            if (!librarySecond || (librarySecond && librarySecond.length === 0)) {
+                return ''
+            }
+            return librarySecond.reduce((acc, lib) => {
+                const libMax = Math.max(...lib.map(item => this.renderStoppinfoS(item.ticketinfooo.stoppinfoo.showtiming)))
+                return libMax > acc ? libMax : acc
+            }, 0)
+        }
+        ShowFilterFlight() {
+            let element = this.state.data;
+            if (!element) return null;
+            return <div><div className="section-filter-items font_13">
+                <div className="filter-items-title font-color_1">خطوط هوایی</div>
+                <div className="filter-items airline_results">
+                    {this.renderairlines(element)}
+                </div>
+            </div>
+                <div className="section-filter-items font_13">
+                    <div className="filter-items-title font-color_1">توقف</div>
+                    <div className="filter-items">
+                        {this.renderstop(element)}
+                    </div>
+                </div>
+                <div className="section-filter-items font_13">
+                    <div className="filter-items-title font-color_1">نوع بلیط</div>
+                    <div className="filter-items">
+                        <div className="body-filter"><div className="section-input_2 p-relative" data-index="1"><input type="checkbox" className="isSystemFlight p-absolute" onChange={((e) => this.handleChange(e))} defaultChecked={this.props.defaultChecked} value="false" /><label className="font_12"><span className="checkbox float_right"><div className="text-checkbox">چارتر</div></span></label><div className="clr"></div></div><div className="clr"></div></div>
+                        <div className="body-filter"><div className="section-input_2 p-relative" data-index="1"><input type="checkbox" className="isSystemFlight p-absolute" onChange={((e) => this.handleChange(e))} defaultChecked={this.props.defaultChecked} value="true" /><label className="font_12"><span className="checkbox float_right"><div className="text-checkbox">سیستمی</div></span></label><div className="clr"></div></div><div className="clr"></div></div>
+                    </div>
+                </div>
+            </div>
+        }
+
+
+        renderairlines(element) {
+            let indents = [];
+            if (element.length !== undefined) {
+                let sentences = [...(new Set(element.map(d => d['routeshow']['routesinfoo']).flat().map(info => info['routesinfoodetails']['otherdetails']['detailsairline'])))]
+                let sentencesimg = [...(new Set(element.map(d => d['routeshow']['routesinfoo']).flat().map(info => info['routesinfoodetails']['otherdetails']['detailsairlineimage'])))]
+                for (let i = 0; i < sentences.length; i++) {
+                    let singleSentence = <div className="body-filter airline_filter"><div className="section-input_2 p-relative" data-index="1"><input type="checkbox" value={sentences[i]} className="startairline p-absolute" onChange={((e) => this.handleChange(e))} defaultChecked={this.props.defaultChecked} /><label className="font_12"><span className="checkbox  float_right"><div className="name_airline text-checkbox font_11 float_right">{sentences[i]}</div></span><span className="total_content font_11 float_left ">از <span className="min_total">{new Intl.NumberFormat().format(this.min_totalByAirline(element, sentences[i]))}</span><span className="unit_content">{[...(new Set(element.map(x => this.renderUnit(x.moneytype, this.state.state_currency_unit))))]}</span></span></label><div className="clr"></div></div><div className="clr"></div></div>
+                    let output = singleSentence
+                    indents.push(singleSentence)
+                }
+
+                return (
+                    indents
+                )
+
+            }
+        }
+
+        min_totalByAirline = (data, name) => {
+        const { state_currency_cost, state_floatdigit } = this.state;
+        const totals = data
+        .filter(x =>
+                x.routeshow.routesinfoo.find(y => y.routesinfoodetails.otherdetails.detailsairline === name)
+                ).map(x => x.total);
+        let new_totals = new Array();
+        for (const element of totals) {
+            if (state_floatdigit == '') {
+                new_totals.push(element * state_currency_cost);
+            } else {
+                let toString_element = (element * state_currency_cost).toString();
+                if (toString_element.indexOf('.') > -1) {
+                    let parseFloat_element = parseFloat(toString_element).toFixed(state_floatdigit).toString();
+                    let parseFloat_element_split = parseFloat_element.split('.');
+                    if (parseFloat_element_split[1].indexOf('0') > -1) {
+                        new_totals.push(parseFloat(element * state_currency_cost).toFixed(1).toString())
+                    } else {
+                        new_totals.push(parseFloat(element * state_currency_cost).toFixed(state_floatdigit).toString())
+                    }
+                } else {
+                    new_totals.push(parseFloat(element * state_currency_cost).toFixed(state_floatdigit).toString())
+                }
+            }
+
+        }
+        return Math.min(...new_totals);
+    }
+    renderTotal(element, currency_cost, floatdigit) {
+        if (floatdigit == '') {
+            return element * currency_cost;
+        } else {
+            let toString_element = (element * currency_cost).toString();
+            if (toString_element.indexOf('.') > -1) {
+                let parseFloat_element = parseFloat(toString_element).toFixed(floatdigit).toString();
+                let parseFloat_element_split = parseFloat_element.split('.');
+                if (parseFloat_element_split[1].indexOf('0') > -1) {
+                    return parseFloat(element * currency_cost).toFixed(1).toString();
+                } else {
+                    return parseFloat(element * currency_cost).toFixed(floatdigit).toString();
+                }
+            } else {
+                return parseFloat(element * currency_cost).toFixed(floatdigit).toString();
+            }
+        }
+    }
+    renderUnit(element, currency_unit) {
+        if (currency_unit == '') {
+            return element;
+        } else {
+            return currency_unit;
+        }
+
+    }
+
+        renderstop(element) {
+            if (element.length !== undefined) {
+                let sentences = [...(new Set(element.map(d => d['ticketinfooo']['stoppinfoo']['showstopinfo']).flat()))]
+                let singleSentence = sentences.map(s => <React.Fragment><div className="body-filter"><div className="section-input_2 p-relative" data-index="1"><input type="checkbox" value={s} className="stops p-absolute" onChange={((e) => this.handleChange(e))} defaultChecked={this.props.defaultChecked} /><label className="font_12"><span className="checkbox float_right"><div className="text-checkbox">{s}</div></span></label><div className="clr"></div></div><div className="clr"></div></div></React.Fragment>);
+                let output = singleSentence
+                return (
+                    output
+                )
+            }
+        }
+        handleChange = (e) => {
+            let checktype = e.target.getAttribute("data-type")
+            let checkkey = e.target.getAttribute("data-key")
+            let isChecked = e.target.checked
+            let valu = e.target.value
+            let classname = e.target.getAttribute("class");
+            switch (classname) {
+                case 'startairline p-absolute':
+                    if (isChecked) {
+                        this.airlines.push(valu + ',')
+                    } else {
+                        this.airlines.splice(this.airlines.indexOf(valu + ','), 1)
+                    }
+                    break;
+                case 'stops p-absolute':
+                    if (isChecked) {
+                        this.stops.push(valu + ',')
+                    } else {
+                        this.stops.splice(this.stops.indexOf(valu + ','), 1)
+                    }
+                    break;
+                case 'isSystemFlight p-absolute':
+                    if (isChecked) {
+                        this.isSystemFlight.push(valu + ',')
+                    } else {
+                        this.isSystemFlight.splice(this.isSystemFlight.indexOf(valu + ','), 1)
+                    }
+                    break;
+            }
+            $(document).trigger('update_result', [this.airlines.join(), this.stops.join(), this.isSystemFlight.join(), checktype, checkkey])
+            this.setState({
+                state_airlines: this.airlines.join(),
+                state_stops: this.stops.join(),
+                state_isSystemFlight: this.isSystemFlight.join(),
+                state_checktype: checktype,
+                state_checkkey: checkkey,
+            })
+        }
+        rendertimesorting(element) {
+            let splitElement = element.split(" ")
+            let SplitElementmin = splitElement[1].slice(0, -1)
+            let SplitElementhour = parseInt(splitElement[0].slice(0, -1)) * 60
+            let sumsplits = SplitElementhour + parseInt(SplitElementmin)
+            return sumsplits
+        }
+        rendertakeoffsorting(element) {
+            let splitElement = element.split(":")
+            let SplitElementmin = splitElement[1]
+            let SplitElementhour = parseInt(splitElement[0]) * 60
+            let sumsplits = SplitElementhour + parseInt(SplitElementmin)
+            return sumsplits
+        }
+        renderStoppinfo(element) {
+            let splitElement = element.split(" ")
+            return splitElement[0].slice(0, -1)
+        }
+        renderStoppinfoF(element) {
+            let splitElement = element.split(" ")
+            return splitElement[0].slice(0, -1)
+
+        }
+        renderStoppinfoS(element) {
+            let splitElement = element.split(" ")
+            let SplitElementSecond = splitElement[1]
+            if (SplitElementSecond !== undefined) {
+                let SliceElementSecond = splitElement[1].slice(0, -1)
+                if (SliceElementSecond > 0) {
+                    return parseInt(splitElement[0].slice(0, -1)) + 1
+                } else {
+                    return splitElement[0].slice(0, -1)
+                }
+            }
+
+        }
+        renderCount(element) {
+            let maxPage = this.state.maxPage
+            let len = this.renderLibrary().length
+            let sum = len * maxPage
+            sum = sum || 0
+            if (sum == '0') {
+                $("#page-numbers").hide()
+                $(".message_box_nodata").show()
+
+            } else {
+                $("#page-numbers").show()
+                $(".message_box_nodata").hide()
+            }
+
+        }
+        renderhomepage = event => {
+            return window.location = '/'
+        }
+        renderResearch = event => {
+            return location.reload()
+        }
+        renderAction(element) {
+            if ('[##cms.cms.ownerid##]' == '9252'){
+                return ''
+            } else {
+                return  '/OnewayView.bc'
+            }
+        }
+        
+        renderid(element) {
+            let id = element._id
+            if (typeof id === 'string') {
+                return <input type="hidden" value={id} name="idnows" />
+            } else if (typeof id === 'object') {
+                return <input type="hidden" value={JSON.stringify(id)} name="idws" />
+            }
+        }
+        renderProductid(element) {
+            if (typeof element._id === 'string') {
+                return <input type="hidden" value={element._id} name="productid" />
+            } else if (typeof element._id === 'object') {
+                return <input type="hidden" value={element._id.value} name="productid" />
+            }
+        }
+
+        renderChildrenCount(element) {
+            if (element.special_cost_table) {
+                let elementAdd = 0;
+                for (let i = 0; i < element.special_cost_table.childs.length; i++) {
+                    elementAdd += parseInt(element.special_cost_table.childs[i].count)
+                }
+                return elementAdd
+            } else {
+                return element.childs.count
+            }
+        }
+        renderInfantsCount(element) {
+            if (element.special_cost_table) {
+                let elementAdd = 0;
+                for (let i = 0; i < element.special_cost_table.infants.length; i++) {
+                    elementAdd += parseInt(element.special_cost_table.infants[i].count)
+                }
+                return elementAdd
+            } else {
+                return element.infants.count
+            }
+        }
+        renderAdultsCount(element) {
+            if (element.special_cost_table) {
+                let elementAdd = 0;
+                for (let i = 0; i < element.special_cost_table.adults.length; i++) {
+                    elementAdd += parseInt(element.special_cost_table.adults[i].count)
+                }
+                return elementAdd
+            } else {
+                return element.adults.count
+            }
+        }
+        renderprovider(element) {
+            let provider = element._id.provider
+            if (provider == undefined) {
+                return '';
+            } else {
+                return <input type="hidden" value={JSON.stringify(provider)} name="mainprovider" />
+            }
+        }
+        renderproviderId(element) {
+            let provider = element.provider
+            if (provider == undefined) {
+                return <input type="hidden" value="0" name="provider" />;
+            } else {
+                let providerId = element.provider.provider_id
+                return <input type="hidden" value={providerId} name="provider" />;
+            }
+        }
+        renderProviderName(element) {
+            if (element._id.provider == undefined) {
+                const providerName = this.state.data_provider
+                    .filter((x) => x.id === 0)
+                    .map((x) => x.name);
+                return <div className="font-color_1 font-weight">{providerName}</div>;
+            } else {
+                const providerName = this.state.data_provider
+                    .filter((x) => x.id === parseInt(element._id.provider.provider_id))
+                    .map((x) => x.name);
+                return <div className="font-color_1 font-weight">{providerName}</div>;
+            }
+
+        }
+        renderisSystemFlight(element) {
+            let keyToLowerCase = {};
+            for (var key in element) {
+                keyToLowerCase[key.toLowerCase()] = element[key];
+            }
+            if (keyToLowerCase.issystemflight == 'true') {
+                return <div className="isSystemFlight system">سیستمی</div>
+            } else {
+                return <div className="isSystemFlight charter">چارتر</div>
+            }
+        }
+        renderCommission(element) {
+            if (element.commissioncost == 0) {
+                return '';
+            } else {
+                return <div><div className="cost-table-item font_12"><span className="cost-title">کمیسیون : </span><span>{new Intl.NumberFormat().format(this.renderTotal(element.commissioncost, this.state.state_currency_cost, this.state.state_floatdigit))}</span><span className="money-type font_10">{this.renderUnit(element.moneytype, this.state.state_currency_unit)}</span></div>
+                <div className="cost-table-item font_12"><span className="cost-title">قیمت نهایی : </span><span className="total-cost  font_15">{new Intl.NumberFormat().format(this.renderTotal(element.totalCom, this.state.state_currency_cost, this.state.state_floatdigit))}</span><span className="money-type font_10">{this.renderUnit(element.moneytype, this.state.state_currency_unit)}</span></div></div>
+            }
+        }
+        renderprice(element,owner) {
+            if(owner == 9336){
+                if (element.special_cost_table) {
+                    return  <div className="col-price"><div>قیمت برای هر نفر :</div><div><span className="total-cost font_15"><span className="font-size_16">{new Intl.NumberFormat().format(element.special_cost_table.adults[0].unit)}</span></span><span className="money-type font_10">{this.renderUnit(element.moneytype, this.state.state_currency_unit)}</span></div></div>
+                } else {
+                    return <div className="col-price"><div>قیمت برای هر نفر :</div><div><span className="total-cost font_15"><span className="font-size_16">{new Intl.NumberFormat().format(element.adults.unit)}</span></span><span className="money-type font_10">{this.renderUnit(element.moneytype, this.state.state_currency_unit)}</span></div></div> 
+                }
+            }else {
+                return  <div className="col-price"><div>قیمت :</div><div><span className="total-cost font_15">{new Intl.NumberFormat().format(this.renderTotal(element.totalCom, this.state.state_currency_cost, this.state.state_floatdigit))}</span><span className="money-type font_10">{this.renderUnit(element.moneytype, this.state.state_currency_unit)}</span></div></div>
+            }
+       }
+       moneytype() {
+            let element = this.state.data;
+            if (!element) return null;
+            if (element.length !== undefined) {
+                let sentences = [...(new Set(element.map(d => d['moneytype']).flat()))]
+                return this.renderUnit(sentences, this.state.state_currency_unit)
+            }
+
+        }
+        renderFlightDetails(element) {
+            let len = element.routeshow.routesinfoo.length
+            let indents = [];
+            for (let i = 0; i < len; i++) {
+                indents.push(<div className="section-details-item font_13">
+                    <div className="details-item-title font-color_1"><span>پرواز رفت ({element.routeshow.routesinfoo[i].routesinfoodetails.detailscityinfo.detailsstartcity} - {element.routeshow.routesinfoo[i].routesinfoodetails.detailscityinfo.detailsendcity})</span></div>
+                    <div className="airline-details">
+                        <div className="logo-details float_right"><img src={element.routeshow.routesinfoo[i].routesinfoodetails.otherdetails.detailsairlineimage} alt={element.routeshow.routesinfoo[i].routesinfoodetails.otherdetails.detailsairline} width="" height="" /></div>
+                        <div className="flightNumClass-details font_11">
+                            <div>{element.routeshow.routesinfoo[i].routesinfoodetails.otherdetails.detailsroutecode} - {element.ticketinfooo.classes.classname}</div>
+                            <div><span>مدت زمان پرواز: </span><span>{element.routeshow.routesinfoo[i].routesinfoodetails.otherdetails.detailstiming}</span></div>
+                            <div className="clr"></div>
+                        </div>
+                        <div className="rout-details p-relative">
+                            <div className="rout-details-part font_12">
+                                <div className="airport-details">{element.routeshow.routesinfoo[i].routesinfoodetails.otherdetails.detailsexittimeinfo.detailsexitairport}</div>
+
+                                <div className="date-details"> <div className="time-details">{element.routeshow.routesinfoo[i].routesinfoodetails.otherdetails.detailsexittimeinfo.detailsexittime}</div> {element.routeshow.routesinfoo[i].routesinfoodetails.otherdetails.detailsexittimeinfo.exit_date.sstring} - <span className="EnNum"> {element.routeshow.routesinfoo[i].routesinfoodetails.otherdetails.detailsexittimeinfo.exit_date.mstring}</span></div>
+                            </div>
+                            <span className="right-border-d p-absolute"></span>
+                            <div className="rout-details-part font_12">
+                                <div className="airport-details">{element.routeshow.routesinfoo[i].routesinfoodetails.otherdetails.detailsarrivaltimeinfo.detailsarrivalairport}
+                                </div>
+                                <div className="date-details">  <div className="time-details">{element.routeshow.routesinfoo[i].routesinfoodetails.otherdetails.detailsarrivaltimeinfo.detailsarrivaltime}</div> {element.routeshow.routesinfoo[i].routesinfoodetails.otherdetails.detailsarrivaltimeinfo.arrival_date.sstring} -<span className="EnNum"> {element.routeshow.routesinfoo[i].routesinfoodetails.otherdetails.detailsarrivaltimeinfo.arrival_date.mstring}</span></div>
+                            </div>
+                            <div className="clr"></div>
+                        </div>
+                    </div>
+                </div>);
+            }
+            return (
+                indents
+            )
+        }
+        renderCost_table(element) {
+            if (element.special_cost_table) {
+                return <tbody>
+                    {this.renderSpecial_cost_table_adults(element.special_cost_table.adults)}
+                    {this.renderSpecial_cost_table_childs(element.special_cost_table.childs)}
+                    {this.renderSpecial_cost_table_infants(element.special_cost_table.infants)}
+                </tbody>
+            } else {
+                return <tbody><tr>
+                    <td>بزرگسال</td>
+                    <td>{new Intl.NumberFormat().format(this.renderTotal(element.adults.unit, this.state.state_currency_cost, this.state.state_floatdigit))} <span className="money-type font_10">{this.renderUnit(element.moneytype, this.state.state_currency_unit)}</span><span>({element.adults.count} نفر)</span></td>
+                    <td>{new Intl.NumberFormat().format(this.renderTotal(element.adults.total, this.state.state_currency_cost, this.state.state_floatdigit))}<span className="money-type font_10">{this.renderUnit(element.moneytype, this.state.state_currency_unit)}</span></td>
+                </tr>
+                    {this.renderTolCh(element.childs)}
+                    {this.renderTolInf(element.infants)}</tbody>
+            }
+        }
+        renderTolCh(element) {
+            if (element.count == 0) {
+                return '';
+            } else {
+                return <tr><td>کودک</td><td>{new Intl.NumberFormat().format(this.renderTotal(element.unit, this.state.state_currency_cost, this.state.state_floatdigit))}<span className="money-type font_10">{this.renderUnit(element.moneytype, this.state.state_currency_unit)}</span><span>({element.count} نفر)</span></td>
+                    <td>{new Intl.NumberFormat().format(this.renderTotal(element.total, this.state.state_currency_cost, this.state.state_floatdigit))}<span className="money-type font_10">{this.renderUnit(element.moneytype, this.state.state_currency_unit)}</span></td></tr>
+            }
+        }
+        renderTolInf(element) {
+            if (element.count == 0) {
+                return '';
+            } else {
+                return <tr><td>نوزاد</td><td>{new Intl.NumberFormat().format(this.renderTotal(element.unit, this.state.state_currency_cost, this.state.state_floatdigit))}<span className="money-type font_10">{this.renderUnit(element.moneytype, this.state.state_currency_unit)}</span><span>({element.count} نفر)</span></td>
+                    <td>{new Intl.NumberFormat().format(this.renderTotal(element.total, this.state.state_currency_cost, this.state.state_floatdigit))}<span className="money-type font_10">{this.renderUnit(element.moneytype, this.state.state_currency_unit)}</span></td></tr>
+            }
+        }
+        renderSpecial_cost_table_adults(element) {
+            let elementAdd = []
+            for (let i = 0; i < element.length; i++) {
+                elementAdd.push(<tr>
+                    <td>بزرگسال</td>
+                    <td>{new Intl.NumberFormat().format(this.renderTotal(element[i].unit, this.state.state_currency_cost, this.state.state_floatdigit))} <span className="money-type font_10">{this.renderUnit(element[i].moneytype, this.state.state_currency_unit)}</span><span>({element[i].count} نفر)</span></td>
+
+                    <td>{new Intl.NumberFormat().format(this.renderTotal(element[i].total, this.state.state_currency_cost, this.state.state_floatdigit))} <span className="money-type font_10">{this.renderUnit(element[i].moneytype, this.state.state_currency_unit)}</span></td>
+                </tr>)
+            }
+            return elementAdd
+        }
+        renderSpecial_cost_table_childs(element) {
+            let elementAdd = []
+            for (let i = 0; i < element.length; i++) {
+                elementAdd.push(<tr>
+                    <td>کودک</td>
+                    <td>{new Intl.NumberFormat().format(this.renderTotal(element[i].unit, this.state.state_currency_cost, this.state.state_floatdigit))} <span className="money-type font_10">{this.renderUnit(element[i].moneytype, this.state.state_currency_unit)}</span><span>({element[i].count} نفر)</span></td>
+
+                    <td>{new Intl.NumberFormat().format(this.renderTotal(element[i].total, this.state.state_currency_cost, this.state.state_floatdigit))} <span className="money-type font_10">{this.renderUnit(element[i].moneytype, this.state.state_currency_unit)}</span></td>
+                </tr>)
+            }
+            return elementAdd
+        }
+        renderSpecial_cost_table_infants(element) {
+            let elementAdd = []
+            for (let i = 0; i < element.length; i++) {
+                elementAdd.push(<tr>
+                    <td>نوزاد</td>
+                    <td>{new Intl.NumberFormat().format(this.renderTotal(element[i].unit, this.state.state_currency_cost, this.state.state_floatdigit))} <span className="money-type font_10">{this.renderUnit(element[i].moneytype, this.state.state_currency_unit)}</span><span>({element[i].count} نفر)</span></td>
+
+                    <td>{new Intl.NumberFormat().format(this.renderTotal(element[i].total, this.state.state_currency_cost, this.state.state_floatdigit))}<span className="money-type font_10">{this.renderUnit(element[i].moneytype, this.state.state_currency_unit)}</span></td>
+                </tr>)
+            }
+            return elementAdd
+        }
+        renderStopinfo(element) {
+            if (element == 0) {
+                return <span>بدون توقف</span>
+            } else {
+                return <div><span>{element} توقف</span></div>
+            }
+        }
+        renderStoptiming(element){
+            if (element.stoptiming == undefined) {
+                return <span></span>
+            } else {
+                if(element.showstopinfo !== 0){
+                    return <span>زمان توقف : {element.stoptiming}</span>
+                }
+            }
+        }
+        renderRule(element, i) {
+            if (typeof element.routeshow.description === 'string') {
+                return <div className="details-item">
+                    <p className="font-color_1 section-bar-info-title font_12">قوانین پرواز رفت </p>
+                    <p dir="auto" className="text-justify font_13 max-height" dangerouslySetInnerHTML={{ __html: element.routeshow.description }}></p>
+                </div>
+
+
+            } else {
+                return <div>
+                    <div className="details-item">
+                        <p className="font-color_1 section-bar-info-title font_12" onClick={e => this.ruleDep(e, element, i)}>برای مشاهده قوانین پرواز رفت <span className="clicked  font-weight">کلیک</span> کنید</p>
+                        <div key={i} className={`${!this.state.loadingRuleDep[i] ? "unvisible" : "visible"}`}>
+                            <div id="ballsWaveG">
+                                <div id="ballsWaveG_1" className="ballsWaveG"></div>
+                                <div id="ballsWaveG_2" className="ballsWaveG"></div>
+                                <div id="ballsWaveG_3" className="ballsWaveG"></div>
+                                <div id="ballsWaveG_4" className="ballsWaveG"></div>
+                                <div id="ballsWaveG_5" className="ballsWaveG"></div>
+                                <div id="ballsWaveG_6" className="ballsWaveG"></div>
+                                <div id="ballsWaveG_7" className="ballsWaveG"></div>
+                                <div id="ballsWaveG_8" className="ballsWaveG"></div>
+                            </div>
+                        </div>
+                        <p dir="auto" className="text-justify font_13 max-height" dangerouslySetInnerHTML={{ __html: this.state.ruleDepTxt[i] }}></p>
+                    </div>
+
+                </div>
+            }
+        }
+        renderBar(element, i) {
+            if (typeof element.routeshow.description === 'string') {
+                return <div className="details-item">
+                    <p className="font-color_1 section-bar-info-title font_12">بار پرواز رفت </p>
+                    <p className="text-justify font_13 section-bar-info-content">
+                        <div dir="auto"><span className="font_12">بار کابین: </span> <span dangerouslySetInnerHTML={{ __html: element.bar.bar1 }}></span></div>
+                        <div dir="auto"><span className="font_12">بار مجاز: </span> <span dangerouslySetInnerHTML={{ __html: element.bar.bar2 }} ></span></div>
+                    </p>
+                </div>
+
+            } else {
+                return <div>
+                    <div className="details-item">
+                        <p className="font-color_1 section-bar-info-title font_12" onClick={e => this.bardep(e, element, i)}>برای مشاهده قوانین بار رفت <span className="clicked font-weight">کلیک</span> کنید</p>
+                        <div key={i} className={`${!this.state.loadingBarDep[i] ? "unvisible" : "visible"}`}>
+                            <div id="ballsWaveG">
+                                <div id="ballsWaveG_1" className="ballsWaveG"></div>
+                                <div id="ballsWaveG_2" className="ballsWaveG"></div>
+                                <div id="ballsWaveG_3" className="ballsWaveG"></div>
+                                <div id="ballsWaveG_4" className="ballsWaveG"></div>
+                                <div id="ballsWaveG_5" className="ballsWaveG"></div>
+                                <div id="ballsWaveG_6" className="ballsWaveG"></div>
+                                <div id="ballsWaveG_7" className="ballsWaveG"></div>
+                                <div id="ballsWaveG_8" className="ballsWaveG"></div>
+                            </div>
+                        </div>
+                        <p dir="auto" className="text-justify font_13 max-height" dangerouslySetInnerHTML={{ __html: this.state.barDepTxt[i] }}></p>
+                    </div>
+                </div>
+
+            }
+        }
+        ruleDep = (e, element, i) => {
+            this.showloadingRuleDep(e, i);
+            const obj = new Object();
+            obj["id"] = element._id
+            obj["adults"] = element.adults.count
+            obj["childs"] = element.childs.count
+            obj["infant"] = element.infants.count
+            delete obj["bar_info"];
+            setTimeout(() => {
+                let return_rule = function () {
+                    let tmp = null;
+                    $.ajax({
+                        'async': false,
+                        'type': "POST",
+                        'global': false,
+                        'dataType': 'html',
+                        'url': "Client_Flight_Rule.bc",
+                        'data': { 'id': JSON.stringify(obj) },
+                        'success': (response) => {
+                            tmp = response;
+                        }
+                    });
+                    return tmp;
+                }();
+                return this.setState(prevState => ({
+                    ruleDepTxt: { ...prevState.ruleDepTxt, [i]: return_rule },
+                    loadingRuleDep: { ...prevState.loadingRuleDep, [i]: "" }
+                }))
+
+            }, 1000)
+        }
+
+        bardep = (e, element, i) => {
+            this.showloadingBarDep(e, i);
+            let id = element.routeshow.description
+            setTimeout(() => {
+                let return_rule = function () {
+                    let tmp = null;
+                    $.ajax({
+                        'async': false,
+                        'type': "POST",
+                        'global': false,
+                        'dataType': 'html',
+                        'url': "Client_Baggage_Rule.bc",
+                        'data': { 'id': JSON.stringify(id) },
+                        'success': (response) => {
+                            tmp = response;
+                        }
+                    });
+
+                    return tmp;
+                }();
+                return this.setState(prevState => ({
+                    barDepTxt: { ...prevState.barDepTxt, [i]: return_rule },
+                    loadingBarDep: { ...prevState.loadingBarDep, [i]: "" }
+                }))
+
+            }, 1000);
+        };
+
+        localStorage_getCurrency = () => {
+        let getCurrencyObject = localStorage.getItem('currencyObject');
+        let jsonCurrency = JSON.parse(getCurrencyObject);
+        if(jsonCurrency){
+        return jsonCurrency.currency_unit
+       }else{
+           return '--واحد پول--'
+       }
+    }
+    localStorage_expire = () => {
+    const { state_currency_unit, state_currency_cost, state_floatdigit} = this.state
+    let getCurrencyObject = localStorage.getItem('currencyObject');
+    let jsonCurrency = JSON.parse(getCurrencyObject);
+    if (jsonCurrency) {
+        var timer =  setInterval(()=>{
+                if(new Date().getTime() - jsonCurrency.time >= jsonCurrency.expire){
+                 localStorage.removeItem('currencyObject');
+                 document.querySelector(".currency-selected").innerText = '--واحد پول--';
+                 document.querySelector(".currency-selected").setAttribute("data-active", 0);
+                 clearInterval(timer);
+                 this.setState({
+                    state_currency_unit: "",
+                    state_currency_cost:1,
+                    state_floatdigit: "",
+                  });
+                 console.log('localStorage has ex pired');
+                }
+        },1000)
+    }
+    }
+
+    
+    currency_selected_list = () => {
+        if (document.querySelector(".currency-selected").getAttribute("data-active") == 0) {
+            document.querySelector(".currency-loading").classList.toggle("unvisible");
+            fetch('/Client_Currency_Rate.bc')
+                .then(response => response.text())
+                .then(text => {
+                    this.setState({ data_currency: JSON.parse(text.replace(/\'/g, '"')) });
+                    document.querySelector(".currency-loading").classList.toggle("unvisible");
+                    document.querySelector(".currency-selected").setAttribute("data-active", 1);
+                    document.querySelector(".currency-list").classList.toggle("unvisible");
+                }).catch(error => console.error(error))
+
+        } else {
+            document.querySelector(".currency-list").classList.toggle("unvisible");
+        }
+
+    }
+    renderCurrencyRate() {
+        let element = this.state.data_currency;
+        if (!element) return null;
+        return this.renderRate(element.rate, element.floatdigit)
+    }
+    renderRate(element, floatdigit) {
+        if (element !== undefined) {
+            let indents = [];
+            for (let i = 0; i < element.length; i++) {
+                indents.push(<li className="" onClick={e => this.select_currency_list(e, element[i], floatdigit)}>{element[i].rate_unit}</li>)
+            }
+            return (
+                indents
+            )
+        }
+    }
+
+    select_currency_list = (e, element, floatdigit) => {
+        this.setState({
+            state_currency_unit: element.rate_unit,
+            state_currency_cost: element.rate_cost,
+            state_floatdigit: floatdigit,
+        })
+        document.querySelector(".currency-list").classList.toggle("unvisible");
+        document.querySelector(".currency-selected").innerText = element.rate_unit;
+        this.localStorage_setCurrency(element.rate_unit, element.rate_cost,floatdigit);
+     
+    }
+
+    localStorage_setCurrency = (currency_unit,currency_cost,floatdigit) => {
+        let currencyObject = {
+        'currency_unit': currency_unit,
+        'currency_cost': currency_cost,
+        'floatdigit': floatdigit,
+        'time':new Date().getTime(),
+        'expire':1200000,
+      };
+      localStorage.setItem('currencyObject', JSON.stringify(currencyObject));
+    }
+
+        handleClick(event) {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth',
+            })
+            this.setState({
+                currentPage: Number(event.target.id)
+            })
+        }
+
+
+        showAllDetails = (e, i) => {
+            this.setState(prevState => ({
+                visibleDetails: { ...prevState.visibleDetails, [i]: !prevState.visibleDetails[i] },
+
+            }))
+        }
+
+
+        showBar = (e, i) => {
+            this.setState(prevState => ({
+                visibleBar: { ...prevState.visibleBar, [i]: !prevState.visibleBar[i] },
+
+            }))
+        }
+
+        showRule = (e, i) => {
+            this.setState(prevState => ({
+                visibleRule: { ...prevState.visibleRule, [i]: !prevState.visibleRule[i] },
+            }))
+
+        }
+        showloadingBarDep = (e, i) => {
+            this.setState(prevState => ({
+                loadingBarDep: { ...prevState.loadingBarDep, [i]: !prevState.loadingBarDep[i] }
+
+            }))
+        };
+
+        showloadingRuleDep = (e, i) => {
+            this.setState(prevState => ({
+                loadingRuleDep: { ...prevState.loadingRuleDep, [i]: !prevState.loadingRuleDep[i] }
+            }))
+        }
+
+        closeAllDetails = (i) => {
+            this.setState(prevState => ({
+                visibleDetails: { ...prevState.visibleDetails, [i]: !prevState.visibleDetails[i] }
+            }))
+        }
+        closeBar = (i) => {
+            this.setState(prevState => ({
+                visibleBar: { ...prevState.visibleBar, [i]: !prevState.visibleBar[i] }
+            }))
+        }
+        closeRule = (i) => {
+            this.setState(prevState => ({
+                visibleRule: { ...prevState.visibleRule, [i]: !prevState.visibleRule[i] }
+            }))
+        }
+        showFilter = (e) => {
+            $(".section-filter").addClass('section-filter-open')
+            $(".section-filter-content").animate({ right: '0' }, 350);
+        }
+        hideFilter = (e) => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+            $(".section-filter").removeClass('section-filter-open')
+            $(".section-filter-content").animate({ right: '-100%' }, 350);
+        }
+
+    }
+    ReactDOM.render(<App />, document.getElementById('app'))
+}
+
+</script>
+
+<script src="https://cdn.basiscore.net/basisfly.com/js/reservation_react.production.min.js"></script>
+<script src="https://cdn.basiscore.net/basisfly.com/js/reservation_react_dom.production.min.js"></script>
+<script src="https://cdn.basiscore.net/basisfly.com/js/reservation_babel.min.js"></script>
+<script src="https://cdn.basiscore.net/basisfly.com/js/reservation_react_paging.js"></script>
+
+
+<script src="https://cdn.basiscore.net/basisfly.com/js/reservation_progress_bar.js" type="text/javascript"></script>
+<script src="https://cdn.basiscore.net/basisfly.com/js/reservation_mob_calendar.js" type="text/javascript" ></script>
+<script type="text/javascript">
+    <basis core = "call" file = "Client_Basis_Calendar_js.inc"/>
+    var progress = $(".loading-progress").progressTimer({
+        timeLimit: 40,
+        onFinish: function () {
+        }
+    });
+    $(".form_research").each(function () {
+        $(this).submit(function (e) {
+            e.preventDefault()
+            if ($(this).attr('data-read') == 0) {
+                $(".content-research").show()
+                $.ajax({
+                    url: $(this).attr("action"),
+                    type: $(this).attr("method"),
+                    data: $($(this)).serialize(),
+                    success: function (response) {
+                        $('.content-research').empty().show().html(response);
+                        $(this).attr('data-read', '1')
+                    }
+                });
+            } else {
+                $(".content-research").show()
+            }
+        
+        });
+    });
+
+    function onloadFunc() {
+        var counter = 300;
+        setInterval(function () {
+            counter--;
+            var m = parseInt(counter / 60);
+            var s = counter % 60;
+            if (counter >= 0) {
+            var timer = document.getElementById("timer");
+                if(timer !== null){
+                    if (s < 10) {
+                        s = "0" + s;
+                    }
+                    if (m < 10) {
+                        m = "0" + m;
+                    }
+                    if (m < 2) {
+                        document.getElementById("timer").classList.add("blink_me")
+                    }
+                    timer.innerHTML = "00:" + m + ":" + s;
+                }
+                     
+            }
+            if (counter === 0) {
+                $(".message_box_timeout,#bg-popup").fadeIn();
+                $(".message_box_timeout").css("top", "200px")
+                clearInterval(counter)
+            }
+        }, 1000)
+    }
+    // function close_notice(){
+    //      $(".notice-wrapper").addClass("hide-notice-wrapper")
+    //      $(".notice-container").addClass("hide-notice-wrapper")
+    //  }
+    $(document).on('click', function (event) {
+    if(document.querySelector(".currency-list")){
+        if (!$(event.target).closest('.currency-selected,.currency-list').length) {
+        document.querySelector(".currency-list").classList.add("unvisible");
+
+    }
+    }
+})
+</script>
+         <!----JS LIBRARY---->
+
+</body>
+</html>

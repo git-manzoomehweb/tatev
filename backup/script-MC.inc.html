@@ -1,0 +1,505 @@
+if ($(window).width() <= 750) {
+    if ($("#flight-form").attr('action') == '/Tem3_Roundtrip_Search_EN.bc') {
+        $("#flight-form").attr('action', '/M_Roundtrip_Search_en.bc')
+    }
+    if ($("#flight-form").attr('action') == '/Tem3_Oneway_Search_EN.bc') {
+        $("#flight-form").attr('action', '/M_Oneway_Search_en.bc')
+    }
+    $("#hotel-form").attr('action', '/M_Hotel_Search_en.bc')
+    $("#flightHotel-form").attr('action', '/M_FlightHotel_Search_en.bc')
+    $("#insurance-form").attr('action', '/M_Insurance_Search_en.bc')
+    $("#tour-form").attr('action', '/M_Tour_Search_en.bc')
+}
+$("#backtoback").click(function () {
+    $(this).closest("#item-Flight").find(".end_date").addClass("nextCalOpening")
+    $("#flight-form #inp2").prop("disabled", false);
+    $("#flight-form #inp2").removeClass("Noactive-date");
+    $("#flight-form #inp2").closest(".result-for").removeClass("Noactive-date-section");
+    $("#flight-form #inp2").addClass("nextCalOpening");
+    if ($(window).width() <= 750) {
+        $("#flight-form").attr('action', '/M_Roundtrip_Search_en.bc')
+    }
+    $(this).find("input").prop('checked', true)
+    $(this).siblings("li").find("input").prop('checked', false)
+});
+$("#oneway").click(function () {
+    $(this).closest("#item-Flight").find(".end_date").removeClass("nextCalOpening")
+    $("#flight-form #inp2").prop("disabled", true);
+    $("#flight-form #inp2").addClass("Noactive-date");
+    $("#flight-form #inp2").closest(".result-for").addClass("Noactive-date-section");
+    $("#flight-form #inp2").removeClass("nextCalOpening");
+    if ($(window).width() <= 750) {
+        $("#flight-form").attr('action', '/M_Oneway_Search_en.bc')
+    }
+    $(this).find("input").prop('checked', true)
+    $(this).siblings("li").find("input").prop('checked', false)
+});
+$("#Flight").click(function () {
+    $(this).addClass("active-moudle");
+    $(this).siblings("li").removeClass("active-moudle");
+    $("#item-Flight").show();
+    $("#item-Hotel,#item-FlightHotel,#item-Tour,#item-Insurance").hide();
+});
+$("#Hotel").click(function () {
+    $(this).addClass("active-moudle");
+    $(this).siblings("li").removeClass("active-moudle");
+    $("#item-Hotel").show();
+    $("#item-Flight,#item-FlightHotel,#item-Tour,#item-Insurance").hide();
+});
+$("#FlightHotel").click(function () {
+    $(this).addClass("active-moudle");
+    $(this).siblings("li").removeClass("active-moudle");
+    $("#item-FlightHotel").show();
+    $("#item-Flight,#item-Hotel,#item-Tour,#item-Insurance").hide();
+});
+$("#Tour").click(function () {
+    $(this).addClass("active-moudle");
+    $(this).siblings("li").removeClass("active-moudle");
+    $("#item-Tour").show();
+    $("#item-Flight,#item-Hotel,#item-FlightHotel,#item-Insurance").hide();
+});
+$("#Insurance").click(function () {
+    $(this).addClass("active-moudle");
+    $(this).siblings("li").removeClass("active-moudle");
+    $("#item-Insurance").show();
+    $("#item-Flight,#item-Hotel,#item-Tour,#item-FlightHotel").hide();
+});
+
+function openNextCal(e) {
+    let activeBtn = $('.search-box-header ul > .active-moudle').attr('data-id');
+    if (activeBtn == 'item-FlightHotel') {
+        if ($('.check-hotel-date-container').is(':visible')) {
+            if ($('.check-hotel-date-container').find(".checkin").val() != '') {
+                let returnDate = $('.check-hotel-date-container').find('.nextCalOpeningex').val();
+                if (returnDate == '') {
+                    $('.check-hotel-date-container').find('.nextCalOpeningex').trigger("onclick");
+                }
+            } else {
+                let returnDate = $('#' + activeBtn).find('.nextCalOpening').val();
+                if (returnDate == '') {
+                    $('#' + activeBtn).find('.nextCalOpening').trigger("onclick");
+                }
+            }
+
+        } else {
+            let returnDate = $('#' + activeBtn).find('.nextCalOpening').val();
+            if (returnDate == '') {
+                $('#' + activeBtn).find('.nextCalOpening').trigger("onclick");
+            }
+        }
+    } else {
+        let returnDate = $('#' + activeBtn).find('.nextCalOpening').val();
+        if (returnDate == '') {
+            $('#' + activeBtn).find('.nextCalOpening').trigger("onclick");
+        }
+
+    }
+};
+
+
+function empty_value(element) {
+    $(element).val('')
+    $(element).closest(".city").find(".co-id").val('')
+    $(element).closest(".city").find(".searchList").fadeIn()
+    $(element).closest(".city").siblings(".city").find(".searchList").fadeOut()
+}
+
+$('.country').each(function () {
+    $(this).on('keyup', function (e) {
+        $(this).closest(".city").find(".searchList").fadeOut()
+    });
+    $(this).on('blur', function () {
+        if ($(this).closest(".city").find(".countryFlight").text().length > 0) {
+            if (hoverelse == 0) {
+                var defresult = $(this).closest(".city").find(".countryFlight")
+                    .children(".selectCountry:first").find(".txtcountry")
+                    .text();
+                var defresultid = $(this).closest(".city").find(".countryFlight").children(".selectCountry:first").find(".countryid").val();
+                $(this).closest(".city").find(".country").val(defresult);
+                $(this).closest(".city").find(".co-id").val(defresultid);
+                $(this).closest(".city").find(".countryFlight").empty();
+            }
+        } else {
+            $(this).closest(".city").find(".mini-loading").css("display", "none")
+            $(this).closest(".city").find(".country").val('');
+            $(this).closest(".city").find(".co-id").val('');
+        }
+    });
+
+});
+
+function city_search(a) {
+    if ($(a).attr('data-type') == 4) {
+        $(a).val('')
+        $(a).closest(".city").find(".co-id").val('')
+        if ($(a).attr('data-active') == 0) {
+            $(a).closest(".city").find(".mini-loading").show();
+            $.ajax({
+                url: '/Client_City_Search.bc',
+                type: 'get',
+                data: {
+                    type: $(a).attr('data-type'),
+                    lid: "2"
+                },
+                success: function (result) {
+                    $(a).attr('data-active', "1")
+                    $(a).closest(".city").find(".mini-loading").hide();
+                    $(a).closest(".city").find(".countryFlight").empty().html(result);
+                    $(a).closest(".city").find(".countryFlight").slideDown()
+                }
+            });
+        } else {
+            $(a).closest(".city").find(".countryFlight").slideDown()
+        }
+
+    } else {
+        if (a.which !== 0 && !a.ctrlKey && !a.metaKey && !a.altKey) {
+            upper_case = $(a).val().substr(0, 1).toUpperCase() + $(a).val().substr(1).toLowerCase();
+            $(a).val(upper_case)
+            if ($(a).val().length > 2) {
+                $(a).closest(".city").find(".mini-loading").show();
+                $.ajax({
+                    url: '/Client_City_Search.bc',
+                    type: 'get',
+                    data: {
+                        term: $(a).val(),
+                        type: $(a).attr('data-type'),
+                        lid: 2
+                    },
+                    success: function (result) {
+                        $(a).closest(".city").find(".mini-loading").hide();
+                        $(a).closest(".city").find(".countryFlight").empty().html(result)
+                    }
+                });
+            } else
+                $(a).closest(".city").find(".countryFlight").empty()
+        }
+    }
+
+}
+function SelectPlace(element) {
+    var idSelected = $(element).attr("data-id")
+    var textSelected = $(element).find("span").text()
+    $(element).closest(".city").find(".country").val(textSelected)
+    $(element).closest(".city").find(".co-id").val(idSelected)
+    $(element).closest(".city").find(".searchList").fadeOut()
+    $(element).closest(".city").next(".city").find('.country').trigger("onclick")
+}
+
+
+function show_passengers(element) {
+    $(element).closest('form').find('.CountPassenger').fadeIn();
+}
+$(".confirm").click(function (e) {
+    $(this).closest(".CountPassenger").fadeOut()
+})
+////////<!----- JS  FLIGHT ---->////////
+$(".plus-minus").on("click", function () {
+    var button = $(this);
+    var oldVal = parseInt(button.closest(".item-CountPassenger").find('input').val());
+    var newVal = (button.text() == "+") ? oldVal + 1 : (oldVal > 0) ? oldVal - 1 : 0;
+    if (newVal >= 2) {
+        button.closest(".item-CountPassenger").find(".minus-btn").addClass("minus-btn-active")
+    }
+    if (newVal < 2) {
+        button.closest(".item-CountPassenger").find(".minus-btn").removeClass("minus-btn-active")
+    }
+    if (newVal >= 10) return;
+
+    if (newVal < 1) return;
+
+    button.closest(".item-CountPassenger").find('input').val(newVal);
+    var passengers_count = parseInt(button.closest("form").find('.child-count').val()) + parseInt(newVal)
+    button.closest("form").find('.count-passengers .count').text(passengers_count)
+});
+$(".plus-minus-ch").on("click", function () {
+    var button = $(this);
+    var oldVal = parseInt(button.closest(".item-CountPassenger").find('input').val());
+    var newVal = (button.text() == "+") ? oldVal + 1 : (oldVal > 0) ? oldVal - 1 : 0;
+    if (newVal >= 1) {
+        button.closest(".item-CountPassenger").find(".minus-btn").addClass("minus-btn-active")
+    }
+    if (newVal < 1) {
+        button.closest(".item-CountPassenger").find(".minus-btn").removeClass("minus-btn-active")
+    }
+    if (newVal >= 5) return;
+    button.closest(".item-CountPassenger").find('input').val(newVal);
+    if (newVal == 0) {
+        button.closest(".item-CountPassenger").find('.child').val(newVal);
+    } else {
+        button.closest(".item-CountPassenger").find('.child').val(newVal + ',');
+    }
+    var passengers_count = parseInt(button.closest("form").find('.adult').val()) + parseInt(newVal)
+    button.closest("form").find('.count-passengers .count').text(passengers_count)
+    if (oldVal < newVal) {
+
+        button.closest(".item-CountPassenger").find('.section-select-age').append(createChildDropdown(newVal));
+
+
+    } else if (oldVal > newVal) {
+        destroyChildDropdown(button.closest(".item-CountPassenger").find('.section-select-age'), newVal);
+    }
+});
+var createChildDropdown = function (i) {
+    var $childDropdown = $('<div />', {
+        'class': 'createChildDropdown select-arrow p-relative'
+    });
+    $childDropdown.append($('<label />', {
+        'for': 'childDropdown-' + i
+    }).text('Age ' + i));
+    $childDropdown.append($('<select />'));
+    var options = ['Up to 1 ', '1 to 2  ', '2 to 3 ', '3 to 4  ', '4 to 5 ',
+        '5 to 6 ', '6 to 7 ', '7 to 8 ', '8 to 9 ', '9 to 10 ',
+        '10 to 11 ', '11 to 12 '
+    ];
+    options.forEach(function (option, index) {
+        $childDropdown.find('select').append($('<option />').text(option).attr(
+            'value', index + 1));
+    });
+    return $childDropdown;
+};
+
+var destroyChildDropdown = function ($el, i) {
+    $el.find('div.createChildDropdown').get(i).remove();
+};
+$(document).on('click', function (event) {
+    if (!$(event.target).closest('.searchList,.country,.selectCountry').length) {
+        $(".searchList").fadeOut();
+    }
+    if (!$(event.target).closest('.show_passengers,#ui-datepicker-div,.FlightClass,.Wrapper-CountPassenger,.plus-minus,.plus-minus-ch,.plus-minus-room,.createChildDropdown select,.add-room,.plus-minus-ins,.BithdatePassenger,.nice-select .option').length) {
+        $(".CountPassenger").slideUp();
+    }
+})
+
+$(".fa-exchange-container").click(function () {
+    var dep = $(this).closest("form").find(".FCD1").val()
+    var des = $(this).closest("form").find(".FCD2").val()
+    var depid = $(this).closest("form").find(".FCDid1").val()
+    var desid = $(this).closest("form").find(".FCDid2").val()
+    $(this).closest("form").find(".FCD1").val(des)
+    $(this).closest("form").find(".FCD2").val(dep)
+    $(this).closest("form").find(".FCDid1").val(desid)
+    $(this).closest("form").find(".FCDid2").val(depid)
+})
+
+
+
+$(".plus-minus-room").on("click", function () {
+    var button = $(this);
+    var ad = 0;
+    var oldVal = parseInt(button.closest(".item-CountPassenger").find('input').val());
+    var newVal = (button.text() == "+") ? oldVal + 1 : (oldVal > 0) ? oldVal - 1 : 0;
+    if (newVal >= 2) {
+        button.closest(".item-CountPassenger").find(".minus-btn").addClass("minus-btn-active")
+    }
+    if (newVal < 2) {
+        button.closest(".item-CountPassenger").find(".minus-btn").removeClass("minus-btn-active")
+    }
+    if (newVal >= 5) return;
+    if (newVal < 1) return;
+    button.closest(".item-CountPassenger").find('input').val(newVal);
+    button.closest("form").find('.count-passengers .count-room').text(newVal)
+    button.closest("form").find(".ShowRow").empty()
+    for (i = 1; i <= newVal; i++) {
+        button.closest("form").find(".ShowRow").append('<div class="contentRoom"><div class="RoomRow color_2">Room ' + i + ' </div><div class="item-CountPassenger"><div class="first-part-CountPassenger">adult (+12)</div><div class="second-part-CountPassenger"><div class="passenger-button plus-minus"><span class="background-color_2 plus-btn">+</span></div><div class="passenger-button"><input type="text" name="_root.rooms__' + i + '.adultcount" class="adult adult-count color_1 width_100 font_15"  readonly="" value="1"></div><div class="passenger-button plus-minus"><span class="minus-btn">-</span></div></div><div class="clr"></div></div><div class="item-CountPassenger"><div class="first-part-CountPassenger">child (-12)</div><div class="second-part-CountPassenger"><div class="passenger-button plus-minus-ch"><span class="background-color_2 plus-btn">+</span></div><div class="passenger-button"><input type="text" class="child-count color_1 width_100 font_15"  readonly="" value="0"></div><div class="passenger-button plus-minus-ch"><span class="minus-btn">-</span></div></div><input type="hidden" value="0" class="childcountandage" name="_root.rooms__' + i + '.childcountandage"><div class="clr"></div><div class="section-select-age"></div><div class="clr"></div></div></div>')
+    }
+    button.closest("form").find(".contentRoom").each(function () {
+        var adult = parseInt($(this).find(".adult").val())
+        ad += adult;
+        $(this).find(".plus-minus").on("click", function () {
+            var sumAdult = 0;
+            var sumChild = 0;
+            var button = $(this);
+            var oldVal = parseInt(button.closest(".item-CountPassenger").find('input').val());
+            var newVal = (button.text() == "+") ? oldVal + 1 : (oldVal > 0) ? oldVal - 1 : 0;
+            if (newVal >= 2) {
+                button.closest(".item-CountPassenger").find(".minus-btn").addClass("minus-btn-active")
+            }
+            if (newVal < 2) {
+                button.closest(".item-CountPassenger").find(".minus-btn").removeClass("minus-btn-active")
+            }
+            if (newVal >= 10) return;
+            if (newVal < 1) return;
+            button.closest(".item-CountPassenger").find('input').val(newVal);
+            button.closest(".CountPassenger").find(".contentRoom").each(function () {
+                sumAdult += parseInt($(this).find(".adult").val());
+                sumChild += parseInt($(this).find(".child-count").val());
+            })
+            button.closest("form").find('.count-passengers .count').text(sumAdult + sumChild)
+        });
+        $(this).find(".plus-minus-ch").on("click", function () {
+            var sumAdult = 0;
+            var sumChild = 0;
+            var button = $(this);
+            var oldVal = parseInt(button.closest(".item-CountPassenger").find('input').val());
+            var newVal = (button.text() == "+") ? oldVal + 1 : (oldVal > 0) ? oldVal - 1 : 0;
+            if (newVal >= 1) {
+                button.closest(".item-CountPassenger").find(".minus-btn").addClass("minus-btn-active")
+            }
+            if (newVal < 1) {
+                button.closest(".item-CountPassenger").find(".minus-btn").removeClass("minus-btn-active")
+            }
+            if (newVal >= 5) return;
+            button.closest(".item-CountPassenger").find('input').val(newVal);
+            button.closest(".CountPassenger").find(".contentRoom").each(function () {
+                sumAdult += parseInt($(this).find(".adult").val());
+                sumChild += parseInt($(this).find(".child-count").val());
+            })
+            button.closest("form").find('.count-passengers .count').text(sumAdult + sumChild)
+            if (oldVal < newVal) {
+                button.closest(".item-CountPassenger").find('.section-select-age').append(createChildDropdown(newVal));
+            } else if (oldVal > newVal) {
+                destroyChildDropdown(button.closest(".item-CountPassenger").find('.section-select-age'), newVal);
+            }
+        });
+    })
+    button.closest("form").find('.count-passengers .count').text(parseInt(ad))
+});
+
+////////<!----- JS  INSURANCE ---->////////
+$(".plus-minus-ins").on("click", function () {
+    var button = $(this);
+    var oldVal = parseInt(button.closest(".item-CountPassenger").find('input').val());
+    var newVal = (button.text() == "+") ? oldVal + 1 : (oldVal > 0) ? oldVal - 1 : 0;
+    if (newVal >= 1) {
+        button.closest(".item-CountPassenger").find(".minus-btn").addClass("minus-btn-active")
+    }
+    if (newVal < 1) {
+        button.closest(".item-CountPassenger").find(".minus-btn").removeClass("minus-btn-active")
+    }
+    if (newVal >= 9) return;
+    if (newVal < 1) return;
+    button.closest(".item-CountPassenger").find('.passengercount').val(newVal);
+    button.closest("form").find('.count-passengers .count').text(newVal)
+    if (oldVal < newVal) {
+        button.closest(".item-CountPassenger").find('.Wrapper-BirthdatePassenger').empty()
+        for (var i = 1; i <= newVal; i++) {
+            button.closest(".item-CountPassenger").find('.Wrapper-BirthdatePassenger').append('<div class="BirthdatePassenger"><label class="label">birthdate passenger ' +
+                i +
+                '</label><input class="datepicker BithdatePassenger" type="text" autocomplete="off" readonly required><div class="clr"></div></div>'
+            );
+        }
+    } else if (oldVal > newVal) {
+        destroyInsurancePassenger(button.closest(".item-CountPassenger").find('.Wrapper-BirthdatePassenger'), newVal);
+    }
+    $('.datepicker').focus(function (e) {
+        FDatepicker(this, {
+            single: true,
+            isJalali: isJalali,
+            changeMonth: true,
+            changeYear: true,
+            minDate: "-100y",
+            maxDate: $("#AdaultMaxDate").val(),
+            yearRangeJalali: "1250:1500",
+            yearRangeGregorian: "1900:2030",
+            numberOfMonths: 1,
+        });
+        var innerContent = $('.nice-select > ul');
+        var option_height = $('.nice-select .option').height();
+        var option_count = $('.nice-select .option').length;
+        var Ul_height = parseInt(option_height) * parseInt(option_count)
+        innerContent.scrollTop(Ul_height / 2);
+    });
+
+});
+var destroyInsurancePassenger = function ($el, i) {
+    $el.find('div.BirthdatePassenger').get(i).remove();
+};
+
+
+////////<!----- JS  FLIGHT/HOTEL ---->////////
+function CheckExteraHoteldate(elementent) {
+    var isChecked = $(elementent).prop("checked")
+    if (isChecked == true) {
+        $(elementent).val(1)
+        $(".check-hotel-date-container").show()
+        $(".checkout").attr('required', true)
+        $(".checkin").attr('required', true)
+    } else if (isChecked == false) {
+        $(elementent).val(0)
+        $(".check-hotel-date-container").hide()
+        $(".checkout").attr('required', false)
+        $(".checkin").attr('required', false)
+    }
+}
+if ($(".Hotel-Date").val() == 1) {
+    $(".check-hotel-date-container").show()
+    $(".Hotel-Date").prop("checked", true)
+} else {
+    $(".check-hotel-date-container").hide()
+    $(".Hotel-Date").prop("checked", false)
+}
+////////<!----- JS  DATEPICKER ---->////////
+function getPassportExpiryDate() {
+    return new Date();
+}
+var regional = "",
+    isJalali = false;
+if (regional == "fa") {
+    isJalali = true;
+}
+$('.datepicker').focus(function (e) {
+    FDatepicker(this, {
+        single: true,
+        isJalali: isJalali,
+        changeMonth: true,
+        changeYear: true,
+        minDate: "-100y",
+        maxDate: $("#AdaultMaxDate").val(),
+        yearRangeJalali: "1250:1500",
+        yearRangeGregorian: "1900:2030",
+        numberOfMonths: 1,
+    });
+    var innerContent = $('.nice-select > ul');
+    var option_height = $('.nice-select .option').height();
+    var option_count = $('.nice-select .option').length;
+    var Ul_height = parseInt(option_height) * parseInt(option_count)
+    innerContent.scrollTop(Ul_height / 2);
+});
+PersianDate = {
+    g_days_in_month: [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31],
+    j_days_in_month: [31, 31, 31, 31, 31, 31, 30, 30, 30, 30, 30, 29]
+};
+PersianDate.PersianToGregorian = function (j_y, j_m, j_d) {
+    j_y = parseInt(j_y);
+    j_m = parseInt(j_m);
+    j_d = parseInt(j_d);
+    var jy = j_y - 979;
+    var jm = j_m - 1;
+    var jd = j_d - 1;
+
+    var j_day_no = 365 * jy + parseInt(jy / 33) * 8 + parseInt((jy % 33 + 3) / 4);
+    for (var i = 0; i < jm; ++i) j_day_no += PersianDate.j_days_in_month[i];
+    j_day_no += jd;
+    var g_day_no = j_day_no + 79;
+    var gy = 1600 + 400 * parseInt(g_day_no /
+        146097); /* 146097 = 365*400 + 400/4 - 400/100 + 400/400 */
+    g_day_no = g_day_no % 146097;
+    var leap = true;
+    if (g_day_no >= 36525) /* 36525 = 365*100 + 100/4 */ {
+        g_day_no--;
+        gy += 100 * parseInt(g_day_no / 36524); /* 36524 = 365*100 + 100/4 - 100/100 */
+        g_day_no = g_day_no % 36524;
+
+        if (g_day_no >= 365) g_day_no++;
+        else leap = false;
+    }
+
+    gy += 4 * parseInt(g_day_no / 1461); /* 1461 = 365*4 + 4/4 */
+    g_day_no %= 1461;
+    if (g_day_no >= 366) {
+        leap = false;
+        g_day_no--;
+        gy += parseInt(g_day_no / 365);
+        g_day_no = g_day_no % 365;
+    }
+    for (var i = 0; g_day_no >= PersianDate.g_days_in_month[i] + (i == 1 && leap); i++)
+        g_day_no -= PersianDate.g_days_in_month[i] + (i == 1 && leap);
+    var gm = i + 1;
+    var gd = g_day_no + 1;
+    gm = gm < 10 ? "0" + gm : gm;
+    gd = gd < 10 ? "0" + gd : gd;
+    return [gy, gm, gd];
+}
+
+

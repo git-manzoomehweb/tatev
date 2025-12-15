@@ -1,0 +1,12 @@
+<meta charset="utf-8">
+<basis name="log" core="dbsource" source="trust_login8" mid="24" lid="1" rkey="[##cms.cookie.rkey##]" request="logout">
+    <member name="out" type="scalar" request="status" preview="true" />
+</basis>
+<basis core="cookie" name="rkey" value="" />
+<script type="text/javascript">
+    function delete_cookie(name) {
+        document.cookie = name + '=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+    }
+    delete_cookie("rkey")
+    window.location = '/FA';
+</script>

@@ -1,0 +1,51 @@
+<basis core="external.fly.ws" source="cmsDbService2" name="db" procedurename="dbsource">
+    <member method="cms" name="agencycatid" query='{
+        "name": "db",
+        "mid": "20",
+        "member": [
+            {
+                "type": "scalar",
+                "name": "q",
+                "request": "agencycatid"
+            }
+        ]
+    } ' preview="" />
+</basis>
+<basis core="group" name="delaycounter">
+    <basis core="dbsource" source="trust_login" lid="1" name="db" catid="[##db.agencycatid.result##]">
+        <member name="agencycounter" type="list" request="agencycounter" preview="" />
+    </basis>
+    <basis core="group" name="Delay_1">
+        <basis core='dbsource' name='users' source='trust_login8' usersid='[##db.agencycounter.userid##]'>
+                <member name='info' request='usersinformation' type='list'></member>
+        </basis>
+        <basis core="group" name="Delay_2">
+            <basis core="inlinesource" name="joining">
+                <member name="list" lefttblcol="users.info.userid" righttblcol="db.agencycounter.userid" format="join"
+                        jointype="rightjoin" />
+            </basis>    
+    <div class="agencycounter obligation">
+        <span class="box_tlt"><span class="shopper-icon"><i class="fas fa-user fa-user-shopper"></i></span><span>کانتر
+                اقدام کننده : </span></span>
+        <basis core="print" datamembername="joining.list">
+            <layout>
+                <select class="selectagcounter">
+                    <option value="0"> - </option>
+                    @child
+                </select>
+            </layout>
+            <face>
+                <option value="@users.info.userid">@users.info.name @users.info.family</option>
+            </face>
+        </basis>
+        <span class="arr"><i class="fas fa-angle-down"></i></span>
+        <p class="alertcheck2">لطفا کانتر اقدام کننده را انتخاب کنید.</p>
+    </div>
+    <script type="text/javascript">
+        $(".selectagcounter").change(function () {
+            var Eval = $(this).val()
+            var Sval = $(this).find('option:selected').html()
+            $(".agcounter").val(Eval)
+            $(".agcountername").val(Sval)
+        })
+    </script>

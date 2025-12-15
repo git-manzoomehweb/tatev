@@ -1,0 +1,2558 @@
+<basis core="tracking" name="tracking" source="Monitoring" collectionname="activity" dbname="tracking" addcookie="true" />
+<basis core="cookie" name="trackingid" value="[##tracking.inserted.id|(0)##]" />
+<basis core="dbsource" source="trust_login8" mid="24" name="db" lid="1" rkey="[##cms.cookie.rkey##]">
+    <member name="userid" type="scalar" request="userid" preview="" />
+</basis>
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>تور</title>
+    <meta charset="utf-8">
+    <meta name="author" content="BasisCore">
+    <meta name="viewport" content="width=device-width, minimum-scale=0.25, maximum-scale=1.0, initial-scale=1.0">
+    <!----CSS LIBRARY---->
+    <link href="https://cdn.basiscore.net/basisfly.com/css/reservation_mob_calendar.css" type="text/css" rel="stylesheet" />
+    <link href="https://cdn.basiscore.net/basisfly.com/css/reservation_mob_style.css" type="text/css" rel="stylesheet" />
+    <link href="https://cdn.basiscore.net/basisfly.com/css/reservation_font_awesome.css" type="text/css" rel="stylesheet" />
+    <!----CSS CUSTOMIZE---->
+    <link href="[##cms.cms.cdn##]/css/style_mob.css" type="text/css" rel="stylesheet" />
+    <!----JS LIBRARY---->
+    <script src="https://cdn.basiscore.net/basisfly.com/js/reservation_js_library.js" type="text/javascript"></script>
+</head>
+
+<body onload="onloadFunc();">
+    <div id="Container" class="p-relative">
+        <div id="bg-popup" class="unvisible"></div>
+        <div class="message_box message_box_timeout unvisible font_13 p-absolute">
+            <i class="fas fa-clock icon_message_box font-color_2 "></i>
+            <div class="line-one font_18">
+                <span>اعتبار جستجوی شما پایان یافت.</span>
+            </div>
+            <div class="line-two">
+                <div> لطفا برای دریافت بهترین قیمت ها و بررسی مجدد ظرفیت روی دکمه زیر کلیک کنید.</div>
+                <button class="background-color_2 font-weight" onClick="window.location='/'">صفحه
+                    اصلی</button>
+                <button class="background-color_2 font-weight" onclick="location.reload()">جستجوی
+                    مجدد</button>
+            </div>
+        </div>
+        <div id="Container-resize">
+            <div class="loginRegister"></div>
+            <basis core="call" file="M_Header.inc" />
+            <div class="clr"></div>
+            <div id="content">
+                <div class="section-research background-color_1 font_13">
+                    <div class="section-research-right float_right">
+                         <div>
+                            <span>[##cms.form.tour-search-text##]</span>
+                        </div>
+                       <div class="clr"></div>
+                        <div class="float_right">
+                            <span>[##cms.form.fdate##]</span>
+                            <span class="">-</span>
+                            <span>[##cms.form.tdate##]</span>
+                        </div>
+                        <div class="section-research-left float_left">
+                            <form method="post" data-read="0" action="M_Research.bc" class="form_research">
+                                <input type="hidden" value="4" name="type" />
+                                <input type="hidden" value="[##cms.form.persiancurrent##]" class="persiancurrent" name="persiancurrent" />
+                                <input type="hidden" value="[##cms.form.tourname##]" name="tourname" />
+                                <input type="hidden" value="[##cms.form.tour-search-text##]" name="tour-search-text" />
+                                <input type="hidden" value="[##cms.form.fdate##]" name="fdate" class="departuredate"/>
+                                <input type="hidden" value="[##cms.form.tdate##]" name="tdate" class="returndate" />
+                                <input type="hidden" value="[##cms.form.mstring_fdate##]" name="mstring_fdate" class="departureMdate" />
+                                <input type="hidden" value="[##cms.form.mstring_tdate##]" name="mstring_tdate" class="returnMdate" />
+                                <input type="hidden" value="" name="roomcount" class="roomcount" />
+                                <input type="hidden" value="" name="adult" class="adult" />
+                                <input type="hidden" value="" name="childage" class="childage" />
+                                <button type="submit"><span>تغییر </span><span class="fa fa-search"></span></button>
+                            </form>
+                            <form method="post" action="M_Tour_Search.bc" class="form_research_date">
+                                <input type="hidden" value="[##cms.form.persiancurrent##]" class="persiancurrent" name="persiancurrent" />
+                                <input type="hidden" value="[##cms.form.tourname##]" name="tourname" />
+                                <input type="hidden" value="[##cms.form.tour-search-text##]" name="tour-search-text" />
+                                <input type="hidden" value="[##cms.form.fdate##]" name="fdate" class="departuredate"/>
+                                <input type="hidden" value="[##cms.form.tdate##]" name="tdate" class="returndate" />
+                                <input type="hidden" value="[##cms.form.mstring_fdate##]" name="mstring_fdate" class="departureMdate" />
+                                <input type="hidden" value="[##cms.form.mstring_tdate##]" name="mstring_tdate" class="returnMdate" />
+                                <input type="hidden" value='[##cms.json.header|cms.form.roomSearch##]' name="roomSearch" />
+                            </form>
+                        </div>
+                        <div class="clr"></div>
+                    </div>
+                 
+                    <div class="clr"></div>
+                    <div class="content-research unvisible">
+                        <div class="Loading-box">
+                            <div class="lds-spinner">
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clr"></div>
+                </div>
+                <div class="wrapper-95">
+                    <span class="before-btn background-color_1  font_12"><i
+                            class="fa fa-arrow-right float_right"></i>روز قبل</span>
+                    <span class="after-btn background-color_1   font_12">روز بعد<i
+                            class="fa fa-arrow-left float_left"></i></span>
+                </div>
+                <div class="wating-search">
+                    <span>در حال جستجوی بهترین تور ها ...</span>
+                    <div class="loading-progress"></div>
+                    <img src="/images/M_Tour.gif" alt="" width="170" height="" />
+                </div>
+                <div id="app" class="unvisible"></div>
+            </div>
+            <basis core="call" file="M_Footer.inc" />
+        </div>
+    </div>
+
+    <!----JS LIBRARY---->
+    <script type="text/javascript">
+    $(document).ready(function () {
+    fetch('/Client_Tour_Json.bc', {
+    method: 'POST',
+    body: 'tourname=[##cms.form.tourname##]&fdate=[##cms.form.fdate##]&tdate=[##cms.form.tdate##]&userid=[##db.userid.userid##]&rooms=[##cms.json.header|cms.form.roomSearch##]'
+})
+    .then(response => response.text())
+    .then(text => {
+        let Maindata = JSON.parse(text.replace(/\'/g, '"'))
+        let LenMaindata = Maindata.length
+        if (LenMaindata !== undefined) {
+            Maindata.sort((a, b) => a.totalCom - b.totalCom);
+        }
+        $('.wating-search').hide()
+        $('#app').show()
+        load_data(Maindata)
+        
+    }).catch(error => console.error(error))
+
+    })
+
+
+        </script>
+           <script type="text/babel">
+            function load_data(load_data) {
+            class App extends React.Component {
+                constructor(props) {
+                    super(props);
+                    this.state = {
+                        data: [],
+                        data_currency: [],
+                        library: null,
+                        perPage: 20,
+                        currentPage: 1,
+                        currentPage2: 2,
+                        currentPage3: 3,
+                        maxPage: null,
+                        filterName: "",
+                        visibleTourInfo: {},
+                        visibleDetails: {},
+                        visibleBar: {},
+                        visibleRule: {},
+                        visibleRoomInfo: {},
+                        costtable: {},
+                        roomids: {},
+                        chkbox: true,
+                        jsonbackup: {},
+                        cityindex: "",
+                        roomindex: "",
+                        roomcheck: "",
+                        chflag: 0,
+                        copy: {},
+                        costtableinfo: [],
+                        Visible_rooms: {},
+                        state_airlines: "",
+                        state_stops: "",
+                        state_classNames: "",
+                        state_service: "",
+                        state_stars: "",
+                        state_availability: "",
+                        state_currency_unit: "",
+                        state_currency_cost: 1,
+                        state_floatdigit: ""
+        
+                    }
+                    this.airlines = [];
+                    this.stops = [];
+                    this.stars = [];
+                    this.service = [];
+                    this.availability = [];
+                    this.classNames = []
+                    this.handleClick = this.handleClick.bind(this);
+        
+                }
+                componentDidMount() {
+                    this.setState(state => ({
+                        ...state,
+                        data: load_data
+                    }), () => {
+                        this.reorganiseLibrary()
+                    })
+                    $(document).on('update_result', (event, service, stars, availability, airlines, classNames, stops) => {
+                        this.reorganiseLibrary(service, stars, availability, airlines, classNames, stops)
+                    })
+                    let getCurrencyObject = localStorage.getItem('currencyObject');
+            let jsonCurrency = JSON.parse(getCurrencyObject);
+            if (jsonCurrency) {
+                this.setState({
+                    state_currency_unit: jsonCurrency.currency_unit,
+                    state_currency_cost: jsonCurrency.currency_cost,
+                    state_floatdigit: jsonCurrency.floatdigit,
+                })
+            }
+                }
+                componentDidUpdate() {
+                    $(".search-item").each(function () {
+                        let basiscoreid = $(this).find(".basiscoreid").val()
+                        var check_loaded = $(this).attr("date-load-info");
+                        var self = $(this)
+                        if ($(this).find(".basiscoreid").val()) {
+                            if ($(this).find(".basiscoreid").val() == $(this).closest(".search-item").siblings().find(".basiscoreid").val()) {
+                                if (check_loaded == 0) {
+                                    $.get("/Tem1_Tour_Info.bc?id=" + basiscoreid + "", function (data, status) {
+                                        self.find(".load_info_tour").empty().append(data)
+                                        self.closest(".search-item").siblings().find(".load_info_tour").empty().append(data)
+        
+                                    });
+                                    $(this).attr("date-load-info", "1")
+                                    $(this).siblings().attr("date-load-info", "1")
+                                }
+                            } else {
+                                $.get("/Tem1_Tour_Info.bc?id=" + basiscoreid + "", function (data, status) {
+                                    self.find(".load_info_tour").empty().append(data)
+                                });
+        
+                            }
+                        }
+                    })
+                    $(".airline_filter").sort(function (a, b) {
+                        a = $(".min_total", a).text().replace(/,/g, '');
+                        b = $(".min_total", b).text().replace(/,/g, '');
+                        return a - b;
+                    }).appendTo(".airline_results");
+                    $(".unit_content").each(function () {
+                        if ($(this).text() == 'ريالریال') {
+                            $(this).text('ریال')
+                        }
+                    })
+                    $(".grade_filter").sort(function (a, b) {
+                        a = $(".stars", a).val().replace(/,/g, '');
+                        b = $(".stars", b).val().replace(/,/g, '');
+                        return b - a;
+                    }).appendTo(".grade_results");
+                    $(document).on('click', function (event) {
+                        if (!$(event.target).closest('.section-filter-icon,.section-filter-content').length) {
+                            $(".section-filter").removeClass('section-filter-open')
+                            $(".section-filter-content").animate({ right: '-100%' }, 350);
+                        }
+        
+                    })
+                }
+                reorganiseLibrary = (service, stars, availability, airlines, classNames, stops) => {
+                    const { filterName, perPage, data } = this.state
+                    let library = data
+                    if (filterName !== "") {
+                        library = library.filter(item =>
+                            this.render_filter_search(item).toString().toLowerCase().includes(filterName)
+                        )
+                        let lenLibrary = library.length
+                        $('.list_count').text(lenLibrary)
+                    }
+                    if (stars !== undefined) {
+                        if (stars !== "") {
+                            stars = stars.split(",");
+                            library = library.filter(item => {
+                                if (this.renderFilter_search(item.hotelinfo, 'star').some(r => stars.includes(r))) return item;
+        
+                            })
+                        }
+                        let lenLibrary = library.length
+                        $('.list_count').text(lenLibrary)
+                    }
+                    if (service !== undefined) {
+                        if (service !== "") {
+                            service = service.split(",");
+                            library = library.filter(item => {
+                                if (this.renderFilter_search(item.hotelinfo, 'sevice').some(r => service.includes(r))) return item;
+        
+                            })
+                        }
+                        let lenLibrary = library.length
+                        $('.list_count').text(lenLibrary)
+                    }
+        
+                    if (availability !== undefined) {
+                        if (availability !== "") {
+                            availability = availability.split(",");
+                            library = library.filter(item => {
+                                if (this.renderFilter_search(item.hotelinfo, 'availability').some(r => availability.includes(r))) return item;
+        
+                            })
+                        }
+        
+                        let lenLibrary = library.length
+                        $('.list_count').text(lenLibrary)
+        
+                    }
+                    if (airlines !== undefined) {
+                        if (airlines !== "") {
+                            airlines = airlines.split(",");
+                            library = library.filter(item => {
+                                if (this.renderFilter_search(item, 'airlines').some(r => airlines.includes(r))) return item;
+        
+        
+                            })
+                        }
+                        let lenLibrary = library.length
+                        $('.list_count').text(lenLibrary)
+                    }
+        
+                    if (stops !== undefined) {
+                        if (stops !== "") {
+                            stops = stops.split(",");
+                            library = library.filter(item => {
+                                if (this.renderFilter_search(item, 'stops').some(r => stops.includes(r))) return item;
+        
+                            })
+                        }
+                        let lenLibrary = library.length
+                        $('.list_count').text(lenLibrary)
+                    }
+                    if (classNames !== undefined) {
+                        if (classNames !== "") {
+                            classNames = classNames.split(",");
+                            library = library.filter(item => {
+                                if (this.renderFilter_search(item, 'classNames').some(r => classNames.includes(r))) return item;
+                            })
+                        }
+                        let lenLibrary = library.length
+                        $('.list_count').text(lenLibrary)
+                    }
+                    let lenLibrary = library.length
+                    if (lenLibrary == undefined) {
+                        $('.list_count').text(0)
+                    } else {
+                        $('.list_count').text(lenLibrary)
+                    }
+                    library = _.chunk(library, perPage)
+                    this.setState({
+                        library,
+                        currentPage: 1,
+                        maxPage: library.length === 0 ? 1 : library.length
+                    })
+                }
+                render_filter_search = (element) => {
+                    let lenhotelinfo = element.hotelinfo.length
+                    for (let i = 0; i < lenhotelinfo; i++) {
+                        for (let i = 0; i < lenhotelinfo; i++) {
+                            let lenhotel = element.hotelinfo[i].hotel.length
+                            let indents = []
+                            for (let j = 0; j < lenhotel; j++) {
+                                indents.push(element.hotelinfo[i].hotel[j].hotelinfo.name)
+                            }
+                            return (
+                                indents
+                            )
+                        }
+                    }
+                }
+        
+                renderFilter_search(element, type) {
+                    if (type == 'star') {
+                        let elementAdd = []
+                        for (let i = 0; i < element.length; i++) {
+                            for (let j = 0; j < element[i].hotel.length; j++) {
+                                elementAdd.push(element[i].hotel[j].hotelinfo.hotelsearch.star.toString())
+                            }
+        
+                        }
+                        return elementAdd
+                    } if (type == 'sevice') {
+                        let elementAdd = []
+                        for (let i = 0; i < element.length; i++) {
+                            for (let j = 0; j < element[i].hotel.length; j++) {
+                                elementAdd.push(element[i].hotel[j].hotelinfo.hotelsearch.services)
+                            }
+        
+                        }
+                        return elementAdd
+                    } if (type == 'availability') {
+                        let elementAdd = []
+                        for (let i = 0; i < element.length; i++) {
+                            for (let j = 0; j < element[i].hotel.length; j++) {
+                                for (let y = 0; y < element[i].hotel[j].families.length; y++) {
+                                    for (let z = 0; z < element[i].hotel[j].families[y].availablerooms.length; z++) {
+                                        elementAdd.push(element[i].hotel[j].families[y].availablerooms[z].info.availability)
+                                    }
+                                }
+        
+                            }
+        
+                        }
+                        return elementAdd
+                    }
+                    if (type == 'classNames') {
+                        let elementAdd = []
+                        for (let i = 0; i < element.backtobackinfo.mainflights.length; i++) {
+                            elementAdd.push(element.backtobackinfo.mainflights[i].classname)
+                        }
+                        for (let i = 0; i < element.onewayflights.length; i++) {
+                            elementAdd.push(element.onewayflights[i].classname)
+                        }
+                        return elementAdd
+                    }
+                    if (type == 'stops') {
+                        let elementAdd = []
+                        for (let i = 0; i < element.backtobackinfo.mainflights.length; i++) {
+                            elementAdd.push(element.backtobackinfo.mainflights[i].ticketinfooo.stoppinfoo.showstopinfo)
+                        }
+                        for (let i = 0; i < element.onewayflights.length; i++) {
+                            elementAdd.push(element.onewayflights[i].ticketinfooo.stoppinfoo.showstopinfo)
+                        }
+                        return elementAdd
+                    }
+        
+                    if (type == 'airlines') {
+                        let elementAdd = []
+                        for (let i = 0; i < element.backtobackinfo.mainflights.length; i++) {
+        
+                            for (let j = 0; j < element.backtobackinfo.mainflights[i].routeshow.routesinfoo.length; j++) {
+                                elementAdd.push(element.backtobackinfo.mainflights[i].routeshow.routesinfoo[j].routesinfoodetails.otherdetails.detailsairline)
+                            }
+        
+                        }
+                        for (let i = 0; i < element.onewayflights.length; i++) {
+                            for (let j = 0; j < element.onewayflights[i].routeshow.routesinfoo.length; j++) {
+                                elementAdd.push(element.onewayflights[i].routeshow.routesinfoo[j].routesinfoodetails.otherdetails.detailsairline)
+                            }
+        
+                        }
+                        return elementAdd
+        
+                    }
+                }
+        
+                // Previous Page
+                previousPage = event => {
+                    let maxPage = this.state.maxPage
+                    let len = this.renderLibrary().length
+                    let Multi = len * maxPage
+                    for (let i = 0; i <= Multi; i++) {
+                        this.setState(prevState => ({
+                            visibleDetails: { ...prevState.visibleDetails, [i]: "" },
+                            visibleRule: { ...prevState.visibleRule, [i]: "" },
+                            visibleBar: { ...prevState.visibleBar, [i]: "" },
+                            visibleTourInfo: { ...prevState.visibleTourInfo, [i]: "" },
+                            visibleRoomInfo: { ...prevState.visibleRoomInfo, [i]: "" },
+                            Visible_rooms: { ...prevState.Visible_rooms, [i]: "" },
+                        }))
+                    }
+                    this.handleClick(event)
+                    this.setState({
+                        currentPage: this.state.currentPage - 1,
+                        currentPage2: this.state.currentPage2 - 1,
+                        currentPage3: this.state.currentPage3 - 1
+                    })
+                }
+                // Next Page 
+                nextPage = event => {
+                    let maxPage = this.state.maxPage
+                    let len = this.renderLibrary().length
+                    let Multi = len * maxPage
+                    for (let i = 0; i <= Multi; i++) {
+                        this.setState(prevState => ({
+                            visibleDetails: { ...prevState.visibleDetails, [i]: "" },
+                            visibleRule: { ...prevState.visibleRule, [i]: "" },
+                            visibleBar: { ...prevState.visibleBar, [i]: "" },
+                            visibleTourInfo: { ...prevState.visibleTourInfo, [i]: "" },
+                            visibleRoomInfo: { ...prevState.visibleRoomInfo, [i]: "" },
+                            Visible_rooms: { ...prevState.Visible_rooms, [i]: "" },
+                        }))
+                    }
+                    this.handleClick(event)
+                    this.setState({
+                        currentPage: this.state.currentPage + 1,
+                        currentPage2: this.state.currentPage2 + 1,
+                        currentPage3: this.state.currentPage3 + 1
+                    })
+                }
+        
+                // Next Page3
+                nextPage3 = event => {
+                    let maxPage = this.state.maxPage
+                    let len = this.renderLibrary().length
+                    let Multi = len * maxPage
+                    for (let i = 0; i <= Multi; i++) {
+                        this.setState(prevState => ({
+                            visibleDetails: { ...prevState.visibleDetails, [i]: "" },
+                            visibleRule: { ...prevState.visibleRule, [i]: "" },
+                            visibleBar: { ...prevState.visibleBar, [i]: "" },
+                            visibleTourInfo: { ...prevState.visibleTourInfo, [i]: "" },
+                            visibleRoomInfo: { ...prevState.visibleRoomInfo, [i]: "" },
+                            Visible_rooms: { ...prevState.Visible_rooms, [i]: "" },
+                        }))
+                    }
+                    this.handleClick(event)
+                    this.setState({
+                        currentPage: this.state.currentPage3,
+                        currentPage2: this.state.currentPage3 + 1,
+                        currentPage3: this.state.currentPage3 + 2
+                    })
+                }
+        
+                // handle filter
+                handlerFilterName = evt => {
+                    const { state_service, state_stars, state_availability, state_airlines, state_classNames, state_stops } = this.state;
+                    this.setState(
+                        {
+                            filterName: evt.target.value.toLowerCase()
+                        },
+                        () => {
+                            this.reorganiseLibrary(state_service, state_stars, state_availability, state_airlines, state_classNames, state_stops);
+                        }
+                    )
+                }
+        
+        
+                // handle per page
+                handlePerPage = (evt) =>
+                    this.setState({
+                        perPage: evt.target.value
+                    }, () => this.reorganiseLibrary())
+        
+                // handle render of library
+                renderLibrary = () => {
+                    const { library, currentPage } = this.state
+        
+                    if (!library || (library && library.length === 0)) {
+                        return <div><div className="message_box message_box_nodata font_13 no-data">
+                            <i className="fas fa-exclamation-triangle icon_message_box font-color_2"></i>
+                            <div className="line-one font_18">
+                                <span>برای جستجوی شما نتیجه ای یافت نشد .</span>
+                            </div>
+                            <div className="line-two">
+                                <div> لطفا برای دریافت بهترین قیمت ها و بررسی مجدد ظرفیت روی دکمه زیر کلیک کنید.</div>
+                                <button className="background-color_2 font-weight hvr-horizontal" onClick={this.renderhomepage}>صفحه اصلی</button>
+                                <button className="background-color_2 font-weight hvr-horizontal" onClick={this.renderResearch}  >جستجوی مجدد</button>
+                            </div>
+                        </div></div>
+                    }
+                    return library[currentPage - 1].map((item) => (
+                        <div className="search-item transition tour" date-load-info="0">
+                            <form method="post" action={this.renderAction(item)}>
+                                <input type="hidden" value={this.state.state_currency_unit} name="rate-unit" className="rate-unit" />
+                                <input type="hidden" value={this.state.state_currency_cost} name="rate-cost" className="rate-cost" />
+                                <input type="hidden" value={this.state.state_floatdigit} name="rate-floatdigit" className="rate-floatdigit" />
+                                <input type="hidden" value="[##db.userid.userid##]" name="userid" />
+                                <input type="hidden" value="[##cms.form.tourname##]" name="tourname" />
+                                <input type="hidden" value="[##cms.form.tour-search-text##]" name="tour-search-text" />
+                                <input type="hidden" value='[##cms.json.header|cms.form.roomSearch##]' name="roomSearch" />
+                                <input type="hidden" value={item.id} name="id" />
+                                <input type="hidden" value={item.supplier} name="supplier" />
+                                <input type="hidden" value={item.share} name="share" />
+                                <input type="hidden" value={item.dateinfo.begindate.sstring} name="fdate" />
+                                <input type="hidden" value={item.dateinfo.enddate.sstring} name="tdate" />
+                                {this.renderproviderId(item.id)}
+                                {this.renderprovider(item)}
+                                {this.renderNeardate(item)}
+                                {this.renderhotelgroupid(item)}
+                                <div className="item-result">
+                                    <div className="item-result-top  p-relative">
+                                        <div className="title-info background-color_1 font-color_4">
+                                            <span className="font_12">{item.name}</span>
+                                            <span className="font_12">{item.dateinfo.begindate.sstring}</span>
+                                            <span className="font_12 EnNum">({item.dateinfo.begindate.mstring})</span>
+                                            <span className="font_12">الی</span>
+                                            <span className="font_12">{item.dateinfo.enddate.sstring}</span>
+                                            <span className="font_12 EnNum">({item.dateinfo.enddate.mstring})</span>
+                                            {this.renderTime(item)}
+                                        </div>
+                                        {this.renderhotelinfo_wrapper(item)}
+        
+                                        <div className="clr"></div>
+                                    </div>
+                                    <div className="item-result-bottom">
+                                        <div className="item-result-bottom-right float_right font_13">
+                                            <div className="col-price">
+                                        <div>قیمت :</div>
+                                        <div><span className="total-cost font_15">{this.renderTotal_first(item)}</span><span className="money-type font_10">{this.renderUnit(item.unit, this.state.state_currency_unit)}</span>
+                                        </div>
+                                        <div className="clr"></div>
+                                    </div>
+                                        </div>
+                                        <div className="item-result-bottom-left float_left">
+                                            <button type="button" className="details-button font_13 background-color_2" onClick={((e) => this.showTourInfo(e, item.index))}><span>جزئیات تور</span></button>
+                                            <button type="submit" className="reserve-button font_13 background-color_1"><span>خرید تور</span></button>
+                                        </div>
+                                        <div className="item-result-bottom-100  font_13">
+                                            {this.renderCommission(item)}
+                                            {this.renderTotalcom(item)}
+                                            <div className="clr"></div>
+                                        </div>
+                                        <div className="clr"></div>
+                                    </div>
+                                    <div key={item.index} className={`item-result-details p-relative font_13 ${!this.state.visibleTourInfo[item.index] ? "unvisible" : "visible"}`} >
+                                        <div className="close-details-box float_left font_11" onClick={(e) => this.closeTourInfo(item.index)}>بستن</div>
+                                        <div className="clr"></div>
+                                        {this.renderbacktobackinfo(item.backtobackinfo, item.index)}
+                                        {this.renderonewayflights(item, item.index)}
+                                        <div className="details-row-content p-relative">
+                                            <div className="details-item-title font-color_1">جدول قیمت</div>
+                                            {this.rendercosttable(item)}
+                                        </div>
+                                        {this.renderserviceTour(item.services)}
+                                        {this.renderInsurance(item)}
+                                        {this.rendervisa(item)}
+                                        <div className="clr"></div>
+                                    </div>
+                                    <div className="clr"></div>
+                                </div>
+                            </form>
+                        </div>
+                    ))
+                }
+                render() {
+                    const { library, currentPage, perPage, maxPage } = this.state
+                    return (
+                        <div>
+                            <div className="neardate unvisible font_11"><span>تور در تاریخ مورد نظر شما موجود نیست ! نزدیک ترین تاریخ موجود نمایش داده شده است .</span></div>
+                            <p className="section-top-info font_11"><span className="font-color_1 font-weight list_count">{this.renderCount()}</span> تور پیدا شد.</p>
+                            <p className="section-top-info font_12">مدت زمان باقی مانده : <span id="timer" className="font-color_2 font-weight EnNum font_20">00:00:00</span></p>
+                            <div className="section-top-facility">
+                            <basis core="group" if="[##cms.cms.domainid##] in ('4592','4564','4603')" name="check-has-currency">
+                            <div className="currency-content-list font_13 p-relative">
+                                <span class="currency-loading p-absolute unvisible"><i class="fas fa-spinner fa-spin"></i></span>
+                                <div className="currency-selected font-color_4 background-color_3" data-active="0" onClick={() => this.currency_selected_list()}><span>{this.localStorage_getCurrency()}{this.localStorage_expire()}</span></div>
+                                <div class="currency-list unvisible font_12 p-absolute"><ul>{this.renderCurrencyRate()}</ul></div>
+                            </div>
+                            </basis>
+                            <div className="section-filter-icon" onClick={((e) => this.showFilter(e))}>
+                                <button type="button" className="background-color_1"><i className="fa fa-sliders-h" aria-hidden="true"></i>فیلترها
+                                </button>
+                            </div>
+                           </div>
+                            <div className="section-items">
+                                {this.renderLibrary()}
+                            </div>
+                            <div className="section-filter">
+                                <div className="section-filter-content p-absolute">
+                                    <div className="top-menu">فیلتر تور براساس . . .</div>
+                                    <div className="hideFilter_icon" onClick={((e) => this.hideFilter(e))}><i className="fa fa-times cursor"></i></div>
+                                    <div className="run_filter section-filter-icon" onClick={((e) => this.hideFilter(e))}><button type="button" className=" background-color_1">اعمال فیلتر</button></div>
+                                    <div className="row-filter">
+                                        <div className="section-filter-items font_13">
+                                            <div className="filter-items-title font-color_1">نام هتل</div>
+                                            <div className="filter-items">
+                                                <input value={this.state.filterName} onChange={this.handlerFilterName} placeholder="نام هتل مورد نظر را وارد نمائید" className="font_12 hotelName" />
+                                            </div>
+                                        </div>
+                                        {this.ShowFilterTour()}
+                                        <div className="clr"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="section-paging">
+                                <ul id="page-numbers" className="unvisible">
+                                    <li className="nexprevPage nexprevPage-left p-relative">
+                                        {currentPage !== 1 && (
+                                            <button onClick={this.previousPage}><i className="fa fa-angle-double-left  transition"></i></button>
+                                        )}
+                                    </li>
+                                    <li className="controlsPage activePage background-color_2">{this.state.currentPage}</li>
+                                    {(this.state.currentPage2 < maxPage) && (<li className="controlsPage" onClick={this.nextPage}>{this.state.currentPage2}</li>
+                                    )}
+                                    {(this.state.currentPage3 < maxPage) && (<li className="controlsPage" onClick={this.nextPage3}>{this.state.currentPage3}</li>
+                                    )}
+                                    <li className="restControls">...</li>
+                                    <li className="controlsPage">{this.state.maxPage}</li>
+                                    <li className="nexprevPage p-relative">
+                                        {(this.state.currentPage < maxPage) && (<button onClick={this.nextPage}><i className="fa fa-angle-double-right transition"></i></button>
+                                        )}
+                                    </li>
+                                </ul>
+                                <div className="clr"></div>
+                            </div>
+                        </div>
+                    )
+                }
+                ShowFilterTour() {
+                    let element = this.state.data;
+                    if (!element) return null;
+                    return <div>
+                        <div className="section-filter-items font_13">
+                            <div className="filter-items-title font-color_1">درجه</div>
+                            <div className="filter-items grade_results">
+                                {this.renderstars(element)}
+                            </div>
+                        </div>
+                        <div className="section-filter-items font_13">
+                            <div className="filter-items-title font-color_1">سرویس</div>
+                            <div className="filter-items">
+                                {this.renderservice(element)}
+                            </div>
+                        </div>
+                        <div className="section-filter-items font_13 has-border">
+                            <div className="filter-items-title font-color_1">وضعیت</div>
+                            <div className="filter-items">
+                                {this.renderAllavailability(element)}
+                            </div>
+                        </div>
+                        <div className="section-filter-items font_13">
+                            <div className="filter-items-title font-color_1">خطوط هوایی</div>
+                            <div className="filter-items airline_results">
+                                {this.renderairlines(element)}
+                            </div>
+                        </div>
+                        <div className="section-filter-items font_13">
+                            <div className="filter-items-title font-color_1">توقف</div>
+                            <div className="filter-items">
+                                {this.renderstop(element)}
+                            </div>
+                        </div>
+                        <div className="section-filter-items font_13">
+                            <div className="filter-items-title font-color_1">کلاس پروازی</div>
+                            <div className="filter-items">
+                                {this.renderclassname(element)}
+                            </div>
+                        </div>
+                    </div>
+        
+                }
+
+            renderairlines(element) {
+            let indents = [];
+            if (element.length !== undefined) {
+                let sentencesBack = [...(new Set(element
+                    .map((d) => {
+                        if (d['backtobackinfo']) {
+                            return d['backtobackinfo']['mainflights']
+                        }
+                    }).flat().map((elem) => {
+                        if (elem) {
+                            return elem['routeshow']['routesinfoo']
+                        }
+                    }
+                    ).flat().map((info) => {
+                        if (info) {
+                            return info['routesinfoodetails']['otherdetails']['detailsairline']
+                        }
+                    }
+                    )))]
+                let sentencesOne = [...(new Set(element
+                    .map((d) => {
+                        if (d['onewayflights']) {
+                            return d['onewayflights']
+                        }
+                    }).flat().map((elem) => {
+                        if (elem) {
+                            return elem['routeshow']['routesinfoo']
+                        }
+                    }
+                    ).flat().map((info) => {
+                        if (info) {
+                            return info['routesinfoodetails']['otherdetails']['detailsairline']
+                        }
+                    }
+                    )))]
+                let sentences = sentencesBack.concat(sentencesOne.filter((item) => sentencesBack.indexOf(item) < 0))
+                let imgDep = [...(new Set(element
+                    .map((d) => {
+                        if (d['backtobackinfo']) {
+                            return d['backtobackinfo']['mainflights']
+                        }
+                    }).flat().map((elem) => {
+                        if (elem) {
+                            return elem['routeshow']['routesinfoo']
+                        }
+                    }
+                    ).flat().map((info) => {
+                        if (info) {
+                            return info['routesinfoodetails']['otherdetails']['detailsairlineimage']
+                        }
+                    }
+                    )))]
+                let imgDes = [...(new Set(element
+                    .map((d) => {
+                        if (d['onewayflights']) {
+                            return d['onewayflights']
+                        }
+                    }).flat().map((elem) => {
+                        if (elem) {
+                            return elem['routeshow']['routesinfoo']
+                        }
+                    }
+                    ).flat().map((info) => {
+                        if (info) {
+                            return info['routesinfoodetails']['otherdetails']['detailsairlineimage']
+                        }
+                    }
+                    )))]
+                let sentencesimg = imgDep.concat(imgDes.filter((item) => imgDep.indexOf(item) < 0))
+                for (let i = 0; i < sentences.length; i++) {
+                    if (sentences[i] !== undefined) {
+                        let singleSentence = <div className="body-filter airline_filter"><div className="section-input_2 p-relative" data-index="1"><input type="checkbox" value={sentences[i]} className="startairline p-absolute" onChange={((e) => this.handleChange(e))} defaultChecked={this.props.defaultChecked} /><label className="font_12"><span className="checkbox"><div className="name_airline text-checkbox font_11 float_right">{sentences[i]}</div></span><span className="total_content font_11 float_left">از <span className="min_total">{new Intl.NumberFormat().format(this.min_totalByAirline(element, sentences[i]))}</span><span className="unit_content">{[...(new Set(element.map(x => this.renderUnit(x.unit, this.state.state_currency_unit))))]}</span></span></label><div className="clr"></div></div><div className="clr"></div></div>
+                        let output = singleSentence
+                        indents.push(singleSentence)
+                    }
+                }
+
+                return (
+                    indents
+                )
+
+            }
+        }
+        min_totalByAirline = (data, name) => {
+            const { state_currency_cost, state_floatdigit } = this.state;
+            const totalsBack = data.filter((x) => {
+                if (x.backtobackinfo) {
+                    return x.backtobackinfo.mainflights
+                        .flatMap(z => z.routeshow.routesinfoo)
+                        .find(y => y.routesinfoodetails.otherdetails.detailsairline === name)
+                }
+            })
+                .map(x => x.totalcostmin);
+
+            const totalsOne = data.filter((x) => {
+                if (x.onewayflights) {
+                    return x.onewayflights.flatMap(z => z.routeshow.routesinfoo).find(y => y.routesinfoodetails.otherdetails.detailsairline === name)
+                }
+            })
+                .map(x => x.totalcostmin);
+
+
+
+            let new_totalsBack = new Array();
+            for (const element of totalsBack) {
+                if (state_floatdigit == '') {
+                    new_totalsBack.push(element * state_currency_cost);
+                } else {
+                    let toString_element = (element * state_currency_cost).toString();
+                    if (toString_element.indexOf('.') > -1) {
+                        let parseFloat_element = parseFloat(toString_element).toFixed(state_floatdigit).toString();
+                        let parseFloat_element_split = parseFloat_element.split('.');
+                        if (parseFloat_element_split[1].indexOf('0') > -1) {
+                            new_totalsBack.push(parseFloat(element * state_currency_cost).toFixed(1).toString())
+                        } else {
+                            new_totalsBack.push(parseFloat(element * state_currency_cost).toFixed(state_floatdigit).toString())
+                        }
+                    } else {
+                        new_totalsBack.push(parseFloat(element * state_currency_cost).toFixed(state_floatdigit).toString())
+                    }
+                }
+
+            }
+            let new_totalsOne = new Array();
+            for (const element of totalsOne) {
+                if (state_floatdigit == '') {
+                    new_totalsOne.push(element * state_currency_cost);
+                } else {
+                    let toString_element = (element * state_currency_cost).toString();
+                    if (toString_element.indexOf('.') > -1) {
+                        let parseFloat_element = parseFloat(toString_element).toFixed(state_floatdigit).toString();
+                        let parseFloat_element_split = parseFloat_element.split('.');
+                        if (parseFloat_element_split[1].indexOf('0') > -1) {
+                            new_totalsOne.push(parseFloat(element * state_currency_cost).toFixed(1).toString())
+                        } else {
+                            new_totalsOne.push(parseFloat(element * state_currency_cost).toFixed(state_floatdigit).toString())
+                        }
+                    } else {
+                        new_totalsOne.push(parseFloat(element * state_currency_cost).toFixed(state_floatdigit).toString())
+                    }
+                }
+
+            }
+            return Math.min(...new_totalsBack, ...new_totalsOne);
+        }
+        
+                renderclassname(element) {
+                    if (element.length !== undefined) {
+                        let sentencesBack = [...(new Set(element
+                            .map((d) => {
+                                if (d['backtobackinfo']) {
+                                    return d['backtobackinfo']['mainflights']
+                                }
+                            }).flat().map((elem) => {
+                                if (elem) {
+                                    return elem['classname']
+                                }
+                            }
+                            ).flat()))]
+                        let sentencesOne = [...(new Set(element
+                            .map((d) => {
+                                if (d['onewayflights']) {
+                                    return d['onewayflights']
+                                }
+                            }).flat().map((elem) => {
+                                if (elem) {
+                                    return elem['classname']
+                                }
+                            }
+                            ).flat()))]
+                        let sentences = sentencesBack.concat(sentencesOne.filter((item) => sentencesBack.indexOf(item) < 0))
+                        if (sentences != '') {
+                            let singleSentence = sentences.map(s => <React.Fragment><div className="body-filter"><div className="section-input_2 p-relative" data-index="1"><input type="checkbox" value={s} className="classNames p-absolute" onChange={((e) => this.handleChange(e))} defaultChecked={this.props.defaultChecked} /><label className="font_12"><span className="checkbox"><div className="text-checkbox">{s}</div></span></label><div className="clr"></div></div><div className="clr"></div></div></React.Fragment>);
+                            let output = singleSentence
+                            return (
+                                output
+                            )
+                        }
+        
+                    }
+                }
+                renderstop(element) {
+                    if (element.length !== undefined) {
+                        let sentencesBack = [...(new Set(element
+                            .map((d) => {
+                                if (d['backtobackinfo']) {
+                                    return d['backtobackinfo']['mainflights']
+                                }
+                            }).flat().map((elem) => {
+                                if (elem) {
+                                    return elem['ticketinfooo']['stoppinfoo']['showstopinfo']
+                                }
+                            }
+                            ).flat()))]
+                        let sentencesOne = [...(new Set(element
+                            .map((d) => {
+                                if (d['onewayflights']) {
+                                    return d['onewayflights']
+                                }
+                            }).flat().map((elem) => {
+                                if (elem) {
+                                    return elem['ticketinfooo']['stoppinfoo']['showstopinfo']
+                                }
+                            }
+                            ).flat()))]
+                        let sentences = sentencesBack.concat(sentencesOne.filter((item) => sentencesBack.indexOf(item) < 0))
+                        if (sentences != '') {
+                            let singleSentence = sentences.map(s => <React.Fragment><div className="body-filter"><div className="section-input_2 p-relative" data-index="1"><input type="checkbox" value={s} className="stops p-absolute" onChange={((e) => this.handleChange(e))} defaultChecked={this.props.defaultChecked} /><label className="font_12"><span className="checkbox"><div className="text-checkbox">{s}</div></span></label><div className="clr"></div></div><div className="clr"></div></div></React.Fragment>);
+                            let output = singleSentence
+                            return (
+                                output
+                            )
+                        }
+        
+                    }
+                }
+                renderstars(element) {
+        
+                    if (element.length !== undefined) {
+                        let sentences = [...(new Set(element.map(d => d['hotelinfo']).flat().map(a => a['hotel']).flat()
+                            .map((elem) => {
+                                if (elem['hotelinfo']) {
+                                    return elem['hotelinfo']['hotelsearch']['star']
+                                }
+        
+                            }).flat()))]
+                        let singleSentence = sentences.map((s) => {
+                            if (s !== undefined) {
+                                return <React.Fragment><div className="body-filter grade_filter"><div className="section-input_2 p-relative" data-index="1"><input type="checkbox" value={s} className="stars p-absolute" onChange={((e) => this.handleChange(e))} defaultChecked={this.props.defaultChecked} /><label className="font_12"><span className="checkbox"><div className="text-checkbox float_right"><img src={(`https://cdn.basiscore.net/basisfly.com/images/reservation_${s}-rate.png`)} width="70" height="14" alt="rating" /></div></span><span className="total_content font_11 float_left">از <span className="min_total">{new Intl.NumberFormat().format(this.min_totalByGrade(element, s))}</span><span className="unit_content"> {[...(new Set(element.map(x => this.renderUnit(x.unit, this.state.state_currency_unit))))]} </span></span></label><div className="clr"></div></div><div className="clr"></div></div></React.Fragment>
+                            }
+                        });
+                        let output = singleSentence
+                        return (
+                            output
+                        )
+                    }
+                }
+        
+                min_totalByGrade = (data, name) => {
+            const { state_currency_cost, state_floatdigit } = this.state;
+            const totals = data.filter(x =>
+                x.hotelinfo.flatMap(z => z.hotel).find(
+                    (y) => {
+                        if (y.hotelinfo) {
+                            return y.hotelinfo.hotelsearch.star === name
+                        }
+                    })).map(x => x.totalcostmin);
+            let new_totals = new Array();
+            for (const element of totals) {
+                if (state_floatdigit == '') {
+                    new_totals.push(element * state_currency_cost);
+                } else {
+                    let toString_element = (element * state_currency_cost).toString();
+                    if (toString_element.indexOf('.') > -1) {
+                        let parseFloat_element = parseFloat(toString_element).toFixed(state_floatdigit).toString();
+                        let parseFloat_element_split = parseFloat_element.split('.');
+                        if (parseFloat_element_split[1].indexOf('0') > -1) {
+                            new_totals.push(parseFloat(element * state_currency_cost).toFixed(1).toString())
+                        } else {
+                            new_totals.push(parseFloat(element * state_currency_cost).toFixed(state_floatdigit).toString())
+                        }
+                    } else {
+                        new_totals.push(parseFloat(element * state_currency_cost).toFixed(state_floatdigit).toString())
+                    }
+                }
+
+            }
+            return Math.min(...new_totals);
+        }
+                renderservice(element) {
+                    if (element.length !== undefined) {
+                        let sentences = [...(new Set(element.map(d => d['hotelinfo']).flat().map(a => a['hotel']).flat()
+                            .map((elem) => {
+                                if (elem['hotelinfo']) {
+                                    return elem['hotelinfo']['hotelsearch']['services']
+                                }
+        
+                            }).flat()))]
+                        let singleSentence = sentences.map((s) => {
+                            if (s !== undefined) {
+                                return <React.Fragment><div className="body-filter"><div className="section-input_2 p-relative" data-index="1"><input type="checkbox" value={s} className="service p-absolute" onChange={((e) => this.handleChange(e))} defaultChecked={this.props.defaultChecked} /><label className="font_12"><span className="checkbox"><div className="text-checkbox">{s}</div></span></label><div className="clr"></div></div><div className="clr"></div></div></React.Fragment>
+                            }
+                        });
+                        let output = singleSentence
+                        return (
+                            output
+                        )
+                    }
+                }
+                renderAllavailability(element) {
+                    if (element.length !== undefined) {
+                        let sentences = [...(new Set(element.map(d => d['hotelinfo']).flat().map(a => a['hotel']).flat()
+                            .map((d) => {
+                                if (d['hotelinfo']) {
+                                    return d['families']
+                                }
+                            }).flat()
+                            .map((info) => {
+                                if (info) {
+                                    return info['availablerooms']
+                                }
+                            })
+                            .flat()
+                            .map((info) => {
+                                if (info) {
+                                    return info['info']['availability']
+                                }
+                            })
+                        ))]
+                        let singleSentence = sentences.map((s) => {
+                            if (s !== undefined) {
+                                return <React.Fragment><div className="body-filter"><div className="section-input_2 p-relative" data-index="1"><input type="checkbox" value={s} className="all_availability p-absolute" onChange={((e) => this.handleChange(e))} defaultChecked={this.props.defaultChecked} /><label className="font_12"><span className="checkbox"><div className="text-checkbox">{s}</div></span></label><div className="clr"></div></div><div className="clr"></div></div></React.Fragment>
+                            }
+                        });
+                        let output = singleSentence
+                        return (
+                            output
+                        )
+                    }
+                }
+        
+                handleChange = (e) => {
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                    let isChecked = e.target.checked
+                    let valu = e.target.value
+                    let classname = e.target.getAttribute("class");
+                    switch (classname) {
+                        case 'service p-absolute':
+                            if (isChecked) {
+                                this.service.push(valu + ',')
+                            } else {
+                                this.service.splice(this.service.indexOf(valu + ','), 1)
+                            }
+                            break;
+                        case 'stars p-absolute':
+                            if (isChecked) {
+                                this.stars.push(valu + ',')
+                            } else {
+                                this.stars.splice(this.stars.indexOf(valu + ','), 1)
+                            }
+                            break;
+                        case 'all_availability p-absolute':
+                            if (isChecked) {
+                                this.availability.push(valu + ',')
+                            } else {
+                                this.availability.splice(this.availability.indexOf(valu + ','), 1)
+                            }
+                            break;
+                        case 'startairline p-absolute':
+                            if (isChecked) {
+                                this.airlines.push(valu + ',')
+                            } else {
+                                this.airlines.splice(this.airlines.indexOf(valu + ','), 1)
+                            }
+                            break;
+                        case 'stops p-absolute':
+                            if (isChecked) {
+                                this.stops.push(valu + ',')
+                            } else {
+                                this.stops.splice(this.stops.indexOf(valu + ','), 1)
+                            }
+                            break;
+                        case 'classNames p-absolute':
+                            if (isChecked) {
+                                this.classNames.push(valu + ',')
+                            } else {
+                                this.classNames.splice(this.classNames.indexOf(valu + ','), 1)
+                            }
+                            break;
+        
+                    }
+                    $(document).trigger('update_result', [this.service.join(), this.stars.join(), this.availability.join(), this.airlines.join(), this.classNames.join(), this.stops.join()])
+                    this.setState({
+                        state_service: this.service.join(),
+                        state_stars: this.stars.join(),
+                        state_availability: this.availability.join(),
+                        state_airlines: this.airlines.join(),
+                        state_classNames: this.classNames.join(),
+                        state_stops: this.stops.join(),
+                    })
+                }
+                renderCount(element) {
+                    let maxPage = this.state.maxPage
+                    let len = this.renderLibrary().length
+                    let sum = len * maxPage
+                    sum = sum || 0
+                    if (sum == '0') {
+                        $("#page-numbers").hide()
+                        $(".message_box_nodata").show()
+        
+                    } else {
+                        $("#page-numbers").show()
+                        $(".message_box_nodata").hide()
+                    }
+        
+                }
+                renderTime(element) {
+                    if (element.time !== undefined) {
+                        return <span className="font_12">{element.time.wenttime} - {element.time.backtime}</span>
+                    }
+                }
+                renderhomepage = event => {
+                    return window.location = '/'
+                }
+                renderResearch = event => {
+                    return location.reload()
+                }
+                renderAction(element) {
+                    if ('[##cms.cms.ownerid##]' == '9252'){
+                    return ''
+                   } else {
+                    return  '/TourView.bc'
+                   }
+                 }
+                renderNeardate(element) {
+                    let neardate = element.neardate
+                    if (neardate == '1') {
+                        $(".neardate").show()
+                    }
+                }
+        
+                renderprovider(element) {
+                    let provider = element.id.provider
+                    if (provider == undefined) {
+                        return ''
+                    } else {
+                        return <input type="hidden" value={JSON.stringify(provider)} name="mainprovider" />
+                    }
+                }
+                renderhotelgroupid(element) {
+                    if (element.hotelinfo[0].hotel.length == 0) {
+                        return <input type="hidden" value="" name="hotelgroupid" />
+                    } else {
+                        return <input type="hidden" value={element.hotelinfo[0].hotel[0].hotelgroupid} name="hotelgroupid" />
+                    }
+                }
+        
+                renderproviderId(element) {
+                    let provider = element.provider
+                    if (provider == undefined) {
+                        return <input type="hidden" value="0" name="provider" />
+                    } else {
+                        let providerId = element.provider.provider_id
+                        return <input type="hidden" value={providerId} name="provider" />
+                    }
+                }
+                renderbacktobackinfo(element, i) {
+                    if (element !== undefined) {
+                        return <div className="font_12"><div className="details-item-title font-color_1">پرواز رفت و برگشت </div> {this.rendermainflights(element, i)}</div>
+                    }
+        
+                }
+                rendermainflights(element, i) {
+                    let lenArray = element.mainflights.length
+                    let indents = []
+                    let index = 0
+                    for (let len = 0; len < lenArray; len++) {
+                        let numlen = len
+                        let numCounter = i
+                        let stinglen = numlen.toString()
+                        let stingCounter = numCounter.toString()
+                        index = stinglen + stingCounter
+                        indents.push(<div className="font_12">
+                            <div className="routs-flight">
+                                <div className="item-result-top-right float_right p-relative">
+                                    <div className="airline-logo"><img src={element.mainflights[len].ticketinfooo.showstartairline} width="" height=""
+                                        alt={element.mainflights[len].routeshow.routesinfoo[0].routesinfoodetails.otherdetails.detailsairline} /></div>
+                                    {this.renderAllDetails(index, lenArray)}
+        
+                                </div>
+                                <div className="item-result-top-left float_left font_13">
+                                    <div className="rout-info-dep float_right">
+                                        <div className="exit-time font_15">{element.mainflights[len].ticketinfooo.exitinfo.showexittime}</div>
+                                        <div className="short-airline font_10">{element.mainflights[len].ticketinfooo.exitinfo.shortstartairport}<span className="start-city">({element.mainflights[len].infoo.showstartcity})</span></div>
+        
+                                    </div>
+                                    <div className="rout-info float_right">
+                                        <div className="stop-info font_10">{this.renderStopinfo(element.mainflights[len].ticketinfooo.stoppinfoo.showstopinfo)}</div>
+                                        <div className="rout-shape p-relative">
+                                            <i className="fa fa-plane font_11 float_right"></i>
+                                            <span className="line-solid"></span>
+                                            <i className="circle background-color_2 float_left p-absolute"></i>
+                                        </div>
+                                        <div className="stop-time font_10">{element.mainflights[len].ticketinfooo.stoppinfoo.showtiming}</div>
+                                    </div>
+                                    <div className="rout-info-des float_left">
+                                        <div className="arrivel-time font_15">{element.mainflights[len].ticketinfooo.arrivalinfo.showarrivaltime}</div>
+                                        <div className="short-airline font_10">{element.mainflights[len].ticketinfooo.arrivalinfo.shortendairport}<span className="end-city">({element.mainflights[len].infoo.showendcity})</span></div>
+                                    </div>
+                                </div>
+                                <div className="clr"></div>
+                                {this.renderDetails(element.mainflights[len], index, lenArray)}
+                            </div>
+        
+                        </div>
+                        )
+        
+                    }
+                    return (
+                        indents
+                    )
+        
+        
+                }
+                renderStopinfo(element) {
+                    if (element == 0) {
+                        return <span>بدون توقف</span>
+                    } else {
+                        return <span>{element} توقف</span>
+                    }
+                }
+                renderAllDetails(i, len) {
+                    let numlen = len
+                    let numCounter = i
+                    let stinglen = numlen.toString()
+                    let stingCounter = numCounter.toString()
+                    let index = stinglen + stingCounter
+                    return <span className="flight-option font_11" onClick={((e) => this.showDetails(e, index))}>جزئیات پرواز</span>
+        
+                }
+                renderDetails(element, i, len) {
+                    let numlen = len
+                    let numCounter = i
+                    let stinglen = numlen.toString()
+                    let stingCounter = numCounter.toString()
+                    let index = stinglen + stingCounter
+                    return <div key={index} className={`${!this.state.visibleDetails[index] ? "unvisible" : "visible"}`}>
+                        <div className="close-details-box float_left font_11" onClick={() => this.closeDetails(index)}>بستن</div>
+                        <div className="clr"></div>
+                        <div className="section-details">
+                            {this.renderFlightDetails(element)}
+                            <div className="section-bar">
+                                <button type="button" onClick={((e) => this.showBar(e, index))} className="font_11">مشاهده بار</button>
+                            </div>
+                            <div className="section-rule">
+                                <button type="button" onClick={((e) => this.showRule(e, index))} className="font_11">مشاهده قوانین</button>
+                            </div>
+                            <div key={index} className={`details-row-content ${!this.state.visibleRule[index] ? "unvisible" : "visible"}`}>
+                                <div className="close-bar-box font_11 float_left" onClick={() => this.closeRule(index)}>بستن</div>
+                                <div className="clr"></div>
+                                <div className="details-item">
+                                    <p dir="auto" className="text-justify font_13" dangerouslySetInnerHTML={{ __html: element.routeshow.description }}></p>
+                                </div>
+        
+                            </div>
+                            <div key={index} className={`details-row-content ${!this.state.visibleBar[index] ? "unvisible" : "visible"}`}>
+                                <div className="close-bar-box font_11 float_left" onClick={() => this.closeBar(index)}>بستن</div>
+                                <div className="clr"></div>
+                                <div className="details-item">
+        
+                                    <p className="text-justify font_13 section-bar-info-content">
+                                        <div dir="auto"><span className="font_12">بار کابین: </span> <span dangerouslySetInnerHTML={{ __html: element.barinfo.bar }}></span></div>
+                                        <div dir="auto"><span className="font_12">بار مجاز: </span> <span dangerouslySetInnerHTML={{ __html: element.barinfo.bar1 }} ></span></div>
+                                    </p>
+                                </div>
+        
+                            </div>
+        
+                        </div>
+        
+        
+        
+                    </div>
+        
+                }
+                renderFlightDetails(element) {
+                    let len = element.routeshow.routesinfoo.length
+                    let indents = []
+                    for (let i = 0; i < len; i++) {
+                        indents.push(<div className="section-details-item font_13">
+                            <div className="details-item-title font-color_1"><span> ({element.routeshow.routesinfoo[i].routesinfoodetails.detailscityinfo.detailsstartcity} - {element.routeshow.routesinfoo[i].routesinfoodetails.detailscityinfo.detailsendcity})</span></div>
+                            <div className="airline-details">
+                                <div className="logo-details float_right"><img src={element.routeshow.routesinfoo[i].routesinfoodetails.otherdetails.detailsairlineimage} alt={element.routeshow.routesinfoo[i].routesinfoodetails.otherdetails.detailsairline} width="" height="" /></div>
+                                <div className="flightNumClass-details font_11">
+                                    <div>{element.routeshow.routesinfoo[i].routesinfoodetails.otherdetails.detailsroutecode}</div>
+                                    <div><span>مدت زمان پرواز: </span><span>{element.routeshow.routesinfoo[i].routesinfoodetails.otherdetails.detailstiming}</span></div>
+                                    <div className="clr"></div>
+                                </div>
+                                <div className="rout-details p-relative">
+                                    <div className="rout-details-part font_12">
+                                        <div className="airport-details">{element.routeshow.routesinfoo[i].routesinfoodetails.otherdetails.detailsexittimeinfo.detailsexitairport}</div>
+        
+        
+                                    </div>
+                                    <span className="right-border-d p-absolute"></span>
+                                    <div className="rout-details-part font_12">
+                                        <div className="airport-details">{element.routeshow.routesinfoo[i].routesinfoodetails.otherdetails.detailsarrivaltimeinfo.detailsarrivalairport}
+                                        </div>
+        
+                                    </div>
+                                    <div className="clr"></div>
+                                </div>
+                            </div>
+                        </div>)
+                    }
+                    return (
+                        indents
+                    )
+                }
+                renderonewayflights(element, i) {
+                    if (element.onewayflights !== undefined) {
+                        let lenArray = element.onewayflights.length
+                        let indents = []
+                        if (lenArray == 0) {
+                        } else {
+                            let index = 0
+                            for (let len = 0; len < lenArray; len++) {
+                                let numlen = len
+                                let numCounter = i
+                                let stinglen = numlen.toString()
+                                let stingCounter = numCounter.toString()
+                                index = stinglen + stingCounter
+                                indents.push(<div className="item-result-flight-brief font_12"><div className="details-item-title font-color_1">پرواز داخلی </div>
+                                    <div className="routs-flight">
+                                        <div className="item-result-top-right float_right p-relative">
+                                            <div className="airline-logo"><img src={element.onewayflights[len].ticketinfooo.showstartairline} width="" height=""
+                                                alt={element.onewayflights[len].routeshow.routesinfoo[0].routesinfoodetails.otherdetails.detailsairline} /></div>
+                                            {this.renderAllDetails(index, lenArray)}
+                                        </div>
+                                        <div className="item-result-top-left float_left font_13">
+                                            <div className="rout-info-dep float_right">
+                                                <div className="exit-time font_15">{element.onewayflights[len].ticketinfooo.exitinfo.showexittime}</div>
+                                                <div className="short-airline font_10">{element.onewayflights[len].ticketinfooo.exitinfo.shortstartairport}<span className="start-city">({element.mainflights[len].infoo.showstartcity})</span></div>
+        
+                                            </div>
+                                            <div className="rout-info float_right">
+                                                <div className="stop-info font_10">{this.renderStopinfo(element.onewayflights[len].ticketinfooo.stoppinfoo.showstopinfo)}</div>
+                                                <div className="rout-shape p-relative">
+                                                    <i className="fa fa-plane font_11 float_right"></i>
+                                                    <span className="line-solid"></span>
+                                                    <i className="circle background-color_2 float_left p-absolute"></i>
+                                                </div>
+                                                <div className="stop-time font_10">{element.onewayflights[len].ticketinfooo.stoppinfoo.showtiming}</div>
+                                            </div>
+                                            <div className="rout-info-des float_left">
+                                                <div className="arrivel-time font_15">{element.onewayflights[len].ticketinfooo.arrivalinfo.showarrivaltime}</div>
+                                                <div className="short-airline font_10">{element.onewayflights[len].ticketinfooo.arrivalinfo.shortendairport}<span className="end-city">({element.onewayflights[len].infoo.showendcity})</span></div>
+                                            </div>
+                                        </div>
+                                        <div className="clr"></div>
+                                        {this.renderDetails(element.onewayflights[len], index, lenArray)}
+                                    </div>
+                                </div>)
+                            }
+                            return (
+                                indents
+                            )
+                        }
+                    }
+        
+                }
+        
+        
+                renderhotelinfo_wrapper(element) {
+                    if (element.basiscoreid == undefined) {
+                        return <div className="item-result-hotel">{this.renderhotelinfo(element, element.index)}</div>
+                    } else {
+                        return <div className="item-result-hotel"><input type="hidden" value={element.basiscoreid} className="basiscoreid" /><div className="load_info_tour font_13 item-result-details"></div><div className="section_item_hotel unvisible">{this.renderhotelinfo(element, element.index)}</div></div>
+                    }
+                }
+        
+                renderhotelinfo(element, index) {
+                    if (element.basiscoreid == undefined) {
+                        for (let i = 0; i < element.hotelinfo.length; i++) {
+                            let indents = []
+                            for (let j = 0; j < element.hotelinfo[i].hotel.length; j++) {
+                                let night = j + 1
+                                indents.push(<div className="p-relative">
+                                    <div className="item-result-top-right float_right p-relative back_img">
+                                        <img src={element.hotelinfo[i].hotel[j].hotelinfo.hotelsearch.hotelimage} className="image-hotel float_right" width="200" height="200" alt={element.hotelinfo[i].hotel[j].hotelinfo.hotelsearch.realname} />
+                                    </div>
+                                    <div className="item-result-top-left hotel float_left font_13">
+                                        <div>
+                                            <div className="hotel-name">
+                                                <h1 className="font_13">{element.hotelinfo[i].hotel[j].hotelinfo.name}</h1>
+                                            </div>
+                                            <div><img src={(`https://cdn.basiscore.net/basisfly.com/images/reservation_${element.hotelinfo[i].hotel[j].hotelinfo.hotelsearch.star}-rate.png`)} alt="" width="70"
+                                                height="14" /></div>
+        
+                                            <div className="clr"></div>
+                                        </div>
+                                        <ul className="font_13 ">
+                                            <li><span className="Qu-info-hotel  font_12">ورود به هتل:</span><span
+                                                className="font_11"> <span>{element.hotelinfo[i].hotel[j].hotelinfo.validatedate.fdate.sstring}/<span className="EnNum">{element.hotelinfo[i].hotel[j].hotelinfo.validatedate.fdate.mstring}</span></span></span></li>
+                                            <li><span className="Qu-info-hotel font_12">خروج از هتل :</span><span
+                                                className="font_11"><span>{element.hotelinfo[i].hotel[j].hotelinfo.validatedate.tdate.sstring}/<span className="EnNum">{element.hotelinfo[i].hotel[j].hotelinfo.validatedate.tdate.mstring}</span></span></span></li>
+        
+        
+                                            <li><span className="Qu-info-hotel font_12">مدت اقامت :</span><span
+                                                className="font_11">{element.hotelinfo[i].hotel[j].nights} شب</span> / <span
+                                                    className="font_11">{element.hotelinfo[i].hotel[j].hotelinfo.hotelsearch.cityname} / {element.hotelinfo[i].hotel[j].hotelinfo.hotelsearch.countryname}</span></li>
+        
+                                        </ul>
+                                        <span className="font_10 font-color_1 cursor" onClick={((e) => this.showRoomInfo(e, index))}><i className="fa fa-info-circle font-color_1"></i>مشاهده اتاق ها</span>   
+                                        <a href={(`/M_Hotel.bc?id=${element.hotelinfo[i].hotel[j].hotelinfo.hotelsearch.hotelid}`)} target="_blank" className="money-type LinkToHotelInfo font_10 font-color_1" ><i className="fa fa-info-circle font-color_1"></i>توضیحات بیشتر</a>
+        
+                                    </div>
+                                    <div className="clr"></div>
+                                    <div key={index} className={`item-result-details section-cost-table ${!this.state.visibleRoomInfo[index] ? "unvisible" : "visible"}`} >
+                                        <div className="close-details-box float_left font_11" onClick={() => this.closeRoomInfo(index)}>بستن</div>
+                                        <div className="clr"></div>
+                                        <table className="font_12 margin_tbl">
+                                            <tr>
+                                                <th className="font-color_1">اتاق</th>
+                                                <th className="font-color_1">وضعیت</th>
+                                                <th className="font-color_1">نما - سرویس</th>
+                                            </tr>
+                                            {this.renderInfoFamily(element.hotelinfo[i].hotel[j], j, element, index, element.hotelinfo[i].hotel.length)}
+                                        </table>
+                                    </div>
+                                    <div className="clr"></div>
+                                </div>
+        
+        
+        
+                                )
+                            }
+                            return (
+                                indents
+                            )
+                        }
+                    } else {
+        
+                        for (let i = 0; i < element.hotelinfo.length; i++) {
+                            let indents = []
+                            if (element.hotelinfo[i].hotel.length !== 0) {
+                                indents = []
+                            }
+                            for (let j = 0; j < element.hotelinfo[i].hotel.length; j++) {
+                                let night = j + 1
+                                indents.push(<div className="item_hotel font_12 row">
+                                    <div className="section_tour_img float_right p-relative"> <div className="section_tour_night">
+                                        <span> {this.render_nights(element, j)}</span><span className="Qu-info-hotel font_12">شب</span>
+                                    </div>{this.render_img_hotel(element.hotelinfo[i].hotel[j])}
+                                    </div>
+                                    <div className="section_tour_name float_right"><span className="Qu-info-hotel font_12">اقامت در هتل: </span><span>{this.render_name_hotel(element.hotelinfo[i].hotel[j])}</span></div><div className="section_tour_date float_right">{this.render_date_hotel(element, j)}</div>{this.render_room_hotel(element.hotelinfo[i].hotel[j], j + '-' + index)}
+                                    <div className="clr"></div><div key={j + '-' + index} className={`width-100 ${!this.state.Visible_rooms[j + '-' + index] ? "unvisible" : "visible"}`}>{this.render_show_rooms(element.hotelinfo[i].hotel[j], j, element, index, element.hotelinfo[i].hotel.length)}</div></div>)
+                            }
+                            return (
+                                indents
+                            )
+                        }
+                    }
+        
+                }
+                render_nights(element, index) {
+                    return element.nights[index].stay
+                }
+                render_room_hotel(element, index) {
+                    if (element.hotelinfo == undefined) {
+                        return <div className="section_tour_room section-details"><button className="font_12  not_active_room" type="button">اتاق ها</button></div>
+                    } else {
+                        return <div className="section_tour_room section-details cursor"><button className="font_12" type="button" onClick={() => this.onclick_render_rooms(index)}>اتاق ها</button></div>
+                    }
+                }
+        
+        
+                render_show_rooms(element, j, ItemElement, index, len) {
+                    if (element.hotelinfo == undefined) {
+                        return ''
+                    } else {
+                        return <div className="section-cost-table">
+                            <div className="close-details-box float_left font_11" onClick={() => this.close_render_rooms(j + '-' + index)}>بستن</div>
+                            <div className="clr"></div>
+                            <table className="font_12 margin_tbl cost-tbl">
+                                <tr>
+                                    <th className="font-color_1">اتاق</th>
+                                    <th className="font-color_1">وضعیت</th>
+                                    <th className="font-color_1">نما - سرویس</th>
+                                </tr>
+                                {this.renderInfoFamily(element, j, ItemElement, index, len)}
+                            </table>
+                        </div>
+        
+                    }
+                }
+                render_name_hotel(element) {
+                    if (element.hotelinfo == undefined) {
+                        return 'ندارد'
+                    } else {
+                        return element.hotelinfo.name
+                    }
+                }
+                render_date_hotel(element, index) {
+                    return <span className="date_hotel font_11"><span>{element.nights[index].fdate.sstring} <span className="EnNum">({element.nights[index].fdate.mstring})</span></span>  / <span>{element.nights[index].tdate.sstring} <span className="EnNum">({element.nights[index].tdate.mstring})</span></span> </span>
+        
+                }
+                render_img_hotel(element) {
+                    if (element.hotelinfo !== undefined) {
+                        return <a href={this.renderHotelid(element.hotelinfo.hotelsearch)} target="_blank"><img src={element.hotelinfo.hotelsearch.hotelimage} width="50" height="50" alt={element.hotelinfo.hotelsearch.realname} /></a>
+                    }
+                }
+                onclick_render_rooms = (i) => {
+                    this.setState(prevState => ({
+                        Visible_rooms: { ...prevState.Visible_rooms, [i]: !prevState.Visible_rooms[i] }
+                    }))
+                }
+                close_render_rooms = (i) => {
+                    this.setState(prevState => ({
+                        Visible_rooms: { ...prevState.Visible_rooms, [i]: !prevState.Visible_rooms[i] }
+                    }))
+                }
+        
+                renderHotelid(element) {
+                    let hotelId = element.hotelid
+                    return '/hotel.bc?id=' + hotelId
+                }
+        
+                renderInfoFamily(element, j, ItemElement, index, len) {
+                    if (element.hotelinfo == undefined) {
+                        return ''
+                    } else {
+                        let indents = []
+                        let lenfamilies = element.families.length
+                        for (let x = 0; x < lenfamilies; x++) {
+                            let idjx = j + x
+                            indents.push(<tbody>
+                                <tr>
+                                    <td colspan="3">{this.rendercountpassenger(element.families[x], x)}</td>
+                                </tr>
+                                {this.renderavailablerooms(element.families[x], element, idjx, x, ItemElement, index, j, ItemElement.nights[j].stay, len)}
+                            </tbody>)
+                        }
+                        return (
+                            indents
+                        )
+                    }
+        
+                }
+                rendercountpassenger(element, x) {
+                    let info = [##cms.json.header | cms.form.roomSearch##]
+                    if (x == 0) {
+                        let ad = info.rooms[0].adultcount
+                        let ch = info.rooms[0].childcountandage
+                        let sp = ch.split(",")
+                        if (sp[0] > 0) {
+                            let age = ""
+        
+                            let ages2 = ""
+                            for (let i = 1; i < sp.length; i++) {
+                                age = age + sp[i] + " سال "
+                                ages2 = ages2 + sp[i] + ','
+                            }
+                            return <span>اتاق اول ({ad} بزرگسال / {sp[0]} کودک / {age})</span>
+                        }
+                        else {
+                            return <span>اتاق اول ({ad} بزرگسال )</span>
+        
+                        }
+                    }
+                    else if (x == 1) {
+                        let ad = info.rooms[1].adultcount
+                        let ch = info.rooms[1].childcountandage
+                        let sp = ch.split(",")
+                        if (sp[0] > 0) {
+                            let age = ""
+        
+                            let ages2 = ""
+                            for (let i = 1; i < sp.length; i++) {
+                                age = age + sp[i] + " سال "
+                                ages2 = ages2 + sp[i] + ','
+                            }
+                            return <span>اتاق دوم ({ad} بزرگسال / {sp[0]} کودک {age})</span>
+        
+                        }
+                        else {
+                            return <span>اتاق دوم ({ad} بزرگسال )</span>
+        
+                        }
+                    }
+                    else if (x == 2) {
+                        let ad = info.rooms[2].adultcount
+                        let ch = info.rooms[2].childcountandage
+                        let sp = ch.split(",")
+                        if (sp[0] > 0) {
+                            let age = ""
+        
+                            let ages2 = ""
+                            for (let i = 1; i < sp.length; i++) {
+                                age = age + sp[i] + " سال "
+                                ages2 = ages2 + sp[i] + ','
+                            }
+                            return <span>اتاق سوم ({ad} بزرگسال / {sp[0]} کودک {age})</span>
+                        }
+                        else {
+                            return <span>اتاق سوم ({ad} بزرگسال )</span>
+        
+                        }
+                    }
+                    else if (x == 3) {
+                        let ad = info.rooms[3].adultcount
+                        let ch = info.rooms[3].childcountandage
+                        let sp = ch.split(",")
+                        if (sp[0] > 0) {
+                            let age = ""
+        
+                            let ages2 = ""
+                            for (let i = 1; i < sp.length; i++) {
+                                age = age + sp[i] + " سال "
+                                ages2 = ages2 + sp[i] + ','
+                            }
+                            return <span>اتاق چهارم ({ad} بزرگسال / {sp[0]} کودک {age})</span>
+                        }
+                        else {
+                            return <span>اتاق چهارم ({ad} بزرگسال )</span>
+        
+                        }
+                    }
+                }
+        
+                renderavailablerooms(element, item, idjx, x, ItemElement, index, j, nights, len) {
+                    let lenavailablerooms = element.availablerooms.length
+                    let indents = []
+                    for (let i = 0; i < lenavailablerooms; i++) {
+                        let idx = i + x
+                        let idj = idjx + x
+                        indents.push(<tr>
+                            {this.renderInputRadio(element.availablerooms[i], i, idx, idj, x, lenavailablerooms, ItemElement, index, j, nights, len)}
+                            <td>{element.availablerooms[i].info.availability}</td>
+                            <td>{item.hotelinfo.information.viewname} - {item.hotelinfo.hotelsearch.services}</td>
+                        </tr>)
+                    }
+                    return (
+                        indents
+                    )
+                }
+        
+                renderInputRadio(element, i, idx, idj, x, lenavailablerooms, ItemElement, index, j, nights, len) {
+                    if (ItemElement.basiscoreid == undefined) {
+                        if (i == 0) {
+                            return <td className="section-input p-relative">
+                                <input type="hidden" name={`_root.rooms__${idx}.roomids__${idj}.roomid`} key={idj} defaultValue={this.state.roomids[idj] || element.info.roomid} />
+                                <input type="hidden" name={`_root.rooms__${idx}.roomids__${idj}.adultcount`} value={element.info.adults} />
+                                <input type="hidden" name={`_root.rooms__${idx}.roomids__${idj}.childwithbed`} value={element.info.withbed} />
+                                <input type="hidden" name={`_root.rooms__${idx}.roomids__${idj}.childwithoutbed`} value={element.info.withoutbed} />
+                                <input type="hidden" name={`_root.rooms__${idx}.roomids__${idj}.infant`} value={element.info.infants} />
+                                <input type="hidden" name={`_root.rooms__${idx}.adultcount`} value={this.rendervalueAdult(element, i, idx, idj, x)} />
+                                <input type="hidden" name={`_root.rooms__${idx}.childcountandage`} value={this.rendervalueChild(element, i, idx, idj, x)} />
+                                <input type="radio" value={element.info.roomid} onChange={((e) => this.handleCheck(e, i, idj, x, ItemElement, j, element.info.adults, element.info.withbed, element.info.withoutbed, element.info.infants))} name={`element${idj + '-' + j + '-' + index}`} defaultChecked={this.state.chkbox} className="radioButton p-absolute" />
+                                <label><span>{element.info.room}</span></label>
+                            </td>
+                        } else {
+                            return <td className="section-input p-relative">
+                                <input type="radio" value={element.info.roomid} onChange={((e) => this.handleCheck(e, i, idj, x, ItemElement, j, element.info.adults, element.info.withbed, element.info.withoutbed, element.info.infants))} name={`element${idj + '-' + j + '-' + index}`} className="radioButton p-absolute" />
+                                <label><span>{element.info.room}</span></label>
+                            </td>
+                        }
+                    } else {
+        
+                        if (i == 0) {
+                            if (nights == 1) {
+                                return <td className="section-input p-relative">
+                                    <input type="hidden" name={`_root.rooms__${idx}.roomids__${idj}.roomid`} key={idj} defaultValue={this.state.roomids[idj] || element.info.roomid} />
+                                    <input type="hidden" name={`_root.rooms__${idx}.roomids__${idj}.adultcount`} value={element.info.adults} />
+                                    <input type="hidden" name={`_root.rooms__${idx}.roomids__${idj}.childwithbed`} value={element.info.withbed} />
+                                    <input type="hidden" name={`_root.rooms__${idx}.roomids__${idj}.childwithoutbed`} value={element.info.withoutbed} />
+                                    <input type="hidden" name={`_root.rooms__${idx}.roomids__${idj}.infant`} value={element.info.infants} />
+                                    <input type="hidden" name={`_root.rooms__${idx}.adultcount`} value={this.rendervalueAdult(element, i, idx, idj, x)} />
+                                    <input type="hidden" name={`_root.rooms__${idx}.childcountandage`} value={this.rendervalueChild(element, i, idx, idj, x)} />
+                                    <input type="radio" value={element.info.roomid} onChange={((e) => this.handleCheck(e, i, idj, x, ItemElement, j, element.info.adults, element.info.withbed, element.info.withoutbed, element.info.infants))} name={`element${idj + '-' + j + '-' + index}`} defaultChecked={this.state.chkbox} className="radioButton p-absolute" />
+                                    <label><span>{element.info.room}</span></label>
+                                </td>
+                            } else {
+                                return <td className="section-input p-relative">
+                                    {this.render_inputs(nights, idx, idj, element, len,j)}
+                                    <input type="hidden" name={`_root.rooms__${idx}.adultcount`} value={this.rendervalueAdult(element, i, idx, idj, x)} />
+                                    <input type="hidden" name={`_root.rooms__${idx}.childcountandage`} value={this.rendervalueChild(element, i, idx, idj, x)} />
+                                    <input type="radio" value={element.info.roomid} onChange={((e) => this.handleCheck(e, i, idj, x, ItemElement, j, element.info.adults, element.info.withbed, element.info.withoutbed, element.info.infants))} name={`element${idj + '-' + j + '-' + index}`} defaultChecked={this.state.chkbox} className="radioButton p-absolute" />
+                                    <label><span>{element.info.room}</span></label>
+                                </td>
+                            }
+        
+                        } else {
+                            return <td className="section-input p-relative">
+                                <input type="radio" value={element.info.roomid} onChange={((e) => this.handleCheck(e, i, idj, x, ItemElement, j, element.info.adults, element.info.withbed, element.info.withoutbed, element.info.infants))} name={`element${idj + '-' + j + '-' + index}`} className="radioButton p-absolute" />
+                                <label><span>{element.info.room}</span></label>
+                            </td>
+                        }
+                    }
+                }
+                render_inputs(nights, idx, idj, element, len, j) {
+                    let indents = []
+                    for (let m = 0; m < nights; m++) {
+                        indents.push(<div><input type="hidden" name={`_root.rooms__${idx}.roomids__${j}${len}${m}.roomid`} key={idj} defaultValue={this.state.roomids[idj] || element.info.roomid} />
+                            <input type="hidden" name={`_root.rooms__${idx}.roomids__${j}${len}${m}.adultcount`} value={element.info.adults} />
+                            <input type="hidden" name={`_root.rooms__${idx}.roomids__${j}${len}${m}.childwithbed`} value={element.info.withbed} />
+                            <input type="hidden" name={`_root.rooms__${idx}.roomids__${j}${len}${m}.childwithoutbed`} value={element.info.withoutbed} />
+                            <input type="hidden" name={`_root.rooms__${idx}.roomids__${j}${len}${m}.infant`} value={element.info.infants} />
+                        </div>)
+                    }
+                    return indents
+                }
+                handleCheck = (e, i, idj, x, ItemElement, j, ad, ch1, ch2, inf) => {
+        
+                    let value = e.target.value
+                    let gid = ItemElement.id
+                    let city_index = ItemElement.hotelinfo[0].hotel[j].cityindex
+                    let room_index = ItemElement.hotelinfo[0].hotel[j].families[x].roomindex
+                    let adcount = ad
+                    let chcount = parseInt(ch1 + ch2)
+                    let infcount = inf
+                    let last_adult = 0
+                    let last_child = 0
+                    let last_infant = 0
+        
+                    this.setState({
+                        chflag: 1,
+                        cityindex: city_index,
+                        roomindex: room_index,
+                        hgid: gid,
+                        roomcheck: x
+        
+                    });
+        
+                    if (!this.state.copy[gid]) {
+        
+                        this.state.copy[gid] = {}
+                        this.state.copy[gid]["costtable"] = ItemElement.costtable
+        
+                    }
+        
+        
+                    if (this.state.jsonbackup[gid]) {
+        
+                        if (this.state.jsonbackup[gid][city_index + "-" + room_index]) {
+                            this.state.jsonbackup[gid][city_index + "-" + room_index]["roomname"] = ItemElement.costOptions[j].families[x].roomsOption[i].roomname
+                            if (adcount > 0) {
+                                last_adult = this.state.jsonbackup[gid][city_index + "-" + room_index]["adult"]
+                                this.state.jsonbackup[gid][city_index + "-" + room_index]["adult"] = ItemElement.costOptions[j].families[x].roomsOption[i].family[0].cost * ad
+                            } else if (adcount == 0) {
+                                this.state.jsonbackup[gid][city_index + "-" + room_index]["adult"] = 0
+                            }
+                            if (chcount > 0) {
+                                last_child = this.state.jsonbackup[gid][city_index + "-" + room_index]["child"]
+                                this.state.jsonbackup[gid][city_index + "-" + room_index]["child"] = ItemElement.costOptions[j].families[x].roomsOption[i].family[adcount + chcount - 1].cost * chcount
+                            } else if (chcount == 0) {
+                                this.state.jsonbackup[gid][city_index + "-" + room_index]["child"] = 0
+                            }
+                            if (infcount > 0) {
+                                last_infant = this.state.jsonbackup[gid][city_index + "-" + room_index]["infant"]
+                                this.state.jsonbackup[gid][city_index + "-" + room_index]["infant"] = ItemElement.costOptions[j].families[x].roomsOption[i].family[adcount + chcount].cost * infcount
+                            } else if (infcount == 0) {
+                                this.state.jsonbackup[gid][city_index + "-" + room_index]["infant"] = 0
+                            }
+        
+                            this.state.jsonbackup[gid][city_index + "-" + room_index]["total_diff"] = ItemElement.costOptions[j].families[x].roomsOption[i].total_diff_cost
+        
+                        } else {
+                            this.state.jsonbackup[gid][city_index + "-" + room_index] = {}
+                            this.state.jsonbackup[gid][city_index + "-" + room_index]["roomname"] = ItemElement.costOptions[j].families[x].roomsOption[i].roomname
+                            if (adcount > 0) {
+                                this.state.jsonbackup[gid][city_index + "-" + room_index]["adult"] = ItemElement.costOptions[j].families[x].roomsOption[i].family[0].cost * ad
+                            } else if (adcount == 0) {
+                                this.state.jsonbackup[gid][city_index + "-" + room_index]["adult"] = 0
+                            }
+                            if (chcount > 0) {
+                                this.state.jsonbackup[gid][city_index + "-" + room_index]["child"] = ItemElement.costOptions[j].families[x].roomsOption[i].family[adcount + chcount - 1].cost * chcount
+                            } else if (chcount == 0) {
+                                this.state.jsonbackup[gid][city_index + "-" + room_index]["child"] = 0
+                            }
+                            if (infcount > 0) {
+                                this.state.jsonbackup[gid][city_index + "-" + room_index]["infant"] = ItemElement.costOptions[j].families[x].roomsOption[i].family[adcount + chcount].cost * infcount
+                            } else if (infcount == 0) {
+                                this.state.jsonbackup[gid][city_index + "-" + room_index]["infant"] = 0
+                            }
+        
+                            this.state.jsonbackup[gid][city_index + "-" + room_index]["total_diff"] = ItemElement.costOptions[j].families[x].roomsOption[i].total_diff_cost
+        
+                        }
+        
+                        let copylen = this.state.copy[gid].costtable[room_index].family.length
+                        this.state.copy[gid].costtable[room_index].roomname = this.state.jsonbackup[gid][city_index + "-" + room_index]["roomname"]
+                        for (let i = 0; i < copylen; i++) {
+                            if (this.state.copy[gid].costtable[room_index].family[i].type == 2) {
+                                this.state.copy[gid].costtable[room_index].family[i].cost = parseInt(this.state.copy[gid].costtable[room_index].family[i].cost - last_adult + this.state.jsonbackup[gid][city_index + "-" + room_index]["adult"])
+                            }
+                            else if (this.state.copy[gid].costtable[room_index].family[i].type == 1 || this.state.copy[gid].costtable[room_index].family[i].type == 3) {
+                                this.state.copy[gid].costtable[room_index].family[i].cost = parseInt(this.state.copy[gid].costtable[room_index].family[i].cost - last_child + this.state.jsonbackup[gid][city_index + "-" + room_index]["child"]) || 0
+                            }
+                            else if (this.state.copy[gid].costtable[room_index].family[i].type == 0) {
+                                this.state.copy[gid].costtable[room_index].family[i].cost = parseInt(this.state.copy[gid].costtable[room_index].family[i].cost - last_infant + this.state.jsonbackup[gid][city_index + "-" + room_index]["infant"]) || 0
+                            }
+                        }
+        
+                    } else {
+                        this.state.jsonbackup[gid] = {}
+                        this.state.jsonbackup[gid][city_index + "-" + room_index] = {}
+                        this.state.jsonbackup[gid][city_index + "-" + room_index]["roomname"] = ItemElement.costOptions[j].families[x].roomsOption[i].roomname
+                        if (adcount > 0) {
+                            this.state.jsonbackup[gid][city_index + "-" + room_index]["adult"] = ItemElement.costOptions[j].families[x].roomsOption[i].family[0].cost * ad
+                        } else if (adcount == 0) {
+                            this.state.jsonbackup[gid][city_index + "-" + room_index]["adult"] = 0
+                        }
+                        if (chcount > 0) {
+                            this.state.jsonbackup[gid][city_index + "-" + room_index]["child"] = ItemElement.costOptions[j].families[x].roomsOption[i].family[adcount + chcount - 1].cost * chcount
+                        } else if (chcount == 0) {
+                            this.state.jsonbackup[gid][city_index + "-" + room_index]["child"] = 0
+                        }
+                        if (infcount > 0) {
+                            this.state.jsonbackup[gid][city_index + "-" + room_index]["infant"] = ItemElement.costOptions[j].families[x].roomsOption[i].family[adcount + chcount].cost * infcount
+                        } else if (infcount == 0) {
+                            this.state.jsonbackup[gid][city_index + "-" + room_index]["infant"] = 0
+                        }
+        
+                        this.state.jsonbackup[gid][city_index + "-" + room_index]["total_diff"] = ItemElement.costOptions[j].families[x].roomsOption[i].total_diff_cost
+        
+        
+                        let copylen = this.state.copy[gid].costtable[room_index].family.length
+                        this.state.copy[gid].costtable[room_index].roomname = this.state.jsonbackup[gid][city_index + "-" + room_index]["roomname"]
+                        for (let i = 0; i < copylen; i++) {
+                            if (this.state.copy[gid].costtable[room_index].family[i].type == 2) {
+                                this.state.copy[gid].costtable[room_index].family[i].cost += this.state.jsonbackup[gid][city_index + "-" + room_index]["adult"]
+                            }
+                            else if (this.state.copy[gid].costtable[room_index].family[i].type == 1 || this.state.copy[gid].costtable[room_index].family[i].type == 3) {
+                                this.state.copy[gid].costtable[room_index].family[i].cost += this.state.jsonbackup[gid][city_index + "-" + room_index]["child"] || 0
+                            }
+                            else if (this.state.copy[gid].costtable[room_index].family[i].type == 0) {
+                                this.state.copy[gid].costtable[room_index].family[i].cost += this.state.jsonbackup[gid][city_index + "-" + room_index]["infant"] || 0
+                            }
+                        }
+        
+                    }
+        
+                    this.setState({
+                        copy: this.state.copy
+                    });
+        
+        
+                    this.setState({
+                        jsonbackup: this.state.jsonbackup
+                    });
+        
+        
+                    return this.setState(prevState => ({
+                        roomids: { ...prevState.roomids, [idj]: value }
+                    }))
+                }
+                rendervalueAdult(element, i, idx, idj, x) {
+                    let info = [##cms.json.header | cms.form.roomSearch##]
+                    if (x == 0) {
+                        let ad = info.rooms[0].adultcount
+                        return ad
+        
+                    }
+                    else if (x == 1) {
+                        let ad = info.rooms[1].adultcount
+                        return ad
+        
+                    }
+                    else if (x == 2) {
+                        let ad = info.rooms[2].adultcount
+                        return ad
+        
+                    }
+                    else if (x == 3) {
+                        let ad = info.rooms[3].adultcount
+                        return ad
+        
+                    }
+                }
+                rendervalueChild(element, i, idx, idj, x) {
+                    let info = [##cms.json.header | cms.form.roomSearch##]
+                    if (x == 0) {
+                        let ch = info.rooms[x].childcountandage
+                        let sp = ch.split(",")
+                        if (sp[0] > 0) {
+                            let age = ""
+                            let val = ""
+                            let ages2 = ""
+                            for (let i = 1; i < sp.length; i++) {
+                                ages2 = ages2 + sp[i] + ','
+                            }
+                            val = val + '' + sp[0] + ',' + ages2
+                            val = val.slice(0, -1)
+                            return val
+                        }
+                        else {
+                            return sp[0]
+                        }
+        
+                    }
+                    else if (x == 1) {
+                        let ch = info.rooms[x].childcountandage
+                        let sp = ch.split(",")
+                        if (sp[0] > 0) {
+                            let age = ""
+                            let val = ""
+                            let ages2 = ""
+                            for (let i = 1; i < sp.length; i++) {
+                                ages2 = ages2 + sp[i] + ','
+                            }
+                            val = val + '' + sp[0] + ',' + ages2
+                            val = val.slice(0, -1)
+                            return val
+                        }
+                        else {
+                            return sp[0]
+                        }
+        
+                    }
+                    else if (x == 2) {
+                        let ch = info.rooms[x].childcountandage
+                        let sp = ch.split(",")
+                        if (sp[0] > 0) {
+                            let age = ""
+                            let val = ""
+                            let ages2 = ""
+                            for (let i = 1; i < sp.length; i++) {
+                                ages2 = ages2 + sp[i] + ','
+                            }
+                            val = val + '' + sp[0] + ',' + ages2
+                            val = val.slice(0, -1)
+                            return val
+                        }
+                        else {
+                            return sp[0]
+                        }
+        
+                    }
+                    else if (x == 3) {
+                        let ch = info.rooms[x].childcountandage
+                        let sp = ch.split(",")
+                        if (sp[0] > 0) {
+                            let age = ""
+                            let val = ""
+                            let ages2 = ""
+                            for (let i = 1; i < sp.length; i++) {
+                                ages2 = ages2 + sp[i] + ','
+                            }
+                            val = val + '' + sp[0] + ',' + ages2
+                            val = val.slice(0, -1)
+                            return val
+                        }
+                        else {
+                            return sp[0]
+                        }
+        
+                    }
+                }
+        
+                rendercosttable(element) {
+                    let indents = [];
+                    if (this.state.chflag == 0) {
+                        let lencost = element.costtable.length
+                        for (let i = 0; i < lencost; i++) {
+                            indents.push(<div className="section-cost-table">
+                                <table className="font_12">
+                                    <tr>
+                                        <th className="font-color_1">اتاق</th>
+                                        <th className="font-color_1">مسافران - قیمت کل</th>
+                                    </tr>
+                                    <tr>
+                                        <td>{element.costtable[i].roomname}</td>
+                                        <td>{this.renderFamilycost(element.costtable[i], element, i)}</td>
+                                    </tr>
+                                </table>
+                            </div>
+                            )
+                        }
+                        return (
+                            indents
+                        )
+                    } else {
+                        let lencost = element.costtable.length
+                        for (let i = 0; i < lencost; i++) {
+                            indents.push(<div className="section-cost-table">
+                                <table className="font_12">
+                                    <tr>
+                                        <th className="font-color_1">اتاق</th>
+                                        <th className="font-color_1">مسافران - قیمت کل</th>
+        
+                                    </tr>
+                                    <tr>
+                                        <td>{this.renderroomname(element, i)}</td>
+                                        <td>{this.renderFamilycost(this.state.copy[this.state.hgid].costtable[i], element, i)}</td>
+                                    </tr>
+                                </table>
+                            </div>
+                            )
+                        }
+                        return (
+                            indents
+                        )
+                    }
+                }
+                renderFamilycost(element, item, lenc) {
+            let lenFamilycost = element.family.length
+            let indents = [];
+            for (let i = 0; i < lenFamilycost; i++) {
+                indents.push(<div><span className="index_row">{element.family[i].title} - </span>
+                    {this.rendertablecost2(element.family[i].cost, i, item, lenc)}<span className="money-type font_10">{this.renderUnit(item.unit, this.state.state_currency_unit)}</span></div>
+                )
+            }
+            return (
+                indents
+            )
+        }
+        
+                renderInsurance(element) {
+                    if (element.insuranceinfo !== undefined) {
+                        if (element.insuranceinfo == 0) {
+                            return ''
+                        } else {
+                            return <div className=""><input type="hidden" value={JSON.stringify(element.insuranceinfo)} name="insuranceinfo" /><div className="details-item-title font-color_1">بیمه :</div><span className="font_12">{element.insuranceinfo.insurancename}</span></div>
+                        }
+                    }
+        
+                }
+                rendervisa(element) {
+                    if (element.visa !== undefined) {
+                        let lenvisa = element.visa.length
+                        if (lenvisa == 0) {
+                            return ''
+                        } else {
+                            return <div className=""><div className="details-item-title font-color_1">ویزا :</div><span className="font_12">{element.visa[0].name}</span></div>
+                        }
+                    }
+        
+                }
+                renderserviceTour(element) {
+                    if (element !== undefined) {
+                        return <div lassName="details-row-content p-relative"><div className="details-item-title font-color_1">امکانات تور</div>{this.renderserviceType(element)}{this.renderserviceappropriate(element)}{this.renderservicediff(element)}{this.renderservicejourney(element)}{this.renderservicedesc(element)}</div>
+                    }
+                }
+                renderserviceType(element) {
+                    if (element.type == undefined || element.type == '') {
+                        return ''
+                    } else {
+                        let lenserviceType = element.type.length
+                        let indents = [<div className="titleOfTour"><span>نوع تور:</span></div>]
+                        for (let i = 0; i < lenserviceType; i++) {
+                            if (element.type[i].servicename == '' || element.type[i].servicename == undefined) {
+                                indents.push('')
+                            } else {
+                                indents.push(<div> <span>{element.type[i].servicename}</span></div>)
+                            }
+        
+                        }
+                        return (
+                            indents
+                        )
+                    }
+                }
+                renderserviceappropriate(element) {
+                    if (element.appropriate == undefined || element.appropriate == '') {
+                        return ''
+                    } else {
+                        let lenserviceappropriate = element.appropriate.length
+                        let indents = [<div className="titleOfTour"><span>مناسب برای :</span></div>]
+                        for (let i = 0; i < lenserviceappropriate; i++) {
+                            if (element.appropriate[i].servicename == '' || element.appropriate[i].servicename == undefined) {
+                                indents.push('')
+                            } else {
+                                indents.push(<div> <span>{element.appropriate[i].servicename}</span></div>)
+                            }
+        
+                        }
+                        return (
+                            indents
+                        )
+                    }
+                }
+                renderservicediff(element) {
+                    if (element.diff == undefined) {
+                        return ''
+                    } else {
+                        let lenservicediff = element.diff.length
+                        let indents = [<ul><li>سطح سختی :</li></ul>]
+                        for (let i = 0; i < lenservicediff; i++) {
+                            if (element.diff[i].servicename == 'لطفا یکی از موارد را انتخاب نمایید') {
+                                indents.push('')
+                            } else {
+                                indents.push(<li><i className="fa fa-check"></i> <span>{element.diff[i].servicename}</span></li>)
+                            }
+        
+                        }
+                        return (
+                            indents
+                        )
+                    }
+                }
+                renderservicedesc(element) {
+                    if (element.description == undefined) {
+                        return ''
+                    } else {
+                        let lenservicedesc = element.description.length
+                        let indents = [<ul><li>توضیحات :</li></ul>]
+                        for (let i = 0; i < lenservicedesc; i++) {
+                            let text = element.description[i].decs
+                            if (text == '') {
+                                indents.push('')
+                            } else {
+                                indents.push(<li><i className="fa fa-check"></i> <span>{element.description[i].decs} </span></li>)
+                            }
+        
+                        }
+                        return (
+                            indents
+                        )
+                    }
+                }
+                renderservicejourney(element) {
+                    if (element.journey == undefined) {
+                        return ''
+                    } else {
+                        let lenservicejourney = element.journey.length
+                        let indents = [<ul><li>برنامه سفر :</li></ul>]
+                        for (let i = 0; i < lenservicejourney; i++) {
+                            if (element.journey[i].journeytitle == '') {
+                                indents.push('')
+                            } else {
+                                indents.push(<li><i className="fa fa-check"></i> <span>{element.journey[i].journeytitle} </span><span>{element.journey[i].journeydesc}</span></li>)
+                            }
+                        }
+                        return (
+                            indents
+                        )
+                    }
+                }
+        
+                renderroomname(item, lenc) {
+                    let json = this.state.jsonbackup
+                    let copy = this.state.copy
+                    let tour = item.id
+                    let name = item.costtable[lenc].roomname
+                    if (json[tour]) {
+                        if (item.id == this.state.hgid) {
+                            name = this.state.copy[this.state.hgid].costtable[lenc].roomname
+        
+                        } else {
+                            name = this.state.copy[tour].costtable[lenc].roomname
+                        }
+        
+                    } else {
+                        name = item.costtable[lenc].roomname
+                    }
+                    return name
+                }
+        
+                rendertablecost2(element, i, item, lenc) {
+            let total = element
+            let json = this.state.jsonbackup
+            let copy = this.state.copy
+            let tour = item.id
+            if (json[tour]) {
+                if (item.id == this.state.hgid) {
+                    total = element
+                } else {
+                    total = this.state.copy[tour].costtable[lenc].family[i].cost
+                }
+            } else {
+                total = item.costtable[lenc].family[i].cost
+            }
+            return new Intl.NumberFormat().format(this.renderTotal(total, this.state.state_currency_cost, this.state.state_floatdigit))
+        }
+        renderTotal_first(element) {
+            let total = element.totalcostmin
+            let total2 = 0
+            let json = this.state.jsonbackup
+            let tour = element.id
+            if (!json[tour]) {
+                total2 = 0
+            }
+            else {
+                let room = 0
+                for (room in json[tour]) {
+                    total2 += json[tour][room]["total_diff"]
+                }
+            }
+            return new Intl.NumberFormat().format(this.renderTotal(total2 + total, this.state.state_currency_cost, this.state.state_floatdigit))
+
+        }
+        renderTotal(element, currency_cost, floatdigit) {
+            if (floatdigit == '') {
+                return element * currency_cost;
+            } else {
+                let toString_element = (element * currency_cost).toString();
+                if (toString_element.indexOf('.') > -1) {
+                    let parseFloat_element = parseFloat(toString_element).toFixed(floatdigit).toString();
+                    let parseFloat_element_split = parseFloat_element.split('.');
+                    if (parseFloat_element_split[1].indexOf('0') > -1) {
+                        return parseFloat(element * currency_cost).toFixed(1).toString();
+                    } else {
+                        return parseFloat(element * currency_cost).toFixed(floatdigit).toString();
+                    }
+                } else {
+                    return parseFloat(element * currency_cost).toFixed(floatdigit).toString();
+                }
+            }
+        }
+        renderUnit(element, currency_unit) {
+            if (currency_unit == '') {
+                return element;
+            } else {
+                return currency_unit;
+            }
+
+        }
+        renderCommission(element) {
+            let i = element.commissioncost
+            if (i == 0) {
+                return '';
+            } else {
+                let total = element.totalcostmin
+                let commissionlen = parseInt(element.commissionDetails.length - 1)
+                let com = element.commissionDetails[commissionlen].commission
+                let total2 = 0
+                let json = this.state.jsonbackup
+                let tour = element.id
+
+                if (!json[tour]) {
+                    total2 = 0
+                } else {
+                    let room = 0
+                    for (room in json[tour]) {
+                        total2 += json[tour][room]["total_diff"]
+                    }
+                }
+
+                let finalcommission = parseInt(total2 + total) * com
+                return <div className="col-price-50 float_right"><div>کمیسیون :</div><div><span className="total-cost font_15"> {new Intl.NumberFormat().format(this.renderTotal(finalcommission, this.state.state_currency_cost, this.state.state_floatdigit))}</span><span className="money-type font_10">{this.renderUnit(element.unit, this.state.state_currency_unit)}</span></div></div>
+
+            }
+        }
+        renderTotalcom(element) {
+            let i = element.totalCom
+            let j = element.totalcostmin
+            if (i == j) {
+                return '';
+            } else {
+                let total = element.totalcostmin
+                let commissionlen = parseInt(element.commissionDetails.length - 1)
+                let com = element.commissionDetails[commissionlen].commission
+                let total2 = 0
+                let json = this.state.jsonbackup
+                let tour = element.id
+                if (!json[tour]) {
+                    total2 = 0
+                } else {
+                    let room = 0
+                    for (room in json[tour]) {
+                        total2 += json[tour][room]["total_diff"]
+                    }
+                }
+                let commissioncost = parseInt(total2 + total) * com
+                let finaltotalcom = parseInt((total2 + total) - commissioncost)
+                return <div className="col-price-50 float_right"><div>مبلغ نهایی:</div><div><span className="total-cost font_15">{new Intl.NumberFormat().format(this.renderTotal(finaltotalcom, this.state.state_currency_cost, this.state.state_floatdigit))}</span><span className="money-type font_10">{this.renderUnit(element.unit, this.state.state_currency_unit)}</span></div></div>
+
+            }
+        }
+        
+                showTourInfo = (e, i) => {
+                    this.setState(prevState => ({
+                        visibleTourInfo: { ...prevState.visibleTourInfo, [i]: !prevState.visibleTourInfo[i] },
+        
+                    }))
+                }
+                showDetails = (e, i) => {
+                    this.setState(prevState => ({
+                        visibleDetails: { ...prevState.visibleDetails, [i]: !prevState.visibleDetails[i] },
+        
+                    }))
+                }
+                showBar = (e, i) => {
+                    this.setState(prevState => ({
+                        visibleBar: { ...prevState.visibleBar, [i]: !prevState.visibleBar[i] },
+        
+                    }))
+                }
+        
+                showRule = (e, i) => {
+                    this.setState(prevState => ({
+                        visibleRule: { ...prevState.visibleRule, [i]: !prevState.visibleRule[i] },
+                    }))
+        
+                }
+        
+                showRoomInfo = (e, i) => {
+                    this.setState(prevState => ({
+                        visibleRoomInfo: { ...prevState.visibleRoomInfo, [i]: !prevState.visibleRoomInfo[i] },
+                    }))
+        
+                }
+        
+                closeRoomInfo = (i) => {
+                    this.setState(prevState => ({
+                        visibleRoomInfo: { ...prevState.visibleRoomInfo, [i]: !prevState.visibleRoomInfo[i] }
+                    }))
+                }
+                closeDetails = (i) => {
+                    this.setState(prevState => ({
+                        visibleDetails: { ...prevState.visibleDetails, [i]: !prevState.visibleDetails[i] }
+                    }))
+                }
+                closeBar = (i) => {
+                    this.setState(prevState => ({
+                        visibleBar: { ...prevState.visibleBar, [i]: !prevState.visibleBar[i] }
+                    }))
+                }
+                closeRule = (i) => {
+                    this.setState(prevState => ({
+                        visibleRule: { ...prevState.visibleRule, [i]: !prevState.visibleRule[i] }
+                    }))
+                }
+        
+                closeTourInfo = (i) => {
+                    this.setState(prevState => ({
+                        visibleTourInfo: { ...prevState.visibleTourInfo, [i]: !prevState.visibleTourInfo[i] }
+                    }))
+                }
+        
+                localStorage_getCurrency = () => {
+            let getCurrencyObject = localStorage.getItem('currencyObject');
+            let jsonCurrency = JSON.parse(getCurrencyObject);
+            if (jsonCurrency) {
+                return jsonCurrency.currency_unit
+            } else {
+                return '--واحد پول--'
+            }
+        }
+    localStorage_expire = () => {
+    const { state_currency_unit, state_currency_cost, state_floatdigit} = this.state
+    let getCurrencyObject = localStorage.getItem('currencyObject');
+    let jsonCurrency = JSON.parse(getCurrencyObject);
+    if (jsonCurrency) {
+        var timer =  setInterval(()=>{
+                if(new Date().getTime() - jsonCurrency.time >= jsonCurrency.expire){
+                 localStorage.removeItem('currencyObject');
+                 document.querySelector(".currency-selected").innerText = '--واحد پول--';
+                 document.querySelector(".currency-selected").setAttribute("data-active", 0);
+                 clearInterval(timer);
+                 this.setState({
+                    state_currency_unit: "",
+                    state_currency_cost:1,
+                    state_floatdigit: "",
+                  });
+                 console.log('localStorage has ex pired');
+                }
+        },1000)
+    }
+    }
+
+
+
+        currency_selected_list = () => {
+            if (document.querySelector(".currency-selected").getAttribute("data-active") == 0) {
+                document.querySelector(".currency-loading").classList.toggle("unvisible");
+                fetch('/Client_Currency_Rate.bc')
+                    .then(response => response.text())
+                    .then(text => {
+                        this.setState({ data_currency: JSON.parse(text.replace(/\'/g, '"')) });
+                        document.querySelector(".currency-loading").classList.toggle("unvisible");
+                        document.querySelector(".currency-selected").setAttribute("data-active", 1);
+                        document.querySelector(".currency-list").classList.toggle("unvisible");
+                    }).catch(error => console.error(error))
+
+            } else {
+                document.querySelector(".currency-list").classList.toggle("unvisible");
+            }
+
+        }
+        renderCurrencyRate() {
+            let element = this.state.data_currency;
+            if (!element) return null;
+            return this.renderRate(element.rate, element.floatdigit)
+        }
+        renderRate(element, floatdigit) {
+            if (element !== undefined) {
+                let indents = [];
+                for (let i = 0; i < element.length; i++) {
+                    indents.push(<li className="" onClick={e => this.select_currency_list(e, element[i], floatdigit)}>{element[i].rate_unit}</li>)
+                }
+                return (
+                    indents
+                )
+            }
+        }
+
+        select_currency_list = (e, element, floatdigit) => {
+            this.setState({
+                state_currency_unit: element.rate_unit,
+                state_currency_cost: element.rate_cost,
+                state_floatdigit: floatdigit,
+            })
+            document.querySelector(".currency-list").classList.toggle("unvisible");
+            document.querySelector(".currency-selected").innerText = element.rate_unit;
+            this.localStorage_setCurrency(element.rate_unit, element.rate_cost, floatdigit);
+
+        }
+
+        localStorage_setCurrency = (currency_unit, currency_cost, floatdigit) => {
+            let currencyObject = {
+        'currency_unit': currency_unit,
+        'currency_cost': currency_cost,
+        'floatdigit': floatdigit,
+        'time':new Date().getTime(),
+        'expire':1200000,
+      };
+            localStorage.setItem('currencyObject', JSON.stringify(currencyObject));
+        }
+                handleClick(event) {
+                    window.scrollTo({
+                        top: 0,
+                        left: 0,
+                        behavior: 'smooth'
+                    })
+                    this.setState({
+                        currentPage: Number(event.target.id)
+                    })
+                }
+                showFilter = (e) => {
+                    $(".section-filter").addClass('section-filter-open')
+                    $(".section-filter-content").animate({ right: '0' }, 350);
+                }
+                hideFilter = (e) => {
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                    $(".section-filter").removeClass('section-filter-open')
+                    $(".section-filter-content").animate({ right: '-100%' }, 350);
+                }
+        
+            }
+            ReactDOM.render(<App />, document.getElementById('app'))
+        }
+        
+        
+         </script>
+    <script src="https://cdn.basiscore.net/basisfly.com/js/reservation_react.production.min.js"></script>
+    <script src="https://cdn.basiscore.net/basisfly.com/js/reservation_react_dom.production.min.js"></script>
+    <script src="https://cdn.basiscore.net/basisfly.com/js/reservation_babel.min.js"></script>
+    <script src="https://cdn.basiscore.net/basisfly.com/js/reservation_react_paging.js"></script>
+    <script src="https://cdn.basiscore.net/basisfly.com/js/reservation_progress_bar.js" type="text/javascript"></script>
+    <script src="https://cdn.basiscore.net/basisfly.com/js/reservation_mob_calendar.js" type="text/javascript" ></script>
+    <script type="text/javascript">
+        <basis core = "call" file = "Client_Basis_Calendar_js.inc"/>
+        var progress = $(".loading-progress").progressTimer({
+        timeLimit: 40,
+        onFinish: function () {
+        }
+       });
+       $(".form_research").each(function () {
+            var json = [##cms.json.header | cms.form.roomSearch##]
+            var room = json.rooms.length
+            var ad = ""
+            var ch = ""
+            for (var i = 0; i < room; i++) {
+                ad = ad + json.rooms[i].adultcount + ','
+                ch = ch + json.rooms[i].childcountandage + '*'
+            }
+            ad = ad.slice(0, -1)
+            ch = ch.slice(0, -1)
+            $(this).find(".roomcount").val(room)
+            $(this).find(".adult").val(ad)
+            $(this).find(".childage").val(ch)
+            $(this).submit(function (e) {
+                e.preventDefault()
+                if ($(this).attr('data-read') == 0) {
+                    $(".content-research").show()
+                    $.ajax({
+                        url: $(this).attr("action"),
+                        type: $(this).attr("method"),
+                        data: $($(this)).serialize(),
+                        success: function (response) {
+                            $('.content-research').empty().show().html(response);
+                            $(this).attr('data-read', '1')
+                        }
+                    });
+                } else {
+                    $(".content-research").show()
+                }
+
+            });
+        });
+        function onloadFunc() {
+            var counter = 600;
+            setInterval(function () {
+                counter--;
+                var m = parseInt(counter / 60);
+                var s = counter % 60;
+                if (counter >= 0) {
+                    var timer = document.getElementById("timer");
+                    if(timer !== null){
+
+                    
+                    if (s < 10) {
+                        s = "0" + s;
+                    }
+                    if (m < 10) {
+                        m = "0" + m;
+                    }
+                    if (m < 2) {
+                        document.getElementById("timer").classList.add("blink_me")
+                    }
+                    timer.innerHTML = "00:" + m + ":" + s;
+                }
+                }
+                if (counter === 0) {
+                    $(".message_box_timeout,#bg-popup").fadeIn();
+                    $(".message_box_timeout").css("top", "200px")
+                    clearInterval(counter)
+                }
+             }, 1000)
+        }
+        $(document).on('click', function (event) {
+          if(document.querySelector(".currency-list")){
+           if (!$(event.target).closest('.currency-selected,.currency-list').length) {
+            document.querySelector(".currency-list").classList.add("unvisible");
+          }
+        }
+   })
+    </script>
+ 
+    <!----JS LIBRARY---->
+
+</body>
+
+</html>

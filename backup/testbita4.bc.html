@@ -1,0 +1,16 @@
+<basis core="external.fly.ws" source="cmsDbService2" procedurename="dbsource" name="db">
+    <member method="cms" name="agencyinformation" query='{
+       "name": "db",
+       "mid": "20",
+       "member":[ {
+       "type":"list",
+       "name": "q",
+       "request": "agencyinformation",
+       "id":"5a9ddd19c54a76ec94ab31f7",
+       } ] }' preview="" />
+</basis>
+<basis core="group" name="g">
+    <basis core="inlinesource" name="db">
+        <member name="agencyinformation-tree" format="json" preview=""> {"root": [##db.agencyinformation.result##]}
+        </member>
+    </basis>

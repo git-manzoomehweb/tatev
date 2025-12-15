@@ -1,0 +1,242 @@
+<basis core="dbsource" source="basiscore" mid="20" name="db" lid="2">
+    <member name="tour-cat" type="tree" request="cat" parentid="" preview="" order="ord" />
+</basis>
+<basis core="dbsource" source="basiscore" mid="20" name="db" lid="2">
+    <member name="tour-count-1" type="list" link="tour.bc" catid="152929" />
+</basis>
+<basis core="list" dataMemberName="db.tour-count-1">
+    <else-layout>
+        <div class="input-content"><input type="hidden" value="0" data-catid="152929" /></div>
+    </else-layout>
+    <face filter="RowNumber = Max(RowNumber)">
+        <div class="input-content"><input type="hidden" value="@RowNumber" data-catid="152929" /></div>
+    </face>
+</basis>
+<basis core='dbsource' name='captcha' source='trust_login'>
+    <member name='code' type='scalar' request='captcha'></member>
+</basis>
+<!DOCTYPE html>
+<html>
+<head>
+ <meta property="og:type" content="website" />
+ <meta property="og:title" content="tatev">
+ <meta property="og:image" content="[##cms.cms.cdn##]/images/logo.png">
+ <meta property="og:image:width" content="240" />
+ <meta property="og:image:height" content="60" />
+ <meta property="og:image:secure_url" content="[##cms.cms.cdn##]/images/logo.png" />
+ <meta property="og:image:type" content="image/png" />
+ <meta property="og:image:alt" content="tatev" />
+<meta property="og:description" content="tatev" />
+    <title>tatev</title>
+    <meta charset="UTF-8" />
+    <meta name="author" content="BasisCore" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <meta name="description" content="tatev" />
+    <link rel="apple-touch-icon" sizes="57x57" href="[##cms.cms.cdn##]/images/logo.png" />
+    <link rel="shortcut icon" sizes="57x57" href="[##cms.cms.cdn##]/images/logo.png" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <!----------------CSS FILE---------------->
+    <!----CSS MAIN STYLE---->
+    <link href="[##cms.cms.cdn##]/css/style.css" type="text/css" rel="stylesheet" />
+    <!----CSS FONT AWESOME---->
+    <link href="[##cms.cms.cdn##]/css/font_awesome.css" type="text/css" rel="stylesheet" />
+    <!----CSS CALENDAR---->
+    <link href="[##cms.cms.cdn##]/css/calendar.css" type="text/css" rel="stylesheet" />
+    <!----CSS DATEPICKER---->
+    <link href="[##cms.cms.cdn##]/css/datepicker.css" type="text/css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900|Raleway:400,500,600,700" type="text/css"
+        rel="stylesheet" />
+    <!----------------JS FILE---------------->
+    <script src="[##cms.cms.cdn##]/js/library.js" type="text/javascript"></script>
+</head>
+
+<body>
+    <main>
+        <basis core="call" file="header-en.inc" />
+        <section class="content">
+            <section class="loginRegister"></section>
+            <section class="search-box-container en search-banner dir-ltr background-color_body p-relative">
+                <div class="pageBgBlue"></div>
+                <div class="pageBgLight"></div>
+                <div class="bc-main">
+                    <h1 style="opacity: 0;">online ticket,tatev</h1>
+                    <p class="title color_white text-left font_20">Discover amzaing places at exclusive
+                            deals</p>
+                    <section class="search-box" id="search-box">
+                    </section>
+                </div>
+                <div class="search-img">
+                    <img src="[##cms.cms.cdn##]/images/search-bg.jpg" data-src="[##cms.cms.cdn##]/images/search-bg.jpg" class="cover-image lozad" width="1920" height="296"alt="" />
+                </div>
+            </section>
+            <basis core="tree" dataMemberName="tour.cat" idCol="catid" parentidCol="ParentID" nullvalue="152907">
+                <layout>
+                    <section class="item-container">
+                        <div class="bc-main p-relative ">
+                            <div class="title-container text-center">
+                                <div class="title-content color_gray"> Outbound <span
+                                        class="color_3 p-relative">Tours</span>
+                                </div>
+                            </div>
+                            <div class="tour-cat-container owl-carousel">
+                                @child
+                            </div>
+                        </div>
+                    </section>
+                </layout>
+                <face filter="link is null">
+                    <div class="tour-cat-content width_90" data-catid="@catid">
+                        <article class="inner">
+                            <div class="p-relative border-radius card">
+                                <a href="/tour-list-en.bc?catid=@catid">
+                                    <figure class="border-radius"><img  src="@image" width="275" height="365"
+                                            alt="@title" class="cover-image border-radius lozad" />
+                                        <div class="effect"></div>
+                                    </figure>
+                                </a>
+                                <div class="p-absolute color_white desc">
+                                    <header>
+                                        <button class="color_white font_15 background-color_2  btn">View
+                                            Detail</button>
+                                    </header>
+                                </div>
+                            </div>
+                            <footer>
+                                <h2 class="color_gray title font_20">@title</h2>
+                                <div class=""><i class="icon fa fa-map-marker-alt color_3"></i><span
+                                        class="count color_gray tour-count">
+                                    </span> <span class="font_11 text"> City </span></div>
+                            </footer>
+                        </article>
+                    </div>
+                </face>
+                <face>
+                    <div class="tour-cat-content width_90" data-catid="@catid">
+                        <article class="inner">
+                            <div class="p-relative border-radius card">
+                                <a href="/@link">
+                                    <figure class="border-radius"><img src="@image" width="275" height="365"
+                                            alt="@title" class="cover-image border-radius lozad" />
+                                        <div class="effect"></div>
+                                    </figure>
+                                </a>
+                                <div class="p-absolute color_white desc">
+                                    <header>
+                                        <button class="color_white font_15 background-color_2  btn">View
+                                            Detail</button>
+                                    </header>
+                                </div>
+                            </div>
+                            <footer>
+                                <h2 class="color_gray title font_20">@title</h2>
+                                <div class=""><i class="icon fa fa-map-marker-alt color_3"></i><span
+                                        class="count color_gray tour-count">
+                                    </span> <span class="font_11 text"> City </span></div>
+                            </footer>
+                        </article>
+                    </div>
+                </face>
+            </basis>
+            <section class="item-container background-color_body">
+                <div class="bc-main p-relative">
+                    <div class="title-container text-center">
+                        <div class="title-content color_gray">Inbound <span class="color_3 p-relative">Tours</span>
+                        </div>
+                    </div>
+                    <ul class="nav-tour-cat text-center">
+                        <li class="active border-radius btn" onclick="select_tour(this,'52910')">Reginal tours</li>
+                        <li class="border-radius btn" onclick="select_tour(this,'52909')">cultural tours</li>
+
+                        <li class="border-radius btn" onclick="select_tour(this,'52908')">daily tours</li>
+
+
+                    </ul>
+                    <div class="tour-list-load">
+                    </div>
+                </div>
+            </section>
+            <section class="item-container">
+                <div class="bc-main p-relative">
+                    <div class="services-container text-center color_gray ">
+                        <div class="service-content">
+                            <div class="inner width_90">
+                                <div class="service-icon color_1 p-relative">
+                                    1
+                                </div>
+                                <div class="service-text">
+                                    <h2 class="font_15 color_gray">find the best ferry ticket</h2>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="service-content">
+                            <div class="inner width_90">
+                                <div class="service-icon color_1 p-relative">
+                                    2
+                                </div>
+                                <div class="service-text">
+                                    <p class="font_15 color_gray">4 steps resigistration</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="service-content">
+                            <div class="inner width_90">
+                                <div class="service-icon color_1 p-relative">
+                                    3
+                                </div>
+                                <div class="service-text">
+                                    <p class="font_15 color_gray">waiting for your trip</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item-container subscribe p-relative">
+                        <div class="dot-pattern p-absolute"></div>
+                        <div class="title-container text-center">
+                            <p class="title-content color_white white">subscribe & <br />get special discount </span>
+                            </p>
+
+                        </div>
+                        <form method="post" action="/newsletter-get.bc"
+                            class="newsletter-form width_60 p-relative form-content font_14 background-color_white color_gray border-radius">
+                            <i class="fa fa-envelope color_1 font_20"></i>
+                            <input type="text" name="email" placeholder="Email Address" required />
+                            <i class="fa fa-sync color_1 font_20 cursor-pointer"
+                                onclick="refresh_captcha(this,event)"></i>
+                            <input type="text" name="Captcha" placeholder="Captcha" required />
+                            <span class="field-captcha">
+                                <span class="load-captcha">
+                                    <img class="captcha lozad" alt="captcha" src="[##captcha.code.captcha##]" data-src="[##captcha.code.captcha##]" width="80"
+                                        height="35">
+                                    <input type="hidden" value="[##captcha.code.captcha##]" name="Captchaid">
+                                </span>
+                            </span>
+                            <button type="submit"
+                                class="background-color_1 btn color_white font_17 transition float-right">subscribe</button>
+                            <div class="clr"></div>
+
+                            <div class="Loading_Form unvisible text-center">
+                                <div id="ballsWaveG">
+                                    <div id="ballsWaveG_1" class="ballsWaveG"></div>
+                                    <div id="ballsWaveG_2" class="ballsWaveG"></div>
+                                    <div id="ballsWaveG_3" class="ballsWaveG"></div>
+                                    <div id="ballsWaveG_4" class="ballsWaveG"></div>
+                                    <div id="ballsWaveG_5" class="ballsWaveG"></div>
+                                    <div id="ballsWaveG_6" class="ballsWaveG"></div>
+                                    <div id="ballsWaveG_7" class="ballsWaveG"></div>
+                                    <div id="ballsWaveG_8" class="ballsWaveG"></div>
+                                </div>
+                            </div>
+                            <div class="Message-Form text-center font_16"></div>
+                        </form>
+                    </div>
+                </div>
+            </section>
+        </section>
+        <basis core="call" file="footer-en.inc" />
+    </main>
+    <script src="[##cms.cms.cdn##]/js/lozad.min.js"></script>
+</body>
+
+</html>

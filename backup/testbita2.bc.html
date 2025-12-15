@@ -1,0 +1,1447 @@
+<basis core="dbsource" source="trust_login8" mid="24" name="db" lid="1" rkey="[##cms.cookie.rkey##]">
+    <member name="userid" type="scalar" request="userid" ></member>
+</basis>
+<basis core="group" name="Delay_1">
+    <basis core="external.fly.ws" source="cmsDbService2" procedurename="dbsource" name="db">
+        <member name="showdetail" method="flight" query='{
+           "name": "db",
+           "mid": "20",
+           "schemabase": "[##cms.query.schemabase|(true)##]",
+           "schema": {
+            "id": {
+                "action": "find",
+                "map": "id"
+            },
+            "mainInfo": {
+                "action": "create",
+                "childs": [
+                    {
+                        "startAirline": {
+                            "action": "create",
+                            "childs": [
+                                {
+                                    "startAirlineImage": {
+                                        "action": "find",
+                                        "map": "oneway.ticket.infooo.startairlineimage"
+                                    }
+                                },
+                                {
+                                    "startAirlineName": {
+                                        "action": "find",
+                                        "map": "oneway.ticket.infooo.startairline"
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "cityInfo": {
+                            "action": "create",
+                            "childs": [
+                                {
+                                    "startCityInfo": {
+                                        "action": "create",
+                                        "childs": [
+                                            {
+                                                "startCity": {
+                                                    "action": "find",
+                                                    "map": "oneway.ticket.infooo.startcity"
+                                                }
+                                            },
+                                            {
+                                                "startAirportShort": {
+                                                    "action": "find",
+                                                    "map": "startairportshort"
+                                                }
+                                            }
+                                        ]
+                                    }
+                                },
+                                {
+                                    "endCityInfo": {
+                                        "action": "create",
+                                        "childs": [
+                                            {
+                                                "endCity": {
+                                                    "action": "find",
+                                                    "map": "oneway.ticket.infooo.endcity"
+                                                }
+                                            },
+                                            {
+                                                "endAirportShort": {
+                                                    "action": "find",
+                                                    "map": "endairportshort"
+                                                }
+                                            }
+                                        ]
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                ]
+            },
+            "detailsInfo": {
+                "action": "create",
+                "childs": [
+                    {
+                        "routesInfo": {
+                            "action": "create",
+                            "childs": [
+                                {
+                                    "routeInfo": {
+                                        "action": "find",
+                                        "map": "oneway.ticket.routesinfoo",
+                                        "add": [
+                                            "oneway.ticket.classes",
+                                            "oneway.ticket.dateinfo"
+                                        ],
+                                        "options": {
+                                            "route": {
+                                                "action": "create",
+                                                "childs": [
+                                                    {
+                                                        "startCityDetail": {
+                                                            "action": "find",
+                                                            "map": "route.start.city"
+                                                        }
+                                                    },
+                                                    {
+                                                        "endCityDetail": {
+                                                            "action": "find",
+                                                            "map": "route.end.city"
+                                                        }
+                                                    }
+                                                ]
+                                            },
+                                            "airlines": {
+                                                "action": "create",
+                                                "childs": [
+                                                    {
+                                                        "airlineImage": {
+                                                            "action": "find",
+                                                            "map": "airlineimage"
+                                                        }
+                                                    },
+                                                    {
+                                                        "airlineName": {
+                                                            "action": "find",
+                                                            "map": "airline"
+                                                        }
+                                                    }
+                                                ]
+                                            },
+                                            "routeCodeClass": {
+                                                "action": "create",
+                                                "childs": [
+                                                    {
+                                                        "classname": {
+                                                            "action": "find",
+                                                            "map": "classes.classname"
+                                                        }
+                                                    },
+                                                    {
+                                                        "routecode": {
+                                                            "action": "find",
+                                                            "map": "routecode"
+                                                        }
+                                                    },
+                                                    {
+                                                        "timing": {
+                                                            "action": "find",
+                                                            "map": "timing"
+                                                        }
+                                                    }
+                                                ]
+                                            },
+                                            "routeDetail": {
+                                                "action": "create",
+                                                "childs": [
+                                                    {
+                                                        "startRouteDetail": {
+                                                            "action": "create",
+                                                            "childs": [
+                                                                {
+                                                                    "startAirportDetail": {
+                                                                        "action": "find",
+                                                                        "map": "route.start.airport"
+                                                                    }
+                                                                },
+                                                                {
+                                                                    "exitTime": {
+                                                                        "action": "find",
+                                                                        "map": "time.availabel.times.exit_time"
+                                                                    }
+                                                                },
+                                                                {
+                                                                    "exitDates": {
+                                                                        "action": "find",
+                                                                        "map": "dateinfo",
+                                                                        "options": {
+                                                                            "exitDate": {
+                                                                                "action": "find",
+                                                                                "map": "departuredateinfo",
+                                                                                "options": {
+                                                                                    "exitDateSs": {
+                                                                                        "action": "find",
+                                                                                        "map": "sstring"
+                                                                                    },
+                                                                                    "exitDateMs": {
+                                                                                        "action": "find",
+                                                                                        "map": "mstring"
+                                                                                    }
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                }
+                                                            ]
+                                                        },
+                                                        "endRouteDetail": {
+                                                            "action": "create",
+                                                            "childs": [
+                                                                {
+                                                                    "endAirportDetail": {
+                                                                        "action": "find",
+                                                                        "map": "route.end.airport"
+                                                                    }
+                                                                },
+                                                                {
+                                                                    "arrivalTime": {
+                                                                        "action": "find",
+                                                                        "map": "time.availabel.times.arrival_time"
+                                                                    }
+                                                                },
+                                                                {
+                                                                    "arrivalDates": {
+                                                                        "action": "find",
+                                                                        "map": "dateinfo",
+                                                                        "options": {
+                                                                            "arrivalDate": {
+                                                                                "action": "find",
+                                                                                "map": "arrivaldateinfo",
+                                                                                "options": {
+                                                                                    "arrivalDateS": {
+                                                                                        "action": "find",
+                                                                                        "map": "sstring"
+                                                                                    },
+                                                                                    "arrivalDateM": {
+                                                                                        "action": "find",
+                                                                                        "map": "mstring"
+                                                                                    }
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                }
+                                                            ]
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        },
+                        "flightRule": {
+                            "action": "find",
+                            "map": "oneway.ticket.description"
+                        },
+                        "flightBar": {
+                            "action": "find",
+                            "map": "oneway.ticket.bar"
+                        },
+                        "flightBar1": {
+                            "action": "find",
+                            "map": "oneway.ticket.bar1"
+                        }
+                    }
+                ]
+            },
+            "totalInfo": {
+                "action": "create",
+                "childs": [
+             
+                    {
+                        "total": {
+                            "action": "find",
+                            "map": "total"
+                        }
+                    },
+                    {
+                        "commission": {
+                            "action": "find",
+                            "map": "commissioncost"
+                        }
+                    },
+                    {
+                        "totalcom": {
+                            "action": "find",
+                            "map": "totalcom"
+                        }
+                    },
+                    {
+                        "firstpay": {
+                            "action": "find",
+                            "map": "firstpay"
+                        }
+                    },
+            
+                    {
+                        "moneytype": {
+                            "action": "find",
+                            "map": "moneytype"
+                        }
+                    }
+                ]
+            },
+            "Credit_payment": {
+                "action": "find",
+                "map": "Credit_payment"
+            },
+            "extra_service": {
+                "action": "find",
+                "map": "extra_service"
+            },
+            "coupon_data": {
+                "action": "find",
+                "map": "coupon_data"
+            },
+            "internal": {
+                "action": "find",
+                "map": "internal"
+            },
+            "unit": {
+                "action": "find",
+                "map": "unit"
+            }
+        },
+        "member": [
+        {
+          "type": "list",
+          "name": "q",
+          "request": "showdetail",
+          "schemaid": "291",
+          "id": "[##cms.form.idnows##]",
+          "id-ws":[##cms.form.idws|("")##],
+          "childs": "[##cms.form.childcount##]",
+          "infants": "[##cms.form.infants##]",
+          "adults": "[##cms.form.adultcount##]",
+          "classname": "[##cms.form.classname##]",
+          "userid": "[##db.userid.userid##]",
+          "supplier": "[##cms.form.supplier##]",
+          "share": "[##cms.form.share##]",
+          "trackingNo": "[##cms.cookie.trackingid##]",
+          "lid": "1",
+          "unit": "10"
+        }
+      ]
+    }
+     ' ></member>
+    </basis>
+    <basis core="external.fly.ws" source="cmsDbService2" procedurename="dbsource" name="db">
+        <member name="passenger-form" method="site" query='{
+            "name": "db",
+            "mid": "20",
+            "member": [
+              {
+                "type": "list",
+                "name": "q",
+                "request": "form",
+                "schemaid": "291",
+                "ws": "[##cms.form.provider##]",
+                "adult": "[##cms.form.adultcount##]",
+                "child": "[##cms.form.childcount##]",
+                "infant": "[##cms.form.infants##]",
+                "trackingNo": "[##cms.cookie.trackingid##]",
+                "ticketid": "[##cms.form.idvalue##]"
+              }
+            ]
+          }
+       ' preview="" ></member>
+    </basis>
+    <basis core="group" name="Delay_2">
+        <basis core="inlinesource" name="db">
+            <member name="showdetail-Tree" format="json"
+                postsql="select  Id , ParentId , case when trim(Field) is null  then  (select field from [db.showdetail-Tree] where id = a.parentid ) else field end as field, value , type , path  from [db.showdetail-Tree] as a">
+                {"root":[##db.showdetail.result##]}</member>
+            <member name="error" format="json" postsql="select value from [db.error] where field = 'description'">
+                {"root":[##db.showdetail.result##]} </member>
+            <member name="error-code" format="json" postsql="select value from [db.error-code] where field = 'code'">
+                    {"root":[##db.showdetail.result##]} </member>
+            <member name="passenger-form-Tree" format="json"
+                postsql="select  Id , ParentId , case when trim(Field) is null  then  (select field from [db.passenger-form-Tree] where id = a.parentid ) else field end as field, value , type , path  from [db.passenger-form-Tree] as a">
+                {"root":[##db.passenger-form.result##]}</member>
+            <member name="cost-info-Tree" format="json"
+                postsql="select  Id , ParentId , case when trim(Field) is null  then  (select field from [db.cost-info-Tree] where id = a.parentid ) else field end as field, value , type , path  from [db.cost-info-Tree] as a">
+                {"root":[##cms.form.cost-info##]}</member>
+        </basis>
+        <basis core="dbsource" source="basiscore" name="db" mid="5" lid="1" usedforid="[##cms.cms.ownerid##]">
+            <member core="view" name="phone-company" type="view" postsql="select Answer from [db.phone-company] where prpID = '8000'" />
+        </basis>
+<!DOCTYPE html>
+<html lang="fa">
+
+<body onload="onloadFunc();">
+
+    <head>
+        <meta charset="UTF-8">
+        <title>خرید پرواز یکطرفه</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+        <meta name="robots" content="index, nofollow" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="" />
+        <meta property="og:image" content="[##cms.cms.cdn##]/images/icon-logo.png" />
+        <meta property="og:image:width" content="" />
+        <meta property="og:image:height" content="" />
+        <meta property="og:image:secure_url" content="[##cms.cms.cdn##]/images/icon-logo.png" />
+        <meta property="og:image:type" content="image/png" />
+        <meta property="og:image:alt" content="" />
+        <meta name="author" content="BasisCore" />
+        <!----------------CSS FILE---------------->
+        <link href="https://cdn.basiscore.net/basisfly.com/css/reservation_tem_style_view.css" type="text/css"
+            rel="stylesheet" />
+        <link href="[##cms.cms.cdn##]/css/style_tem.css" type="text/css" rel="stylesheet" />
+<link rel="shortcut icon" sizes="80x80" href="[##cms.cms.cdn##]/images/shortcut-icon.png" />
+        <style>
+            .rout-details-part .date-details {display: none;}
+            .details-item:first-child .rout-details .rout-details-part:first-child .date-details {display: block;}
+            .details-item:last-child .rout-details .rout-details-part:nth-child(3) .date-details {display: block;}
+        </style>
+    </head>
+    <main class="dir-rtl main-container contain-currency-show" data-dmnid="[##cms.cms.domainid##]" data-schemaid="291">
+        <input type="hidden" value="[##cms.cms.date##]" id="cms-date"/>
+        <basis core="call" file="header.inc"></basis>
+        <section class="content">
+            <section class="loginRegister"></section>
+            <div id="bg-popup" class="unvisible"></div>
+            <div class="message-box unvisible">
+                <i class="icon-message-box">
+                    <svg width="50pt" height="50pt" fill="#666" version="1.0" viewBox="0 0 512 512"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <g transform="translate(0 512) scale(.1 -.1)">
+                            <path
+                                d="m1958 5059c-518-43-1e3 -273-1362-649-741-772-795-1960-128-2804 30-39 105-121 166-181 338-337 774-546 1256-605 123-15 398-12 519 5 57 8 105 14 106 12 2-1 15-27 30-57 118-235 344-454 600-582 403-202 889-190 1280 32 141 81 174 132 120 185-32 33-60 31-115-6-25-16-83-50-130-73-388-197-846-171-1215 68-119 77-291 251-363 369-303 490-231 1110 175 1512 101 100 186 160 318 225 404 200 875 163 1242-96 87-62 225-200 286-285 222-314 284-722 166-1089-41-126-140-303-219-394-42-47-51-76-35-114 15-34 48-48 89-38 37 9 162 179 229 313 154 304 186 664 92 999-35 120-140 330-219 435-129 171-323 329-509 415l-85 39 5 170c16 517-142 993-465 1403-92 116-135 155-173 155-21 0-38-7-51-22-34-43-24-72 58-167 144-168 276-388 353-588 88-230 124-429 125-693 1-105-2-194-6-198s-44 0-90 9c-46 8-115 18-154 22l-71 6-6 187c-4 135-11 213-27 286-144 676-673 1185-1350 1302-64 11-153 17-270 17s-206-6-270-17c-683-118-1209-630-1352-1315-30-146-33-456-4-607 25-137 63-256 88-277 28-25 70-22 96 5 28 30 28 48-2 151-71 243-75 531-11 782 195 770 974 1261 1749 1103 144-29 233-60 381-134 414-206 703-586 801-1055 13-62 18-132 19-259v-175l-100-17c-410-73-756-315-963-674-90-157-156-367-169-537-3-47-9-91-12-97-3-5-61-15-129-21-334-31-681 63-976 263-127 85-303 264-396 402-71 104-77 110-112 113-27 2-43-3-57-17-36-36-27-71 48-183 342-509 932-786 1547-725l82 8 7-53c3-29 18-100 31-156 14-57 24-105 22-107-11-11-183-25-311-25-167 0-269 10-422 42-354 72-712 266-975 528-704 700-787 1795-197 2587 568 762 1591 1015 2445 603 119-57 248-136 341-206 26-20 55-34 72-34 39 0 69 32 69 74 0 41-31 71-171 163-307 201-630 311-1004 343-134 11-195 11-337-1z" ></path>
+                            <path
+                                d="m2080 4260c-17-17-20-33-20-105s3-88 20-105c25-25 71-26 99-2 41 33 41 172 0 213-25 25-74 24-99-1z" ></path>
+                            <path
+                                d="m1186 3889c-44-35-36-73 31-141 47-47 63-58 90-58 42 0 73 30 73 72 0 25-12 43-58 90-65 64-92 72-136 37z" ></path>
+                            <path
+                                d="m2938 3852c-46-47-58-65-58-90 0-43 31-72 76-72 29 0 44 9 90 54 63 63 72 106 31 144-40 38-73 29-139-36z" ></path>
+                            <path
+                                d="m2082 3670c-22-20-22-26-22-300 0-154-4-280-8-280s-37 30-72 66c-36 36-76 70-89 75-46 18-101-24-101-78 0-22 275-298 311-314 40-16 84 3 98 43 15 43 15 714 0 757-19 53-77 68-117 31z" ></path>
+                            <path
+                                d="m810 2990c-30-30-27-83 6-109 22-17 41-21 101-21 65 0 77 3 98 25 30 30 32 64 4 99-19 24-26 26-105 26-71 0-87-3-104-20z" ></path>
+                            <path
+                                d="m3245 2985c-14-13-25-36-25-50s11-37 25-50c21-22 33-25 94-25 39 0 81 5 95 11 49 23 53 104 7 128-11 6-54 11-96 11-67 0-79-3-100-25z" ></path>
+                            <path
+                                d="m3653 2359c-48-23-89-67-110-116-10-26-13-136-13-533 0-490 0-501 21-546 35-73 118-124 204-124 81 0 157 47 198 124 22 40 22 48 25 516 2 324 0 491-8 526-13 63-67 129-124 155-56 26-140 25-193-2zm153-150c18-20 19-43 19-501v-480l-24-19c-31-25-69-24-98 3l-23 21v479c0 465 1 479 20 498 27 27 81 26 106-1z" ></path>
+                            <path
+                                d="m1265 2172c-16-11-47-38-67-60-58-64-50-125 20-147 29-8 80 22 127 78 42 49 46 87 10 122-29 30-50 31-90 7z" ></path>
+                            <path
+                                d="m2140 1813c-43-16-50-34-50-123 0-78 2-89 23-108 44-41 107-19 123 43 12 48-1 144-22 164-22 22-53 32-74 24z" ></path>
+                            <path
+                                d="m3653 979c-91-45-123-109-123-249 0-115 20-174 74-215 123-94 281-63 347 68 27 51 36 175 20 245-15 62-69 128-125 153-56 26-140 25-193-2zm153-150c15-17 19-36 19-101 0-72-2-82-24-99-31-25-69-24-98 3-20 19-23 31-23 100 0 65 3 81 20 98 27 27 81 26 106-1z" ></path>
+                        </g>
+                    </svg>
+                </i>
+                <div class="line-one font_20 font-weight">
+                    اعتبار نتایج به پایان رسید
+                </div>
+                <div class="line-two">
+                    برای دریافت آخرین نرخ‌ها لطفا صفحه را مجددا بارگذاری کنید
+                </div>
+                <button class="background-color_2 color_white font_16 border-radius cursor-pointer"
+                    onclick="window.location='/'">صفحه اصلی</button>
+                <form method="get" action="" class="reSearch-form" data-tem="[##cms.form.checkpreurl##]"
+                    data-engine="[##cms.form.engine##]">
+                    <input type="hidden" value="[##cms.form.flight_id##]" name="flight_id"/>
+                    <input type="hidden" value="[##cms.form.from##]" name="from"/>
+                    <input type="hidden" value="[##cms.form.to##]" name="to"/>
+                    <input type="hidden" value="[##cms.form.adult##]" name="adult"/>
+                    <input type="hidden" value="[##cms.form.child##]" name="child"/>
+                    <input type="hidden" value="[##cms.form.select-age##]" name="select-age"/>
+                    <input type="hidden" value="[##cms.form.share##]" name="share"/>
+                    <input type="hidden" value="[##cms.form.fdate##]" name="fdate"/>
+                    <input type="hidden" value="[##cms.form.FlightClass##]" name="FlightClass"/>
+                    <button class="background-color_1 color_white font_16 border-radius cursor-pointer"
+                        type="submit">جستجوی مجدد</button>
+                </form>
+            </div>
+            <section class="step-bar text-center">
+                <div class="bc-main">
+                    <ul class="step-nav color_gray font_14">
+                        <li class="step-item active" data-step="passenger"><i class="fa fa-users icon"></i>
+                            <div class="title">مشخصات مسافران</div>
+                        </li>
+                        <li class="step-item" data-step="buyer"><i class="fa fa-user icon"></i>
+                            <div class="title">مشخصات خریدار</div>
+                        </li>
+                        <li class="step-item" data-step="summary"><i class="fa fa-credit-card icon"></i>
+                            <div class="title">پرداخت و صدور</div>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+            <section class="package-container">
+                <div class="bc-main">
+                    <aside class="width_30 float-right aside-container">
+                        <div class="aside-content">
+                            <form method="post" action="/Client_Commission_ver.2.bc" class="check-commission">
+                                <input type="hidden" value="1" name="type"/>
+                                <input type="hidden" value="1" name="lid"/>
+                                <input type="hidden" value="[##cms.form.idnows##]" name="idnows"/>
+                                <input type="hidden" value='[##cms.form.idws|("")##]' name="idws"/>
+                                <input type="hidden" value="[##cms.form.childcount##]" name="childcount"/>
+                                <input type="hidden" value="[##cms.form.infants##]" name="infants"/>
+                                <input type="hidden" value="[##cms.form.adultcount##]" name="adultcount"/>
+                                <input type="hidden" value="[##cms.form.supplier##]" name="supplier"/>
+                                <input type="hidden" value="[##cms.form.share##]" name="share"/>
+                                <input type="hidden" value="[##cms.form.classname##]" name="classname"/>
+                                <input type="hidden" value="[##db.userid.userid##]" name="userid" class="userid"/>
+                                <div class="check-commission-response"></div>
+                            </form>
+                            <div class="brief-container box-content width_100">
+                                <div class="box-content-title">اطلاعات پرواز</div>
+                                <basis core="tree" datamembername="db.showdetail-Tree" idcol="id" parentidcol="parentid"
+                                    nullvalue="null">
+                                    <layout>
+                                        <div class="flight-brief-content">
+                                            @child
+                                        </div>
+                                    </layout>
+                                    <face filter="field in ('mainInfo')">
+                                        <div class="flight-brief-info d-flex">
+                                            @child
+                                        </div>
+                                    </face>
+                                    <face filter="field in ('startAirline')">
+                                        <div class="img-content">@child</div>
+                                    </face>
+                                    <face filter="field in ('startAirlineImage')">
+                                        <img src="@value" </face> <face filter="field in ('startAirlineName')">
+                                        alt="@value" width="50" height="20" />
+                                    </face>
+                                    <face filter="field in ('cityInfo')">
+                                        <div class="d-flex text-center width_100">@child</div>
+                                    </face>
+                                    <face filter="field in ('startCityInfo')">
+                                        <div class="info-item">
+                                            <div class="city-item font_13">@child</div>
+                                            <div class="startTime time-item font_13 font-weight"></div>
+                                        </div>
+                                        <div class="duration-item width_100 p-relative">
+                                            <div class="duration-line">
+                                                <svg class="svg-icon" width="20" height="20"
+                                                    viewBox="0 0 28.284 28.284">
+                                                    <g>
+                                                        <path
+                                                            d="M19.435.565a1.929 1.929 0 0 0-2.756.028l-4.1 4.269-10-3.309-2.1 2.1 8.339 5.131L4.6 13.179l-2.7-.444L0 14.632l3.976 1.393L5.368 20l1.9-1.9-.444-2.7 4.394-4.217 5.131 8.334 2.1-2.1-3.309-10 4.269-4.1a1.929 1.929 0 0 0 .026-2.752z"
+                                                            transform="rotate(-135 12.929 11.213)"></path>
+                                                    </g>
+                                                </svg>
+                                            </div>
+                                        </div>
+
+                                    </face>
+                                    <face filter="field in ('startCity','endCity')">
+                                        @value
+                                    </face>
+                                    <face filter="field in ('startAirportShort')">
+                                        <span class="airline-item font_11">(@value)</span>
+                                    </face>
+                                    <face filter="field in ('endCityInfo')">
+                                        <div class="info-item">
+                                            <div class="city-item font_13">@child</div>
+                                            <div class="endTime time-item font_13 font-weight"></div>
+                                        </div>
+                                    </face>
+                                    <face filter="field in ('endAirportShort')">
+                                        <span class="airline-item font_11">(@value)</span>
+                                    </face>
+                                    <face filter="type in ('object','array')">@child</face>
+                                </basis>
+                                <div class="color_gray more-info"><span class="font_13">جزییات پرواز</span><i
+                                        class="fa fa-angle-down"></i></div>
+
+                                <div class="details-container">
+                                    <ul class="nav-details flex-justify font_13">
+                                        <li class="nav-li active"
+                                            onclick="toggle_details_content(this,'section-detail')">
+                                            جزییات</li>
+                                        <li class="nav-li" onclick="toggle_details_content(this,'section-bar')" data-type-description="[##cms.form.type-description##]">
+                                            قوانین
+                                            بار
+                                        </li>
+                                        <li class="nav-li" onclick="toggle_details_content(this,'section-rule')" data-type-description="[##cms.form.type-description##]">قوانین
+                                            پرواز</li>
+                                        <li class="nav-li" onclick="toggle_details_content(this,'section-price')">جزییات
+                                            قیمت</li>
+                                    </ul>
+                                    <basis core="tree" datamembername="db.showdetail-Tree" idcol="id"
+                                        parentidcol="parentid" nullvalue="null">
+                                        <face filter="field in ('coupon_data')"></face>
+                                        <face filter="field in ('routesInfo')">
+                                            <div id="section-detail" class="section-content">
+                                                @child
+                                            </div>
+                                        </face>
+                                        <face filter="field in ('routeInfo') and type in ('Object')">
+                                            <div class="details-item">
+                                                @child
+                                            </div>
+                                        </face>
+                                        <face filter="field in ('route')">
+                                            <div class="details-item-title font_13"><span>پرواز رفت
+                                                    (@child)</span></div>
+                                        </face>
+                                        <face filter="field in ('startCityDetail')">
+                                            <span>@value</span><span>-</span>
+                                        </face>
+                                        <face filter="field in ('endCityDetail')">
+                                            <span class="endCityDetail">@value</span>
+                                        </face>
+                                        <face filter="field in ('airlines')">
+                                            <div class="logo-details float-right">@child</div>
+                                        </face>
+                                        <face filter="field in ('airlineImage')">
+                                            <img src="@value" </face> <face filter="field in ('airlineName')">
+                                            alt="@value" width="50" height="20"/>
+                                        </face>
+                                        <face filter="field in ('routeCodeClass')">
+                                            <div class="class-details color_gray float-right font_11 d-flex">
+                                                @child
+                                            </div>
+                                            <div class="clr"></div>
+                                        </face>
+                                        <face filter="field in ('classname')">
+                                            <span>@value</span><span>-</span>
+                                        </face>
+                                        <face filter="field in ('routecode')">
+                                            <span>@value</span>
+                                        </face>
+                                        <face filter="field in ('timing')">
+                                            <div class="item"><span>مدت زمان پرواز:
+                                                </span><span>@value</span>
+                                            </div>
+                                        </face>
+                                        <face filter="field in ('routeDetail')">
+                                            <div class="rout-details p-relative font_12">
+                                                @child
+                                                <div class="clr"></div>
+                                            </div>
+                                        </face>
+                                        <face filter="field in ('startRouteDetail')">
+                                            <div class="rout-details-part">
+                                                @child
+                                            </div>
+                                            <span class="duration-details"></span>
+                                        </face>
+                                        <face filter="field in ('startAirportDetail')">
+                                            <div class="airport-details startAirportDetail">@value</div>
+                                        </face>
+                                        <face filter="field in ('endAirportDetail')">
+                                            <div class="airport-details endAirportDetail">@value</div>
+                                        </face>
+                                        <face filter="field in ('exitTime')">
+                                            <div class="time-details exitTime">@value</div>
+                                        </face>
+                                        <face filter="field in ('arrivalTime')">
+                                            <div class="time-details arrivalTime">@value</div>
+                                        </face>
+                                        <face filter="field in ('exitDate','arrivalDate') and type in ('object')">
+                                            <div class="date-details">
+                                                @child
+                                            </div>
+                                        </face>
+                                        <face
+                                            filter="field in ('exitDateSs','arrivalDateS') and type in ('Scalar.String')">
+                                            @value
+                                        </face>
+                                        <face
+                                            filter="field in ('exitDateMs','arrivalDateM') and type in ('Scalar.String')">
+                                            <span class="EnNum">(@value)</span>
+                                        </face>
+                                        <face filter="field in ('endRouteDetail')">
+                                            <div class="rout-details-part">
+                                                @child
+                                            </div>
+                                        </face>
+                                        <face filter="type in ('object','array')">@child</face>
+                                    </basis>
+
+                                    <basis core="tree" datamembername="db.showdetail-Tree" idcol="id"
+                                        parentidcol="parentid" nullvalue="null">
+                                        <layout>
+                                            <div id="section-bar" class="unvisible section-content"  data-description-dep='[##cms.form.description##]'>
+                                                <div class="section-item font_13">
+                                                    <div class="text-dep text-justify max-height">@child</div> 
+                                                    <div class="loading-container unvisible">
+                                                        <div id="ballsWaveG">
+                                                            <div id="ballsWaveG_1" class="ballsWaveG"></div>
+                                                            <div id="ballsWaveG_2" class="ballsWaveG"></div>
+                                                            <div id="ballsWaveG_3" class="ballsWaveG"></div>
+                                                            <div id="ballsWaveG_4" class="ballsWaveG"></div>
+                                                            <div id="ballsWaveG_5" class="ballsWaveG"></div>
+                                                            <div id="ballsWaveG_6" class="ballsWaveG"></div>
+                                                            <div id="ballsWaveG_7" class="ballsWaveG"></div>
+                                                            <div id="ballsWaveG_8" class="ballsWaveG"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </layout>
+                                        <face filter="field in ('flightBar')">
+                                            <span class="bar-info"><span class="inner-title color_font">بار
+                                                    کابین:
+                                                </span><span>@value </span></span>
+                                        </face>
+                                        <face filter="field in ('flightBar1')">
+                                            <span class="bar-info"><span class="inner-title color_font">بار
+                                                    مجاز:
+                                                </span><span>@value </span></span>
+                                        </face>
+                                        <face filter="type in ('object','array')">@child</face>
+                                    </basis>
+                                    <basis core="tree" datamembername="db.showdetail-Tree" idcol="id"
+                                        parentidcol="parentid" nullvalue="null">
+                                        <layout>
+                                            <div id="section-rule" class="unvisible section-content">
+                                                <div class="section-item font_13">
+                                                    @child
+                                                    <div class="loading-container unvisible">
+                                                        <div id="ballsWaveG">
+                                                            <div id="ballsWaveG_1" class="ballsWaveG"></div>
+                                                            <div id="ballsWaveG_2" class="ballsWaveG"></div>
+                                                            <div id="ballsWaveG_3" class="ballsWaveG"></div>
+                                                            <div id="ballsWaveG_4" class="ballsWaveG"></div>
+                                                            <div id="ballsWaveG_5" class="ballsWaveG"></div>
+                                                            <div id="ballsWaveG_6" class="ballsWaveG"></div>
+                                                            <div id="ballsWaveG_7" class="ballsWaveG"></div>
+                                                            <div id="ballsWaveG_8" class="ballsWaveG"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </layout>
+                                        <face filter="field in ('flightRule')">
+                                            <div class="text-dep text-justify max-height">@value</div>
+                                        </face>
+                                        <face filter="type in ('object','array')">@child</face>
+                                    </basis>
+                                    
+                                        <basis core="tree" datamembername="db.cost-info-Tree" idcol="id" parentidcol="parentid" nullvalue="null">
+                                            <layout>
+                                                <div id="section-price" class="unvisible section-content">
+                                                <div class="prices-detail-content">
+                                                    <div class="head-content flex-justify">
+                                                        <div>تعداد</div>
+                                                        <div>واحد</div>
+                                                        <div>قیمت نهایی</div>
+                                                    </div>
+                                                    @child
+                                                </div>
+                                             </div>
+                                            </layout>
+                                            <face filter="field in ('adults') and type in ('Object')">
+                                                <div class="body-content adults flex-justify">
+                                                    <div><span>بزرگسال<span class="space">|</span></span>@child
+                                            </face>
+                                            <face filter="field in ('childs') and value not in ('[]')">
+                                                <div class="body-content childs flex-justify">
+                                                    <div><span>کودک<span class="space">|</span></span>@child
+                                            </face>
+                                            <face filter="field in ('infant') and value not in ('[]')">
+                                                <div class="body-content infants flex-justify">
+                                                    <div><span>نوزاد<span class="space">|</span></span>@child
+                                            </face>
+                                            <face filter="field in('count')"><span class="count">@value</span>
+                                                </div>
+                                            </face>
+                                            <face filter="field in('unit')">
+                                                <div><span class="font-weight font_12 separate">@value</span><span class="unit-content"></span></div>
+                                            </face>
+                                            <face filter="field in('total')">
+                                                <div><span class="font-weight font_12 separate">@value</span><span class="unit-content"></span></div>
+                                                </div>
+                                            </face>
+                                            <face filter="type in ('object','array')"> @child </face>
+                                        </basis>
+                                   
+                                </div>
+                            </div>
+                            <basis core="tree" datamembername="db.showdetail-Tree" idcol="id" parentidcol="parentid"
+                                nullvalue="null">
+                                <layout>
+                                    <div class="width_100">
+
+                                        <div class="cost-box-header background-color_1 color_white text-center">
+                                            قیمت
+                                            بلیط</div>
+                                        <div class="box-content cost-content color_gray">
+                                            @child
+                                        </div>
+                                    </div>
+                                </layout>
+                                <face filter="field in ('commission')">
+                                    <div class="cost-row flex-justify commission-section" data-output="@value">
+                                        <div class="font_14 title">کمیسیون</div>
+                                        <div>
+                                            <span class="font-weight font_13 separate commission-price">@value</span> 
+                                            <span class="unit-content"></span>
+                                        </div>
+                                    </div>
+                                </face>
+                                <face filter="field in ('totalcom')"><div class="cost-row flex-justify totalcom-section" data-output="@value"></div></face>
+                                <face filter="field in ('total')"><div class="cost-row flex-justify total-section" data-output="@value"></div></face>
+                                <face filter="field in ('firstpay')">
+                                    <div class="cost-row flex-justify firstpay-section" data-output="@value">
+                                        <div class="font_14 title">مبلغ قابل پرداخت</div>
+                                        <div>
+                                            <span class="font-weight font_17 separate firstpay-price">@value</span> 
+                                            <span class="unit-content"></span></div>
+                                    </div>
+                                </face>
+                                <face filter="field in ('moneytype')">
+                                    <div class="moneytype-value" data-output="@value"></div>
+                                </face>
+                                <face filter="type in ('object','array')">@child</face>
+                            </basis>
+                        </div>
+
+                    </aside>
+                    <div class="package-info float-left">
+                        <div class="box-content box-content-title">
+                            <div class="flex-justify">
+                                <div class="step-title">مشخصات مسافران</div>
+                                <div class="time-left">
+                                    <span id="timer">00:00:00</span><i class="flaticon-back-in-time"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <basis core="tree" datamembername="db.showdetail-Tree" idcol="id" parentidcol="parentid"
+                            nullvalue="null">
+                            <face filter="field in ('msg') and value in ('no data')">
+                                <div class="message-box-nodata dir-ltr">
+                                    <i class="icon-message-box">
+                                        <svg width="50pt" height="50pt" fill="#666" version="1.0" viewBox="0 0 512 512"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <g transform="translate(0 512) scale(.1 -.1)">
+                                                <path
+                                                    d="m593 5102c-100-35-171-115-193-216-8-36-10-508-8-1626l3-1575 21-46c28-60 87-119 150-150 47-23 59-24 306-29l257-5-459-430c-252-236-470-448-485-470-62-96-71-231-22-338 92-201 346-279 521-159 33 23 269 267 611 632 306 327 562 599 569 604 9 6 23 2 43-12 96-68 313-155 464-186 454-93 972 35 1285 317l51 46 1058 6 57 28c69 34 121 91 148 164 20 53 20 76 20 1633s0 1580-20 1633c-27 73-79 130-148 164l-57 28-2060 2c-1957 2-2063 2-2112-15zm4142-194c48-22 55-52 55-228v-160h-835c-908 0-877 2-903-55-15-33-15-57 0-90 26-57-5-55 903-55h835v-1296-1296l-68-68h-416-415l56 83c102 149 181 339 220 533 27 134 24 423-5 560-64 299-201 559-406 772-214 222-458 359-759 424-87 19-133 22-307 22s-220-3-307-22c-294-64-523-190-738-406-223-224-359-476-427-790-18-84-22-133-22-291 0-206 14-299 70-462 28-82 110-256 144-303 11-16 20-32 20-37s-20-25-44-46l-45-37h-341-342l-68 68v1296 1296h835c625 0 841 3 860 12 29 13 55 55 55 88s-26 75-55 88c-19 9-235 12-860 12h-835v166 166l68 68h2026c1549 0 2031-3 2051-12zm-1788-1077c282-58 509-182 693-378 454-486 454-1300-1-1787-211-226-500-362-845-396-645-65-1252 396-1381 1047-21 109-24 355-4 463 88 493 456 901 931 1032 190 53 410 59 607 19zm-1304-2478-66-74-168 166 146 134 154-152-66-74zm-293-138 84-85-50-52c-28-29-220-234-428-455-403-431-407-434-488-419-106 20-169 137-123 226 13 26 901 870 915 870 3 0 43-38 90-85z" ></path>
+                                                <path
+                                                    d="m2644 4509c-25-13-54-60-54-89 0-51 49-100 100-100s100 49 100 99c0 73-80 122-146 90z" ></path>
+                                                <path
+                                                    d="m2305 3320c-11-4-101-90-200-189-236-237-234-207-27-414l152-152-140-140c-146-146-176-188-165-233 8-34 338-369 381-388 17-7 42-10 55-7s93 73 177 157l152 151 153-151c83-84 163-154 176-157s35-1 50 4c40 15 379 358 386 391 10 46-19 87-165 233l-140 140 152 152c207 208 210 176-32 418-115 115-194 186-210 190-47 10-83-14-228-158l-142-141-143 141c-169 168-185 178-242 153zm185-384c147-147 174-165 228-151 16 4 85 64 175 153l147 146 87-87 88-87-153-153c-133-135-152-157-152-186 0-18 5-42 11-54s75-86 152-165l142-142-175-175-153 153c-151 149-154 152-197 152s-46-3-197-152l-153-153-174 174 152 155c149 150 152 155 152 197s-3 46-152 196l-152 153 84 85c47 47 87 85 89 85 3 0 71-65 151-144z" ></path>
+                                            </g>
+                                        </svg> </i>
+                                    <div class="line-one font_20 font-weight text-right">
+                                        خطایی رخ داده ، پرواز قابل رزرو نیست
+                                    </div>
+                                    <div class="line-two text-right">
+                                        برای دریافت نتیجه لطفا تاریخ و یا مسیر خود را تغییر دهید
+                                    </div>
+                                    <button class="background-color_1 color_white font_16 border-radius cursor-pointer"
+                                        onclick="window.location='/'">صفحه اصلی</button>
+                                </div>
+                            </face>
+                            <face filter="field in ('error') and value in ('1') and '[##db.error-code.Value##]' in ('19')">
+                                <div class="message-box-nodata dir-ltr" data-error-code="[##db.error-code.Value##]">
+                                    <i class="icon-message-box">
+                                        <svg width="50pt" height="50pt" fill="#666" version="1.0" viewBox="0 0 512 512"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <g transform="translate(0 512) scale(.1 -.1)">
+                                                <path
+                                                    d="m593 5102c-100-35-171-115-193-216-8-36-10-508-8-1626l3-1575 21-46c28-60 87-119 150-150 47-23 59-24 306-29l257-5-459-430c-252-236-470-448-485-470-62-96-71-231-22-338 92-201 346-279 521-159 33 23 269 267 611 632 306 327 562 599 569 604 9 6 23 2 43-12 96-68 313-155 464-186 454-93 972 35 1285 317l51 46 1058 6 57 28c69 34 121 91 148 164 20 53 20 76 20 1633s0 1580-20 1633c-27 73-79 130-148 164l-57 28-2060 2c-1957 2-2063 2-2112-15zm4142-194c48-22 55-52 55-228v-160h-835c-908 0-877 2-903-55-15-33-15-57 0-90 26-57-5-55 903-55h835v-1296-1296l-68-68h-416-415l56 83c102 149 181 339 220 533 27 134 24 423-5 560-64 299-201 559-406 772-214 222-458 359-759 424-87 19-133 22-307 22s-220-3-307-22c-294-64-523-190-738-406-223-224-359-476-427-790-18-84-22-133-22-291 0-206 14-299 70-462 28-82 110-256 144-303 11-16 20-32 20-37s-20-25-44-46l-45-37h-341-342l-68 68v1296 1296h835c625 0 841 3 860 12 29 13 55 55 55 88s-26 75-55 88c-19 9-235 12-860 12h-835v166 166l68 68h2026c1549 0 2031-3 2051-12zm-1788-1077c282-58 509-182 693-378 454-486 454-1300-1-1787-211-226-500-362-845-396-645-65-1252 396-1381 1047-21 109-24 355-4 463 88 493 456 901 931 1032 190 53 410 59 607 19zm-1304-2478-66-74-168 166 146 134 154-152-66-74zm-293-138 84-85-50-52c-28-29-220-234-428-455-403-431-407-434-488-419-106 20-169 137-123 226 13 26 901 870 915 870 3 0 43-38 90-85z" ></path>
+                                                <path
+                                                    d="m2644 4509c-25-13-54-60-54-89 0-51 49-100 100-100s100 49 100 99c0 73-80 122-146 90z" ></path>
+                                                <path
+                                                    d="m2305 3320c-11-4-101-90-200-189-236-237-234-207-27-414l152-152-140-140c-146-146-176-188-165-233 8-34 338-369 381-388 17-7 42-10 55-7s93 73 177 157l152 151 153-151c83-84 163-154 176-157s35-1 50 4c40 15 379 358 386 391 10 46-19 87-165 233l-140 140 152 152c207 208 210 176-32 418-115 115-194 186-210 190-47 10-83-14-228-158l-142-141-143 141c-169 168-185 178-242 153zm185-384c147-147 174-165 228-151 16 4 85 64 175 153l147 146 87-87 88-87-153-153c-133-135-152-157-152-186 0-18 5-42 11-54s75-86 152-165l142-142-175-175-153 153c-151 149-154 152-197 152s-46-3-197-152l-153-153-174 174 152 155c149 150 152 155 152 197s-3 46-152 196l-152 153 84 85c47 47 87 85 89 85 3 0 71-65 151-144z" ></path>
+                                            </g>
+                                        </svg> </i>
+                                    <div class="line-one font_20 font-weight text-right">
+                                       پرواز انتخاب شده شما قابل رزرو نیست.(کد خطا 105)
+                                    </div>
+                                    <div class="line-two text-right">
+                                        لطفا با تیم پشتیبانی سایت تماس ([##db.phone-company.Answer##]) بگیرید.
+                                    </div>
+                                    <button class="background-color_1 color_white font_16 border-radius cursor-pointer"
+                                        onclick="window.location='/'">صفحه اصلی</button>
+                                </div>
+                            </face>
+                            <face filter="field in ('error') and value in ('1') and '[##db.error-code.Value##]' not in ('19')">
+                                <div class="message-box-nodata dir-ltr" data-error-code="[##db.error-code.Value##]">
+                                    <i class="icon-message-box">
+                                        <svg width="50pt" height="50pt" fill="#666" version="1.0" viewBox="0 0 512 512"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <g transform="translate(0 512) scale(.1 -.1)">
+                                                <path
+                                                    d="m593 5102c-100-35-171-115-193-216-8-36-10-508-8-1626l3-1575 21-46c28-60 87-119 150-150 47-23 59-24 306-29l257-5-459-430c-252-236-470-448-485-470-62-96-71-231-22-338 92-201 346-279 521-159 33 23 269 267 611 632 306 327 562 599 569 604 9 6 23 2 43-12 96-68 313-155 464-186 454-93 972 35 1285 317l51 46 1058 6 57 28c69 34 121 91 148 164 20 53 20 76 20 1633s0 1580-20 1633c-27 73-79 130-148 164l-57 28-2060 2c-1957 2-2063 2-2112-15zm4142-194c48-22 55-52 55-228v-160h-835c-908 0-877 2-903-55-15-33-15-57 0-90 26-57-5-55 903-55h835v-1296-1296l-68-68h-416-415l56 83c102 149 181 339 220 533 27 134 24 423-5 560-64 299-201 559-406 772-214 222-458 359-759 424-87 19-133 22-307 22s-220-3-307-22c-294-64-523-190-738-406-223-224-359-476-427-790-18-84-22-133-22-291 0-206 14-299 70-462 28-82 110-256 144-303 11-16 20-32 20-37s-20-25-44-46l-45-37h-341-342l-68 68v1296 1296h835c625 0 841 3 860 12 29 13 55 55 55 88s-26 75-55 88c-19 9-235 12-860 12h-835v166 166l68 68h2026c1549 0 2031-3 2051-12zm-1788-1077c282-58 509-182 693-378 454-486 454-1300-1-1787-211-226-500-362-845-396-645-65-1252 396-1381 1047-21 109-24 355-4 463 88 493 456 901 931 1032 190 53 410 59 607 19zm-1304-2478-66-74-168 166 146 134 154-152-66-74zm-293-138 84-85-50-52c-28-29-220-234-428-455-403-431-407-434-488-419-106 20-169 137-123 226 13 26 901 870 915 870 3 0 43-38 90-85z" ></path>
+                                                <path
+                                                    d="m2644 4509c-25-13-54-60-54-89 0-51 49-100 100-100s100 49 100 99c0 73-80 122-146 90z" ></path>
+                                                <path
+                                                    d="m2305 3320c-11-4-101-90-200-189-236-237-234-207-27-414l152-152-140-140c-146-146-176-188-165-233 8-34 338-369 381-388 17-7 42-10 55-7s93 73 177 157l152 151 153-151c83-84 163-154 176-157s35-1 50 4c40 15 379 358 386 391 10 46-19 87-165 233l-140 140 152 152c207 208 210 176-32 418-115 115-194 186-210 190-47 10-83-14-228-158l-142-141-143 141c-169 168-185 178-242 153zm185-384c147-147 174-165 228-151 16 4 85 64 175 153l147 146 87-87 88-87-153-153c-133-135-152-157-152-186 0-18 5-42 11-54s75-86 152-165l142-142-175-175-153 153c-151 149-154 152-197 152s-46-3-197-152l-153-153-174 174 152 155c149 150 152 155 152 197s-3 46-152 196l-152 153 84 85c47 47 87 85 89 85 3 0 71-65 151-144z" ></path>
+                                            </g>
+                                        </svg> </i>
+                                    <div class="line-one font_20 font-weight text-right">
+                                        پرواز قابل رزرو نیست ، [##db.error.value##].
+                                    </div>
+                                    <div class="line-two text-right">
+                                        برای دریافت نتیجه لطفا تاریخ و یا مسیر خود را تغییر دهید
+                                    </div>
+                                    <button class="background-color_1 color_white font_16 border-radius cursor-pointer"
+                                        onclick="window.location='/'">صفحه اصلی</button>
+                                </div>
+                            </face>
+   
+                            <face filter="type in ('object','array')">@child</face>
+                        </basis>
+                        <basis core="tree" datamembername="db.passenger-form-Tree" idcol="id" parentidcol="parentid"
+                            nullvalue="null">
+                            <face filter="field in ('root') and type in ('array')">
+                                <div class="passenger-form-value" data-output='@value'></div>
+                            </face>
+                            <face filter="type in ('object','array')">@child</face>
+                        </basis>
+                        <form method="post" action="/Client_Final_Oneway.bc" class="invoice-form">
+                         <input type="hidden" value="Client_Show_Oneway_ver.2.bc" name="ViewUrl" />
+                            <input type="hidden" value="[##cms.form.idnows##]" name="idnows"/>
+                            <input type="hidden" value='[##cms.form.idws|("")##]' name="idws"/>
+                            <input type="hidden" value="[##cms.form.productid##]" name="productid"/>
+                            <input type="hidden" value="[##cms.form.supplier##]" name="supplier"/>
+                            <input type="hidden" value="[##cms.form.share##]" name="share"/>
+                            <input type="hidden" value="[##cms.form.provider##]" name="provider" class="provider"/>
+                            <input type="hidden" value='[##cms.form.mainprovider##]' name="mainprovider"/>
+                            <input type="hidden" value="[##cms.form.classname##]" name="classname"/>
+                            <input type="hidden" value="[##cms.form.idvalue##]" name="idvalue"/>
+                            <input type="hidden" value="[##db.userid.userid##]" name="userid" class="main-userid"/>
+                            <input type="hidden" value="[##cms.form.adultcount##]" name="adultcount"
+                                class="adultcount"/>
+                            <input type="hidden" value="[##cms.form.childcount##]" name="childcount"
+                                class="childcount"/>
+                            <input type="hidden" value="[##cms.form.infants##]" name="infantcount"
+                                class="infantcount"/>
+                            <input type="hidden" value="[##cms.form.from##]" name="from"/>
+                            <input type="hidden" value="[##cms.form.to##]" name="to"/>
+                            <input type="hidden" value="[##cms.form.adult##]" name="adult"/>
+                            <input type="hidden" value="[##cms.form.child##]" name="child"/>
+                            <input type="hidden" value="[##cms.form.select-age##]" name="select-age"
+                                class="select-age"/>
+                            <input type="hidden" value="[##cms.form.fdate##]" name="fdate"/>
+                            <input type="hidden" value="[##cms.form.FlightClass##]" name="FlightClass"/>
+                            <input type="hidden" value="[##cms.form.engine##]" name="engine"/>
+                            <input type="hidden" value="[##cms.form.flight_id##]" name="flight_id"/>
+                            <input type="hidden" value="[##cms.form.rate-unit##]" name="currency_request"
+                                class="rate-unit"/>
+                            <input type="hidden" value="[##cms.form.rate-cost##]" class="rate-cost"/>
+                            <input type="hidden" value="[##cms.form.rate-floatdigit##]" class="rate-floatdigit"/>
+                            <input type="hidden" value="0" name="c_code"/>
+                            <input type="hidden" value="0" name="agencycounter"/>
+                            <input type="hidden" value="-" name="agencycountername"/>
+                            <input type="hidden" value='' name="invoicedesc"/>
+                            <input type="hidden" value="-" name="bank_id"/>
+                            <input type="hidden" value="" name="paytype"/>
+                            <input type="hidden" value="" name="clear"/>
+                            <input type="hidden" value="0" name="club_discount"/>
+                            <basis core="tree" datamembername="db.showdetail-Tree" idcol="id" parentidcol="parentid"
+                                nullvalue="null">
+                                <face filter="field in ('exitDateSs') and type in ('Scalar.String')">
+                                    <input type="hidden" value="@value" name="arrivalTime"/>
+                                </face>
+                                <face filter="field = 'moneytype'">
+                                    <input type="hidden" value="@value" name="moneytype"/>
+                                </face>
+                                <face filter="field = 'exitDateMs' and type in ('Scalar.String')">
+                                    <input type="hidden" value="@value" class="exitDateMs"/>
+                                </face>
+                                <face filter="field='Credit_payment'">
+                                    <input type="hidden" value="@value" class="Credit_payment"/>
+                                </face>
+                                <face filter="field='coupon_data'">
+                                    <input type="hidden" value='@value' class="coupon_data"/>
+                                </face>
+                                <face filter="field='extra_service'">
+                                    <input type="hidden" value='@value' class="extra_service"/>
+                                </face>
+                                <face filter="field='unit'">
+                                    <input type="hidden" value="@value" class="currency-unit"/>
+                                </face>
+                                <face filter="field='internal'">
+                                    <input type="hidden" value="@value" class="internal"/>
+                                </face>
+                                <face filter="type in ('object','array')">@child</face>
+                            </basis>
+                            <div class="passengers-info-content"></div>
+                            <div class="buyers-info-content unvisible" data-load="0">
+                                <div id="ballsWaveG">
+                                    <div id="ballsWaveG_1" class="ballsWaveG"></div>
+                                    <div id="ballsWaveG_2" class="ballsWaveG"></div>
+                                    <div id="ballsWaveG_3" class="ballsWaveG"></div>
+                                    <div id="ballsWaveG_4" class="ballsWaveG"></div>
+                                    <div id="ballsWaveG_5" class="ballsWaveG"></div>
+                                    <div id="ballsWaveG_6" class="ballsWaveG"></div>
+                                    <div id="ballsWaveG_7" class="ballsWaveG"></div>
+                                    <div id="ballsWaveG_8" class="ballsWaveG"></div>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="summary-info-content unvisible">
+                            <div class="summary-info box-content passenger">
+                                <div class="box-content-title">
+                                    <div class="color_1 font_14 inside-title">مشخصات مسافران</div>
+                                </div>
+                                <div class="summary-passenger-items font_13 text-center">
+                                  
+                                </div>
+                                <div class="clr"></div>
+                            </div>
+                            <div class="summary-info box-content has-maring buyer">
+                                <div class="box-content-title">
+                                    <div class="color_1 font_14 inside-title">مشخصات خریدار</div>
+                                </div>
+                                <div class="summary-buyer-items font_13 text-center">
+                                </div>
+                                <div class="clr"></div>
+                            </div>
+                            <div class="summary-info box-content has-maring">
+                                <div class="box-content-title">
+                                    <div class="color_1 font_14 inside-title">کد تخفیف </div>
+                                </div>
+                                <div class="color_gray font_13">اگر کد تخفیف دارید،‌ آن را در بخش زیر وارد کنید
+                                    و دکمه
+                                    اعمال کد را بزنید.</div>
+                                <form class="coupon-form" onsubmit="check_coupon_form(event,this)">
+                                    <div class="coupon-content flex-justify">
+                                        <input type="text" class="coupon-code" autocomplete="off"/>
+                                        <button type="submit" class="background-color_2"><i
+                                                class="fa fa-search"></i></button>
+                                    </div>
+                                    <div class="action-loading">
+                                        <div id="ballsWaveG">
+                                            <div id="ballsWaveG_1" class="ballsWaveG"></div>
+                                            <div id="ballsWaveG_2" class="ballsWaveG"></div>
+                                            <div id="ballsWaveG_3" class="ballsWaveG"></div>
+                                            <div id="ballsWaveG_4" class="ballsWaveG"></div>
+                                            <div id="ballsWaveG_5" class="ballsWaveG"></div>
+                                            <div id="ballsWaveG_6" class="ballsWaveG"></div>
+                                            <div id="ballsWaveG_7" class="ballsWaveG"></div>
+                                            <div id="ballsWaveG_8" class="ballsWaveG"></div>
+                                        </div>
+                                    </div>
+                               
+                                <div class="action-message"></div>
+                                </form>
+
+                                <div class="clr"></div>
+                            </div>
+                            <div class="member-point-container">
+                                <div id="ballsWaveG">
+                                    <div id="ballsWaveG_1" class="ballsWaveG"></div>
+                                    <div id="ballsWaveG_2" class="ballsWaveG"></div>
+                                    <div id="ballsWaveG_3" class="ballsWaveG"></div>
+                                    <div id="ballsWaveG_4" class="ballsWaveG"></div>
+                                    <div id="ballsWaveG_5" class="ballsWaveG"></div>
+                                    <div id="ballsWaveG_6" class="ballsWaveG"></div>
+                                    <div id="ballsWaveG_7" class="ballsWaveG"></div>
+                                    <div id="ballsWaveG_8" class="ballsWaveG"></div>
+                                </div>
+                            </div>
+                            <div class="summary-info box-content has-maring">
+                                <div class="box-content-title">
+                                    <div class="color_1 font_14 inside-title"> پرداخت </div>
+                                </div>
+                                <div class="counter-content has-select-input package-info-item">
+                                    <i class="fa fa-spinner unvisible"></i>
+                                    <label>کانتر اقدام کننده</label>
+                                    <div class="inner-item"><input type="text" class="name" readonly
+                                            onclick="toggle_counter_list(this)"
+                                             data-load="0"/>
+                                        <ul class="drop-item wide"></ul>
+                                    </div>
+                                </div>
+                                <div class="clr"></div>
+                                <div class="note-content width_50 package-info-item">
+                                    <label> یادداشت </label>
+                                    <_textarea onkeyup="invoice_desc(event,this)"></_textarea>
+                                </div>
+                                <div class="clr"></div>
+                                <div class="rule-condition-content color_gray font_12">
+                                    <input type="checkbox" class="" data-check="0"/>
+                                    <label><span class="font-weight cursor-pointer" onclick="show_condition(this)">قوانین و مقررات</span> این قرارداد را بطور
+                                        کامل
+                                        مطالعه نموده و شرایط آن را قبول دارم که تایید آن بصورت انتخاب این قسمت
+                                        انجام می
+                                        شود .</label>
+                                    <section class="invoice-condition-container"></section>
+                                 
+                                </div>
+                                <div class="clr"></div>
+                            </div>
+
+
+                        </div>
+                        <div class="btns-container font_15">
+                            <button class="btn-item prev-btn float-right unvisible" data-step=""
+                                onclick="prev_step(this)"> بازگشت به مرحله قبل </button>
+                            <button class="btn-item next-btn float-left" data-step="passenger"
+                                onclick="next_step(this)">تایید و ادامه </button>
+                                <div class="clr"></div>
+                        </div>
+                        <div class="summary-info box-content has-maring summary-invoice unvisible">
+                           <div class="invoice-container color_gray">
+                      
+                           </div>
+                        
+                        </div>
+                    </div>
+                </div>
+                <div class="clr"></div>
+            </section>
+        <section id="app"></section>  
+        </section>
+        <!----------------JS FILE---------------->
+        <script src="https://cdn.basiscore.net/basisfly.com/js/reservation_js_library.js" type="text/javascript">
+        </script>
+        <basis core="call" file="footer.inc"></basis>
+    </main>
+    <script src="js/reservation_tem_js_view_test.js" type="text/javascript"></script>
+    <script defer src="https://cdn.basiscore.net/basisfly.com/js/reservation_react.production.min.js" ></script>
+    <script defer src="https://cdn.basiscore.net/basisfly.com/js/reservation_react_dom.production.min.js"></script>
+    <script defer src="https://cdn.basiscore.net/basisfly.com/js/reservation_babel.min.js"></script>
+    <script defer src="https://cdn.basiscore.net/basisfly.com/js/reservation_react_paging.js"></script>
+    <script>
+    
+    </script>
+
+    <script type="text/babel">
+    function load_passengersList(dmnid, userid, internal, index) {
+    class App extends React.Component {
+        constructor(props) {
+            super(props);
+            this.state = {
+                data: [],
+                library: null,
+                perPage: 10,
+                currentPage: 1,
+                maxPage: null,
+                filter: "",
+                InternalOrExternal: ""
+
+            };
+        }
+        componentDidMount() {
+            if (internal == 0) {
+                this.setState({ InternalOrExternal: 'شماره گذرنامه' })
+            } else {
+                this.setState({ InternalOrExternal: 'کد ملی' })
+            }
+            fetch("/Client_Passengers_List_Json.bc", {
+                method: "POST",
+                body: "dmnid=" + dmnid + "&userid=" + userid + "",
+            })
+                .then((response) => response.text())
+                .then((text) => {
+                    text = text.replace(/\"/g, '')
+                    let Maindata = JSON.parse(text.replace(/\'/g, '"'));
+                    this.setState(
+                        (state) => ({
+                            ...state,
+                            data: Maindata,
+                        }),
+                        () => {
+                            this.reorganiseLibrary();
+                            document.querySelector(".passengers-prev-loading").classList.add("unvisible");
+                            document.querySelector(".t-bodys-content").classList.remove("unvisible");
+                        }
+                    );
+                })
+                .catch((error) => console.error(error));
+
+        }
+        componentDidUpdate() {
+            $(".select-passnger").each(function () {
+                $(this).click(function () {
+                    document.querySelector(".passengers-prev-container").classList.toggle("passengers-prev-container-toggle");
+                    var data_firstname = $(this).attr("data-firstname");
+                    var data_lastname = $(this).attr("data-lastname");
+                    var data_nationalcode = $(this).attr("data-nationalcode");
+                    var data_birthdate = $(this).attr("data-birthdate");
+                    var data_gender = $(this).attr("data-gender");
+                    var data_passportcode = $(this).attr("data-passportcode");
+                    var data_passportexpiration = $(this).attr("data-passportexpiration");
+                    var data_issuecountry = $(this).attr("data-issuecountry");
+                    var data_countryofresidence_name = $(this).attr("data-countryofresidence_name");
+                    var data_internal = $(this).attr("data-internal");
+                    var data_index = $(this).attr("data-index");
+                    var countryofresidence_id = "";
+                    for (var i = 0; i < document.getElementsByClassName("passenger-info-content")[data_index].getElementsByClassName("package-info-item").length; i++) {
+                        if (document.getElementsByClassName("passenger-info-content")[data_index].getElementsByClassName("package-info-item")[i].querySelector(".gender-id")) {
+                            document.getElementsByClassName("passenger-info-content")[data_index].getElementsByClassName("package-info-item")[i].querySelector(".gender-id").value = data_gender;
+                            if (data_gender == 0) {
+                                document.getElementsByClassName("passenger-info-content")[data_index].getElementsByClassName("package-info-item")[i].querySelector(".gender").value = "خانم";
+                            } else {
+                                document.getElementsByClassName("passenger-info-content")[data_index].getElementsByClassName("package-info-item")[i].querySelector(".gender").value = "آقا";
+                            }
+                        };
+                        if (document.getElementsByClassName("passenger-info-content")[data_index].getElementsByClassName("package-info-item")[i].querySelector("input[type=hidden]")) {
+                            if (document.getElementsByClassName("passenger-info-content")[data_index].getElementsByClassName("package-info-item")[i].querySelector("input[type=hidden]").getAttribute("name").indexOf('issuecountry') > -1) {
+                                document.getElementsByClassName("passenger-info-content")[data_index].getElementsByClassName("package-info-item")[i].querySelector("input[type=hidden]").value = data_issuecountry;
+                                document.getElementsByClassName("passenger-info-content")[data_index].getElementsByClassName("package-info-item")[i].querySelector("input[type=hidden]").closest(".package-info-item").querySelector(".country").value = data_countryofresidence_name;
+                            } else if (document.getElementsByClassName("passenger-info-content")[data_index].getElementsByClassName("package-info-item")[i].querySelector("input[type=hidden]").getAttribute("name").indexOf('birthday') > -1 || document.getElementsByClassName("passenger-info-content")[data_index].getElementsByClassName("package-info-item")[i].querySelector("input[type=hidden]").getAttribute("name").indexOf('birthdate') > -1) {
+                                document.getElementsByClassName("passenger-info-content")[data_index].getElementsByClassName("package-info-item")[i].querySelector("input[type=hidden]").value = data_birthdate;
+                                var data_birthdate_split = data_birthdate.split("-");
+                                document.getElementsByClassName("passenger-info-content")[data_index].getElementsByClassName("package-info-item")[i].querySelector(".day").value = data_birthdate_split[2];
+                                document.getElementsByClassName("passenger-info-content")[data_index].getElementsByClassName("package-info-item")[i].querySelector(".month").value = data_birthdate_split[1];
+                                document.getElementsByClassName("passenger-info-content")[data_index].getElementsByClassName("package-info-item")[i].querySelector(".year").value = data_birthdate_split[0];
+
+                                document.getElementsByClassName("passenger-info-content")[data_index].getElementsByClassName("package-info-item")[i].querySelector(".day").setAttribute("data-id",data_birthdate_split[2]);
+                                document.getElementsByClassName("passenger-info-content")[data_index].getElementsByClassName("package-info-item")[i].querySelector(".month").setAttribute("data-id",data_birthdate_split[1]);
+                                document.getElementsByClassName("passenger-info-content")[data_index].getElementsByClassName("package-info-item")[i].querySelector(".year").setAttribute("data-id",data_birthdate_split[0]);
+                            }
+                            else if (document.getElementsByClassName("passenger-info-content")[data_index].getElementsByClassName("package-info-item")[i].querySelector("input[type=hidden]").getAttribute("name").indexOf('passportexpiration') > -1) {
+                                if (data_internal == 0) {
+                                    document.getElementsByClassName("passenger-info-content")[data_index].getElementsByClassName("package-info-item")[i].querySelector("input[type=hidden]").value = data_passportexpiration;
+                                    var data_passportexpiration_split = data_passportexpiration.split("-");
+                                    document.getElementsByClassName("passenger-info-content")[data_index].getElementsByClassName("package-info-item")[i].querySelector(".day").value = data_passportexpiration_split[2];
+                                    document.getElementsByClassName("passenger-info-content")[data_index].getElementsByClassName("package-info-item")[i].querySelector(".month").value = data_passportexpiration_split[1];
+                                    document.getElementsByClassName("passenger-info-content")[data_index].getElementsByClassName("package-info-item")[i].querySelector(".year").value = data_passportexpiration_split[0];
+
+                                    document.getElementsByClassName("passenger-info-content")[data_index].getElementsByClassName("package-info-item")[i].querySelector(".day").setAttribute("data-id",data_passportexpiration_split[2]);
+                                    document.getElementsByClassName("passenger-info-content")[data_index].getElementsByClassName("package-info-item")[i].querySelector(".month").setAttribute("data-id", data_passportexpiration_split[1]);
+                                    document.getElementsByClassName("passenger-info-content")[data_index].getElementsByClassName("package-info-item")[i].querySelector(".year").setAttribute("data-id", data_passportexpiration_split[0]);
+
+                                    if (!document.getElementsByClassName("passenger-info-content")[data_index].getElementsByClassName("package-info-item")[i].querySelector(".day").classList.contains("necessary")) {
+                                        document.getElementsByClassName("passenger-info-content")[data_index].getElementsByClassName("package-info-item")[i].querySelector(".day").classList.add("necessary")
+                                    }
+                                    if (!document.getElementsByClassName("passenger-info-content")[data_index].getElementsByClassName("package-info-item")[i].querySelector(".month").classList.contains("necessary")) {
+                                        document.getElementsByClassName("passenger-info-content")[data_index].getElementsByClassName("package-info-item")[i].querySelector(".month").classList.add("necessary")
+                                    }
+                                    if (!document.getElementsByClassName("passenger-info-content")[data_index].getElementsByClassName("package-info-item")[i].querySelector(".year").classList.contains("necessary")) {
+                                        document.getElementsByClassName("passenger-info-content")[data_index].getElementsByClassName("package-info-item")[i].querySelector(".year").classList.add("necessary")
+                                    }
+                                } else {
+                                    document.getElementsByClassName("passenger-info-content")[data_index].getElementsByClassName("package-info-item")[i].querySelector("input[type=hidden]").value == '-';
+                                    if (document.getElementsByClassName("passenger-info-content")[data_index].getElementsByClassName("package-info-item")[i].querySelector(".day").classList.contains("necessary")) {
+                                        document.getElementsByClassName("passenger-info-content")[data_index].getElementsByClassName("package-info-item")[i].querySelector(".day").classList.remove("necessary")
+                                    }
+                                    if (document.getElementsByClassName("passenger-info-content")[data_index].getElementsByClassName("package-info-item")[i].querySelector(".month").classList.contains("necessary")) {
+                                        document.getElementsByClassName("passenger-info-content")[data_index].getElementsByClassName("package-info-item")[i].querySelector(".month").classList.remove("necessary")
+                                    }
+                                    if (document.getElementsByClassName("passenger-info-content")[data_index].getElementsByClassName("package-info-item")[i].querySelector(".year").classList.contains("necessary")) {
+                                        document.getElementsByClassName("passenger-info-content")[data_index].getElementsByClassName("package-info-item")[i].querySelector(".year").classList.remove("necessary")
+                                    }
+
+
+                                }
+
+
+                            }
+
+                        };
+                        if (document.getElementsByClassName("passenger-info-content")[data_index].getElementsByClassName("package-info-item")[i].querySelector("input[type=text]")) {
+                            if (document.getElementsByClassName("passenger-info-content")[data_index].getElementsByClassName("package-info-item")[i].querySelector("input[type=text]").getAttribute("name")) {
+                                if (document.getElementsByClassName("passenger-info-content")[data_index].getElementsByClassName("package-info-item")[i].querySelector("input[type=text]").getAttribute("name").indexOf('firstname') > -1) {
+                                    document.getElementsByClassName("passenger-info-content")[data_index].getElementsByClassName("package-info-item")[i].querySelector("input[type=text]").value = data_firstname;
+                                } else if (document.getElementsByClassName("passenger-info-content")[data_index].getElementsByClassName("package-info-item")[i].querySelector("input[type=text]").getAttribute("name").indexOf('lastname') > -1) {
+                                    document.getElementsByClassName("passenger-info-content")[data_index].getElementsByClassName("package-info-item")[i].querySelector("input[type=text]").value = data_lastname;
+                                } else if (document.getElementsByClassName("passenger-info-content")[data_index].getElementsByClassName("package-info-item")[i].querySelector("input[type=text]").getAttribute("name").indexOf('passportcode') > -1) {
+                                    if (data_internal == 0) {
+                                        document.getElementsByClassName("passenger-info-content")[data_index].getElementsByClassName("package-info-item")[i].querySelector("input[type=text]").value = data_passportcode;
+                                    } else {
+                                        document.getElementsByClassName("passenger-info-content")[data_index].getElementsByClassName("package-info-item")[i].querySelector("input[type=text]").value = "-";
+                                    }
+
+                                } else if (document.getElementsByClassName("passenger-info-content")[data_index].getElementsByClassName("package-info-item")[i].querySelector("input[type=text]").getAttribute("name").indexOf('NationalCode') > -1 || document.getElementsByClassName("passenger-info-content")[data_index].getElementsByClassName("package-info-item")[i].querySelector("input[type=text]").getAttribute("name").indexOf('nationalcode') > -1) {
+                                    document.getElementsByClassName("passenger-info-content")[data_index].getElementsByClassName("package-info-item")[i].querySelector("input[type=text]").value = data_nationalcode;
+                                }
+                            }
+
+                        }
+
+
+                    }
+
+                })
+            })
+        }
+        reorganiseLibrary = () => {
+            const { filter, perPage, data } = this.state;
+            let library = data;
+            if (filter !== "") {
+                if(library.length !== undefined){
+                    library = library.filter(item =>
+                    item.firstname.toLowerCase().includes(filter) || item.lastname.toLowerCase().includes(filter) || item.birthdate.toLowerCase().includes(filter) || item.passportcode.toLowerCase().includes(filter) || item.nationalcode.toLowerCase().includes(filter)
+                )
+                }
+            }
+            library = _.chunk(library, perPage);
+            this.setState({
+                library,
+                currentPage: 1,
+                maxPage: library.length === 0 ? 1 : library.length,
+            });
+        };
+        handleChange = evt =>
+            this.setState(
+                {
+                    filter: evt.target.value.toLowerCase()
+                },
+                () => {
+                    this.reorganiseLibrary();
+                }
+            )
+        // Previous Page
+        previousPage = (event) => {
+            this.setState({
+                currentPage: this.state.currentPage - 1,
+            });
+        };
+
+        // Next Page
+        nextPage = (event) => {
+            this.setState({
+                currentPage: this.state.currentPage + 1,
+            });
+        };
+
+        // handle per page
+        handlePerPage = (evt) =>
+            this.setState(
+                {
+                    perPage: evt.target.value,
+                },
+                () => this.reorganiseLibrary()
+            );
+
+        // handle render of library
+        renderLibrary = () => {
+            const { library, currentPage } = this.state;
+            if (!library || (library && library.length === 0)) {
+                return (<div className="nodata text-center"> نتیجه ای یافت نشد!</div>);
+            }
+            return library[currentPage - 1].map((item, i) => (<div className="t-body">
+                <div className="width_30 float-right dir-ltr text-right"><span>{item.firstname}</span><span
+                    className="space"></span><span>{item.lastname}</span></div>
+                <div className="width_70 float-left dir-ltr text-right"><span>{item.birthdate}</span><span
+                    className="space">/
+                </span><span>{this.renderInternal(item)}</span>
+                    <button className="select-passnger" data-firstname={item.firstname}
+                        data-lastname={item.lastname}
+                        data-nationalcode={item.nationalcode}
+                        data-birthdate={item.birthdate}
+                        data-gender={item.gender}
+                        data-passportcode={item.passportcode}
+                        data-passportexpiration={item.passportexpiration}
+                        data-type={item.type}
+                        data-issuecountry={item.countryofresidence.countryid}
+                        data-countryofresidence_name={item.countryofresidence.ecountryname}
+                        data-passportissuecountry={item.passportissuecountry}
+                        data-index={index}
+                        data-internal={internal}>انتخاب مسافر</button>
+                    <div className="clr"></div>
+                </div>
+                <div className="clr"></div>
+            </div>
+            ));
+        };
+
+        render() {
+            const { library, currentPage, perPage, maxPage } = this.state;
+            return (<section className="passengers-prev-container">
+                <section className="bg-passengers-prev-container" onClick={this.renderClosePassengersPrev}>
+                </section>
+                <section className="main-passengers-prev-container">
+                    <div className="passengers-prev-closed" onClick={this.renderClosePassengersPrev}><i className="fa fa-times"></i></div>
+                    <div className="passengers-prev-title d-flex">
+                        <svg data-v-2919ee3e="" aria-hidden="true"
+                            focusable="false" data-prefix="far" data-icon="user-clock" role="img"
+                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" name="user-clock" color="inherit"
+                            type="regular" className="mr-icon-svg svg-inline--fa fa-user-clock">
+                            <path data-v-2919ee3e="" fill=""
+                                d="M496 224c-79.63 0-144 64.38-144 144s64.38 144 144 144s144-64.38 144-144S575.6 224 496 224zM544 384h-54.25C484.4 384 480 379.6 480 374.3V304c0-8.836 7.164-16 16-16c8.838 0 16 7.164 16 16v48h32c8.838 0 16 7.164 16 15.1S552.8 384 544 384zM224 256c70.69 0 128-57.31 128-128c0-70.69-57.31-128-128-128S96 57.31 96 128C96 198.7 153.3 256 224 256zM224 48c44.11 0 80 35.89 80 80c0 44.11-35.89 80-80 80S144 172.1 144 128C144 83.89 179.9 48 224 48zM395 512H32c-17.67 0-32-14.33-32-32c0-97.2 78.8-176 176-176h96c19.87 0 38.89 3.441 56.7 9.508c-4.963 15.24-7.787 31.41-8.383 48.17C305.4 355.5 289.1 352 272 352h-96c-65.16 0-119.1 48.95-127 112h299.6C360.9 482.8 376.6 499.1 395 512z"
+                                className=""></path>
+                        </svg>
+                        <div>
+                            <p className="title"> انتخاب مسافران</p>
+                            <p className="sub-title">مسافر مورد نظر خود را انتخاب نمایید</p>
+                        </div>
+                    </div>
+                    <div className="passengers-prev-content font_13 ">
+                        <div className="t-head font-weight color_font">
+                            <div className="width_30 float-right">نام ونام خانوادگی</div>
+                            <div className="width_70 float-left flex-justify"><span>{this.state.InternalOrExternal}<span
+                                className="space">/</span>تاریخ
+                                تولد</span>
+                                <input className="search-passenger" value={this.state.filter} onChange={this.handleChange} type="text" placeholder="جستجو مسافر"/>
+                            </div>
+                            <div className="clr"></div>
+                        </div>
+                        <div className="t-bodys color_gray">
+                            <div className="passengers-prev-loading">
+                                <div id="ballsWaveG">
+                                    <div id="ballsWaveG_1" class="ballsWaveG"></div>
+                                    <div id="ballsWaveG_2" class="ballsWaveG"></div>
+                                    <div id="ballsWaveG_3" class="ballsWaveG"></div>
+                                    <div id="ballsWaveG_4" class="ballsWaveG"></div>
+                                    <div id="ballsWaveG_5" class="ballsWaveG"></div>
+                                    <div id="ballsWaveG_6" class="ballsWaveG"></div>
+                                    <div id="ballsWaveG_7" class="ballsWaveG"></div>
+                                    <div id="ballsWaveG_8" class="ballsWaveG"></div>
+                                </div>
+                            </div>
+                            <div className="t-bodys-content unvisible">
+                                {this.renderLibrary()}
+                                <ul id="page-numbers">
+                                    <li className="nexprev">
+                                        {currentPage !== 1 && (
+                                            <button onClick={this.previousPage} className="FirstPage">
+                                                <i className="fa fa-backward"></i>
+                                            </button>
+                                        )}
+                                    </li>
+                                    <li className="controls-active background-color_2 font-weight">
+                                        {this.state.currentPage}
+                                    </li>
+                                    <li className="restControls">...</li>
+                                    <li className="controls">{this.state.maxPage}</li>
+                                    <li className="nexprev">
+                                        {currentPage < maxPage && (
+                                            <button onClick={this.nextPage} className="LastPage">
+                                                <i className="fa fa-forward"></i>
+                                            </button>
+                                        )}
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </section>
+            </section>
+            );
+        }
+        renderInternal(element) {
+            if (internal == 0) {
+                return element.passportcode
+            } else {
+                return element.nationalcode
+            }
+        }
+
+        renderClosePassengersPrev = event => {
+            document.querySelector(".passengers-prev-container").classList.toggle("passengers-prev-container-toggle");
+        }
+    }
+    ReactDOM.render(<App ></App>, document.getElementById("app"));
+}
+
+ 
+    </script>
+</body>
+
+</html>
+</basis>
+</basis>

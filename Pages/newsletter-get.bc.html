@@ -1,0 +1,18 @@
+<basis core="dbsource" source="trust_login" name="db" captcha="[##cms.form.Captcha##]"
+    captchaid="[##cms.form.Captchaid##]">
+    <member name="captcha" type="scalar" request="checkcaptcha" />
+</basis>
+<basis core="group" name="check-captcha" if="'[##db.captcha.Column1##]' = 'true'">
+    <basis core="dbsource" source="trust_login" title="[##cms.form.name##]" email="[##cms.form.email##]" mob="[##cms.form.mobile##]" captcha="[##cms.form.Captcha##]" captchaid="[##cms.form.Captchaid##]" name="db" ownerid="[##cms.cms.ownerid##]">
+        <member name="list" type="scalar" request="newsmembersabt"  />
+      </basis>
+    <script type="text/javascript">
+        $(".Message-Form").html('<p class="success">Your request has been sent successfully</p>');
+    </script>
+</basis>
+<basis core="group" name="check-captcha" if="'[##db.captcha.Column1##]' <> 'true'">
+    <script type="text/javascript">
+        $(".Message-Form").html('<p class="error">Security code is incorrect</p>');
+        $(".load-captcha").load("/Client_Captcha.bc");
+    </script>
+</basis>

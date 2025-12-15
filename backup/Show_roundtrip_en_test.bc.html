@@ -1,0 +1,3015 @@
+<basis core="dbsource" source="trust_login8" mid="24" name="db" lid="1" rkey="[##cms.cookie.rkey##]" >
+    <member name="userid" type="scalar" request="userid"/>
+   </basis>
+   <basis core="group" name="Delay_1">
+  
+   <basis core="external.fly.ws" source="cmsDbService2" procedurename="dbsource" name="db">
+    <member name="ShowDetail" method="flight" query= '{
+        "name": "db",
+        "mid": "20",
+        "schemabase": "[##cms.query.schemabase|(true)##]",
+        "schema": {
+          "mainiall": {
+            "action": "create",
+            "childs": [
+              {
+                "totalinfo": {
+                  "action": "create",
+                  "childs": [
+                    {
+                      "internal": {
+                        "action": "find",
+                        "map": "internal"
+                      }
+                    },
+                    {
+                      "total": {
+                        "action": "find",
+                        "map": "total"
+                      }
+                    },
+                    {
+                      "commission": {
+                        "action": "find",
+                        "map": "commissioncost"
+                      }
+                    },
+                    {
+                      "moneytype": {
+                        "action": "find",
+                        "map": "moneytype"
+                      }
+                    },
+                    {
+                      "totalcom": {
+                        "action": "find",
+                        "map": "totalcom"
+                      }
+                    },
+                    {
+                      "totalorginal": {
+                        "action": "find",
+                        "map": "totalorginal"
+                      }
+                    },
+                    {
+                      "firstpay": {
+                        "action": "find",
+                        "map": "firstpay"
+                      }
+                    },
+                    {
+                      "coupon_data": {
+                        "action": "find",
+                        "map": "coupon_data"
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "cityonfo": {
+                  "action": "create",
+                  "childs": [
+                    {
+                      "startcityall": {
+                        "action": "find",
+                        "map": "ticketinfo.departureinfo.oneway.ticket.infooo.startcity"
+                      }
+                    },
+                    {
+                      "endcityall": {
+                        "action": "find",
+                        "map": "ticketinfo.departureinfo.oneway.ticket.infooo.endcity"
+                      }
+                    },
+                    {
+                      "startcityall2": {
+                        "action": "find",
+                        "map": "ticketinfo.departureinfo.oneway.ticket.infooo.endcity"
+                      }
+                    },
+                    {
+                      "endcityall2": {
+                        "action": "find",
+                        "map": "ticketinfo.departureinfo.oneway.ticket.infooo.startcity"
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "sstringall": {
+                  "action": "find",
+                  "map": "ticketinfo.departureinfo.oneway.ticket.dateinfo.startdeparture.sstring"
+                }
+              },
+              {
+                "sstringall2": {
+                  "action": "find",
+                  "map": "ticketinfo.returninfo.oneway.ticket.dateinfo.startreturn.sstring"
+                }
+              },
+              {
+                "DescDep": {
+                  "action": "find",
+                  "map": "ticketinfo.departureinfo.oneway.ticket.description"
+                }
+              },
+              {
+                "DescArr": {
+                  "action": "find",
+                  "map": "ticketinfo.returninfo.oneway.ticket.description"
+                }
+              },
+              {
+                "BarDepcabin": {
+                  "action": "find",
+                  "map": "ticketinfo.departureinfo.oneway.ticket.bar"
+                }
+              },
+              {
+                "BarDepperm": {
+                  "action": "find",
+                  "map": "ticketinfo.departureinfo.oneway.ticket.bar1"
+                }
+              },
+              {
+                "BarArrcabin": {
+                  "action": "find",
+                  "map": "ticketinfo.returninfo.oneway.ticket.bar"
+                }
+              },
+              {
+                "BarArrperm": {
+                  "action": "find",
+                  "map": "ticketinfo.returninfo.oneway.ticket.bar1"
+                }
+              },
+              {
+                "mainflightinfo": {
+                  "action": "create",
+                  "childs": [
+                    {
+                      "flight1": {
+                        "action": "find",
+                        "map": "ticketinfo.departureinfo.oneway.ticket.routesinfoo",
+                        "add": [
+                          "ticketinfo.departureinfo.oneway.ticket.classes",
+                          "ticketinfo.departureinfo.oneway.ticket.dateinfo"
+                        ],
+                        "options": {
+                          "firstrownulls": {
+                            "action": "create",
+                            "childs": [
+                              {
+                                "firstrownull": {
+                                  "action": "find",
+                                  "map": "airlineimage"
+                                }
+                              }
+                            ]
+                          },
+                          "airlines": {
+                            "action": "create",
+                            "childs": [
+                              {
+                                "airlineimage": {
+                                  "action": "find",
+                                  "map": "airlineimage"
+                                }
+                              },
+                              {
+                                "airlinealt": {
+                                  "action": "find",
+                                  "map": "airline"
+                                }
+                              }
+                            ]
+                          },
+                          "cityandairports": {
+                            "action": "create",
+                            "childs": [
+                              {
+                                "airportstart": {
+                                  "action": "find",
+                                  "map": "route.start.airport"
+                                }
+                              },
+                              {
+                                "citystart": {
+                                  "action": "find",
+                                  "map": "route.start.city"
+                                }
+                              },
+                              {
+                                "airportend": {
+                                  "action": "find",
+                                  "map": "route.end.airport"
+                                }
+                              },
+                              {
+                                "cityend": {
+                                  "action": "find",
+                                  "map": "route.end.city"
+                                }
+                              }
+                            ]
+                          },
+                          "times": {
+                            "action": "create",
+                            "childs": [
+                            {
+                                "exittimes":{
+                                    "action": "create",
+                                    "childs": [
+                                      {
+                                        "exittime": {
+                                          "action": "find",
+                                          "map": "time.availabel.times.exit_time"
+                                        }
+                                      },
+                                      {
+                                        "datealls": {
+                                          "action": "find",
+                                          "map": "dateinfo",
+                                          "options": {
+                                            "date_startdeparture_SS": {
+                                              "action": "find",
+                                              "map": "startdeparture.sstring"
+                                            }
+                                          }
+                                        }
+                                      },
+                                      {
+                                        "dateall": {
+                                          "action": "find",
+                                          "map": "dateinfo",
+                                          "options": {
+                                            "date_startdeparture_MS": {
+                                              "action": "find",
+                                              "map": "startdeparture.mstring"
+                                            }
+                                          }
+                                        }
+                                      }
+                                    ]
+                                }
+                            },
+                            {
+                                "arrivetimes": {
+                                    "action": "create",
+                                    "childs": [
+                                     {
+                                      "arrivaltime": {
+                                        "action": "find",
+                                        "map": "time.availabel.times.arrival_time"
+                                        }
+                                      },
+                                      {
+                                        "dateallas": {
+                                          "action": "find",
+                                          "map": "dateinfo",
+                                          "options": {
+                                            "date11s": {
+                                              "action": "find",
+                                              "map": "arrivaldateinfo",
+                                              "options": {
+                                                "date_arrivaldateinfo_SS": {
+                                                  "action": "find",
+                                                  "map": "sstring"
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      },
+                                      {
+                                        "datealla": {
+                                          "action": "find",
+                                          "map": "dateinfo",
+                                          "options": {
+                                            "date11": {
+                                              "action": "find",
+                                              "map": "arrivaldateinfo",
+                                              "options": {
+                                                "date_arrivaldateinfo_MS": {
+                                                  "action": "find",
+                                                  "map": "mstring"
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                    ]
+                                }
+                              },
+                              {
+                                "exittimego": {
+                                  "action": "find",
+                                  "map": "time.availabel.times.exit_time"
+                                }
+                              }
+                            ]
+                          },
+                          "airlinesgo": {
+                            "action": "create",
+                            "childs": [
+                              {
+                                "airlineimagego": {
+                                  "action": "find",
+                                  "map": "airlineimage"
+                                }
+                              },
+                              {
+                                "airlinealtgo": {
+                                  "action": "find",
+                                  "map": "airline"
+                                }
+                              }
+                            ]
+                          },
+                          "routeandclass": {
+                            "action": "create",
+                            "childs": [
+                              {
+                                "classname": {
+                                  "action": "find",
+                                  "map": "classes.classname"
+                                }
+                              },
+                              {
+                                "routecodeFlight": {
+                                  "action": "find",
+                                  "map": "routecode"
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "flight2": {
+                        "action": "find",
+                        "map": "ticketinfo.returninfo.oneway.ticket.routesinfoo",
+                        "add": [
+                          "ticketinfo.returninfo.oneway.ticket.classes",
+                          "ticketinfo.returninfo.oneway.ticket.dateinfo"
+                        ],
+                        "options": {
+                          "firstrownulls2": {
+                            "action": "create",
+                            "childs": [
+                              {
+                                "firstrownull2": {
+                                  "action": "find",
+                                  "map": "airlineimage"
+                                }
+                              }
+                            ]
+                          },
+                          "airlines2": {
+                            "action": "create",
+                            "childs": [
+                              {
+                                "airlineimage2": {
+                                  "action": "find",
+                                  "map": "airlineimage"
+                                }
+                              },
+                              {
+                                "airlinealt2": {
+                                  "action": "find",
+                                  "map": "airline"
+                                }
+                              }
+                            ]
+                          },
+                          "cityandairports2": {
+                            "action": "create",
+                            "childs": [
+                              {
+                                "airportstart2": {
+                                  "action": "find",
+                                  "map": "route.start.airport"
+                                }
+                              },
+                              {
+                                "citystart2": {
+                                  "action": "find",
+                                  "map": "route.start.city"
+                                }
+                              },
+                              {
+                                "airportend2": {
+                                  "action": "find",
+                                  "map": "route.end.airport"
+                                }
+                              },
+                              {
+                                "cityend2": {
+                                  "action": "find",
+                                  "map": "route.end.city"
+                                }
+                              }
+                            ]
+                          },
+                          "times2": {
+                            "action": "create",
+                            "childs": [
+                              {
+                                "exittimes2": {
+                                    "action": "create",
+                                    "childs": [
+                                    {
+                                        "exittime2": {
+                                          "action": "find",
+                                          "map": "time.availabel.times.exit_time"
+                                        }
+                                      },
+                                      {
+                                        "dateall2s": {
+                                          "action": "find",
+                                          "map": "dateinfo",
+                                          "options": {
+                                            "date_startreturn_SS": {
+                                              "action": "find",
+                                              "map": "startreturn.sstring"
+                                            }
+                                          }
+                                        }
+                                      },
+                                      {
+                                        "dateall2": {
+                                          "action": "find",
+                                          "map": "dateinfo",
+                                          "options": {
+                                            "date_startreturn_MS": {
+                                              "action": "find",
+                                              "map": "startreturn.mstring"
+                                            }
+                                          }
+                                        }
+                                      }
+                                    ]
+                                }
+                              },
+                              {
+                                "arrivetimes2": {
+                                    "action": "create",
+                                    "childs": [
+                                    {
+                                        "arrivaltime2": {
+                                          "action": "find",
+                                          "map": "time.availabel.times.arrival_time"
+                                        }
+                                      },
+                                      {
+                                        "dateall2as": {
+                                          "action": "find",
+                                          "map": "dateinfo",
+                                          "options": {
+                                            "date211s": {
+                                              "action": "find",
+                                              "map": "arrivaldateinfo",
+                                              "options": {
+                                                "date_arrivaldateinfo_SS2": {
+                                                  "action": "find",
+                                                  "map": "sstring"
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      },
+                                      {
+                                        "dateall2a": {
+                                          "action": "find",
+                                          "map": "dateinfo",
+                                          "options": {
+                                            "date211": {
+                                              "action": "find",
+                                              "map": "arrivaldateinfo",
+                                              "options": {
+                                                "date_arrivaldateinfo_MS2": {
+                                                  "action": "find",
+                                                  "map": "mstring"
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                    ]
+                                }
+                              },
+
+                              {
+                                "exittimeback": {
+                                  "action": "find",
+                                  "map": "time.availabel.times.exit_time"
+                                }
+                              }
+                            ]
+                          },
+                          "airlinesback": {
+                            "action": "create",
+                            "childs": [
+                              {
+                                "airlineimageback": {
+                                  "action": "find",
+                                  "map": "airlineimage"
+                                }
+                              },
+                              {
+                                "airlinealtback": {
+                                  "action": "find",
+                                  "map": "airline"
+                                }
+                              }
+                            ]
+                          },
+                          "routeandclass2": {
+                            "action": "create",
+                            "childs": [
+                              {
+                                "classname2": {
+                                  "action": "find",
+                                  "map": "classes.classname"
+                                }
+                              },
+                              {
+                                "routecodeFlight2": {
+                                  "action": "find",
+                                  "map": "routecode"
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "Credit_payment": {
+                  "action": "find",
+                  "map": "Credit_payment"
+                }
+              },
+              {
+                "unit": {
+                    "action": "find",
+                    "map": "unit"
+                }
+               }
+            ]
+          }
+        },
+        "member": [
+          {
+            "type": "list",
+            "name": "q",
+            "request": "showdetail",
+            "schemaid": "290",
+            "id": "[##cms.form.idnows##]",
+            "id-ws":[##cms.form.idws|("")##],
+            "userid": "[##db.userid.userid##]",
+            "childs": "[##cms.form.childcount##]",
+            "infants": "[##cms.form.infants##]",
+            "adults": "[##cms.form.adultcount##]",
+            "supplier": "[##cms.form.supplier##]",
+            "share": "[##cms.form.share##]",
+            "trackingNo": "[##cms.cookie.trackingid##]",
+            "lid": "2",
+            "unit": "10"
+          }
+        ]
+      }
+       ' />
+   </basis>
+   <basis core="group" name="Delay_2">
+    <basis core="external.fly.ws" source="cmsDbService2" procedurename="dbsource" name="db">
+       <member name="form" method="site"  query='{
+        "name": "db",
+        "mid": "20",
+        "member": [
+          {
+            "type": "list",
+            "name": "q",
+            "request": "form",
+            "schemaid": "290",
+            "ws": "[##cms.form.provider##]",
+            "adult": "[##cms.form.adultcount##]",
+            "child": "[##cms.form.childcount##]",
+            "infant": "[##cms.form.infants##]",
+            "trackingNo": "[##cms.cookie.trackingid##]",
+            "ticketid": "[##cms.form.idvalue##]",
+            "lid": "2"
+          }
+        ]
+      }
+      ' preview=""/>
+       </basis>
+    <basis core="group" name="Delay_3">
+        <basis core="inlinesource" name="db">
+         <member name="json" format="json" postsql="select  Id , ParentId , case when trim(Field) is null  then  (select field from [db.json] where id = a.parentid ) else field end as field, value , type , path  from [db.json] as a">{"root":[##db.ShowDetail.result##]}</member>
+         <member name="firstpay" format="json" postsql="select value from [db.firstpay] where field = 'firstpay'"> {"root":[##db.ShowDetail.result##]} </member>
+         <member name="description" format="json" postsql="select value from [db.description] where field = 'description'"> {"root":[##db.ShowDetail.result##]} </member>
+    </basis>
+  <!DOCTYPE html>
+  <html>
+    <head>
+        <title>Roundtrip flight booking</title>
+        <meta name="author" content="BasisCore">
+         <meta name="viewport" content="width=device-width, minimum-scale=0.25, maximum-scale=1.0, initial-scale=1.0">
+         <link rel="stylesheet" href="https://www.marcopolo.ir/css/reservation_css_en_test.css" type="text/css">
+         <link rel="stylesheet" href="[##cms.cms.cdn##]/css/master-css.css" type="text/css">
+        </head>
+    <body class="st-effect-3" onload = "onloadFunc();"> 
+        <input type="hidden" value="[##cms.form.checkpreurl##]" class="checkpreurl"/>
+        <input type="hidden" value="[##db.userid.userid##]" class="useridshopper"/>
+        <input type="hidden" value="[##cms.form.select-age##]" class="selectAgePassenger" />
+        <input type="hidden" value="[##cms.form.adultcount##]" class="AdCountPassenger" />
+        <div id="bg-popup" style="display:none"></div>
+        <div class="boxalert" style="display:none">
+            <i class="fas fa-clock TimeoutIcon"></i>
+            <div class="firstdiv"><span>Your search has expired</span></div>
+            <div class="seconddiv"> <span class="secondalert"> Please click the button below to get the best prices and review the capacity.</span></div>
+            <div class="optionsnodata">
+                <input class="redirect hover" value="Home" onClick="window.location='/EN'" type="button">
+                    <form method="get" action="/roundtrip_search_EN.bc" class="fsearch">
+                        <input type="hidden" value="[##cms.form.from##]" name="from"/>
+                        <input type="hidden" value="[##cms.form.to##]" name="to"/>
+                        <input type="hidden" value="[##cms.form.adult##]" name="adult"/>
+                        <input type="hidden" value="[##cms.form.child##]" name="child"/>
+                        <input type="hidden" value="[##cms.form.select-age##]" name="select-age"/>
+                        <input type="hidden" value="[##cms.form.share##]" name="share"/>
+                        <input type="hidden" value="[##db.userid.userid##]" name="userid"/>
+                        <input type="hidden" value="0" name="edit"/>
+                        <input type="hidden" value="[##cms.form.fdate##]" name="fdate"/>
+                        <input type="hidden" value="[##cms.form.tdate##]" name="tdate"/>
+                        <input type="hidden" value="[##cms.form.FlightClass##]" name="FlightClass"/>
+                        <input type="submit" class="redirect hover" value="Search update" />
+                     </form>
+            </div>
+        </div>
+        <div id="app"></div>
+        <basis core="tree" datamembername="db.json" idcol="id" parentidcol="parentid" nullvalue="null">
+            <face filter="field = 'msg' and value = 'no data'">
+                <div id="bg-popup" style="display:block"></div>
+                <div class="boxalert">
+                    <i class="fas fa-exclamation-triangle NoResultIcon"></i>
+                    <div class="firstdiv"><span> An error occurred, the flight could not be booked .</span></div>
+                    <div class="seconddiv"> <span class="secondalert"> Please click the button below to review again.</span></div>      
+                    <div class="optionsnodata">
+                        <input class="redirect hover" value="Home" onClick="window.location='/EN'" type="button">
+                            <form method="get" action="/roundtrip_search_EN.bc" class="fsearch">
+                                <input type="hidden" value="[##cms.form.from##]" name="from"/>
+                                <input type="hidden" value="[##cms.form.to##]" name="to"/>
+                                <input type="hidden" value="[##cms.form.adult##]" name="adult"/>
+                                <input type="hidden" value="[##cms.form.child##]" name="child"/>
+                                <input type="hidden" value="[##cms.form.select-age##]" name="select-age"/>
+                                <input type="hidden" value="[##cms.form.share##]" name="share"/>
+                                <input type="hidden" value="[##db.userid.userid##]" name="userid"/>
+                                <input type="hidden" value="0" name="edit"/>
+                                <input type="hidden" value="[##cms.form.fdate##]" name="fdate"/>
+                                <input type="hidden" value="[##cms.form.tdate##]" name="tdate"/>
+                                <input type="hidden" value="[##cms.form.FlightClass##]" name="FlightClass"/>
+                                <input type="submit" class="redirect hover" value="Search update" />
+                             </form>
+                    </div>
+                </div>
+            </face>
+            <face filter="field = 'error' and value = '1'">
+                <div id="bg-popup" style="display:block"></div>
+                <div class="boxalert">
+                    <i class="fas fa-exclamation-triangle NoResultIcon"></i>
+                    <div class="firstdiv"><span> Flight is not bookable ، [##db.description.value##]  </span></div>
+                    <div class="seconddiv"> <span class="secondalert"> Please click the button below to review again.</span></div>      
+                    <div class="optionsnodata">
+                        <input class="redirect hover" value="Home" onClick="window.location='/EN'" type="button">
+                            <form method="get" action="/roundtrip_search_EN.bc" class="fsearch">
+                                <input type="hidden" value="[##cms.form.from##]" name="from"/>
+                                <input type="hidden" value="[##cms.form.to##]" name="to"/>
+                                <input type="hidden" value="[##cms.form.adult##]" name="adult"/>
+                                <input type="hidden" value="[##cms.form.child##]" name="child"/>
+                                <input type="hidden" value="[##cms.form.select-age##]" name="select-age"/>
+                                <input type="hidden" value="[##cms.form.share##]" name="share"/>
+                                <input type="hidden" value="[##db.userid.userid##]" name="userid"/>
+                                <input type="hidden" value="0" name="edit"/>
+                                <input type="hidden" value="[##cms.form.fdate##]" name="fdate"/>
+                                <input type="hidden" value="[##cms.form.tdate##]" name="tdate"/>
+                                <input type="hidden" value="[##cms.form.FlightClass##]" name="FlightClass"/>
+                                <input type="submit" class="redirect hover" value="Search update" />
+                             </form>
+                    </div>
+                </div>
+            </face>
+            <face filter="type in ('object','array')">@child</face>
+        </basis>
+   <div class="popup-container">
+                <span class="close CloseBox"><i class="fa fa-times" aria-hidden="true"></i></span>
+                <div class="popup-container_content"></div>
+            </div>
+        <main id="main" class="contain-currency-show">
+          <section class="loginRegister"></section>
+            <div class="main-inner">
+              
+                <div class="Details_box">
+                    <div class="Head-titr">
+                        <div id="details" class="active-titr"><span><i class="fas fa-info-circle"></i></span><span>Flight profile</span></div>
+                        <!-- <div id="rules"><span><i class="fas fa-gavel"></i></span><span>Flight Rules</span></div>
+                        <div id="bar"><span><i class="fas fa-suitcase"></i></span><span>Baggage rules</span></div> -->
+                    </div>
+                    <div class="moredetails-box">
+                    <span class="close CloseBox"><i class="fa fa-times" aria-hidden="true"></i></span>
+                    <div class="Details_info">
+                    <basis core="tree" datamembername="db.json" idcol="id" parentidcol="parentid" nullvalue="null">
+                        <face filter="field = 'mainflightinfo'">
+                            <div cellpadding="0" cellspacing="0" align="center" class="tblreserv flight-tblreserv">
+                                <div class="tblreserv-head">
+                                    <div class="tblreserv-row tblreserv-head-row">
+                                        <div class="each-tlt-cell containertitle"></div>
+                                        <div class="each-tlt-cell">Airline</div>
+                                        <div class="each-tlt-cell">Origin airport</div>
+                                        <div class="each-tlt-cell">Destination airport</div>
+                                        <div class="each-tlt-cell">Exit time</div>
+                                        <div class="each-tlt-cell">Arrival time</div>
+                                        <div class="each-tlt-cell">Flight number </div>
+                                    </div>
+                                </div>
+                                @child
+                            </div>
+                        </face>
+                        <face filter="field = 'flight1' and type = 'Object'">
+                            <div class="tblreserv-row raftreserv">
+                                <div rowspan="1" class="rotatecontainer each-cell" data-label="Departure">
+                                    <div class='rotate'>Departure</div>
+                                </div>
+                                @child 
+                            </div>
+                        </face>
+                    
+                        <face filter="field = 'airlineimage'">
+                            <div class="each-cell" data-label="Airline"><img src="/@value" width="100" height="40"
+                           </face>
+                            <face filter="field = 'airlinealt'"> alt="@value"/>
+                            </div>
+                        </face>
+                        <face filter="field = 'airportstart'">
+                            <div class="each-cell" data-label="Origin airport">@value
+                        </face>
+                        <face filter="field = 'citystart'"> <br />
+                            <font color="#9a9a9a">@value</font>
+                        </div>
+                        </face>
+                        <face filter="field = 'airportend'">
+                            <div class="each-cell" data-label="Destination airport">@value
+                        </face>
+                        <face filter="field = 'cityend'"> <br />
+                            <font color="#9a9a9a">@value</font>
+                        </div>
+                        </face>
+                        <face filter="field = 'exittimes'">
+                            <div class="each-cell" data-label="Exit time">@child</div>
+                        </face>
+                        <face filter="field = 'exittime'">
+                            @value <br />
+                        </face>
+                        <face filter="field = 'date_startdeparture_MS'  and type='Scalar.String' and value <> 'undefined'">
+                            <div class="datii">(@value)</div>
+                        </face>
+                        <face filter="field = 'arrivetimes'">
+                            <div class="each-cell" data-label="Arrival time">@child</div>
+                        </face>
+                        <face filter="field = 'arrivaltime'">
+                            @value<br />
+                        </face>
+                        <face filter="field = 'date_arrivaldateinfo_MS'  and type='Scalar.String' and value <> 'undefined'">
+                            <div class="datii">(@value)</div>
+                        </face>
+                        <face filter="field = 'routeandclass'">
+                            <div class="each-cell" data-label="Flight number">@child</div>
+                        </face>
+                        <face filter="field = 'classname'">
+                            <div>@value</div>
+                        </face>
+                        <face filter="field = 'routecodeFlight'"> @value </face>
+                        <face filter="field = 'flight2' and type = 'Object'">
+                            <div class="bargashtreserv tblreserv-row">
+                                <div rowspan="1" class="rotatecontainer each-cell" data-label="Return">
+                                    <div class='rotate'>Return</div>
+                                </div>
+                                @child </div>
+                        </face>
+                     
+                        <face filter="field = 'airlineimage2'">
+                            <div class="each-cell" data-label="Airline"><img src="/@value" width="100" height="40"
+                           </face> 
+                           <face  filter="field = 'airlinealt2'"> alt="@value"/>
+                           </div>
+                        </face>
+                        <face filter="field = 'airportstart2'">
+                            <div class="each-cell" data-label="Origin airport">@value
+                        </face>
+                        <face filter="field = 'citystart2'"> <br />
+                            <font color="#9a9a9a">@value</font>
+                        </div>
+                        </face>
+                        <face filter="field = 'airportend2'">
+                            <div class="each-cell" data-label="Destination airport">@value
+                        </face>
+                        <face filter="field = 'cityend2'"> <br />
+                            <font color="#9a9a9a">@value</font>
+                        </div>
+                        </face>
+                        <face filter="field = 'exittimes2'">
+                            <div class="each-cell" data-label="Exit time">@child</div>
+                        </face>
+                        <face filter="field = 'exittime2'">
+                            @value<br />
+                        </face>
+                        <face filter="field = 'date_startreturn_MS'  and type='Scalar.String' and value <> 'undefined'">
+                            <div class="datii">@value</div>
+                        </face>
+                        <face filter="field = 'arrivetimes2'">
+                            <div class="each-cell" data-label="Arrival time">@child</div>
+                        </face>
+                        <face filter="field = 'arrivaltime2'">
+                           @value<br />
+                        </face>
+                        <face filter="field = 'date_arrivaldateinfo_MS2'  and type='Scalar.String' and value <> 'undefined'">
+                            <div class="datii">@value</div>
+                        </face>
+                        <face filter="field = 'routeandclass2'">
+                            <div class="each-cell" data-label="Flight number">@child</div>
+                        </face>
+                        <face filter="field = 'classname2'"> @value </face>
+                        <face filter="field = 'routecodeFlight2'"> </br>
+                            @value </face>
+                        <face filter="type in ('object','array')">@child</face>
+                    </basis>
+                   </div>
+                   <div class="Rules_info">
+                    <basis core="tree" datamembername="db.json" idcol="id" parentidcol="parentid" nullvalue="null">
+                        <face filter="field = 'mainiall'">
+                            <div> @child </div>
+                           </face>
+                           <face filter="field = 'DescDep' and type='Scalar.String'">
+                            <div class="dep_rule"><span class="rules-title">Departure flight Rules : </span>
+                            <div class="resultdesc"> @value </div>
+                            </div>
+                           </face>
+                           <face filter="field = 'DescArr' and type='Scalar.String'">
+                            <div class="arr_rule"><span class="rules-title">Return flight Rules : </span>
+                            <div class="resultdesc"> @value </div>
+                            </div>
+                           </face>
+                           <face filter="field = 'DescDep' and value<>'undefined' and type='Object'">
+                            <div class="dep_rule"><span class="rules-title">Departure flight Rules : </span>
+                            <input type="hidden" value='@value' class="descdep"/>
+                            <div class="Forview"><span></span><span class="click"> Click </span><span> to view departure flight rules ! </span></div>
+                            <div class="resultdesc"></div>
+                            <div class="loadingLog" style="display:none">
+                                <div id="ballsWaveG">
+                                 <div id="ballsWaveG_1" class="ballsWaveG"></div>
+                                 <div id="ballsWaveG_2" class="ballsWaveG"></div>
+                                 <div id="ballsWaveG_3" class="ballsWaveG"></div>
+                                 <div id="ballsWaveG_4" class="ballsWaveG"></div>
+                                 <div id="ballsWaveG_5" class="ballsWaveG"></div>
+                                 <div id="ballsWaveG_6" class="ballsWaveG"></div>
+                                 <div id="ballsWaveG_7" class="ballsWaveG"></div>
+                                 <div id="ballsWaveG_8" class="ballsWaveG"></div>
+                                </div>
+                               </div>
+                            </div>
+                           </face>
+                           <face filter="field = 'DescArr' and value<>'undefined' and type='Object'">
+                            <div class="arr_rule"><span class="rules-title">Return flight Rules : </span>
+                            <input type="hidden" value='@value' class="descarr"/>
+                            <div class="Forview"><span></span><span class="click"> Click </span><span> to view return flight rules ! </span></div>
+                            <div class="resultdesc"></div>
+                            <div class="loadingLog" style="display:none">
+                                <div id="ballsWaveG">
+                                 <div id="ballsWaveG_1" class="ballsWaveG"></div>
+                                 <div id="ballsWaveG_2" class="ballsWaveG"></div>
+                                 <div id="ballsWaveG_3" class="ballsWaveG"></div>
+                                 <div id="ballsWaveG_4" class="ballsWaveG"></div>
+                                 <div id="ballsWaveG_5" class="ballsWaveG"></div>
+                                 <div id="ballsWaveG_6" class="ballsWaveG"></div>
+                                 <div id="ballsWaveG_7" class="ballsWaveG"></div>
+                                 <div id="ballsWaveG_8" class="ballsWaveG"></div>
+                                </div>
+                            </div>
+                            </div>
+                           </face>
+                           <face filter="type in ('object','array')">@child</face>
+                    </basis>
+                   </div>
+                   
+                   <div class="Bar_info">
+                    <basis core="tree" datamembername="db.json" idcol="id" parentidcol="parentid" nullvalue="null">
+                        <face filter="field = 'mainiall'">
+                            <div> @child </div>
+                           </face>
+                           <face filter="field = 'BarDepcabin' and type in ('Scalar.String','Scalar.Numeric')">
+                            <div class="dep_bar"><span class="bar-title">Departure baggage rules : </span><br/>
+                            <div><span>Cabin baggage :</span> @value </div>
+                            
+                           </face>
+                           <face filter="field = 'BarDepperm' and type in ('Scalar.String','Scalar.Numeric')">
+                            <div><span>Allowed baggage :</span> @value </div>
+                        </div>
+                           </face>
+                           <face filter="field = 'BarArrcabin' and type in ('Scalar.String','Scalar.Numeric')">
+                            <div class="arr_bar"><span class="bar-title">Return baggage rules : </span><br/>
+                            <div><span>Cabin baggage :</span> @value </div>
+                           </face>
+                           <face filter="field = 'BarArrperm' and type in ('Scalar.String','Scalar.Numeric')">
+                            <div><span>Allowed baggage :</span> @value </div>
+                           </div>
+                           </face>
+  
+                           <face filter="field = 'DescDep' and value<>'undefined' and type='Object'">
+                            <div class="dep_bar"><span class="bar-title">Departure baggage rules : </span><br/>
+                            <input type="hidden" value='@value' class="Bardep"/>
+                            <div class="Forview"><span></span><span class="click"> Click </span><span> to view departure baggage rules ! </span></div>
+                            <div class="resultbar"></div>
+                            <div class="loadingLog" style="display:none">
+                                <div id="ballsWaveG">
+                                 <div id="ballsWaveG_1" class="ballsWaveG"></div>
+                                 <div id="ballsWaveG_2" class="ballsWaveG"></div>
+                                 <div id="ballsWaveG_3" class="ballsWaveG"></div>
+                                 <div id="ballsWaveG_4" class="ballsWaveG"></div>
+                                 <div id="ballsWaveG_5" class="ballsWaveG"></div>
+                                 <div id="ballsWaveG_6" class="ballsWaveG"></div>
+                                 <div id="ballsWaveG_7" class="ballsWaveG"></div>
+                                 <div id="ballsWaveG_8" class="ballsWaveG"></div>
+                                </div>
+                               </div>
+                            </div>
+                           </face>
+                           <face filter="field = 'DescArr' and value<>'undefined' and type='Object'">
+                            <div class="arr_bar"><span class="bar-title">Return baggage rules : </span><br/>
+                            <input type="hidden" value='@value' class="Bararr"/>
+                            <div class="Forview"><span> </span><span class="click"> Click </span><span> to view return baggage rules ! </span></div>
+                            <div class="resultbar"></div>
+                            <div class="loadingLog" style="display:none">
+                                <div id="ballsWaveG">
+                                 <div id="ballsWaveG_1" class="ballsWaveG"></div>
+                                 <div id="ballsWaveG_2" class="ballsWaveG"></div>
+                                 <div id="ballsWaveG_3" class="ballsWaveG"></div>
+                                 <div id="ballsWaveG_4" class="ballsWaveG"></div>
+                                 <div id="ballsWaveG_5" class="ballsWaveG"></div>
+                                 <div id="ballsWaveG_6" class="ballsWaveG"></div>
+                                 <div id="ballsWaveG_7" class="ballsWaveG"></div>
+                                 <div id="ballsWaveG_8" class="ballsWaveG"></div>
+                                </div>
+                               </div>
+                               </div>
+                           </face>
+  
+  
+                           <face filter="type in ('object','array')">@child</face>
+                    </basis>
+                   </div>
+                </div>
+                </div>
+                <div class="rsvsteps">
+                    <div class="steps">
+                        <div class="visited"><span class="content-steps"><span class="em">Ticket search</span></span></div>
+                        <div><span class="content-steps"><span class="counter-steps">2</span><span class="em eminext">Passenger information</span></span></div>
+                        <div><span class="content-steps"><span class="counter-steps">3</span><span class="em eminext">Buyer information</span></span></div>
+                        <div><span class="content-steps"><span class="counter-steps">4</span><span class="em eminext">Pre-invoice and payment</span></span></div>
+                </div>
+                </div>
+                <div class="reserve_reisze">
+                    <div class="reserve_box">
+                        <div class="reserve_left_side">
+                            <div class="bascket_info_Tab">
+                                <div class="reserve_box_title">
+                                    <span>Cart</span>
+                                </div>
+                                <div class="bascket_info">
+                                    <div class="bascket_info_inner">
+                                        <div class="ticket_info">
+                                            <div class="Dep_info">
+                                                <basis core="tree" datamembername="db.json" idcol="id" parentidcol="parentid" nullvalue="null">
+                                                    <face filter="field='startcityall' and type='Scalar.String'">
+                                                        <span class="subject_info">Departure path : </span><span> @value </span><i class="fas fa-angle-left"></i>
+                                                    </face>
+                                                    <face filter="field='endcityall' and type='Scalar.String'">
+                                                        <span> @value </span><br/>
+                                                    </face>
+                                                    <face filter="field = 'date_startdeparture_MS'  and type='Scalar.String' and path='.root[0].mainiall.mainflightinfo.flight1[0].times.exittimes.dateall[0].date_startdeparture_MS' and value <> 'undefined'">
+                                                        <span class="eng-font"> @value </span><br/>
+                                                    </face>
+                                                    <face filter="field = 'exittimego'  and type='Scalar.String' and path='.root[0].mainiall.mainflightinfo.flight1[0].times.exittimego' and value <> 'undefined'">
+                                                        <span class="subject_info">Departure flight time : </span><span> @value </span><br/>
+                                                    </face>
+                                                    <face filter="field = 'airlineimagego' and path = '.root[0].mainiall.mainflightinfo.flight1[0].airlinesgo.airlineimagego'">
+                                                            <span class="subject_info">Departure airline : </span><span class="airimg"><img src="/@value" width="60" height=""
+                                                        </face>
+                                                        <face filter="field = 'airlinealtgo' and path = '.root[0].mainiall.mainflightinfo.flight1[0].airlinesgo.airlinealtgo'"> alt="@value"/>
+                                                            </span>
+                                                        </face>
+                                                    <face filter="type in ('object','array')"> @child </face>
+                                                </basis>
+                                                
+                                            </div>
+                                            <div class="Arr_info">
+                                                    <basis core="tree" datamembername="db.json" idcol="id" parentidcol="parentid" nullvalue="null">
+                                                            <face filter="field='startcityall2' and type='Scalar.String'">
+                                                                <span class="subject_info">Return path : </span><span> @value </span><i class="fas fa-angle-left"></i>
+                                                            </face>
+                                                            <face filter="field='endcityall2' and type='Scalar.String'">
+                                                                    <span> @value </span><br/>
+                                                                </face>
+                                                            
+                                                                <face filter="field = 'date_startreturn_MS'  and type='Scalar.String' and path='.root[0].mainiall.mainflightinfo.flight2[0].times2.exittimes2.dateall2[0].date_startreturn_MS' and value <> 'undefined'">
+                                                                    <span class="eng-font"> @value </span><br/>
+                                                                </face>
+                                                                <face filter="field = 'exittimeback'  and type='Scalar.String' and path='.root[0].mainiall.mainflightinfo.flight2[0].times2.exittimeback' and value <> 'undefined'">
+                                                                    <span class="subject_info">Return flight time : </span><span> @value </span><br/>
+                                                                </face>
+                                                                <face filter="field = 'airlineimageback' and path = '.root[0].mainiall.mainflightinfo.flight2[0].airlinesback.airlineimageback'">
+                                                                    <span class="subject_info">Return airline : </span><span class="airimg"><img src="/@value" width="60" height=""
+                                                                </face>
+                                                                <face filter="field = 'airlinealtback' and path = '.root[0].mainiall.mainflightinfo.flight2[0].airlinesback.airlinealtback'"> alt="@value"/>
+                                                                    </span>
+                                                                </face>
+                                                             
+                                                            <face filter="type in ('object','array')"> @child </face>
+                                                        </basis>
+                                            </div>
+                                            <div class="clr"></div>
+                                            <span class="more_details"><i class="fal fa-angle-double-left"></i><span>Show more details</span></span>
+                                        </div>
+                                        
+  
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="reserve_right_side">
+                            <div class="wrapper-counter_box">
+                                <div class="reserve_box_title inner_box">
+                                    <div class="counter_box">
+                                        <i class="fas fa-clock"></i>
+                                        <div class="ttcounter">The remaining time of the booking process</div>
+                                        <span id="count"></span>
+                                    </div>
+                                    <div class="step_title">
+                                        <span>Passenger profile</span>
+                                    </div>
+                
+                                    <div class="clr"></div>
+                                </div>
+                            </div>
+                            <div class="reserve_info_Tab">
+              
+                                <div class="Info_box">
+                                    <div class="info_box_inner">
+                                        <div id="passenger_box" class="rsv_box">
+                                                <form method="post" action="/Client_Final_btb_en.bc" id="finalforminvoice">
+                                                    <div id="passonly">
+                                                     <input type="hidden" name="_root.account.fullname.firstname" value="" class="rootFirstname pasii"/>
+                                                     <input type="hidden" name="_root.account.fullname.lastname" value="" class="rootLastname pasii" />
+                                                     <input type="hidden" name="_root.account.email" value="" class="rootEmail pasii"/>
+                                                     <input type="hidden" name="_root.account.tel" value="" class="rootTel pasii" />
+                                                     <input type="hidden" name="_root.account.mobile" value="" class="rootMobile pasii" />
+                                                     <input type="hidden" name="_root.account.address" value="" class="rootAdrress pasii"/>
+                                                     <input type="hidden" name="_root.account.gender" value="" class="rootGender pasii"/>
+                                                     <input type="hidden" name="_root.account.birthdate" value="" class="rootBirthdate pasii"/>
+                                                     <input type="hidden" name="_root.account.codepost" value="" class="rootCodepost pasii"/>
+                                                     <input type="hidden" name="_root.account.fax" value="-" class="rootFax pasii"/>
+                                                     <input type="hidden" name="_root.account.countryid" value="" class="rootCountryid pasii"/>
+                                                     <input type="hidden" name="_root.account.cityid" value="" class="rootCityid pasii"/>
+                                                    </div>
+                                                    <div id="agenconly">
+                                                     <input type="hidden" name="_root.account.Agencyname" value="" class="rootnameAgency agencii"/>
+                                                     <input type="hidden" name="_root.account.Agencymanegername" value="" class="rootmanegerAgency agencii"/>
+                                                     <input type="hidden" name="_root.account.namecounter" value="" class="rootnamecounter agencii"/>
+                                                     <input type="hidden" name="_root.account.familycounter" value="" class="rootfamilycounter agencii"/>
+                                                     <input type="hidden" name="_root.account.Agencytell" value="" class="roottellAgency agencii"/>
+                                                     <input type="hidden" name="_root.account.Agencymobile" value="" class="rootmobileAgency agencii"/>
+                                                     <input type="hidden" name="_root.account.Agencyaddress" value="" class="rootaddressAgency agencii"/>
+                                                     <input type="hidden" name="_root.account.Agencyemail" value="" class="rootemailAgency agencii"/>
+                                                     <input type="hidden" name="_root.account.Agencyweb" value="" class="rootwebAgency agencii"/>
+                                                     <input type="hidden" name="_root.account.Agencyfax" value="-" class="rootfaxAgency agencii"/>
+                                                     <input type="hidden" name="_root.account.countryid" value="" class="rootCountryid agencii"/>
+                                                     <input type="hidden" name="_root.account.cityid" value="" class="rootCityid agencii"/>
+                                                     <input type="hidden" name="_root.account.agencyid" value="" class="rootagencyid agencii"/>
+                                                    </div>
+                                                    <input type="hidden" value="[##cms.form.productid##]" name="productid"/>
+                                                    <input type="hidden" value="0" name="c_code" class="c_code" />
+                                                    <input type="hidden" value="-" name="bank_id" class="bank_id" />
+                                                    <input type="hidden" value="0" name="agencycounter" class="agcounter"/>
+                                                    <input type="hidden" value="-" name="agencycountername" class="agcountername"/>
+                                                    <input type="hidden" value="[##cms.form.idnows##]" name="idnows"/>
+                                                    <input type="hidden" value='[##cms.form.idws|("")##]' name="idws"/>
+                                                    <input type="hidden" value="" name="agcname" class="nameAgencyFct"/>
+                                                    <input type="hidden" value="[##cms.form.supplier##]" name="supplier"/>
+                                                    <input type="hidden" value="[##cms.form.share##]" name="share"/>
+                                                    <input type="hidden" name='provider' value='[##cms.form.provider##]' />
+                                                    <input type="hidden" name='mainprovider' value='[##cms.form.mainprovider##]' />
+                                                    <input type="hidden" value="[##cms.form.adultcount##]" name="adultcount" class="adultcount"/>
+                                                    <input type="hidden" value="[##cms.form.childcount##]" name="childcount" class="childcount"/>
+                                                    <input type="hidden" value="[##cms.form.infants##]" name="infantcount" class="infantcount"/>
+                                                    <input type="hidden" value="[##db.userid.userid##]" name="userid" class="mainuserid"/>
+                                                    <input type="hidden" value="[##cms.form.idvalue##]" name="idvalue"  />
+                                                    <input type="hidden" value="" name="mid" class="midlog midagencyall"/>
+                                                    <input type="hidden" value="" name="accounttype" class="accounttypetotal"/>
+                                                    <input type="hidden" value="" name="paytype" class="paytype"/>
+                                                    <input type="hidden" value="" name="clear" class="clear"/>
+                                                    <input type="hidden" value="" name="agencyid" class="agencyidmain"/>
+                                                    <input type="hidden" value="[##cms.form.from##]" name="from"/>
+                                                    <input type="hidden" value="[##cms.form.to##]" name="to"/>
+                                                    <input type="hidden" value="[##cms.form.adult##]" name="adult"/>
+                                                    <input type="hidden" value="[##cms.form.child##]" name="child"/>
+                                                    <input type="hidden" value="[##cms.form.select-age##]" name="select-age"/>
+                                                    <input type="hidden" value="0" name="edit"/>
+                                                    <input type="hidden" value="[##cms.form.fdate##]" name="fdate"/>
+                                                    <input type="hidden" value="[##cms.form.tdate##]" name="tdate"/>
+                                                    <input type="hidden" value="[##cms.form.FlightClass##]" name="FlightClass"/>
+                                                    <input type="hidden" value="0" name="club_discount" class="club_discount"/>
+                                                    <input type="hidden"  value='' name="invoicedesc" class="invoicedesc"/>
+                                                    <basis core="tree" datamembername="db.json" idcol="id" parentidcol="parentid" nullvalue="null">
+                                                     <face filter="field='sstringall' and type='Scalar.String' and value <> 'undefined'">
+                                                      <input type="hidden" value="@value" name="arrivalTime"/>
+                                                     </face>
+                                                     <face filter="field='sstringall2' and type='Scalar.String' and value <> 'undefined'">
+                                                      <input type="hidden" value="@value" name="departureTime"/>
+                                                     </face>
+                                                     <face filter="field = 'moneytype'">
+                                                      <input type="hidden" value="@value" name="moneytype"/>
+                                                     </face>
+                                                     <face filter="field = 'date_arrivaldateinfo_MS'">
+                                                        <input type="hidden" value="@value" class="mdate_dep"/>
+                                                      </face>
+                                                     <face filter="field='Credit_payment'">
+                                                        <input type="hidden" value="@value" class="Credit_payment" name="Credit_payment"/>
+                                                    </face>
+                                                    <face filter="field='internal'">
+                                                        <input type="hidden" value="@value" class="internal"/>
+                                                    </face>
+                                                    <face filter="field='unit'">
+                                                        <input type="hidden" value="@value" class="currency-unit"/>
+                                                        <input type="hidden" value="[##cms.form.rate-unit##]" class="rate-unit" name="currency_request"/>
+                                                        <input type="hidden" value="[##cms.form.rate-cost##]" class="rate-cost"/>
+                                                        <input type="hidden" value="[##cms.form.rate-floatdigit##]" class="rate-floatdigit"/>
+                                                    </face>
+                                                     <face filter="type in ('object','array')">@child</face>
+                                                    </basis>
+                                                    <div class="alert-tlt"></div>
+                                                    <input type="hidden" class="chekformvalue" value="0" />
+                                                    <div id="passengers" class="passengers_information"></div>
+                                                   </form>
+                                            
+                                            
+                                            <basis core="group" if="'[##db.userid.userid##]'='0'">
+                                            <div class="next_level shine-hover next_level_notlog" id="infovalidate" data-validate="0"><span>Next</span></div>
+                                            <form method="post" action="/Client_Commission.bc" class="addcommission">
+                                                <input type="hidden" value="2" name="type"/>
+                                                <input type="hidden" value="[##cms.form.idnows##]" name="idnows"/>
+                                                <input type="hidden" value='[##cms.form.idws|("")##]' name="idws"/>
+                                                <input type="hidden" value="[##cms.form.childcount##]" name="childcount"/>
+                                                <input type="hidden" value="[##cms.form.infants##]" name="infants"/>
+                                                <input type="hidden" value="[##cms.form.adultcount##]" name="adultcount"/>
+                                                <input type="hidden" value="[##cms.form.supplier##]" name="supplier"/>
+                                                <input type="hidden" value="[##cms.form.share##]" name="share"/>
+                                            </form>
+                                            </basis>
+                                            <basis core="group" if="'[##db.userid.userid##]'<>'0'">
+                                                <div class="next_level islogin shine-hover" id="infovalidate" data-validate="0"><span>Next</span></div>
+                                            </basis>
+  
+                                        </div>
+                                        <div id="shopper_box" class="rsv_box">
+                                            <div class="shopper_box_inner">
+                                                    <div class="comInfo"></div>
+                                                    <div class="loadhere"></div>
+                                            </div>
+                                        </div>
+                                        <div id="invoice_box" class="rsv_box">
+                                            <div class="invoice_box_info">
+                                                <div class="Pass_info inner_box">
+                                                    <h3 class="tiltelast"><span>Passenger profile </span></h3>
+                                                    <div class="tableinformation">
+                                                        <div class="pass-info-table pre_invoice tr-display" cellspacing="0">
+                                                            <div class="passengerInfoes">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="Shopper_info inner_box">
+                                                    <h3 class="tiltelast"><span>Buyer details </span></h3>
+                                                    <div class="shopper_loadinfo loadhere2">
+                                                        <div class="buyer_box2"  style="display:none;" id="onlyuser3">
+                                                                <div class="buyer_info_tbl">
+                                                                 <colgroup >
+                                                                 <col width="10%" />
+                                                                 <col width="30%" />
+                                                                 <col width="10%" />
+                                                                 <col width="30%" />
+                                                                 </colgroup>
+                                                                 <div class="info-view">
+                                                                  <div><span class="shopper-icon"><i class="fas fa-user fa-user-shopper"></i></span><span class="question">Full name :</span> </div>
+                                                                  <div><span class="answer firstnameFinal"></span><span class="answer lastnameFinal"></span></div>
+                                                                 </div>
+                                                                 <div class="info-view">
+                                                                  <div><span class="shopper-icon"><i class="fas fa-phone"></i></span><span class="question">Phone number :</span></div>
+                                                                  <div><span class="answer phoneFinal"></span></div>
+                                                                 </div>
+                                                                 <div class="info-view">
+                                                                  <div><span class="shopper-icon"><i class="fas fa-mobile"></i></span><span class="question">Mobile number :</span></div>
+                                                                  <div><span class="answer mobileFinal"></span></div>
+                                                                 </div>
+                                                                 <div class="info-view">
+                                                                     <div><span class="shopper-icon"><i class="fas fa-envelope"></i></span><span class="question">Email :</span></div>
+                                                                     <div><span class="answer postEmailFinal"></span> </div>
+                                                                 </div>
+                                                                 <div class="info-view">
+                                                                  <div><span class="shopper-icon"><i class="fa fa-map-marker" aria-hidden="true"></i></span><span class="question">Address :</span></div>
+                                                                  <div><span class="answer addressFinal"></span></div>
+                                                                 </div>
+                                                                </div>
+                                                               </div>
+                                                               <div class="buyer_box2" style="display:none;" id="onlyuser2">
+                                                                <div class="buyer_info_tbl">
+                                                                 <colgroup >
+                                                                 <col width="10%" />
+                                                                 <col width="30%" />
+                                                                 <col width="10%" />
+                                                                 <col width="30%" />
+                                                                 </colgroup>
+                                                                 <div class="info-view">
+                                                                  <div><span class="shopper-icon"><i class="fal fa-building"></i></span><span class="question">Agency name :</span> </div>
+                                                                  <div><span class="answer nameAgencyFinal"></span></div>
+                                                                 </div>
+                                                                 <div class="info-view">
+                                                                  <div><span class="shopper-icon"><i class="fas fa-user fa-user-shopper"></i></span><span class="question">Managing Director :</span></div>
+                                                                  <div><span class="answer manegerAgencyFinal"></span></div>
+                                                                 </div>
+                                                                 <div class="info-view">
+                                                                  <div><span class="shopper-icon"><i class="fas fa-phone"></i></span><span class="question">Phone number :</span></div>
+                                                                  <div><span class="answer tellAgencyFinal"></span> </div>
+                                                                 </div>
+                                                                 <div class="info-view">
+                                                                  <div><span class="shopper-icon"><i class="fas fa-mobile"></i></span><span class="question">Mobile number :</span></div>
+                                                                  <div><span class="answer mobileAgencyFinal"></span></div>
+                                                                 </div>
+                                                                 <div class="info-view">
+                                                                     <div><span class="shopper-icon"><i class="fas fa-envelope"></i></span><span class="question">Email :</span></div>
+                                                                     <div><span class="answer emailAgencyFinal"></span></div>
+                                                                 </div>
+                                                                 <div class="info-view">
+                                                                  <div><span class="shopper-icon"><i class="fa fa-map-marker" aria-hidden="true"></i></span><span class="question">Address:</span></div>
+                                                                  <div><span class="answer addressAgencyFinal"></span></div>
+                                                                 </div>
+                                                                </div>
+                                                               </div>
+                                                               <div class="buyer_box2"  style="display:none;" id="onlyuser1">
+                                                                <div class="buyer_info_tbl">
+                                                                 <colgroup>
+                                                                 <col width="10%" />
+                                                                 <col width="30%" />
+                                                                 <col width="10%" />
+                                                                 <col width="30%" />
+                                                                 </colgroup>
+                                                                 <div class="info-view">
+                                                                  <div><span class="shopper-icon"><i class="fal fa-building"></i></span><span class="question">Agency name :</span> </div>
+                                                                  <div><span class="answer nameAgencyFinal"></span></div>
+                                                                 </div>
+                                                                 <div class="info-view">
+                                                                  <div><span class="shopper-icon"><i class="fas fa-user fa-user-shopper"></i></span><span class="question">Managing Director :</span></div>
+                                                                  <div><span class="answer manegerAgencyFinal"></span></div>
+                                                                 </div>
+                                                                 <div class="info-view">
+                                                                  <div><span class="shopper-icon"><i class="fas fa-phone"></i></span><span class="question">Phone number :</span></div>
+                                                                  <div><span class="answer tellAgencyFinal"></span> </div>
+                                                                 </div>
+                                                                 <div class="info-view">
+                                                                  <div><span class="shopper-icon"><i class="fas fa-mobile"></i></span><span class="question">Mobile number :</span></div>
+                                                                  <div><span class="answer mobileAgencyFinal"></span></div>
+                                                                 </div>
+                                                                 <div class="info-view">
+                                                                     <div><span class="shopper-icon"><i class="fas fa-envelope"></i></span><span class="question">Email :</span></div>
+                                                                     <div><span class="answer emailAgencyFinal"></span></div>
+                                                                 </div>
+                                                                 <div class="info-view">
+                                                                  <div><span class="shopper-icon"><i class="fa fa-map-marker" aria-hidden="true"></i></span><span class="question">Address :</span></div>
+                                                                  <div><span class="answer addressAgencyFinal"></span></div>
+                                                                 </div>
+                                                                </div>
+                                                               </div>
+                                                               <div class="buyer_box2"  style="display:none;" id="onlyuser1a">
+                                                                <div class="buyer_info_tbl">
+                                                                 <colgroup >
+                                                                 <col width="10%" />
+                                                                 <col width="30%" />
+                                                                 <col width="10%" />
+                                                                 <col width="30%" />
+                                                                 </colgroup>
+                                                                 <div class="info-view">
+                                                                  <div><span class="shopper-icon"><i class="fas fa-user fa-user-shopper"></i></span><span class="question">Full name :</span> </div>
+                                                                  <div><span class="answer firstnameFinal"></span><span class="answer lastnameFinal"></span></div>
+                                                                 </div>
+                                                                 <div class="info-view">
+                                                                  <div><span class="shopper-icon"><i class="fas fa-phone"></i></span><span class="question">Phone number :</span></div>
+                                                                  <div><span class="answer phoneFinal"></span></div>
+                                                                 </div>
+                                                                 <div class="info-view">
+                                                                  <div><span class="shopper-icon"><i class="fas fa-mobile"></i></span><span class="question">Mobile number :</span></div>
+                                                                  <div><span class="answer mobileFinal"></span></div>
+                                                                 </div>
+                                                                 <div class="info-view">
+                                                                     <div><span class="shopper-icon"><i class="fas fa-envelope"></i></span><span class="question">Email :</span></div>
+                                                                     <div><span class="answer postEmailFinal"></span> </div>
+                                                                 </div>
+                                                                 <div class="info-view">
+                                                                  <div><span class="shopper-icon"><i class="fa fa-map-marker" aria-hidden="true"></i></span><span class="question">Address :</span></div>
+                                                                  <div><span class="answer addressFinal"></span></div>
+                                                                 </div>
+                                                                </div>
+                                                               </div>
+                                                        <div class="clr"></div>
+                                                    </div>
+                                                        <div class="clr"></div>
+                                                    </div>
+                                                <div class="clr"></div>
+                                            </div>
+                                            <div class="invoice_box_exinfo inner_box">
+                                                <div id="Coupon_box">
+                                                    <div class="Content-CheckCoupon wrapper-discount">
+  
+                                                        <input type="checkbox" onchange="discount_member_point(this)"  value="0" name="discount"/>
+                                                        <label><span class="radiobox"></span></label>
+                                                        <div class="section-discount">
+                                                            <span class="box_tlt"><span class="shopper-icon"><i class="fas fa-tags"></i></span><span>discount code </span></span>
+                                                            <form method="POST" action="/Client_CheckCoupon_en.bc" class="checkcoupon section-discount-wrapper unvisible">
+                                                                <input type="text" name="couponcode" class="couponcode" autocomplete="off" />
+                                                               
+                                                                <input type="submit" class="submit" value="Check the code" />
+                                                                <span class="CheckCoupon-loading"><img src="images/load.gif" width="20" height="20"></span>
+                                                                <span class="couponresult"></span>
+                                                            </form>
+                                                        </div>
+                                                        <div class="clr"></div>
+                                                    </div>
+                                                    <div class="Content-CheckCoupon wrapper-discount checkMemberPoint"></div>
+                                                </div>
+                                                <div id="Counter_list"></div>
+                                                <div class="section_note">
+                                                  <span class="box_tlt"><span class="shopper-icon"><i class="fas fa-sticky-note"></i></span><span>Notes : </span></span>
+                                                  <_textarea class="invoice_note" placeholder="Notes ..."></_textarea>
+                                                </div>
+                                                <div class="clr"></div>
+                                                <div class="confirmeReserve">
+                                                    <input type="checkbox" name="rullcheck" class="rullcheck">
+                                                    <label for="rullcheck"><span class="checkbox"></span></label>
+                                                    <span class="ruletxt"><span id="tarlink">Terms and Conditions</span> I have read this contract in full and I accept its terms, which will be approved by selecting this section .</span>
+                                                    <p class="alertcheck">Please read the rules section.</p>
+                                                    <div class="clr"></div>
+                                                </div>
+                                                <div class="clr"></div>
+                                            </div>
+                                            <div class="invoice_box_final">
+                                                <div class="redirectBank">
+                                                    <div class="next_level showbank shine-hover"><span>Online payment</span></div>
+                                                    <div class="prev_level invoice_prev_level shine-hover"><span>Previous</span></div>
+                                                    <div class="clr"></div>
+                                                    <div id="Section-Credit-Payment" class="onlinepayment" data-pay = 'credit' data-clear='6' data-clicked ='0'></div>
+                                                    <div id="Bank-list" class="onlinepayment" data-pay = 'bank' data-clear='0' data-clicked ='0'></div>
+                                                      <div class="waiting_text wait_bank">Connecting to the bank portal, please wait</div>
+                                                     <div class="waiting_text wait_credit">Contract issuance, please wait</div>
+                                                    <div class="clr"></div>
+                                                </div>
+                                                <div class="noBank">
+                                                    <div class="next_level hidebank shine-hover"><span>Check out: Final Details</span></div>
+                                                    <div class="prev_level invoice_prev_level shine-hover"><span>Previous</span></div>
+                                                    <div class="clr"></div>
+                                                        <div class="formaccounting inner_box hover"  data-clicked='0'>
+                                                            <div><span> <span class="click_accounting">Click</span> to pre-contract and send to accounting</span></div>
+                                                        </div>
+                                                        <div class="waiting_text">Pre-contracting, please wait</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="clr"></div>
+                                    </div>
+                                    <div class="clr"></div>
+                                </div>
+                                <div class="clr"></div>
+                            </div>
+                        </div>
+                        <basis core="tree" datamembername="db.json" idcol="id" parentidcol="parentid" nullvalue="null">
+                            <face filter="field = 'totalinfo'">
+                                <div class="cost_info">
+                                    <ul>@child</ul>
+                                </div>
+                            </face>
+                            <face filter="field = 'moneytype'">
+                                <input type="hidden" value="@value" class="moneytypeInfo" />
+                            </face>
+                            <face filter="field = 'total'">
+                                <li class="total-section">
+                                    <input type="hidden" value="@value" class="total" />
+                                    <div class="reserv_cost_title">ticket price</div>
+                                    <div class="reserv_cost_title"> <span class="cost">@value</span> <span class="moneytype"></span></div>
+                                    <div class="clr"></div>
+                                </li>
+                            </face>
+                            <face filter="field = 'commission' and value <>'0'">
+                                <li class="commissionresize commisson-section">
+                                    <input type="hidden" value="@value" class="commisson" />
+                                    <div class="reserv_cost_title">Commission deduction</div>
+                                    <div class="reserv_cost_title"><span class="cost commissonCount">@value</span> <span
+                                            class="moneytype"></span></div>
+                                    <div class="clr"></div>
+                                </li>
+                            </face>
+                            <face filter="field = 'commission' and value ='0'">
+                                <li class="commissionresize commisson-section" style="display:none">
+                                    <input type="hidden" value="@value" class="commisson" />
+                                    <div class="reserv_cost_title">Commission deduction</div>
+                                    <div class="reserv_cost_title"><span class="cost commissonCount">@value</span> <span
+                                            class="moneytype"></span></div>
+                                    <div class="clr"></div>
+                                </li>
+                            </face>
+                            <face filter="field = 'totalcom'">
+                                <li class="totalcomresize totalcom-section" style="display:none">
+                                    <input type="hidden" value="@value" class="totalcom" />
+                                    <div class="reserv_cost_title">Amount with commission deduction</div>
+                                    <div class="reserv_cost_title"> <span class="cost finaltotalcom">@value</span> <span
+                                            class="moneytype"></span></div>
+                                    <div class="clr"></div>
+                                </li>
+                            </face>
+                            <face filter="field = 'firstpay'">
+                                <div class="allcost01">The amount payable</div>
+                                <div class="allcost">
+                                    <div class="reserv_cost_title firstpay-section"> <span class="cost finalprice" id="lastprice">@value</span> <span
+                                            class="moneytype"></span></div>
+                                    <input type="hidden" value="@value" class="price_firstpay" />
+                                </div>
+                            </face>
+                            <face filter="field = 'coupon_data'">
+                                <input type="hidden" name="coupondata" class="coupondata" value='@value' />
+                            </face>
+                            <face filter="type in ('object','array')">@child</face>
+                        </basis>
+                        <div class="clr"></div>
+                    </div>
+                    <div class="clr"></div>
+                </div>
+                <div class="clr"></div>
+            </div>
+            <div class="clr"></div>
+        </main>
+  <script type="text/javascript">
+         /*------------------START FUNCTION MULTI CURRENCY-----------------------*/
+  $(function () {
+    currency_rate()
+  })
+  
+  function currency_rate() {
+    if ($(".currency-unit").val() !== '10') {
+        var rate_unit = $(".rate-unit").val();
+        var rate_cost = $(".rate-cost").val();
+        var rate_floatdigit = $(".rate-floatdigit").val();
+        var total = $(".total").val();
+        var totalcom = $(".totalcom").val();
+        var firstpay = $("#lastprice").text().replace(/,/g, '');
+        var commisson = $(".commisson").val();
+        if (rate_cost != 1) {
+            exchange_currency(rate_unit, rate_cost, rate_floatdigit, totalcom, 'totalcom');
+            exchange_currency(rate_unit, rate_cost, rate_floatdigit, commisson, 'commisson');
+            exchange_currency(rate_unit, rate_cost, rate_floatdigit, total, 'total');
+            exchange_currency(rate_unit, rate_cost, rate_floatdigit, firstpay, 'firstpay');
+        }
+  
+    }
+  }
+  
+  function exchange_currency(rate_unit, rate_cost, rate_floatdigit, price, element) {
+    $("." + `${element}` + "-section").find(".currency-section").remove()
+    var exchange_currency = 0;
+    if (rate_floatdigit == '') {
+        exchange_currency = price * rate_cost;
+    } else {
+        let toString_element = (price * rate_cost).toString();
+        if (toString_element.indexOf('.') > -1) {
+            let parseFloat_element = parseFloat(toString_element).toFixed(rate_floatdigit).toString();
+            let parseFloat_element_split = parseFloat_element.split('.');
+            if (parseFloat_element_split[1].indexOf('0') > -1) {
+                exchange_currency = parseFloat(price * rate_cost).toFixed(1).toString();
+            } else {
+                exchange_currency = parseFloat(price * rate_cost).toFixed(rate_floatdigit).toString();
+            }
+        } else {
+            exchange_currency = parseFloat(price * rate_cost).toFixed(rate_floatdigit).toString();
+        }
+    }
+  
+    $("." + `${element}` + "-section").append(`<div class="currency-section"><span class="equal">==</span><span>${new Intl.NumberFormat().format(exchange_currency)}</span><span class="rate_unit">${rate_unit}</span></div>`)
+  
+  }
+  /*------------------END FUNCTION MULTI CURRENCY-----------------------*/
+  $(".CloseBox").click(function () {
+    $(".Details_box,#bg-popup,.popup-container").fadeOut("slow");
+  })
+  
+  function onloadFunc() {
+    var counter = 780;
+    setInterval(function () {
+        counter--;
+        var m = parseInt(counter / 60);
+        var s = counter % 60;
+        if (counter >= 0) {
+            span = document.getElementById("count");
+            if (s < 10) {
+                s = "0" + s;
+            }
+            if (m < 10) {
+                m = "0" + m;
+            }
+            if (m < 2) {
+                document.getElementById("count").classList.add("blink_me")
+            }
+            span.innerHTML = "00:" + m + ":" + s;
+        }
+        if (counter === 0) {
+            $(".boxalert,#bg-popup").fadeIn();
+            $(".boxalert").css("top", "200px")
+            clearInterval(counter);
+        }
+    }, 1000);
+  
+  };
+  
+  
+  
+  $(".more_details").click(function () {
+    $(".Details_box,#bg-popup").fadeIn("slow");
+    $('html,body').animate({
+        scrollTop: $(".Details_box").offset().top -= 50
+    }, 'slow');
+  })
+  
+  $("#details").click(function () {
+    $(this).addClass("active-titr")
+    $("#rules").removeClass("active-titr")
+    $("#bar").removeClass("active-titr")
+    $(".Rules_info").slideUp("slow");
+    $(".Bar_info").slideUp("slow");
+    $(".Details_info").slideDown("slow");
+  })
+  
+  
+  
+  $(".invoice_prev_level").click(function () {
+    $('html,body').animate({
+        scrollTop: $(".info_box_inner").offset().top -= 50
+      }, 'slow');
+    $("#invoice_box").slideUp("slow");
+    $("#shopper_box").slideDown("slow");
+    $(".step_title").find("span").text("Buyer details");
+    $(".visited:last").find('.counter-steps').show()
+    $(".visited:last").removeClass('visited');
+    $(".visited:last").addClass('eminext');
+  })
+  
+  $(".cost").each(function () {
+    $(this).text(new Intl.NumberFormat().format($(this).text()))
+  })
+  
+  
+  var mdate_dep = document.getElementsByClassName("mdate_dep");
+  for (var i = 0; i < mdate_dep.length; i++) {
+    mdate_dep[0].setAttribute("class", "mainmdate_dep")
+  };
+  $(document).ready(function () {
+    var useridshopper = $(".useridshopper").val()
+    if (useridshopper != 0) {
+        $(".loadhere").empty().append('<div id="fountainG"><div id="fountainG_1" class="fountainG"></div><div id="fountainG_2" class="fountainG"></div><div id="fountainG_3" class="fountainG"></div><div id="fountainG_4" class="fountainG"></div><div id="fountainG_5" class="fountainG"></div><div id="fountainG_6" class="fountainG"></div><div id="fountainG_7" class="fountainG"></div><div id="fountainG_8" class="fountainG"></div></div>').load("/Client_Shopper_en.bc?provider=[##cms.form.provider##]")
+        $(".checkMemberPoint").load('/Client_Check_Member_Point_EN.bc')
+    }
+  
+    $.ajax({
+        type: "POST",
+        url: "/Client_List_Banks_en.bc",
+        data: {
+            firstpay: "[##db.firstpay.Value##]",
+            moneytype: $(".moneytypeInfo").val(),
+        },
+        success: function (response) {
+            $("#Bank-list").html(response);
+        }
+    });
+    //<!------PAYMENT BY CREDIT------->//
+    if ($(".Credit_payment").val() == 1) {
+        $.ajax({
+            type: "POST",
+            url: "/Client_Credit_Payment_EN.bc",
+            data: {
+                total_with_commission: $(".totalcom").val(),
+                moneytype: $(".moneytypeInfo").val(),
+            },
+            success: function (response) {
+                $("#Section-Credit-Payment").html(response);
+            }
+        });
+  
+    }
+    //<!------PAYMENT BY CREDIT------->//
+  });
+  
+  
+  
+  //<!------FORM PASSENGERS------->//
+  var schema = [##db.form.result##]
+  for (var i = 0; i < schema.length; i++) {
+    var title = schema[i].title;
+    var newDiv = document.createElement("div");
+    newDiv.className = 'passengerInfo';
+    var newtitle = document.createElement("div");
+    newDiv.appendChild(newtitle);
+    newtitle.className = 'reserve-tlt';
+    newtitle.innerHTML = "<span class='title-passenger'>" + title + "</span><span class='select_passenger_container'><span class='select_passenger' data-open='0' onclick='show_passengersList(this)'><i class='fa fa-user'></i> From former travelers </span></span><div class='clr'></div>";
+    for (var j = 0; j < schema[i].form.length; j++) {
+        var type = schema[i].form[j].type;
+        if (type == 128) {
+            var titleinput = schema[i].form[j].question;
+            var newInnerDiv = document.createElement("div");
+            newInnerDiv.className = 'box-infoes';
+            var newlabel = document.createElement('label');
+            newlabel.className = 'label';
+            newlabel.innerHTML = titleinput;
+  
+            newInnerDiv.appendChild(newlabel);
+            var string = "<input ";
+            for (var y = 0; y < schema[i].form[j].attrs.length; y++) {
+                if (titleinput == 'Name' || titleinput == 'Last name' || titleinput == 'National code' || titleinput == 'Passport number') {
+                    if (schema[i].form[j].attrs[y].attr.name !== 'autocomplete') {
+                        string += schema[i].form[j].attrs[y].attr.name + '="' + schema[i].form[j].attrs[y].attr.value + '" '
+                    }
+                } else {
+                    string += schema[i].form[j].attrs[y].attr.name + '="' + schema[i].form[j].attrs[y].attr.value + '" '
+                }
+            };
+            string += ">";
+            newInnerDiv.innerHTML += string;
+            newDiv.appendChild(newInnerDiv);
+        };
+        if (type == 130) {
+            var titleinput = schema[i].form[j].question;
+            var newInnerDiv = document.createElement("div");
+            newInnerDiv.className = 'box-infoes';
+            var newlabel = document.createElement('label');
+            newlabel.className = 'label';
+            newlabel.innerHTML = titleinput;
+            newInnerDiv.appendChild(newlabel);
+            var string = '<input ';
+            for (var y = 0; y < schema[i].form[j].attrs.length; y++) {
+                if (titleinput == 'Name' || titleinput == 'Last name' || titleinput == 'National code' || titleinput == 'Passport number') {
+                    if (schema[i].form[j].attrs[y].attr.name !== 'autocomplete') {
+                        string += schema[i].form[j].attrs[y].attr.name + '="' + schema[i].form[j].attrs[y].attr.value + '" '
+                    }
+                } else {
+                    string += schema[i].form[j].attrs[y].attr.name + '="' + schema[i].form[j].attrs[y].attr.value + '" '
+                }
+            };
+            string += ">";
+            newInnerDiv.innerHTML += string;
+            newDiv.appendChild(newInnerDiv);
+        };
+        if (type == 132) {
+            var titleinput = schema[i].form[j].question;
+            var newInnerDiv = document.createElement("div");
+            newInnerDiv.className = 'box-infoes';
+            var newlabel = document.createElement('label');
+            newlabel.className = 'label';
+            newlabel.innerHTML = titleinput;
+            newInnerDiv.appendChild(newlabel);
+            var string = '<div  class="arraytel">';
+            for (var y = 0; y < schema[i].form[j].inputs.length; y++) {
+                string += "<input ";
+                for (var x = 0; x < schema[i].form[j].inputs[y].attrs.length; x++) {
+                    string += schema[i].form[j].inputs[y].attrs[x].attr.name + '="' + schema[i].form[j].inputs[y].attrs[x].attr.value + '" '
+                };
+                string += ">";
+            };
+            string += "</div>";
+            newInnerDiv.innerHTML += string;
+            newDiv.appendChild(newInnerDiv);
+        };
+        if (type == 140) {
+            var titleinput = schema[i].form[j].question;
+            var newInnerDiv = document.createElement("div");
+            newInnerDiv.className = 'box-infoes';
+            var newlabel = document.createElement('label');
+            newlabel.className = 'label';
+            newlabel.innerHTML = titleinput;
+            newInnerDiv.appendChild(newlabel);
+            var string = "<select ";
+            for (var y = 0; y < schema[i].form[j].attrs.length; y++) {
+                string += schema[i].form[j].attrs[y].attr.name + '="' + schema[i].form[j].attrs[y].attr.value + '" '
+            };
+            string += ">";
+            for (var x = 0; x < schema[i].form[j].values.length; x++) {
+                string += "<option value='" + schema[i].form[j].values[x].value.value + "'>" + schema[i].form[j].values[x].value.title + "</option>"
+            };
+            string += '</select>';
+            newInnerDiv.innerHTML += string;
+            newDiv.appendChild(newInnerDiv);
+        };
+    };
+  
+    document.getElementById('passengers').appendChild(newDiv);
+    $(".arraytel").each(function (index, element) {
+        $(this).parent(".box-infoes").hide()
+    })
+  
+    $(".E-mail").each(function (index, element) {
+        $(this).parent(".box-infoes").hide()
+    })
+  }
+  //<!------END FORM PASSENGERS------->//
+  //<!------START PASSENGERS LIST------->//
+  function show_passengersList(element){
+    if($(".mainuserid").val() == 0){
+        $(".loginpartner_frm").find(".passengerList-key").val(1)
+        $(".loginpartner_frm").find(".dmnid-key").val('[##cms.cms.domainid##]')
+        $(".loginpartner_frm").find(".internal-key").val($(".internal").val())
+        $(".loginpartner_frm").find(".index-key").val($(element).closest(".passengerInfo").index())
+        check_reset_login()
+    }else{
+      if($(element).attr("data-open") == 0){
+        $(element).attr("data-open","1")
+        $(element).closest(".passengerInfo").siblings(".passengerInfo").find(".select_passenger").attr("data-open","1")
+        load_passengersList('[##cms.cms.domainid##]','[##db.userid.userid##]',$(".internal").val(),$(element).closest(".passengerInfo").index())
+      }else{
+        $(".select_passnger").each(function(){
+          $(this).attr("data-index",$(element).closest(".passengerInfo").index())
+        })
+        $(".bg-PassengersList").show()
+        $(".PassengersList-container").show()
+      }
+       
+    }
+  
+  }
+  //<!------START PASSENGERS LIST------->//
+  $("#tarlink").click(function () {
+    $("#bg-popup,.popup-container").show()
+    $(".popup-container_content").empty().append('<div id="fountainG"><div id="fountainG_1" class="fountainG"></div><div id="fountainG_2" class="fountainG"></div><div id="fountainG_3" class="fountainG"></div><div id="fountainG_4" class="fountainG"></div><div id="fountainG_5" class="fountainG"></div><div id="fountainG_6" class="fountainG"></div><div id="fountainG_7" class="fountainG"></div><div id="fountainG_8" class="fountainG"></div></div>').load("/Get_Company_Rules_en.bc")
+  })
+  
+  
+  $("#infovalidate").click(function () {
+    var isValid = true;
+    var mainmdate_dep = $(this).closest(".rsv_box").find(".mainmdate_dep").val()
+    var selectAge = $(".selectAgePassenger").val()
+    var adultPassenger = $(".AdCountPassenger").val()
+    var ChildAges = ""
+    var InfantAges = ""
+    var AgePassenger = ""
+    if (selectAge !== '0') {
+        var splitAge = selectAge.split(',')
+        for (var i = 0; i < splitAge.length; i++) {
+            if (splitAge[i] > 2) {
+                ChildAges = ChildAges += splitAge[i] + ','
+            } else {
+                InfantAges = InfantAges += splitAge[i] + ','
+            }
+        }
+        InfantAges = InfantAges.slice(0, -1)
+        if (InfantAges !== "") {
+            ChildAges = ChildAges
+        } else {
+            ChildAges = ChildAges.slice(0, -1)
+        }
+        for (var j = 0; j < adultPassenger; j++) {
+            AgePassenger = AgePassenger += '0,'
+        }
+        var AgePassengerFinal = AgePassenger + ChildAges + InfantAges
+        var splitAgePassengerFinal = AgePassengerFinal.split(',')
+        var lenAge = AgePassengerFinal.split(',').length
+        for (var x = 0; x < lenAge; x++) {
+            var barcheck = $("#passengers .passengerInfo:nth-child(" + 1 + ")").find('.reserve-tlt span').text();
+            if (barcheck == 'general') {
+                var n = x + 2
+            } else {
+                var n = x + 1
+            }
+            if (splitAgePassengerFinal[x] > 0) {
+                var birthdate = $("#passengers .passengerInfo:nth-child(" + n + ")").find('.birthday').val();
+                var dateSplitted = birthdate.split('-')
+                var dateSplitted1 = dateSplitted[0]
+                if (dateSplitted1 < 1900) {
+                if (dateSplitted1.indexOf('13') > -1) {
+                    jD_date = PersianDate.PersianToGregorian(dateSplitted[0], dateSplitted[1], dateSplitted[2]);
+                     jResult_date = jD_date[0] + "-" + jD_date[1] + "-" + jD_date[2];
+                     $("#passengers .passengerInfo:nth-child(" + n + ")").find('.birthday').val(jResult_date)
+                } else if (dateSplitted1.indexOf('14') > -1) {
+                    jD_date = PersianDate.PersianToGregorian(dateSplitted[0], dateSplitted[1], dateSplitted[2]);
+                    jResult_date = jD_date[0] + "-" + jD_date[1] + "-" + jD_date[2];
+                     $("#passengers .passengerInfo:nth-child(" + n + ")").find('.birthday').val(jResult_date)
+                } else if (dateSplitted1.indexOf('12') > -1) {
+                    jD_date = PersianDate.PersianToGregorian(dateSplitted[0], dateSplitted[1], dateSplitted[2]);
+                    jResult_date = jD_date[0] + "-" + jD_date[1] + "-" + jD_date[2];
+                     $("#passengers .passengerInfo:nth-child(" + n + ")").find('.birthday').val(jResult_date)
+                }
+               }
+                var new_birthdate = $("#passengers .passengerInfo:nth-child(" + n + ")").find('.birthday').val();
+                var newStr = new_birthdate.replace(/-/g, '');
+                // var cms = "[##cms.cms.date2##]"
+                var cms = mainmdate_dep.replace(/-/g, '')
+                var newdate = (parseInt(cms) - parseInt(newStr)) / 10000
+                if (newdate <= parseInt(splitAgePassengerFinal[x]) && newdate > parseInt(splitAgePassengerFinal[x] - 1)) {
+                    $("#passengers .passengerInfo:nth-child(" + n + ")").find(".birthday").parent().find(".AlertValidate").remove()
+                } else {
+                    isValid = false;
+                    $("#passengers .passengerInfo:nth-child(" + n + ")").find(".birthday").parent().find(".AlertValidate").remove()
+                    $("#passengers .passengerInfo:nth-child(" + n + ")").find(".birthday").parent().append('<p class="AlertValidate">(The child should be between ' + parseInt(splitAgePassengerFinal[x] - 1) + ' and ' + splitAgePassengerFinal[x] + ' years old)</p>');
+                }
+            }
+        }
+    }
+    $(this).closest(".rsv_box").find("#passengers").find(".passengerInfo").each(function (index, element) {
+        $(this).find(".datepicker").each(function () {
+            var myDate = $(this).val()
+            var dateSplitted = myDate.split('-')
+            var dateSplitted1 = dateSplitted[0]
+            if (dateSplitted1 < 1900) {
+                if (dateSplitted1.indexOf('13') > -1) {
+                    jD = PersianDate.PersianToGregorian(dateSplitted[0], dateSplitted[1], dateSplitted[2]);
+                    jResult = jD[0] + "-" + jD[1] + "-" + jD[2];
+                    $(this).val(jResult)
+                } else if (dateSplitted1.indexOf('14') > -1) {
+                    jD = PersianDate.PersianToGregorian(dateSplitted[0], dateSplitted[1], dateSplitted[2]);
+                    jResult = jD[0] + "-" + jD[1] + "-" + jD[2];
+                    $(this).val(jResult)
+                } else if (dateSplitted1.indexOf('12') > -1) {
+                    jD = PersianDate.PersianToGregorian(dateSplitted[0], dateSplitted[1], dateSplitted[2]);
+                    jResult = jD[0] + "-" + jD[1] + "-" + jD[2];
+                    $(this).val(jResult)
+                }
+            }
+        })
+        var brth = $(this).find(".datepicker").val();
+        var typepass = $(this).find(".typepass").val();
+        var birthfield = $(this).find(".birthday").val();
+        var birthdate = new Date(brth)
+        var cms = "[##cms.cms.date##]"
+        var a = ""
+        var type = typepass
+        cms.split("/").forEach(function (x) {
+            x.length >= 2 ? a += x : a += ("0" + x)
+            a += "-"
+        })
+        a = a.substr(0, a.length - 1)
+        date = a.split("-")
+        date = date[2] + "-" + date[0] + "-" + date[1]
+        var currentDate = new Date(date)
+        var timeDiff = currentDate.getTime() - birthdate.getTime();
+        var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+        tmp = (Math.floor(diffDays / 365))
+  
+        if (type == "2") {
+            if (tmp < 12 || tmp > 98 || birthfield == '') {
+                isValid = false;
+                $(this).find(".alertvalid").remove()
+                $(this).find(".birthday").after('<p class="alertvalid"> Enter a valid date for adults</p>');
+            } else {
+  
+                $(this).find(".box-infoes").find(".alertvalid").remove()
+  
+            }
+        }
+    });
+    $(this).closest(".rsv_box").find("#passengers").find(".passengerInfo").find(".box-infoes").each(function (index, element) {
+        $(this).find(".necessary").each(function (index, element) {
+            if ($(this).val() == "" && $(this).val().length < 1) {
+                $(this).closest(".box-infoes").find(".alertvalid").remove()
+  
+                $(this).closest(".box-infoes").find(".necessary").after('<p class="alertvalid">Please complete the field</p>')
+                isValid = false;
+            } else {
+  
+                $(this).closest(".box-infoes").find(".alertvalid").remove()
+            }
+        });
+        $(this).find(".passexpiredate").filter(function () {
+            var fromSearch = new Date(mainmdate_dep)
+            var fromCalender = new Date($(this).val())
+            var val = $(this).val()
+            var timeDiff = fromCalender.getTime() - fromSearch.getTime();
+            var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+            if (diffDays < 181 || val == '') {
+                $(this).closest(".box-infoes").find(".alertvalid").remove()
+                $(this).closest(".box-infoes").find("input").after('<p  class="alertvalid">According to passport rules, it must be valid at least 6 months after the date of travel</p>')
+                isValid = false;
+            } else {
+                $(this).closest(".box-infoes").find(".alertvalid").remove()
+            }
+        });
+        $(this).find(".ValidatePassportCode").filter(function () {
+            var val = $(this).val();
+            var reg = /^[a-zA-Z]{1}[0-9]{8}$/;
+            if (!reg.test(val)) {
+                $(this).closest(".box-infoes").find(".alertvalid").remove()
+                $(this).closest(".box-infoes").find("input").after('<p class="alertvalid">Please enter as example (J12345678).</p>')
+                isValid = false;
+            } else {
+                $(this).closest(".box-infoes").find(".alertvalid").remove()
+            }
+        });
+        $(this).find(".ValidateNationalCode").filter(function () {
+            var val = $(this).val();
+            var reg = /^[0-9]{10}$/;
+            if (!reg.test(val)) {
+                $(this).closest(".box-infoes").find(".alertvalid").remove()
+                $(this).closest(".box-infoes").find("input").after('<p  class="alertvalid">Please enter as example (0012345678).</p>')
+                isValid = false;
+            } else {
+                $(this).closest(".box-infoes").find(".alertvalid").remove()
+            }
+        });
+  
+        $(this).find(".internal-national-validate").filter(function () {
+            var val = $(this).val();
+  
+            if (!/^\d{10}$/.test(val)) {
+                isValid = false;
+                $(this).closest(".box-infoes").find(".alertvalid").remove()
+                $(this).closest(".box-infoes").find("input").after('<p  class="alertvalid">Enter only 10 digits.</p>')
+            } else {
+                var checkArray = 0;
+                for (j = 0; j < 10; j++) {
+                    if (val[0] == val[j]) {
+                        checkArray++
+                    }
+                }
+                if (checkArray < 10) {
+                    var check = parseInt(val[9]);
+                    var sum = 0;
+                    var i;
+                    for (i = 0; i < 9; i++) {
+                        sum += parseInt(val[i]) * (10 - i);
+                    }
+                    sum %= 11;
+                    if ((sum < 2 && check == sum) || (sum >= 2 && check + sum == 11)) {
+                        $(this).closest(".box-infoes").find(".alertvalid").remove()
+                    } else {
+                        isValid = false;
+                        $(this).closest(".box-infoes").find("input").after('<p  class="alertvalid">The national code entered is incorrect. </p>')
+                    }
+                } else {
+                    isValid = false;
+                    $(this).closest(".box-infoes").find("input").after('<p  class="alertvalid">The national code entered is incorrect. </p>')
+                }
+            }
+        });
+  
+        $(this).find(".english").filter(function () {
+            var val = $(this).val();
+            var len = $(this).val().length;
+            var reg = /^[a-zA-Z _]+$/;
+            if (!reg.test(val)) {
+                $(this).closest(".box-infoes").find(".alertvalid").remove()
+                $(this).closest(".box-infoes").find("input").after('<p  class="alertvalid">Please type in English.</p>')
+                isValid = false;
+            } else if (len < 2) {
+                $(this).closest(".box-infoes").find(".alertvalid").remove()
+                $(this).closest(".box-infoes").find("input").after('<p  class="alertvalid">The minimum number of characters is 2.</p>')
+  
+                isValid = false;
+  
+            } else {
+                $(this).closest(".box-infoes").find(".alertvalid").remove()
+            }
+        });
+  
+        $(this).find(".NationalCode").each(function (index, element) {
+            var keyval = $(this).val()
+            if (isPersian(keyval)) {
+                $(this).closest(".box-infoes").find(".alertvalid").remove()
+                $(this).closest(".box-infoes").find("input").after('<p  class="alertvalid">Please type in English.</p>')
+                isValid = false;
+            }
+  
+            function isPersian(key) {
+                var p = /^[\u0600-\u06FF\s]+$/;
+                return p.test(key) && key != ' ';
+            }
+        });
+  
+        $(this).find(".passportcode").each(function (index, element) {
+            var keyval = $(this).val()
+            if (isPersian(keyval)) {
+                $(this).closest(".box-infoes").find(".alertvalid").remove()
+                $(this).closest(".box-infoes").find("input").after('<p  class="alertvalid">Please type in English.</p>')
+                isValid = false;
+            }
+  
+            function isPersian(key) {
+                var p = /^[\u0600-\u06FF\s]+$/;
+                return p.test(key) && key != ' ';
+            }
+        });
+  
+    });
+  
+    if (isValid == false) {
+        $(".chekformvalue").val(0);
+        $(".alert-tlt").empty().append('<p class="alertvalid">Please complete the required items correctly !</p>')
+        $('html,body').animate({
+            scrollTop: $(".alert-tlt").offset().top -= 50
+        }, 'slow');
+    }
+  
+  
+    if (isValid) {
+        $(this).attr("data-validate","1");
+        $(".chekformvalue").val(1);
+        $(".alert-tlt").empty()
+        var userid = '[##db.userid.userid##]';
+        if ($(this).hasClass("next_level_notlog") && userid == 0) {
+            $(".loginpartner_frm").find(".passengerList-key").val('')
+            check_reset_login()
+  
+        } else {
+            $('html,body').animate({
+               scrollTop: $(".info_box_inner").offset().top -= 50
+            }, 'slow');
+            $("#passenger_box").slideUp("slow");
+            $("#shopper_box").slideDown("slow");
+            $(".step_title").find("span").text("Buyer details");
+            $(".visited:last").next().find('.counter-steps').hide();
+            $(".visited:last").next().children('em').removeClass('eminext');
+            $(".visited:last").next().addClass('visited').next().children('em').addClass("eminext");
+        }
+  
+  
+  
+        var html = ""
+        var htmlhead = ""
+        var htmlheadBar = ""
+        $("#passengers").children(".passengerInfo:nth-child(1)").each(function () {
+            var CountBoxInfo = $(this).find(".box-infoes").length;
+            $("#passengers").children(".passengerInfo:nth-child(1)").find(".box-infoes").each(function () {
+                if (CountBoxInfo == 1) {
+                    var label = $(this).find(".label").text()
+                    $("#passengers").children(".passengerInfo:nth-child(2)").find(".box-infoes").each(function () {
+                        var labelSecond = $(this).find(".label").text()
+                        htmlheadBar = htmlheadBar + "<div class='labeltbl pass-col' data-label='" + labelSecond + "'>" + labelSecond + "</div>";
+                    })
+                    htmlhead = htmlhead + "<div class='labeltbl pass-col'  colspan='20' data-label='" + label + "'>" + label + "</div>";
+                } else {
+                    var label = $(this).find(".label").text()
+                    if (label.indexOf('phone') < 0 && label.indexOf('email') < 0 && label != 'roomid' && label != 'type') {
+                        htmlhead = htmlhead + "<div class='labeltbl pass-col' data-label='" + label + "'>" + label + "</div>";
+                    }
+                }
+            });
+        });
+        html = html + "<div class='pass-head-row pass-info-row'>" + htmlhead + "</div>" + "<div class='pass-head-row pass-info-row'>" + htmlheadBar + "</div>";
+        $("#passengers").find(".passengerInfo").each(function () {
+            var html2 = ""
+            $(this).find(".box-infoes").each(function () {
+                var checklabel = $(this).find(".label").text()
+                if (checklabel.indexOf('phone') < 0 && checklabel.indexOf('email') < 0 && checklabel != 'roomid' && checklabel != 'type') {
+                    var vall = $(this).find(":input:not([type=hidden])").val();
+                    var NameSlectOption = $(this).find("select").attr("name")
+                    var TextSlectOption = $(this).find("select").find('option:selected').text()
+                    if (NameSlectOption !== undefined) {
+                        vall = TextSlectOption
+                    }
+                    html2 = html2 + "<div class='columns pass-col' data-label='" + checklabel + "'>" + vall + "</div>"
+                }
+  
+  
+            });
+            html = html + "<div class='rows pass-info-row'>" + html2 + "</div>";
+        });
+  
+        $(".passengerInfoes").empty().append(html)
+        $(".passengerInfoes").find(".rows").each(function (index, element) {
+            var lenColumns = $(this).find(".columns").length;
+            if (lenColumns == 1) {
+                $(this).find(".columns").attr('colspan', '20')
+            }
+            $(this).find(".columns").each(function (index, element) {
+                var txt = $(this).text();
+                if (txt == 'undefined') {
+                    $(this).remove()
+                }
+                if (txt == '1') {
+                    $(this).text('Male')
+                } else if (txt == '0') {
+                    $(this).text('ّFemale')
+                }
+             
+            });
+        });
+  
+  
+    }
+  })
+  
+  $(function () {
+    $('.reserve-tlt:contains("adult")').each(function () {
+        var index = $(this).parent(".passengerInfo").index()
+        $(this).parent(".passengerInfo").append('<input class="typepass"  type="hidden" value="2" name="_root.passengerinfo__' + index + '.passengerinfo.type"/>')
+    });
+    $('.reserve-tlt:contains("Child")').each(function () {
+        var index = $(this).parent(".passengerInfo").index()
+        $(this).parent(".passengerInfo").append('<input class="typepass"  type="hidden" value="1" name="_root.passengerinfo__' + index + '.passengerinfo.type"/>')
+    });
+    $('.reserve-tlt:contains("Infant")').each(function () {
+        var index = $(this).parent(".passengerInfo").index()
+        $(this).parent(".passengerInfo").append('<input  class="typepass" type="hidden" value="0" name="_root.passengerinfo__' + index + '.passengerinfo.type" />')
+    });
+  });
+  
+  $(".english").each(function (index, element) {
+    $(this).attr('maxlength', '41')
+    $(this).bind('keydown', function (event) {
+        switch (event.keyCode) {
+            case 8:
+            case 9:
+            case 13:
+            case 37:
+            case 38:
+            case 39:
+            case 40:
+                break;
+            default:
+            var regex = new RegExp("^[a-zA-Z _]+$");
+                var key = event.key;
+                if (!regex.test(key)) {
+                    event.preventDefault();
+                    $(this).closest(".box-infoes").find(".alertvalid").remove()
+                    $(this).closest(".box-infoes").find("input").after('<p  class="alertvalid">Please type in English</p>')
+                    return false;
+                } else {
+                    $(this).closest(".box-infoes").find(".alertvalid").remove()
+                }
+                break;
+        }
+  
+    });
+    $(this).bind('keyup', function (event) {
+        $(this).val($(this).val().toUpperCase());
+    });
+  });
+  /*start new datepicker*/
+  function getPassportExpiryDate() {
+    return new Date();
+  }
+  var regional = "",
+    isJalali = false;
+  if (regional == "fa") {
+    isJalali = true;
+  }
+  $('.birthday').focus(function (e) {
+    FDatepicker(this, {
+        single: true,
+        isJalali: isJalali,
+        changeMonth: true,
+        changeYear: true,
+        minDate: "-100y",
+        maxDate: $("#AdaultMaxDate").val(),
+        yearRangeJalali: "1250:1500",
+        yearRangeGregorian: "1900:2030",
+        numberOfMonths: 1,
+    });
+    var innerContent = $('.nice-select > ul');
+    var option_height = $('.nice-select .option').height();
+    var option_count = $('.nice-select .option').length;
+    var Ul_height = parseInt(option_height) * parseInt(option_count)
+    innerContent.scrollTop(Ul_height / 2);
+  });
+  $('.passexpiredate').focus(function (e) {
+    FDatepicker(this, {
+        single: true,
+        isJalali: isJalali,
+        changeMonth: true,
+        changeYear: true,
+        minDate: getPassportExpiryDate(),
+        maxDate: '+15y',
+        yearRangeJalali: "1250:1500",
+        yearRangeGregorian: "1900:2150",
+        numberOfMonths: 1,
+    });
+    var innerContent = $('.nice-select > ul');
+    innerContent.scrollTop(0);
+  });
+  PersianDate = {
+    g_days_in_month: [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31],
+    j_days_in_month: [31, 31, 31, 31, 31, 31, 30, 30, 30, 30, 30, 29]
+  };
+  PersianDate.PersianToGregorian = function (j_y, j_m, j_d) {
+    j_y = parseInt(j_y);
+    j_m = parseInt(j_m);
+    j_d = parseInt(j_d);
+    var jy = j_y - 979;
+    var jm = j_m - 1;
+    var jd = j_d - 1;
+  
+    var j_day_no = 365 * jy + parseInt(jy / 33) * 8 + parseInt((jy % 33 + 3) / 4);
+    for (var i = 0; i < jm; ++i) j_day_no += PersianDate.j_days_in_month[i];
+    j_day_no += jd;
+    var g_day_no = j_day_no + 79;
+    var gy = 1600 + 400 * parseInt(g_day_no / 146097); /* 146097 = 365*400 + 400/4 - 400/100 + 400/400 */
+    g_day_no = g_day_no % 146097;
+    var leap = true;
+    if (g_day_no >= 36525) /* 36525 = 365*100 + 100/4 */ {
+        g_day_no--;
+        gy += 100 * parseInt(g_day_no / 36524); /* 36524 = 365*100 + 100/4 - 100/100 */
+        g_day_no = g_day_no % 36524;
+  
+        if (g_day_no >= 365) g_day_no++;
+        else leap = false;
+    }
+  
+    gy += 4 * parseInt(g_day_no / 1461); /* 1461 = 365*4 + 4/4 */
+    g_day_no %= 1461;
+    if (g_day_no >= 366) {
+        leap = false;
+        g_day_no--;
+        gy += parseInt(g_day_no / 365);
+        g_day_no = g_day_no % 365;
+    }
+    for (var i = 0; g_day_no >= PersianDate.g_days_in_month[i] + (i == 1 && leap); i++)
+        g_day_no -= PersianDate.g_days_in_month[i] + (i == 1 && leap);
+    var gm = i + 1;
+    var gd = g_day_no + 1;
+    gm = gm < 10 ? "0" + gm : gm;
+    gd = gd < 10 ? "0" + gd : gd;
+    return [gy, gm, gd];
+  }
+  /*end new datepicker*/
+  
+  $(".reserve_reisze").each(function (index, element) {
+    var sa = $(this).find(".moneytypeInfo").val()
+    $(this).find(".moneytype").each(function () {
+        $(this).text(sa)
+    });
+  });
+  
+  $(".showbank").click(function (e) {
+    var isValid = true;
+    var check = $(this).closest(".rsv_box").find(".rullcheck").prop('checked');
+    var counter = $(this).closest(".rsv_box").find(".selectagcounter").val()
+    if (check == false) {
+        isValid = false;
+        $(this).closest(".rsv_box").find(".alertcheck").show()
+    } else {
+        $(this).closest(".rsv_box").find(".alertcheck").hide()
+    }
+    if (counter == '0') {
+        isValid = false;
+        $(this).closest(".rsv_box").find(".alertcheck2").show()
+    } else {
+        $(this).closest(".rsv_box").find(".alertcheck2").hide()
+    }
+    if (isValid) {
+      $('html,body').animate({
+              scrollTop: $(".onlinepayment").offset().top -= 50
+          }, 500);
+        $(this).closest(".rsv_box").find(".onlinepayment").show()
+    }
+  
+  });
+  
+  $(".onlinepayment").click(function () {
+    $(".invoicedesc").val($(".invoice_note").val())
+    $(".paytype").val($(this).attr('data-pay'))
+    $(".clear").val($(this).attr('data-clear'))
+    if($(this).attr('data-clicked') == 0){
+        $(this).attr('data-clicked','1')
+        $("#finalforminvoice").submit()
+        if($(this).attr('data-clear') == 6){
+          $(this).closest(".redirectBank").find(".wait_credit").show()
+          $("#Bank-list").attr('data-clicked','1')
+          $("#Bank-list").css('cursor','no-drop')
+        }else{
+          $(this).closest(".redirectBank").find(".wait_bank").show()
+          $("#Section-Credit-Payment").attr('data-clicked','1')
+          $("#Section-Credit-Payment").css('cursor','no-drop')
+        }
+        $(this).css('cursor','no-drop')
+    }else{
+        $(this).css('cursor','no-drop')
+    }
+  })
+  
+  $(".hidebank").click(function (e) {
+    var isValid = true;
+    var check = $(this).closest(".rsv_box").find(".rullcheck").prop('checked');
+    if (check == false) {
+        isValid = false;
+        $(this).closest(".rsv_box").find(".alertcheck").show()
+    } else {
+        $(this).closest(".rsv_box").find(".alertcheck").hide()
+    }
+  
+    if (isValid) {
+        $(this).closest(".rsv_box").find(".formaccounting").show()
+    }
+  });
+  
+  $(".formaccounting").click(function () {
+    $(".invoicedesc").val($(".invoice_note").val())
+    if($(this).attr('data-clicked') == 0){
+        $(this).attr('data-clicked','1')
+        $("#finalforminvoice").submit()
+        $(this).closest(".noBank").find(".waiting_text").show()
+        $(this).css('cursor','no-drop')
+    }else{
+        $(this).css('cursor','no-drop')
+    }
+  
+  });
+  
+  
+  $(".addcommission").submit(function (e) {
+    e.preventDefault()
+    $.ajax({
+        url: $(".addcommission").attr("action"),
+        type: $(".addcommission").attr("method"),
+        data: $($(".addcommission")).serialize(),
+        success: function (response) {
+            $('.comInfo').empty().show().html(response);
+            var com = $(".commission").val();
+            var tltcom = $(".totalwithcom").val();
+            var Ftlt = $(".totalfirstpay").val();
+            //<!------PAYMENT BY CREDIT------->//
+            if ($(".Credit_payment_new").val() == 1) {
+                $.ajax({
+                    type: "POST",
+                    url: "/Client_Credit_Payment_EN.bc",
+                    data: {
+                        total_with_commission: $(".totalwithcom").val(),
+                        moneytype: $(".moneytypeInfo").val(),
+                    },
+                    success: function (response) {
+                        $("#Section-Credit-Payment").html(response);
+                    }
+                });
+  
+            }
+            //<!------PAYMENT BY CREDIT------->//
+            if (tltcom !== Ftlt) {
+                $(".allcost01").text('First stage payment')
+            }
+            if ($(".commission").val() && com != 0) {
+                $(".commissionresize").show()
+                $(".totalcomresize").show()
+                $(".commissonCount").text(com)
+                $(".commissonCount").each(function () {
+                    $(this).text(new Intl.NumberFormat().format($(this).text()))
+                })
+            }
+            if ($(".totalwithcom").val()) {
+                $(".finaltotalcom").text(tltcom);
+                $(".totalcom").val(tltcom);
+                $(".finaltotalcom").each(function () {
+                    $(this).text(new Intl.NumberFormat().format($(this).text()))
+                })
+            }
+            if ($(".totalfirstpay").val()) {
+                $(".finalprice").each(function () {
+                    $(this).text(Ftlt);
+                })
+  
+                $(".price_firstpay").val(Ftlt);
+                $(".finalprice").each(function () {
+                    $(this).text(new Intl.NumberFormat().format($(this).text()))
+                })
+            }
+             /*------------------START FUNCTION MULTI CURRENCY-----------------------*/
+             currency_rate()
+            /*------------------END FUNCTION MULTI CURRENCY-----------------------*/
+  
+        }
+    });
+  });
+  
+  if ($(".commissonCount").text() != 0) {
+    $(".totalcomresize").show()
+  }
+  
+  if ($(".totalcom").val() !== $(".price_firstpay").val()) {
+    $(".allcost01").text('First stage payment')
+  }
+  
+  /*------------------START FUNCTION CHECK COUNTRY OWNER-----------------------*/
+  fetch('/Client_CountryId_Library.bc')
+    .then(response => response.json())
+    .then(data => {
+        const country = data.filter((item) => item.dmnid == '[##cms.cms.domainid##]').map((item) => item.country);
+        const country_id = data.filter((item) => item.dmnid == '[##cms.cms.domainid##]').map((item) => item.country_id);
+        if (country.length > 0) {
+            $(".box-infoes").find(".autocompleteCOUNTRY").each(function () {
+                $(this).closest(".box-infoes").find(".countryInfo").val(country_id);
+                $(this).val(country);
+                $(this).closest(".passengerInfo").find(".NationalCode").addClass("ncode-notshow")
+                $(this).closest(".passengerInfo").find(".ncode-notshow").removeClass("necessary")
+                $(this).closest(".passengerInfo").find(".ncode-notshow").removeClass("NationalCode")
+                $(this).closest(".passengerInfo").find(".ncode-notshow").parent(".box-infoes").hide()
+                $(this).closest(".passengerInfo").find(".ncode-notshow").val('-')
+  
+            })
+        } else {
+            $(".box-infoes").find(".autocompleteCOUNTRY").each(function () {
+                $(this).closest(".box-infoes").find(".countryInfo").val('1002236');
+                $(this).val('Iran');
+                if ($(".internal").val() == 1) {
+                    $(this).closest(".passengerInfo").find(".passportcode").addClass("pass-notshow")
+                    $(this).closest(".passengerInfo").find(".passexpiredate").addClass("passxp-notshow")
+                    $(this).closest(".passengerInfo").find(".DrawerCo").addClass("drw-notshow")
+                    $(this).closest(".passengerInfo").find(".NationalCode").addClass("internal-national-validate")
+                    $(this).closest(".passengerInfo").find(".pass-notshow").val("-")
+                    $(this).closest(".passengerInfo").find(".passxp-notshow").val("-")
+                    $(this).closest(".passengerInfo").find(".passportcode").parent(".box-infoes").hide()
+                    $(this).closest(".passengerInfo").find(".passexpiredate").parent(".box-infoes").hide()
+                    $(this).closest(".passengerInfo").find(".DrawerCo").parent(".box-infoes").hide()
+                    var style = $(this).css('display');
+                    if (style == 'none') {
+                        $(this).closest(".passengerInfo").find(".necessary").removeClass("passexpiredate")
+                        $(this).closest(".passengerInfo").find(".necessary").removeClass("passportcode")
+                        $(this).closest(".passengerInfo").find(".necessary").removeClass("DrawerCo")
+                        $(this).closest(".passengerInfo").find('input').removeClass("necessary")
+                    }
+                } else {
+                    $(this).closest(".passengerInfo").find(".passportcode").addClass("ValidatePassportCode")
+                    $(this).closest(".passengerInfo").find(".NationalCode").addClass("ValidateNationalCode")
+                    $(this).closest(".passengerInfo").find(".DrawerCo").addClass("drw-notshow")
+                    $(this).closest(".passengerInfo").find(".DrawerCo").parent(".box-infoes").hide()
+                    $(this).closest(".passengerInfo").find(".drw-notshow").removeClass("DrawerCo")
+                    $(this).closest(".passengerInfo").find('.drw-notshow').removeClass("necessary")
+                }
+  
+            })
+        }
+    }).catch(error => console.error(error))
+  
+  
+  $(".passengerInfo").each(function () {
+    $(this).find(".autocompleteCOUNTRY").each(function () {
+        $(this).after('<span  class="mini-loading"><img src="/images/load.gif" width="20" height="20" /></span><input type="hidden" value="" name="countryInfo" class="countryInfo" /><div class="clr"></div><div class="co"></div>')
+        $(this).closest(".box-infoes").find(".countryInfo").attr("name", $(this).attr("name"))
+        $(this).closest(".box-infoes").addClass('c-infoo')
+        $(this).attr("name", "")
+        $(this).on('click', function (e) {
+            $(this).val('')
+            $(this).closest(".box-infoes").find(".countryInfo").val('')
+            var namecountryInfo = $(this).attr("class")
+            if (namecountryInfo.indexOf('nationalityCo') > -1) {
+                $(this).closest(".passengerInfo").find(".NationalCode").val('')
+                $(this).closest(".passengerInfo").find(".passportcode").val('')
+                $(this).closest(".passengerInfo").find(".passportcode").removeClass("ValidatePassportCode")
+            }
+        });
+        var namecountryInfo = $(this).attr("class")
+        if (namecountryInfo.indexOf('nationalityCo') > -1) {
+            $(this).closest(".box-infoes").find(".countryInfo").addClass('CountryidNationality')
+        }
+    });
+  });
+  
+  /*------------------END FUNCTION CHECK COUNTRY OWNER-----------------------*/
+  
+  $(".checkcoupon").submit(function (e) {
+    e.preventDefault(e)
+    var accounttype = $(".accounttypetotal").val();
+    var coupondata = $(".coupondata").val();
+    var firstpay = $(".price_firstpay").val();
+    var totalcom = $(".totalcom").val();
+    var couponcode = $(".couponcode").val();
+      var userid = $(".mainuserid").val();
+    $(".CheckCoupon-loading").show()
+    $.ajax({
+        type: "POST",
+        url: $(".checkcoupon").attr("action"),
+        data: {
+            accounttype: accounttype,
+            price: totalcom,
+            firstpay: firstpay,
+            schemaid: 290,
+            provider: "[##cms.form.provider##]",
+            coupondata: coupondata,
+            couponcode: couponcode,
+            userid: userid,
+        },
+        success: function (response) {
+            $(".couponresult").html(response);
+            $(".CheckCoupon-loading").hide();
+            /*------------------START FUNCTION MULTI CURRENCY-----------------------*/
+             currency_rate()
+            /*------------------END FUNCTION MULTI CURRENCY-----------------------*/
+        }
+    });
+  
+  });
+  
+  
+  function empty(a) {
+    $(a).val('')
+    $(a).closest(".c-infoo").find(".countryInfo").val('')
+  }
+  $('.country').each(function (e) {
+    $(this).on('input', function () {
+        var _this = this;
+        if (e.which !== 0 && !e.ctrlKey && !e.metaKey && !e.altKey) {
+            upper_case = $(this).val().substr(0, 1).toUpperCase() + $(this).val().substr(1).toLowerCase();
+            $(this).val(upper_case)
+            if ($(this).val().length > 2) {
+                $(this).closest(".c-infoo").find(".mini-loading").show();
+                $.ajax({
+                    url: '/Client_Get_Country.bc',
+                    type: 'get',
+                    data: {
+                        key: $(this).val(),
+                        internal: $(".internal").val()
+                    },
+                    success: function (result) {
+                        $(_this).closest(".c-infoo").find(".mini-loading").hide();
+                        $(_this).closest(".c-infoo").find(".co").empty().html(result)
+                    }
+                });
+            } else
+                $(_this).closest(".c-infoo").find(".co").empty()
+        }
+    });
+    $(this).on('blur', function () {
+        if ($(this).closest(".c-infoo").find(".co").text().length > 0) {
+            if (hoverelse == 0) {
+                var defresult = $(this).closest(".c-infoo").find(".co").children(".selectCountry:first").find(".txtcountry").text();
+                var defresultid = $(this).closest(".c-infoo").find(".co").children(".selectCountry:first").find(".countryid").val();
+                $(this).closest(".c-infoo").find(".country").val(defresult);
+                $(this).closest(".c-infoo").find(".countryInfo").val(defresultid);
+                var sval = $(this).closest(".c-infoo").find(".countryInfo").val()
+                $(this).closest(".c-infoo").find(".co").empty();
+                var idcountry = $(this).closest(".c-infoo").find(".CountryidNationality").val()
+                var internal = $(".internal").val()
+                if (internal == 0) {
+                    if (idcountry !== '1002236' && idcountry !== undefined) {
+                        // flight = external & passenger = not iranian
+                        $(this).closest(".passengerInfo").find(".NationalCode").addClass("ncode-notshow")
+                        $(this).closest(".passengerInfo").find(".drw-notshow").addClass("DrawerCo")
+                        $(this).closest(".passengerInfo").find(".DrawerCo").addClass("necessary")
+                        $(this).closest(".passengerInfo").find(".DrawerCo").removeClass("drw-notshow")
+                        $(this).closest(".passengerInfo").find(".ncode-notshow").removeClass("necessary")
+                        $(this).closest(".passengerInfo").find(".ncode-notshow").removeClass("NationalCode")
+                        $(this).closest(".passengerInfo").find(".ncode-notshow").removeClass("ValidateNationalCode")
+                        $(this).closest(".passengerInfo").find(".ncode-notshow").removeClass("internal-national-validate")
+                        $(this).closest(".passengerInfo").find(".ncode-notshow").parent(".box-infoes").css("display", "none")
+                        $(this).closest(".passengerInfo").find(".ncode-notshow").val('-')
+                        $(this).closest(".passengerInfo").find(".passportcode").removeClass("ValidatePassportCode")
+                        $(this).closest(".passengerInfo").find(".DrawerCo").parent(".box-infoes").css("display", "block")
+                        $(this).closest(".passengerInfo").find(".passportcode").closest(".box-infoes").find(".alertvalid").hide()
+                        $(this).closest(".passengerInfo").find(".DrawerCo").val('')
+                    } else if (idcountry == '1002236' && idcountry !== undefined) {
+                        // flight = external & passenger = iranian
+                        $(this).closest(".passengerInfo").find(".DrawerCo").addClass("drw-notshow")
+                        $(this).closest(".passengerInfo").find(".ncode-notshow").addClass("necessary")
+                        $(this).closest(".passengerInfo").find(".ncode-notshow").addClass("NationalCode")
+                        $(this).closest(".passengerInfo").find(".ncode-notshow").addClass("ValidateNationalCode")
+                        $(this).closest(".passengerInfo").find(".ncode-notshow").removeClass("internal-national-validate")
+                        $(this).closest(".passengerInfo").find(".passportcode").addClass("ValidatePassportCode")
+                        $(this).closest(".passengerInfo").find(".DrawerCo").parent(".box-infoes").css("display", "none")
+                        $(this).closest(".passengerInfo").find(".NationalCode").parent(".box-infoes").css("display", "block")
+                        $(this).closest(".passengerInfo").find(".NationalCode").removeClass("ncode-notshow")
+                        $(this).closest(".passengerInfo").find(".drw-notshow").removeClass("DrawerCo")
+                        $(this).closest(".passengerInfo").find(".drw-notshow").removeClass("necessary")
+  
+                    }
+                } else if (internal == 1) {
+                    if (idcountry !== '1002236' && idcountry !== undefined) {
+                        // flight = internal & passenger = not iranian
+                        $(this).closest(".passengerInfo").find(".NationalCode").addClass("ncode-notshow")
+                        $(this).closest(".passengerInfo").find(".pass-notshow").addClass("passportcode")
+                        $(this).closest(".passengerInfo").find(".passxp-notshow").addClass("passexpiredate")
+                        $(this).closest(".passengerInfo").find(".drw-notshow").addClass("DrawerCo")
+  
+                        $(this).closest(".passengerInfo").find(".passportcode").addClass("necessary")
+                        $(this).closest(".passengerInfo").find(".passexpiredate").addClass("necessary")
+                        $(this).closest(".passengerInfo").find(".DrawerCo").addClass("necessary")
+  
+                        $(this).closest(".passengerInfo").find(".passportcode").removeClass("pass-notshow")
+                        $(this).closest(".passengerInfo").find(".passexpiredate").removeClass("passxp-notshow")
+                        $(this).closest(".passengerInfo").find(".DrawerCo").removeClass("drw-notshow")
+  
+  
+                        $(this).closest(".passengerInfo").find(".ncode-notshow").removeClass("necessary")
+                        $(this).closest(".passengerInfo").find(".ncode-notshow").removeClass("NationalCode")
+                        $(this).closest(".passengerInfo").find(".ncode-notshow").removeClass("ValidateNationalCode")
+                        $(this).closest(".passengerInfo").find(".ncode-notshow").removeClass("internal-national-validate")
+                        $(this).closest(".passengerInfo").find(".passportcode").closest(".box-infoes").find(".alertvalid").hide()
+  
+                        $(this).closest(".passengerInfo").find(".passportcode").val('')
+                        $(this).closest(".passengerInfo").find(".passexpiredate").val('')
+                        $(this).closest(".passengerInfo").find(".DrawerCo").val('')
+  
+  
+                        $(this).closest(".passengerInfo").find(".passportcode").parent(".box-infoes").css("display", "block")
+                        $(this).closest(".passengerInfo").find(".passexpiredate").parent(".box-infoes").css("display", "block")
+                        $(this).closest(".passengerInfo").find(".DrawerCo").parent(".box-infoes").css("display", "block")
+                        $(this).closest(".passengerInfo").find(".ncode-notshow").parent(".box-infoes").css("display", "none")
+                        $(this).closest(".passengerInfo").find(".ncode-notshow").val('-')
+                    } else if (idcountry == '1002236' && idcountry !== undefined) {
+                        // flight = internal & passenger = iranian
+  
+                        $(this).closest(".passengerInfo").find(".ncode-notshow").addClass("necessary")
+                        $(this).closest(".passengerInfo").find(".ncode-notshow").addClass("NationalCode")
+                        $(this).closest(".passengerInfo").find(".ncode-notshow").removeClass("ValidateNationalCode")
+                        $(this).closest(".passengerInfo").find(".ncode-notshow").addClass("internal-national-validate")
+                        $(this).closest(".passengerInfo").find(".passportcode").addClass("pass-notshow")
+                        $(this).closest(".passengerInfo").find(".passexpiredate").addClass("passxp-notshow")
+  
+                        $(this).closest(".passengerInfo").find(".passportcode").val("-")
+                        $(this).closest(".passengerInfo").find(".passexpiredate").val("-")
+  
+  
+                        $(this).closest(".passengerInfo").find(".DrawerCo").addClass("drw-notshow")
+  
+                        $(this).closest(".passengerInfo").find(".NationalCode").removeClass("ncode-notshow")
+                        $(this).closest(".passengerInfo").find(".passportcode").removeClass("necessary")
+                        $(this).closest(".passengerInfo").find(".passexpiredate").removeClass("necessary")
+                        $(this).closest(".passengerInfo").find(".DrawerCo").removeClass("necessary")
+  
+  
+                        $(this).closest(".passengerInfo").find(".NationalCode").parent(".box-infoes").css("display", "block")
+                        $(this).closest(".passengerInfo").find(".passportcode").parent(".box-infoes").css("display", "none")
+                        $(this).closest(".passengerInfo").find(".passexpiredate").parent(".box-infoes").css("display", "none")
+                        $(this).closest(".passengerInfo").find(".DrawerCo").parent(".box-infoes").css("display", "none")
+  
+                        $(this).closest(".passengerInfo").find(".pass-notshow").removeClass("passportcode")
+                        $(this).closest(".passengerInfo").find(".passxp-notshow").removeClass("passexpiredate")
+                        $(this).closest(".passengerInfo").find(".drw-notshow").removeClass("DrawerCo")
+  
+  
+                     $(this).closest(".passengerInfo").find(".pass-notshow").val('-')
+                     $(this).closest(".passengerInfo").find(".passxp-notshow").val('-')
+                    }
+                }
+            }
+        } else {
+            $(this).closest(".c-infoo").find(".mini-loading").hide()
+            $(this).closest(".c-infoo").find(".country").val('');
+            $(this).closest(".c-infoo").find(".countryInfo").val('');
+        }
+    });
+  })
+  
+  
+  $(document).ready(function () {
+      if($(".checkpreurl").val() !== ''){
+        $(".fsearch").each(function () {
+            $(this).attr('action', '/'+$(".checkpreurl").val()+'_Roundtrip_Search_EN.bc')
+        })
+      }
+      if ($(window).width() <= 750) {
+        $(".fsearch").each(function () {
+            $(this).attr('action', '/M_Roundtrip_Search_EN.bc')
+        })
+      }
+  })
+  
+  //<!------STATR JS RESET LOGIN BOX------->
+    function check_reset_login(){
+    if ($("#Login_box").length){
+            $("#Login_box,#bg-popup2").show();
+                $(".Wrapper-registerinfo").hide()
+                $(".Wrapper-logininfo").show()
+                $(".Wrapper-forgetpass").hide()
+                $(".Wrapper-resendmail").hide()
+                $(".login-form_new").show()
+                $(".login-form_prev").hide()
+                $('html,body').animate({
+                scrollTop: $("#Login_box").offset().top -= 50
+            }, 500);
+            }else{
+                $(".not-login-section").click();
+            }
+            $(".error-login").each(function(){
+                $(this).empty()
+            })
+            $(".fcapForgetpass,.fcap,.fcapRegMail,.fcapResendmail").each(function(){
+                $(this).hide()
+            })
+            $(".login_info input:not([type=hidden]").each(function(){
+                $(this).val('')
+            })
+  }
+   //<!------END JS RESET LOGIN BOX------->
+  
+  </script>
+  <!------REACT CODE FOR PASSENGERS LIST------->  
+  <script src="[##cms.cms.cdn##]/js/reservation_react.production.min.js" crossorigin></script>
+  <script src="[##cms.cms.cdn##]/js/reservation_react_dom.production.min.js" crossorigin></script>
+  <script src="[##cms.cms.cdn##]/js/reservation_babel.min.js" crossorigin></script>
+  <script src="[##cms.cms.cdn##]/js/reservation_react_paging.js"></script>
+  <script type="text/babel">
+    function load_passengersList(dmnid, userid, internal, index) {
+        class App extends React.Component {
+            constructor(props) {
+                super(props);
+                this.state = {
+                    data: [],
+                    library: null,
+                    perPage: 10,
+                    currentPage: 1,
+                    maxPage: null,
+                    filter: "",
+                    InternalOrExternal: ""
+    
+                };
+            }
+            componentDidMount() {
+                if (internal == 0) {
+                    this.setState({ InternalOrExternal: 'Passport number' })
+                } else {
+                    this.setState({ InternalOrExternal: 'National code' })
+                }
+                fetch("/Client_Passengers_List_Json.bc", {
+                    method: "POST",
+                    body: "dmnid=" + dmnid + "&userid=" + userid + "",
+                })
+                    .then((response) => response.text())
+                    .then((text) => {
+                        text = text.replace(/\"/g, '')
+                        let Maindata = JSON.parse(text.replace(/\'/g, '"'));
+                        this.setState(
+                            (state) => ({
+                                ...state,
+                                data: Maindata,
+                            }),
+                            () => {
+                                this.reorganiseLibrary();
+                                $(".loading-passengerList").hide()
+                                $(".section-passengersList").show()
+                            }
+                        );
+                    })
+                    .catch((error) => console.error(error));
+    
+            }
+            componentDidUpdate() {
+                $(".close_content").click(function () {
+                    $(".bg-PassengersList").hide()
+                    $(".PassengersList-container").hide()
+                })
+                $(".select_passnger").each(function () {
+                    $(this).click(function () {
+                        $(".bg-PassengersList").hide()
+                        $(".PassengersList-container").hide()
+                        var data_firstname = $(this).attr("data-firstname")
+                        var data_lastname = $(this).attr("data-lastname")
+                        var data_nationalcode = $(this).attr("data-nationalcode")
+                        var data_birthdate = $(this).attr("data-birthdate")
+                        var data_gender = $(this).attr("data-gender")
+                        var data_passportcode = $(this).attr("data-passportcode")
+                        var data_passportexpiration = $(this).attr("data-passportexpiration")
+                        var data_issuecountry = $(this).attr("data-issuecountry")
+                        var data_countryofresidence_name = $(this).attr("data-countryofresidence_name")
+                        var data_internal = $(this).attr("data-internal")
+                        var data_index = $(this).attr("data-index")
+                        data_index = parseInt(data_index) + 1
+                        var countryofresidence_id = ""
+                        $("#passengers").children(".passengerInfo:nth-child(" + data_index + ")").each(function () {
+                            if ($(this).find(".box-infoes select").attr("name").indexOf('gender') > -1) { $(this).find(".box-infoes select").val(data_gender) }
+                            $(this).find(".box-infoes input[type=hidden]").each(function () {
+                                if ($(this).attr("name").indexOf('issuecountry') > -1) {
+                                    $(this).val(data_issuecountry)
+                                    $(this).closest(".box-infoes").find(".country").val(data_countryofresidence_name)
+                                    countryofresidence_id = $(this).val()
+                                }
+                            })
+                            $(this).find(".box-infoes input[type=text]").each(function () {
+                                if ($(this).attr("name").indexOf('firstname') > -1) { $(this).val(data_firstname) }
+                                else if ($(this).attr("name").indexOf('lastname') > -1) { $(this).val(data_lastname) }
+                                else if ($(this).attr("name").indexOf('birthdate') > -1 || $(this).attr("name").indexOf('birthday') > -1) { $(this).val(data_birthdate) }
+                                else if ($(this).attr("name").indexOf('passportcode') > -1) {
+                                    if (countryofresidence_id !== '1002236') {
+                                        $(this).removeClass("ValidatePassportCode")
+                                        $(this).val(data_passportcode)
+                                    } else {
+                                        if (data_internal == '0') {
+                                            $(this).val(data_passportcode)
+                                            $(this).addClass("ValidatePassportCode")
+                                            $(this).closest(".box-infoes").show()
+                                        } else {
+                                            $(this).val('-')
+                                            $(this).removeClass("ValidatePassportCode")
+                                            $(this).closest(".box-infoes").hide()
+                                        }
+                                    }
+    
+                                }
+                                else if ($(this).attr("name").indexOf('passportexpiration') > -1) {
+                                    if (data_internal == '0') {
+                                        $(this).val(data_passportexpiration)
+                                    } else {
+                                        $(this).val('-')
+                                    }
+                                }
+                                else if ($(this).attr("name").indexOf('NationalCode') > -1 || $(this).attr("name").indexOf('nationalcode') > -1) {
+                                    if (countryofresidence_id !== '1002236') {
+                                        $(this).removeClass("ValidateNationalCode")
+                                        $(this).removeClass("internal-national-validate")
+                                        $(this).closest(".box-infoes").hide()
+                                    } else {
+                                        if (data_internal == '0') {
+                                            $(this).addClass("ValidateNationalCode")
+                                            $(this).closest(".box-infoes").show()
+                                        } else {
+                                            $(this).addClass("ValidateNationalCode")
+                                            $(this).closest(".box-infoes").show()
+                                        }
+                                    }
+                                    $(this).val(data_nationalcode)
+                                }
+                            })
+                        })
+                    })
+                })
+            }
+            reorganiseLibrary = () => {
+                const { filter, perPage, data } = this.state;
+                let library = data;
+                if (filter !== "") {
+                    library = library.filter(item =>
+                        item.firstname.toLowerCase().includes(filter) || item.lastname.toLowerCase().includes(filter) || item.birthdate.toLowerCase().includes(filter) || item.passportcode.toLowerCase().includes(filter) || item.nationalcode.toLowerCase().includes(filter)
+                    )
+                }
+                library = _.chunk(library, perPage);
+                this.setState({
+                    library,
+                    currentPage: 1,
+                    maxPage: library.length === 0 ? 1 : library.length,
+                });
+            };
+            handleChange = evt =>
+                this.setState(
+                    {
+                        filter: evt.target.value.toLowerCase()
+                    },
+                    () => {
+                        this.reorganiseLibrary();
+                    }
+                )
+            // Previous Page
+            previousPage = (event) => {
+                this.setState({
+                    currentPage: this.state.currentPage - 1,
+                });
+            };
+    
+            // Next Page
+            nextPage = (event) => {
+                this.setState({
+                    currentPage: this.state.currentPage + 1,
+                });
+            };
+    
+            // handle per page
+            handlePerPage = (evt) =>
+                this.setState(
+                    {
+                        perPage: evt.target.value,
+                    },
+                    () => this.reorganiseLibrary()
+                );
+    
+            // handle render of library
+            renderLibrary = () => {
+                const { library, currentPage } = this.state;
+                if (!library || (library && library.length === 0)) {
+                    return (
+                        <div className="nodata passenger-list-row">
+                            <div className="passenger-list-col" colspan="4"> No results found!</div>
+                        </div>
+                    );
+                }
+                return library[currentPage - 1].map((item, i) => (
+                    <div className="passenger-list-row">
+                        <div className="passenger-list-col" data-label={this.renderInternal_label(item)}>{this.renderInternal(item)}</div>
+                        <div className="passenger-list-col" data-label="Full name">{item.firstname} {item.lastname}</div>
+                        <div className="passenger-list-col" data-label="Birthdate">{item.birthdate}</div>
+                        <div className="passenger-list-col" data-label="-"><button className="select_passnger" data-firstname={item.firstname}
+                            data-lastname={item.lastname}
+                            data-nationalcode={item.nationalcode}
+                            data-birthdate={item.birthdate}
+                            data-gender={item.gender}
+                            data-passportcode={item.passportcode}
+                            data-passportexpiration={item.passportexpiration}
+                            data-type={item.type}
+                            data-issuecountry={item.countryofresidence.countryid}
+                            data-countryofresidence_name={item.countryofresidence.ecountryname}
+                            data-passportissuecountry={item.passportissuecountry}
+                            data-index={index}
+                            data-internal={internal}
+                        >Choose</button></div>
+                    </div>
+                ));
+            };
+    
+            render() {
+                const { library, currentPage, perPage, maxPage } = this.state;
+                return (
+                    <div>
+                        <div className="bg-PassengersList close_content"></div>
+                        <section className="PassengersList-container">
+                            <div className="PassengersList-title">
+                                <span>
+                                    <i className="fa fa-user"></i>List of former passengers
+                                </span>
+                                <span className="close-container close_content">
+                                    <i className="fa fa-times"></i>
+                                </span>
+                            </div>
+                            <div className="PassengersList-content">
+                                <div className="search-container">
+                                    <input
+                                        type="search"
+                                        value={this.state.filter} onChange={this.handleChange}
+                                        className=""
+                                        placeholder="Search"
+                                    />
+                                </div>
+                                <div class="list-container">
+                                    <div className="passenger-list-table">
+                                        <div className="passenger-list-head">
+                                            <div className="InternalOrExternal passenger-list-col passenger-list-tltcol">{this.state.InternalOrExternal}</div>
+                                            <div className="passenger-list-col passenger-list-tltcol">Full name</div>
+                                            <div className="passenger-list-col passenger-list-tltcol">Birthdate</div>
+                                            <div className="passenger-list-col passenger-list-tltcol"></div>
+                                        </div>
+                                        <div className="loading-passengerList">
+                                            <div className="passenger-list-row"><div class="passenger-list-col passenger-list-columns" colspan="4"><div id="fountainG"><div id="fountainG_1" class="fountainG"></div><div id="fountainG_2" className="fountainG"></div><div id="fountainG_3" className="fountainG"></div><div id="fountainG_4" className="fountainG"></div><div id="fountainG_5" className="fountainG"></div><div id="fountainG_6" className="fountainG"></div><div id="fountainG_7" className="fountainG"></div><div id="fountainG_8" className="fountainG"></div></div></div></div>
+                                        </div>
+                                        <div className="section-passengersList unvisible">
+                                            {this.renderLibrary()}
+                                        </div>
+                                    </div>
+                                </div>
+    
+                                <ul id="page-numbers">
+                                    <li className="nexprevPage">
+                                        {currentPage !== 1 && (
+                                            <button onClick={this.previousPage} className="FirstPage">
+                                                <i className="fa fa-backward"></i>
+                                            </button>
+                                        )}
+                                    </li>
+                                    <li className="controlsPage activepaging FirstPage">
+                                        {this.state.currentPage}
+                                    </li>
+                                    <li className="restControls">...</li>
+                                    <li className="controlsPage LastPage">{this.state.maxPage}</li>
+                                    <li className="nexprevPage">
+                                        {currentPage < maxPage && (
+                                            <button onClick={this.nextPage} className="LastPage">
+                                                <i className="fa fa-forward"></i>
+                                            </button>
+                                        )}
+                                    </li>
+                                </ul>
+                            </div>
+                        </section>
+                    </div>
+                );
+            }
+            renderInternal(element) {
+                if (internal == 0) {
+                    return element.passportcode
+                } else {
+                    return element.nationalcode
+                }
+            }
+            renderInternal_label(element) {
+                if (internal == 0) {
+                    return 'Passport number'
+                } else {
+                    return 'National code'
+                }
+            }
+    
+        }
+        ReactDOM.render(<App />, document.getElementById("app"));
+    }
+    </script>
+    </body>
+  </html>

@@ -1,0 +1,526 @@
+<basis core="dbsource" source="basiscore" name="db" lid="1" request="seo">
+    <member name="list" type="list" request="cat" id="[##cms.query.id##]"></member>
+</basis>
+<basis core='dbsource' name='captcha' source='trust_login'>
+    <member name='code' type='scalar' request='captcha'></member>
+</basis>
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>[##cms.seo.title|db.list.title##]</title>
+    <meta charset="UTF-8" />
+    <meta name="author" content="BasisCore" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <meta name="description" content="[##cms.seo.title|db.list.title##]" />
+    <link rel="apple-touch-icon" sizes="57x57" href="" />
+    <link rel="shortcut icon" sizes="57x57" href="" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <!----------------CSS FILE---------------->
+    <!----CSS MAIN STYLE---->
+    <link href="[##cms.cms.cdn##]/css/style.css" type="text/css" rel="stylesheet" />
+    <!----CSS FONT AWESOME---->
+    <link href="[##cms.cms.cdn##]/css/font_awesome.css" type="text/css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900|Raleway:400,500,600,700" type="text/css"
+        rel="stylesheet" />
+    <!----------------JS FILE---------------->
+    <script src="[##cms.cms.cdn##]/js/library.js" type="text/javascript"></script>
+</head>
+
+<body>
+    <main>
+        <basis core="call" file="header-en.inc" />
+        <section class="content pages">
+            <section class="loginRegister"></section>
+            <section class="item-container about">
+                <div class="bc-main">
+                    <div class="width_40 float-right img-content">
+                        <img src="[##cms.cms.cdn##]/images/contact-sub.jpg" width="400" height="280" alt="" />
+
+                    </div>
+                    <div class="width_60 float-left text-content">
+                        <ul class="nav-contact text-center color_gray">
+                            <li class="active btn" onclick="select_contact(this,'General')">General contact</li>
+                            <li class="btn" onclick="select_contact(this,'Inbound')">Inbound contacts</li>
+                            <li class="btn" onclick="select_contact(this,'Outbound')">Outbound contacts</li>
+                        </ul>
+                    </div>
+                    <div class="clr"></div>
+                    <div class="contact-container color_gray ">
+                        <div id="General">
+                            <div class="contact-item background-color_body border-radius">
+                                <div class="title-container-middle text-left">
+                                    <h2 class="title-content-middle color_gray"> What <span
+                                            class="color_3 p-relative">We
+                                            Do</span>
+                                    </h2>
+                                </div>
+                                <basis core="print" datamembername="db.info">
+                                    <face filter="prpid = 8004">
+                                        <div class="font_14 text-justify about-text color_gray">@answer</div>
+                                    </face>
+                                </basis>
+                            </div>
+                            <div class="contact-item background-color_body border-radius">
+                                <div class="title-container-middle text-left">
+                                    <h2 class="title-content-middle color_gray"> Where <span
+                                            class="color_3 p-relative">Are
+                                            WE</span>
+                                    </h2>
+                                </div>
+                                <basis core="print" datamembername="db.info">
+                                    <layout>
+                                        <div class="contact-content float-left width_25">
+                                            <div class="inner width_90 d-flex">
+                                                <div class="contact-icon text-center p-relative">
+                                                    <i class="fa fa-map-marker-alt color_3"></i>
+
+                                                </div>
+                                                <div class="contact-text">
+                                                    <h2 class="font_18 color_gray title">Address</h2>
+                                                    <p class="font_14">@child</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </layout>
+                                    <face filter="prpid = 7999">
+                                        <span class="answer"> @answer </span>
+                                    </face>
+                                </basis>
+                                <basis core="print" datamembername="db.info">
+                                    <layout>
+                                        <div class="contact-content  float-left width_25">
+                                            <div class="inner width_90 d-flex">
+                                                <div class="contact-icon text-center p-relative">
+                                                    <i class="fa fa-envelope color_3"></i>
+                                                </div>
+                                                <div class="contact-text">
+                                                    <h2 class="font_18 color_gray title">Email</h2>
+                                                    <p class="font_14">@child</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </layout>
+                                    <face filter="prpid = 8001">
+                                        <span class="answer"> <a class="color_gray" href="mailto:@answer">@answer
+                                            </a></span>
+                                    </face>
+                                </basis>
+                                <basis core="print" datamembername="db.info">
+                                    <layout>
+                                        <div class="contact-content  float-left width_25">
+                                            <div class="inner width_90 d-flex">
+                                                <div class="contact-icon text-center p-relative">
+                                                    <i class="fa fa-phone color_3"></i>
+                                                </div>
+                                                <div class="contact-text">
+                                                    <h2 class="font_18 color_gray title">Phone</h2>
+                                                    <p class="font_14">@child</p>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </layout>
+                                    <face filter="prpid = 8000">
+                                        <span class="answer"> <a class="color_gray" href="mailto:@answer">@answer
+                                            </a></span>
+                                    </face>
+                                </basis>
+                                <basis core="print" datamembername="db.info">
+                                    <layout>
+                                        <div class="contact-content float-left width_25">
+                                            <div class="inner width_90 d-flex">
+                                                <div class="contact-icon text-center p-relative">
+                                                    <i class="fa fa-globe color_3"></i>
+                                                </div>
+                                                <div class="contact-text">
+                                                    <h2 class="font_18 color_gray title">Website</h2>
+                                                    <p class="font_14">@child</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </layout>
+                                    <face filter="prpid = 8002">
+                                        <span class="answer"> @answer </span>
+                                    </face>
+                                </basis>
+                                <div class="clr"></div>
+                            </div>
+                            <div class="contact-item background-color_body border-radius">
+                                <div class="title-container-middle text-left">
+                                    <h2 class="title-content-middle color_gray"> Leave Us <span
+                                            class="color_3 p-relative">Your
+                                            Info</span>
+                                    </h2>
+                                </div>
+                                <div class="contact-form">
+                                    <div class="width_50 float-left form">
+                                        <form method="post" action="/message-get.bc"
+                                            class="color_gray font_15 width_100 form-content">
+                                            <input type="text" class="form-control width_45 float-right" name="name"
+                                                placeholder="Full Name*" required>
+                                            <input type="text" class="form-control width_45 " name="email"
+                                                placeholder="Email*" required>
+                                            <input type="text" class="form-control width_100" name="subject"
+                                                placeholder="Subject*" required>
+                                            <_textarea class="form-control width_100 color_gray font_15" rows="4"
+                                                name="message" placeholder="Message*" required> </_textarea>
+                                            <div class="captcha-content">
+                                                <input type="text" class="form-control width_50 float-left"
+                                                    name="Captcha" placeholder="Captcha*" required>
+                                                <span class="field-captcha width_50 float-right text-right">
+                                                    <span class="load-captcha">
+                                                        <img class="captcha" alt="captcha"
+                                                            src="[##captcha.code.captcha##]" loading="lazy" width="80"
+                                                            height="35">
+                                                        <input type="hidden" value="[##captcha.code.captcha##]"
+                                                            name="Captchaid"></span>
+                                                    <i class="fa fa-sync color_1 refresh-captcha cursor-pointer font_20"
+                                                        onclick="refresh_captcha(this,event)"></i>
+                                                </span>
+                                                <div class="clr"></div>
+                                            </div>
+                                            <button type="submit"
+                                                class="background-color_2 btn cursor-pointer width_100 color_white"><i
+                                                    class="fa fa-location-arrow"></i> Send Message</button>
+                                            <div class="clr"></div>
+                                            <div class="Loading_Form unvisible text-center">
+                                                <div id="ballsWaveG">
+                                                    <div id="ballsWaveG_1" class="ballsWaveG"></div>
+                                                    <div id="ballsWaveG_2" class="ballsWaveG"></div>
+                                                    <div id="ballsWaveG_3" class="ballsWaveG"></div>
+                                                    <div id="ballsWaveG_4" class="ballsWaveG"></div>
+                                                    <div id="ballsWaveG_5" class="ballsWaveG"></div>
+                                                    <div id="ballsWaveG_6" class="ballsWaveG"></div>
+                                                    <div id="ballsWaveG_7" class="ballsWaveG"></div>
+                                                    <div id="ballsWaveG_8" class="ballsWaveG"></div>
+                                                </div>
+                                            </div>
+                                            <div class="Message-Form text-center font_16"></div>
+                                        </form>
+                                    </div>
+                                    <div class="width_50 float-right text-right map">
+                                        <iframe
+                                            src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d12193.294013287019!2d44.500655084886155!3d40.17961347029225!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1s19Nalbandyan, Yerevan!5e0!3m2!1sen!2s!4v1647240830062!5m2!1sen!2s"
+                                            style="border:0; border-radius: 5px;" allowfullscreen="" loading="lazy"
+                                            width="90%" height="324"></iframe>
+                                    </div>
+                                    <div class="clr"></div>
+                                </div>
+                                <div class="clr"></div>
+                            </div>
+                        </div>
+                        <div id="Inbound" class="unvisible">
+                            <div class="contact-item background-color_body border-radius">
+                                <div class="title-container-middle text-left">
+                                    <h2 class="title-content-middle color_gray"> Where <span
+                                            class="color_3 p-relative">Are
+                                            WE</span>
+                                    </h2>
+                                </div>
+                                <div class="contact-content float-left width_25">
+                                    <div class="inner width_90 d-flex">
+                                        <div class="contact-icon text-center p-relative">
+                                            <i class="fa fa-envelope color_3"></i>
+                                        </div>
+                                        <div class="contact-text">
+                                            <h2 class="font_18 color_gray title">Email</h2>
+                                            <p class="font_14">
+                                                <span class="answer"> <a class="color_gray"
+                                                        href="mailto:incoming@tatev.com">incoming@tatev.com</a> </span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="contact-content float-left width_25">
+                                    <div class="inner width_90 d-flex">
+                                        <div class="contact-icon text-center p-relative">
+                                            <i class="fa fa-phone color_3"></i>
+                                        </div>
+                                        <div class="contact-text">
+                                            <h2 class="font_18 color_gray title">Phone</h2>
+                                            <p class="font_14">
+                                                <span class="answer"> <a class="color_gray"
+                                                        href="tel:0037499524402">0037499524402</a>
+                                                </span>
+
+
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="contact-content float-left width_25">
+                                    <div class="inner width_90 d-flex">
+                                        <div class="contact-icon text-center p-relative">
+                                            <i class="fa fa-paper-plane color_3"></i>
+                                        </div>
+                                        <div class="contact-text">
+                                            <h2 class="font_18 color_gray title">Telegram</h2>
+                                            <p class="font_14">
+                                                <span class="answer"> <a class="color_gray"
+                                                        href="https://t.me/tatev_tour">@tatev_tour </a>
+                                                </span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="contact-content float-left width_25">
+                                    <div class="inner width_90 d-flex">
+                                        <div class="contact-icon text-center p-relative">
+                                            <i class="far fa-whatsapp color_3"></i>
+                                        </div>
+                                        <div class="contact-text">
+                                            <h2 class="font_18 color_gray title">Whatsapp</h2>
+                                            <p class="font_14">
+                                                <span class="answer"> <a class="color_gray"
+                                                        href="https://api.whatsapp.com/send?phone=0037499524402&text='tatev tour'">0037499524402</a>
+                                                </span>
+
+
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="clr"></div>
+                            </div>
+                            <div class="contact-item background-color_body border-radius">
+                                <div class="title-container-middle text-left">
+                                    <h2 class="title-content-middle color_gray"> Leave Us <span
+                                            class="color_3 p-relative">Your
+                                            Info</span>
+                                    </h2>
+                                </div>
+                                <div class="contact-form">
+                                    <div class="width_50 float-left form">
+                                        <form method="post" action="/message-get.bc"
+                                            class="color_gray font_15 width_100 form-content">
+                                            <input type="text" class="form-control width_45 float-right" name="name"
+                                                placeholder="Full Name*" required>
+                                            <input type="text" class="form-control width_45 " name="email"
+                                                placeholder="Email*" required>
+                                            <input type="text" class="form-control width_100" name="subject"
+                                                placeholder="Subject*" required>
+                                            <_textarea class="form-control width_100 color_gray font_15" rows="4"
+                                                name="message" placeholder="Message*" required> </_textarea>
+                                            <div class="captcha-content">
+                                                <input type="text" class="form-control width_50 float-left"
+                                                    name="Captcha" placeholder="Captcha*" required>
+                                                <span class="field-captcha width_50 float-right text-right">
+                                                    <span class="load-captcha">
+                                                        <img class="captcha" alt="captcha"
+                                                            src="[##captcha.code.captcha##]" loading="lazy" width="80"
+                                                            height="35">
+                                                        <input type="hidden" value="[##captcha.code.captcha##]"
+                                                            name="Captchaid"></span>
+                                                    <i class="fa fa-sync color_1 refresh-captcha cursor-pointer font_20"
+                                                        onclick="refresh_captcha(this,event)"></i>
+                                                </span>
+                                                <div class="clr"></div>
+                                            </div>
+                                            <button type="submit"
+                                                class="background-color_2 btn cursor-pointer width_100 color_white"><i
+                                                    class="fa fa-location-arrow"></i> Send Message</button>
+                                            <div class="clr"></div>
+                                            <div class="Loading_Form unvisible text-center">
+                                                <div id="ballsWaveG">
+                                                    <div id="ballsWaveG_1" class="ballsWaveG"></div>
+                                                    <div id="ballsWaveG_2" class="ballsWaveG"></div>
+                                                    <div id="ballsWaveG_3" class="ballsWaveG"></div>
+                                                    <div id="ballsWaveG_4" class="ballsWaveG"></div>
+                                                    <div id="ballsWaveG_5" class="ballsWaveG"></div>
+                                                    <div id="ballsWaveG_6" class="ballsWaveG"></div>
+                                                    <div id="ballsWaveG_7" class="ballsWaveG"></div>
+                                                    <div id="ballsWaveG_8" class="ballsWaveG"></div>
+                                                </div>
+                                            </div>
+                                            <div class="Message-Form text-center font_16"></div>
+                                        </form>
+                                    </div>
+                                    <div class="width_50 float-right text-right map">
+                                        <iframe
+                                            src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d12193.294013287019!2d44.500655084886155!3d40.17961347029225!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1s19Nalbandyan, Yerevan!5e0!3m2!1sen!2s!4v1647240830062!5m2!1sen!2s"
+                                            style="border:0; border-radius: 5px;" allowfullscreen="" loading="lazy"
+                                            width="90%" height="324"></iframe>
+                                    </div>
+                                    <div class="clr"></div>
+                                </div>
+                                <div class="clr"></div>
+                            </div>
+                        </div>
+                        <div id="Outbound" class="unvisible">
+                            <div class="contact-item background-color_body border-radius">
+                                <div class="title-container-middle text-left">
+                                    <h2 class="title-content-middle color_gray"> Where <span
+                                            class="color_3 p-relative">Are
+                                            WE</span>
+                                    </h2>
+                                </div>
+                                <div class="contact-content float-left width_20">
+                                    <div class="inner width_90 d-flex">
+                                        <div class="contact-icon text-center p-relative">
+                                            <i class="fa fa-envelope color_3"></i>
+                                        </div>
+                                        <div class="contact-text">
+                                            <h2 class="font_18 color_gray title">Email</h2>
+                                            <p class="font_14">
+                                                <span class="answer"> <a class="color_gray"
+                                                        href="mailto:travel@tatev.com">travel@tatev.com</a> </span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="contact-content float-left width_20">
+                                    <div class="inner width_90 d-flex">
+                                        <div class="contact-icon text-center p-relative">
+                                            <i class="fa fa-phone color_3"></i>
+                                        </div>
+                                        <div class="contact-text">
+                                            <h2 class="font_18 color_gray title">Phone</h2>
+                                            <p class="font_14">
+                                                <span class="answer"> <a class="color_gray"
+                                                        href="tel:0037410524401">0037410524401</a>
+                                                </span>
+
+
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="contact-content float-left width_20">
+                                    <div class="inner width_90 d-flex">
+                                        <div class="contact-icon text-center p-relative">
+                                            <i class="fa fa-paper-plane color_3"></i>
+                                        </div>
+                                        <div class="contact-text">
+                                            <h2 class="font_18 color_gray title">Telegram</h2>
+                                            <p class="font_14">
+                                                <span class="answer">0037433524401
+                                                </span>
+                                                <span class="answer"> <a class="color_gray"
+                                                        href="https://t.me/TatevTravelAgency">TatevTravelAgency </a>
+                                                </span>
+                                                <span class="answer"> <a class="color_gray"
+                                                        href="https://t.me/TatevTour">TatevTour<span
+                                                            class="font_11">(Iranian website)</span></a>
+                                                </span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="contact-content float-left width_20">
+                                    <div class="inner width_90 d-flex">
+                                        <div class="contact-icon text-center p-relative">
+                                            <i class="far fa-whatsapp color_3"></i>
+                                        </div>
+                                        <div class="contact-text">
+                                            <h2 class="font_18 color_gray title">Whatsapp</h2>
+                                            <p class="font_14">
+                                                <span class="answer"> <a class="color_gray"
+                                                        href="https://api.whatsapp.com/send?phone=0037433524401&text='tatev tour'">0037433524401</a>
+                                                </span>
+
+
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="contact-content float-left width_20">
+                                    <div class="inner width_90 d-flex">
+                                        <div class="contact-icon text-center p-relative">
+                                            <i class="far fa-youtube color_3"></i>
+                                        </div>
+                                        <div class="contact-text">
+                                            <h2 class="font_18 color_gray title">Youtube</h2>
+                                            <p class="font_14">
+                                                <span class="answer"> <a class="color_gray youtube"
+                                                        href="https://www.youtube.com/channel/UCwnl5q_1jhtxtsRu_2KjyWg">https://www.youtube.com/channel/UCwnl5q_1jhtxtsRu_2KjyWg</a>
+                                                </span>
+
+
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="clr"></div>
+                            </div>
+                            <div class="contact-item background-color_body border-radius">
+                                <div class="title-container-middle text-left">
+                                    <h2 class="title-content-middle color_gray"> Leave Us <span
+                                            class="color_3 p-relative">Your
+                                            Info</span>
+                                    </h2>
+                                </div>
+                                <div class="contact-form">
+                                    <div class="width_50 float-left form">
+                                        <form method="post" action="/message-get.bc"
+                                            class="color_gray font_15 width_100 form-content">
+                                            <input type="text" class="form-control width_45 float-right" name="name"
+                                                placeholder="Full Name*" required>
+                                            <input type="text" class="form-control width_45 " name="email"
+                                                placeholder="Email*" required>
+                                            <input type="text" class="form-control width_100" name="subject"
+                                                placeholder="Subject*" required>
+                                            <_textarea class="form-control width_100 color_gray font_15" rows="4"
+                                                name="message" placeholder="Message*" required> </_textarea>
+                                            <div class="captcha-content">
+                                                <input type="text" class="form-control width_50 float-left"
+                                                    name="Captcha" placeholder="Captcha*" required>
+                                                <span class="field-captcha width_50 float-right text-right">
+                                                    <span class="load-captcha">
+                                                        <img class="captcha" alt="captcha"
+                                                            src="[##captcha.code.captcha##]" loading="lazy" width="80"
+                                                            height="35">
+                                                        <input type="hidden" value="[##captcha.code.captcha##]"
+                                                            name="Captchaid"></span>
+                                                    <i class="fa fa-sync color_1 refresh-captcha cursor-pointer font_20"
+                                                        onclick="refresh_captcha(this,event)"></i>
+                                                </span>
+                                                <div class="clr"></div>
+                                            </div>
+                                            <button type="submit"
+                                                class="background-color_2 btn cursor-pointer width_100 color_white"><i
+                                                    class="fa fa-location-arrow"></i> Send Message</button>
+                                            <div class="clr"></div>
+                                            <div class="Loading_Form unvisible text-center">
+                                                <div id="ballsWaveG">
+                                                    <div id="ballsWaveG_1" class="ballsWaveG"></div>
+                                                    <div id="ballsWaveG_2" class="ballsWaveG"></div>
+                                                    <div id="ballsWaveG_3" class="ballsWaveG"></div>
+                                                    <div id="ballsWaveG_4" class="ballsWaveG"></div>
+                                                    <div id="ballsWaveG_5" class="ballsWaveG"></div>
+                                                    <div id="ballsWaveG_6" class="ballsWaveG"></div>
+                                                    <div id="ballsWaveG_7" class="ballsWaveG"></div>
+                                                    <div id="ballsWaveG_8" class="ballsWaveG"></div>
+                                                </div>
+                                            </div>
+                                            <div class="Message-Form text-center font_16"></div>
+                                        </form>
+                                    </div>
+                                    <div class="width_50 float-right text-right map">
+                                        <iframe
+                                            src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d12193.294013287019!2d44.500655084886155!3d40.17961347029225!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1s19Nalbandyan, Yerevan!5e0!3m2!1sen!2s!4v1647240830062!5m2!1sen!2s"
+                                            style="border:0; border-radius: 5px;" allowfullscreen="" loading="lazy"
+                                            width="90%" height="324"></iframe>
+                                    </div>
+                                    <div class="clr"></div>
+                                </div>
+                                <div class="clr"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </section>
+        <basis core="call" file="footer-en.inc" />
+    </main>
+</body>
+
+</html>

@@ -1,0 +1,29 @@
+<basis core="tracking" name="tracking" source="Monitoring" collectionname="activity" dbname="tracking"
+            addcookie="true" />
+        <basis core="cookie" name="trackingid" value="[##tracking.inserted.id|(0)##]" />  
+  <basis core="external.fly.ws" source="cmsDbService2" procedurename="dbsource" name="db">
+        <member name="toursearch" method="tour_final" postsql="select replace(replace(replace(replace(replace(replace(result,'None',' '),'undefined','null'),'\xa0',' '),' nan','null'),' inf','null'),' -inf' , 'null') as 'result' from [db.toursearch]"  query='{
+            "name": "db",
+            "mid": "20",
+            "member": [
+                {
+                    "type": "list",
+                    "name": "q",
+                    "request": "toursearchfinal",
+                    "basiscoreid": "",
+                    "tourname": "1192689",
+                    "tourid": "",
+                    "fromdate": "1402-12-18",
+                    "todate": "1402-12-25",
+                    "trackingNo": "[##cms.cookie.trackingid##]",
+                    "rooms": { "rooms":[{ "adultcount":"1","childcountandage":"0" }] },
+                    "userid": "0",
+                    "lid": "[##cms.form.clid|(1)##]",
+                    "unit": "10",
+                    "neardate": "1",
+                    "flexible": "0"
+                }
+            ]
+        } ' preview="" />
+    </basis>
+    [##db.toursearch.result##]
