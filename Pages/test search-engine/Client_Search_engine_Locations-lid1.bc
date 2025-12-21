@@ -1,56 +1,56 @@
+
+
 <!-- =========================
      FLIGHT (same template, only items replaced)
 ========================= -->
 <basis core="group" name="flight-items" if="'[##cms.query.module-type##]'='flight'">
-    <div class="block mx-auto ul-list w-full text-left">
-
-        <ul class="w-full float-left">
-            <li class="bg-bgColor-100 rounded-type-1 text-zin-950 text-base text-center p-1 mb-1"><span>Crowded cities</span></li>
+    <div class="block mx-auto ul-list w-full">
+        <ul class="w-full ">
+            <li class="bg-bgColor-100 rounded-type-1 text-zin-950 text-base text-center p-1 mb-1"><span>مسیر های پر تردد</span></li>
 
             <li class="cursor-pointer hover:text-primary text-textColor p-1 pr-1.5 text-sm" onclick="SelectPlace(this)" data-id="1192689">
-                <span>Yerevan - (all airports)</span>
+                <span>ایروان - (تمام فرودگاه‌ها)</span>
             </li>
             <li class="cursor-pointer hover:text-primary text-textColor p-1 pr-1.5 text-sm" onclick="SelectPlace(this)" data-id="1203548">
-                <span>Tehran - (all airports)</span>
+                <span>تهران - (تمام فرودگاه‌ها)</span>
             </li>
             <li class="cursor-pointer hover:text-primary text-textColor p-1 pr-1.5 text-sm" onclick="SelectPlace(this)" data-id="1190766">
-                <span>Urumqi - (all airports)</span>
+                <span>اورومچی - (تمام فرودگاه‌ها)</span>
             </li>
             <li class="cursor-pointer hover:text-primary text-textColor p-1 pr-1.5 text-sm" onclick="SelectPlace(this)" data-id="1189731">
-                <span>Tbilisi - (all airports)</span>
+                <span>تفلیس - (تمام فرودگاه‌ها)</span>
             </li>
             <li class="cursor-pointer hover:text-primary text-textColor p-1 pr-1.5 text-sm" onclick="SelectPlace(this)" data-id="1173505">
-                <span>Dubai - (all airports)</span>
+                <span>دبی - (تمام فرودگاه‌ها)</span>
             </li>
             <li class="cursor-pointer hover:text-primary text-textColor p-1 pr-1.5 text-sm" onclick="SelectPlace(this)" data-id="1182348">
-                <span>Moscow - (all airports)</span>
+                <span>مسکو - (تمام فرودگاه‌ها)</span>
             </li>
         </ul>
     </div>
 </basis>
 <basis core="group" name="multi-items" if="'[##cms.query.module-type##]'='multi'">
-    <div class="block mx-auto ul-list w-full text-left">
-
-        <ul class="w-full float-left">
-            <li class="bg-bgColor-100 rounded-type-1 text-zin-950 text-base text-center p-1 mb-1"><span>Crowded cities</span></li>
+    <div class="block mx-auto ul-list w-full">
+        <ul class="w-full ">
+            <li class="bg-bgColor-100 rounded-type-1 text-zin-950 text-base text-center p-1 mb-1"><span>مسیر های پر تردد</span></li>
 
             <li class="cursor-pointer hover:text-primary text-textColor p-1 pr-1.5 text-sm" onclick="SelectPlace(this)" data-id="1192689">
-                <span>Yerevan - (all airports)</span>
+                <span>ایروان - (تمام فرودگاه‌ها)</span>
             </li>
             <li class="cursor-pointer hover:text-primary text-textColor p-1 pr-1.5 text-sm" onclick="SelectPlace(this)" data-id="1203548">
-                <span>Tehran - (all airports)</span>
+                <span>تهران - (تمام فرودگاه‌ها)</span>
             </li>
             <li class="cursor-pointer hover:text-primary text-textColor p-1 pr-1.5 text-sm" onclick="SelectPlace(this)" data-id="1190766">
-                <span>Urumqi - (all airports)</span>
+                <span>اورومچی - (تمام فرودگاه‌ها)</span>
             </li>
             <li class="cursor-pointer hover:text-primary text-textColor p-1 pr-1.5 text-sm" onclick="SelectPlace(this)" data-id="1189731">
-                <span>Tbilisi - (all airports)</span>
+                <span>تفلیس - (تمام فرودگاه‌ها)</span>
             </li>
             <li class="cursor-pointer hover:text-primary text-textColor p-1 pr-1.5 text-sm" onclick="SelectPlace(this)" data-id="1173505">
-                <span>Dubai - (all airports)</span>
+                <span>دبی - (تمام فرودگاه‌ها)</span>
             </li>
             <li class="cursor-pointer hover:text-primary text-textColor p-1 pr-1.5 text-sm" onclick="SelectPlace(this)" data-id="1182348">
-                <span>Moscow - (all airports)</span>
+                <span>مسکو - (تمام فرودگاه‌ها)</span>
             </li>
         </ul>
     </div>
@@ -60,28 +60,28 @@
      HOTEL (same template, only items replaced)
 ========================= -->
 <basis core="group" name="hotel-items" if="'[##cms.query.module-type##]'='hotel'">
-    <div class="block mx-auto ul-list w-full text-left">
+    <div class="block mx-auto ul-list w-full">
 
-        <ul class="w-full float-left">
-            <li class="bg-bgColor-100 rounded-type-1 text-zin-950 text-base text-center p-1 mb-1"><span>Crowded cities</span></li>
+        <ul class="w-full ">
+            <li class="bg-bgColor-100 rounded-type-1 text-zin-950 text-base text-center p-1 mb-1"><span>مسیر های پر تردد</span></li>
 
             <li class="cursor-pointer hover:text-primary text-textColor p-1 pr-1.5 text-sm" onclick="SelectPlace(this)" data-id="1192689">
-                <span>Yerevan - Armenia</span>
+                <span>ایروان - ارمنستان</span>
             </li>
             <li class="cursor-pointer hover:text-primary text-textColor p-1 pr-1.5 text-sm" onclick="SelectPlace(this)" data-id="1179553">
-                <span>Larnaca - Cyprus</span>
+                <span>لارناکا - قبرس</span>
             </li>
             <li class="cursor-pointer hover:text-primary text-textColor p-1 pr-1.5 text-sm" onclick="SelectPlace(this)" data-id="1168736">
-                <span>Ayia Napa - Cyprus</span>
+                <span>آیا ناپا - قبرس</span>
             </li>
             <li class="cursor-pointer hover:text-primary text-textColor p-1 pr-1.5 text-sm" onclick="SelectPlace(this)" data-id="1203548">
-                <span>Tehran - Iran</span>
+                <span>تهران - ایران</span>
             </li>
             <li class="cursor-pointer hover:text-primary text-textColor p-1 pr-1.5 text-sm" onclick="SelectPlace(this)" data-id="1189731">
-                <span>Tbilisi - Georgia</span>
+                <span>تفلیس - گرجستان</span>
             </li>
             <li class="cursor-pointer hover:text-primary text-textColor p-1 pr-1.5 text-sm" onclick="SelectPlace(this)" data-id="1173505">
-                <span>Dubai - United Arab Emirates</span>
+                <span>دبی - امارات متحده عربی</span>
             </li>
         </ul>
     </div>
@@ -91,27 +91,28 @@
      FLIGHT HOTEL (same template, only items replaced)
 ========================= -->
 <basis core="group" name="flighthotel-items" if="'[##cms.query.module-type##]'='flighthotel'">
-    <div class="block mx-auto ul-list w-full text-left">
-        <ul class="w-full float-left">
-            <li class="bg-bgColor-100 rounded-type-1 text-zin-950 text-base text-center p-1 mb-1"><span>Crowded cities</span></li>
+    <div class="block mx-auto ul-list w-full">
+
+        <ul class="w-full ">
+            <li class="bg-bgColor-100 rounded-type-1 text-zin-950 text-base text-center p-1 mb-1"><span>مسیر های پر تردد</span></li>
 
             <li class="cursor-pointer hover:text-primary text-textColor p-1 pr-1.5 text-sm" onclick="SelectPlace(this)" data-id="1192689">
-                <span>Yerevan - (all airports)</span>
+                <span>ایروان - (تمام فرودگاه‌ها)</span>
             </li>
             <li class="cursor-pointer hover:text-primary text-textColor p-1 pr-1.5 text-sm" onclick="SelectPlace(this)" data-id="1203548">
-                <span>Tehran - (all airports)</span>
+                <span>تهران - (تمام فرودگاه‌ها)</span>
             </li>
             <li class="cursor-pointer hover:text-primary text-textColor p-1 pr-1.5 text-sm" onclick="SelectPlace(this)" data-id="1190766">
-                <span>Urumqi - (all airports)</span>
+                <span>اورومچی - (تمام فرودگاه‌ها)</span>
             </li>
             <li class="cursor-pointer hover:text-primary text-textColor p-1 pr-1.5 text-sm" onclick="SelectPlace(this)" data-id="1189731">
-                <span>Tbilisi - (all airports)</span>
+                <span>تفلیس - (تمام فرودگاه‌ها)</span>
             </li>
             <li class="cursor-pointer hover:text-primary text-textColor p-1 pr-1.5 text-sm" onclick="SelectPlace(this)" data-id="1173505">
-                <span>Dubai - (all airports)</span>
+                <span>دبی - (تمام فرودگاه‌ها)</span>
             </li>
             <li class="cursor-pointer hover:text-primary text-textColor p-1 pr-1.5 text-sm" onclick="SelectPlace(this)" data-id="1182348">
-                <span>Moscow - (all airports)</span>
+                <span>مسکو - (تمام فرودگاه‌ها)</span>
             </li>
         </ul>
     </div>

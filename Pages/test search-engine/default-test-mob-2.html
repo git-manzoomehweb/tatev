@@ -4,17 +4,13 @@
 <basis core="dbsource" source="basiscore" mid="20" name="db" lid="2">
     <member name="tour-count-1" type="list" link="tour.bc" catid="152929" />
 </basis>
-<basis core="list" dataMemberName="db.tour-count-1">
-    <else-layout>
-        <div class="input-content"><input type="hidden" value="0" data-catid="152929" /></div>
-    </else-layout>
-    <face filter="RowNumber = Max(RowNumber)">
-        <div class="input-content"><input type="hidden" value="@RowNumber" data-catid="152929" /></div>
-    </face>
-</basis>
+
 <basis core='dbsource' name='captcha' source='trust_login'>
     <member name='code' type='scalar' request='captcha'></member>
 </basis>
+
+
+
 <!DOCTYPE html>
 <html>
 
@@ -40,7 +36,7 @@
     <meta name="mobile-web-app-capable" content="yes" />
     <!----------------CSS FILE---------------->
     <!----CSS MAIN STYLE---->
-    <link href="[##cms.cms.cdn##]/css/style.css" type="text/css" rel="stylesheet" />
+    <link href="[##cms.cms.cdn##]/css/tatev-EN-mob.ui.min.css" type="text/css" rel="stylesheet" />
     <!----CSS FONT AWESOME---->
     <link href="[##cms.cms.cdn##]/css/font_awesome.css" type="text/css" rel="stylesheet" />
     <!----CSS CALENDAR---->
@@ -51,27 +47,38 @@
         rel="stylesheet" />
     <!----------------JS FILE---------------->
     <script src="[##cms.cms.cdn##]/js/library.js" type="text/javascript"></script>
+
 </head>
 
 <body>
+    <basis core="list" dataMemberName="db.tour-count-1">
+        <else-layout>
+            <div class="input-content"><input type="hidden" value="0" data-catid="152929" /></div>
+        </else-layout>
+        <face filter="RowNumber = Max(RowNumber)">
+            <div class="input-content"><input type="hidden" value="@RowNumber" data-catid="152929" /></div>
+        </face>
+    </basis>
     <main>
-        <basis core="call" file="header-en.inc" />
+        <basis core="call" file="header_test.inc" lid="2" />
         <section class="content">
             <section class="loginRegister"></section>
-            <section class="search-box-container en search-banner dir-ltr background-color_body p-relative">
+            <section class="search-box-container mobile-search-box en search-banner dir-ltr background-color_body p-relative">
                 <div class="pageBgBlue"></div>
                 <div class="pageBgLight"></div>
                 <div class="bc-main">
                     <h1 style="opacity: 0;">online ticket,tatev</h1>
                     <p class="title color_white text-left font_20">Discover amazing places at exclusive
                         deals</p>
-                    <section class="search-box" id="search-box">
-                    </section>
+                    <div id="search-box" class="dir-ltr">
+                        <div class="loader-searchbox"></div>
+                    </div>
+                    <div class="clr"></div>
                 </div>
-                <div class="search-img">
+                <!-- <div class="search-img">
                     <img src="[##cms.cms.cdn##]/images/search-bg.jpg" data-src="[##cms.cms.cdn##]/images/search-bg.jpg"
                         class="cover-image lozad" width="1920" height="296" alt="" />
-                </div>
+                </div> -->
             </section>
             <section class="item-container background-color_body">
                 <div class="bc-main p-relative">
@@ -87,7 +94,8 @@
                             </ul>
                         </layout>
                         <face>
-                            <li class="border-radius btn" onclick="select_tour(this,'@catid')" data-catid="@catid">@title</li>
+                            <li class="border-radius btn" onclick="select_tour(this,'@catid')" data-catid="@catid">
+                                @title</li>
                         </face>
                     </basis>
 
@@ -242,8 +250,56 @@
                 </div>
             </section>
         </section>
-        <basis core="call" file="footer-en.inc" />
+                <basis core="call" file="footer_test.inc" lid="2" />
+
     </main>
+
+
+    <script>
+        function fetchEngine() {
+            try {
+                var xhrobj = new XMLHttpRequest();
+                xhrobj.open('GET', 'search_engine_mob.bc?lid=2');
+                xhrobj.send();
+
+
+                xhrobj.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+                        var container = document.getElementById('search-box');
+                        container.innerHTML = xhrobj.responseText;
+
+
+                        var scripts = container.getElementsByTagName("script");
+                        for (var i = 0; i < scripts.length; i++) {
+                            var scriptTag = document.createElement("script");
+                            if (scripts[i].src) {
+                                scriptTag.src = scripts[i].src;
+                                scriptTag.async = false;
+                            } else {
+                                scriptTag.text = scripts[i].textContent;
+                            }
+                            document.head.appendChild(scriptTag).parentNode.removeChild(scriptTag);
+                        }
+                    }
+                };
+            } catch (error) {
+                console.error('مشکلی رخ داده است لطفا صبور باشید.', error);
+            }
+        }
+        function waitForFiles() {
+            fetchEngine();
+            /* if (checkAllResourcesLoaded()) {
+                fetchEngine();
+            } else {
+                setTimeout(waitForFiles, 500);
+            } */
+        }
+
+
+        waitForFiles();
+        // });
+    </script>
+
     <script src="[##cms.cms.cdn##]/js/lozad.min.js"></script>
 </body>
 

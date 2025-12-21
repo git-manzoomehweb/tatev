@@ -1,7 +1,7 @@
 <basis core="dbsource" source="basiscore" name="db" mid="1" lid="2" usedforid="[##cms.query.id##]">
     <member name="view" type="view" />
-    <member name="related-tour" type="list" blgid="18" link="tour-en.bc" propertyid="8181,8076,8077,10000504" typeid="159" />
-    <member name="related-article" type="list" blgid="218" link="article-en.bc" propertyid="7246" typeid="159" />
+    <member name="related-tour" type="list" blgid="18" link="tour.bc" propertyid="8181,8076,8077,10000504" typeid="159" />
+    <member name="related-article" type="list" blgid="218" link="article.bc" propertyid="7246" typeid="159" />
     <member name="data" type="view" request="rdfa" />
 </basis>
 
@@ -30,7 +30,7 @@
     <meta name="mobile-web-app-capable" content="yes" />
     <!----------------CSS FILE---------------->
     <!----CSS MAIN STYLE---->
-    <link href="[##cms.cms.cdn##]/css/style.css" type="text/css" rel="stylesheet" />
+    <link href="[##cms.cms.cdn##]/css/tatev-EN.ui.min.css" type="text/css" rel="stylesheet" />
     <!----CSS FONT AWESOME---->
     <link href="[##cms.cms.cdn##]/css/font_awesome.css" type="text/css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900|Raleway:400,500,600,700" type="text/css"
@@ -41,9 +41,8 @@
 
 <body>
     <main>
-        <basis core="call" file="header-en.inc" />
+        <basis core="call" file="header.inc" lid="2" />
         <section class="content pages">
-            <section class="loginRegister"></section>
             <section class="item-container">
                 <div class="bc-main p-relative">
                     <div class="width_70 float-left info-container">
@@ -296,7 +295,7 @@
                 <face filter="link is null">
                     <div class="article-list-content">
                         <article class="inner border-radius card background-color_white  width_90">
-                            <a href="/article-en.bc?id=@id">
+                            <a href="/article.bc?id=@id">
                                 <figure class="p-relative border-radius"><img src="/@type_159"
                                     width="380" height="245" alt="@title" class="cover-image border-radius transition" />
                                 <div class="effect"></div>
@@ -348,7 +347,7 @@
             </basis>
             
         </section>
-        <basis core="call" file="footer-en.inc" />
+        <basis core="call" file="footer.inc" lid="2" />
     </main>
     <!----------------JS GALLERY---------------->
     <script type="text/javascript" src="[##cms.cms.cdn##]/js/lightgallery.js"></script>

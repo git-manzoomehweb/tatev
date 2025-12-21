@@ -7,3 +7,28 @@ flighthotel-module
 tour-module
 empty-fields
 flight-list-v2
+
+
+
+
+svg.module-icon-deactive.align-middle.group-hover\:hidden ,
+svg.module-icon-active.align-middle.group-hover\:inline-block{
+    width: 30px !important;
+    height: 30px !important;
+}
+.flighthotel-btn svg.module-icon-deactive.align-middle.group-hover\:hidden ,
+.flighthotel-btn svg.module-icon-active.align-middle.group-hover\:inline-block{
+    width: 34px !important;
+    height: 30px !important;
+}
+
+.flight-btn svg.module-icon-deactive.align-middle.group-hover\:hidden, 
+.flight-btn svg.module-icon-active.align-middle.group-hover\:inline-block {
+    width: 29px !important;
+    height: 26px !important;
+}
+.hotel-btn svg.module-icon-deactive.align-middle.group-hover\:hidden, 
+.hotel-btn svg.module-icon-active.align-middle.group-hover\:inline-block {
+    width: 29px !important;
+    height: 26px !important;
+}
