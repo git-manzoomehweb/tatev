@@ -10,7 +10,7 @@
 </basis>
 
 <!DOCTYPE html>
-<html>
+<html lang="fa">
 
 <head>
     <meta property="og:type" content="website" />
@@ -59,7 +59,7 @@
     </basis>
 
     <main>
-        <basis core="call" file="header_test.inc" lid="1" />
+        <basis core="call" file="header.inc" lid="1" />
 
         <section class="content">
             <section class="loginRegister"></section>
@@ -127,7 +127,7 @@
                     <div class="tour-cat-content width_90" data-catid="@catid">
                         <article class="inner">
                             <div class="p-relative border-radius card">
-                                <a href="/tour-list-en.bc?catid=@catid">
+                                <a href="/tour-list.bc?lid=1&catid=@catid">
                                     <figure class="border-radius">
                                         <img src="@image" width="275" height="365" alt="@title"
                                             class="cover-image border-radius lozad" />
@@ -269,7 +269,7 @@
         </section>
 
 
-                <basis core="call" file="footer_test.inc" lid="1" />
+                <basis core="call" file="footer.inc" lid="1" />
 
 
     </main>
@@ -278,7 +278,7 @@
         function fetchEngine() {
             try {
                 var xhrobj = new XMLHttpRequest();
-                xhrobj.open('GET', 'search_engine_mob.bc?lid=1');
+                xhrobj.open('GET', 'search_engine.bc?lid=1');
                 xhrobj.send();
 
                 xhrobj.onreadystatechange = function () {

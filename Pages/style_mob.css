@@ -1,0 +1,84 @@
+@charset "utf-8";
+@font-face{font-family:'fontawesome';src:url('../fonts/fontAwesome.eot') format('embedded-opentype'), url('../fonts/fontAwesome.woff') format('woff'), url('../fonts/fontAwesome.ttf') format('truetype'), url('../fonts/fontAwesome.svg') format('svg'), url('../fonts/fontAwesome-brands.eot') format('embedded-opentype');font-weight:normal;font-style:normal;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;}
+.sr-only-focusable:active, .sr-only-focusable:focus{clip:auto;height:auto;margin:0;overflow:visible;position:static;width:auto;}
+@font-face{font-family:'fontawesome';font-style:normal;font-weight:400;font-display:block;src:url("../fonts/fontAwesome-brands.eot");src:url("../fonts/fontAwesome-brands.eot") format("embedded-opentype"), url("../fonts/fontAwesome-brands.woff") format("woff"), url("../fonts/fontAwesome-brands.ttf") format("truetype"), url("../fonts/fontAwesome-brands.svg") format("svg");}
+.fab{font-family:'fontawesome';font-weight:400;}
+@font-face{font-family:'fontawesome';font-style:normal;font-weight:400;font-display:block;src:url("../fonts/fontAwesome-regular.eot");src:url("../fonts/fontAwesome-regular.eot") format("embedded-opentype"), url("../fonts/fontAwesome-regular.woff") format("woff"), url("../fonts/fontAwesome-regular.ttf") format("truetype"), url("../fonts/fontAwesome-regular.svg") format("svg");}
+.far{font-family:'fontawesome';font-weight:400;}
+@font-face{font-family:'fontawesome';font-style:normal;font-weight:900;font-display:block;src:url("../fonts/fontAwesome-solid.eot");src:url("../fonts/fontAwesome-solid.eot") format("embedded-opentype"), url("../fonts/fontAwesome-solid.woff") format("woff"), url("../fonts/fontAwesome-solid.ttf") format("truetype"), url("../fonts/fontAwesome-solid.svg") format("svg");}
+.fa,
+.fas{font-family:'fontawesome';font-weight:900;}
+@font-face{font-family:'IRANSansWeb';src:url('../fonts/IRANSansWeb(FaNum).ttf') format('truetype'), url('../fonts/IRANSansWeb(FaNum).eot') format('embedded-opentype');font-weight:normal;font-style:normal;}
+@font-face{font-family:'IRANSansWebEnNum';font-style:normal;font-weight:lighter;src:url('../fonts/IRANSansWeb_Medium.eot');src:url('../fonts/IRANSansWeb_Medium.eot?#iefix') format('embedded-opentype'),
+url('../fonts/IRANSansWeb_Medium.woff') format('woff'),
+url('../fonts/IRANSansWeb_Medium.ttf') format('truetype');}
+@font-face {font-family: 'fontIcon';src: url("../fonts/fontIcon.eot?n1z373");src: url("../fonts/fontIcon.eot?#iefixn1z373") format("embedded-opentype"), url("../fonts/fontIcon.woff?n1z373") format("woff"), url("../fonts/fontIcon.ttf?n1z373") format("truetype"), url("../fonts/fontIcon.svg?n1z373#lg") format("svg");
+font-weight: normal;font-style: normal;}
+.font-color_1{color:#2d348e;}
+.background-color_1{background:#2d348e !important;}
+.sort-box .sort-items li.active,.reserve-button:hover,.mm-spn li:before,.mm-spn.mm-spn--navbar:before,.fa-times,.section-research-left button:hover ,.after-btn:hover,.before-btn:hover,.section-filter-icon button:hover,.highlight,.selectCountry i,.select-arrow::before,.Link-Forgetpass:hover,.Link-Login-New:hover,.Link-Login-Prev:hover, .Link-Register:hover, .Link-ResendMail:hover, .Link-Login:hover{color:#2d348e !important;}
+.createChildDropdown select ,.section-details button:hover ,.progress-bar ,.section-input_2 input[type="checkbox"]:checked + label span.checkbox::after,.section-input_2 input[type="checkbox"]:checked + label span.checkbox::after,.ui-datepicker-buttonpane .ui-state-default:hover,.ui-datepicker-buttonpane .ui-state-default:focus,.ui-datepicker-buttonpane .ui-datepicker-current:hover,.ui-datepicker-buttonpane .ui-datepicker-current:focus{ background:#2d348e!important;  }
+.radioButton:checked+label span::after {color:#2d348e;border: 2px solid #2d348e;}
+.active_tab_tour{color: #fff !important; background:#2d348e;}
+.ui-state-active,.ui-widget-content .ui-state-active,.ui-widget-header .ui-state-active{border:1px solid #2d348e;background:#2d348e!important;}
+.reserve-button { border: 1px solid #2d348e; }
+.title-result { border-bottom: 1px solid #2d348e; }
+.login_info .label{color: #2d348e;}
+.confirm {  background: linear-gradient(-90deg, #2d348e 0%, #a7e5da 100%);  }
+.confirm:hover { background: linear-gradient(-90deg, #a7e5da 0%, #2d348e 100%); }
+.details-item-title { border-bottom: 2px solid #2d348e;  }
+.section-details button{border: 2px solid #2d348e;}
+.item-search:before{border: 1px dashed #2d348e;}
+.progress-bar {background-image: -webkit-linear-gradient(top,#2d348e 0,#2d348e 100%);background-image: -o-linear-gradient(top,#2d348e 0,#2d348e 100%);background-image: -webkit-gradient(linear,left top,left bottom,from(#2d348e),to(#2d348e));background-image: linear-gradient(to bottom,#2d348e 0,#2d348e 100%);filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff337ab7', endColorstr='#ff286090', GradientType=0);background-repeat: repeat-x;}
+.link-2:hover:after{border-color:#2d348e;}
+.section-input_2 span.checkbox::before{border: 2px solid #2d348e;}
+.top-menu {background: linear-gradient(-135deg,#2d348e, #2d348e);  }
+.section-input_2 span.checkbox::before{  border: 2px solid #2d348e;}
+.loader {border-top: 5px solid #2d348e; }
+.ChangeFlight-header {background: linear-gradient(-135deg,#2d348e, #a7e5da);}
+/*-----------------------------*/
+.font-color_2{color: #06acf1;}
+.background-color_2{background:#06acf1 !important;}
+.second-part-header .col1-second-part-header a:after,.second-part-header .col1-second-part-header a:before,.category-title:hover,.fa-angle-double-left:hover, .fa-angle-double-right:hover ,.controlsPage:hover,
+.second-part-header .col1-second-part-header a:after,.second-part-header .col1-second-part-header a span,.active-item-search img,.row1-footer .fa,.row1-footer .far,.right-border-d::after,.right-border-d::before,.ui-datepicker-today .ui-state-highlight,.ui-datepicker table thead th,.ui-datepicker .ui-datepicker-buttonpane button,.ResendSMSSubmit,#sendSms input[type="submit"],#ConfirmRegister input[type="submit"]{background:#06acf1 !important;}
+.CountPassenger.room::before,.highlight,.active-item-search .fa-arrow-down:before,.circle,.details-button:hover,.Others-Button:hover,.row1-footer .fa:hover,.row1-footer .far:hover ,.sort-box .sort-items li.active {color: #06acf1 !important;}
+.active-item-search .item-search:before { border: 1px dashed #06acf1 !important; display: none; }
+.radioButton:checked + label span::after {color:#06acf1;border: 3px solid #06acf1;}
+.add-room { background: linear-gradient(-90deg,#06acf1 0%, #06acf1 100%); }
+.row1-footer .fa,.row1-footer .far {  border: 1px solid #06acf1; }
+.details-button,.Others-Button { border: 1px solid #06acf1;  }
+.right-border-d {  border-left: 2px dashed #06acf1;}
+/*-----------------------------*/
+.total-cost { color: #00a703; }
+.fa.fa-user.is-login { color:  #00a703; }
+.true-result{color:  #00a703;}
+.selected{color: #00a703;}
+.width_100 button{ background: #00a703 ;}
+.error-result{color: #f42e36;}
+.submit:hover { color:#34495e; }
+.font-color_3{color:#30d5a0;}
+.background-color_3{background:#30d5a0;}
+.font-color_4{color: #fff;}
+/*-----------------------------*/
+.Basis_Calendar .selected_date{background: #06acf1!important;}
+.Basis_Calendar .month_day_list table td:hover{background:#06acf1 }
+.Basis_Calendar .month_detail{background:#06acf1}
+.Basis_Calendar .basis_s_day{color:#2d348e;}
+.Basis_Calendar .day_of_date{color:#2d348e;}
+.Basis_Calendar .month_of_date{color:#2d348e;}
+.Basis_Calendar .date_info_selected{border-bottom: 2px solid rgba(255, 117, 85, 0.49);}
+.Basis_Calendar .month_detail{border-bottom: 2px solid rgba(255, 117, 85, 0.49);}
+.Basis_Calendar .selected_day {background: rgba(255, 117, 85, 0.2);}
+.week .day:nth-child(1),.week .day:nth-child(5) {background-color: #d1949f;} 
+.week .day:nth-child(1) .basis_s_day,.week .day:nth-child(1) .basis_m_day,.week .day:nth-child(5) .basis_s_day,.week .day:nth-child(5) .basis_m_day{color: #fff;} 
+.warning {color: #f42e36;}
+.col2-second-part-header img{width: 70px; height: auto; padding: 0.2em 0;}
+.top-menu img{width: 100px; height: auto;-webkit-filter: brightness(0) invert(1);filter: brightness(0) invert(1);}
+.fa.fa-#f42e36o-alt {color: #2d348e;}
+#Insurance {display: none;}
+#Visa {display: none;}
+
+
+
+
+

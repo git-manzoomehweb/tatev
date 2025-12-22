@@ -11,7 +11,7 @@ body,*,html,
 html, body{font-family:'Lato', sans-serif;height:100%;letter-spacing: .2px;font-weight: 700;}
 input:focus, textarea:focus, select:focus, button:focus{outline:none !important;}
 input, button, select, textarea, option{border: none;background: none;font-family:'Lato', sans-serif;appearance: none;-webkit-appearance: none;-moz-appearance: none;-o-appearance: none;-s-appearance: none;}
-main {width: 100%;height: auto;}
+main {width: 100%;height: auto;margin-top: 9em;padding-top: 9px;}
 a, i, span{display:inline-block;font-style:normal;vertical-align:middle;}
 a, i, span, p, h1, h2, h3, h4, input, button{-webkit-transition:all .3s ease-in-out;-moz-transition:all .3s ease-in-out;-ms-transition:all .3s ease-in-out;-o-transition:all .3s ease-in-out;transition:all .3s ease-in-out;}
 .transition{-webkit-transition:all 0.5s ease-in-out;-moz-transition:all 0.5s ease-in-out;-o-transition:all 0.5s ease-in-out;-ms-transition:all 0.5s ease-in-out;transition:all 0.5s ease-in-out;}
@@ -172,6 +172,10 @@ a, i, span, p, h1, h2, h3, h4, input, button{-webkit-transition:all .3s ease-in-
 .footer .bottom{background: #313a45 none repeat scroll 0 0;border-bottom: 1px solid #475362;}
 .footer .logo{margin-bottom: 0.5em;}
 .mini-about {font-weight: initial;}
+.text-justify.mini-about.font_15 {
+  height: 134px;
+  overflow: hidden;
+}
 .footer .link{font-weight: initial;}
 .footer .link li:not(:last-child){margin-bottom: .5em;}
 .footer .copy{padding: 1em 0;}
@@ -798,6 +802,8 @@ margin-right: 2em;
 
 
 @media only screen and (max-width:1250px){
+  main {width: 100%;height: auto;margin-top: 8em !important;}
+
 .bc-main {width: 95%;}
 .Login_Information{padding: 0;margin: 0.3em 1em 0 1em;}
 .section-menu{display:none;}

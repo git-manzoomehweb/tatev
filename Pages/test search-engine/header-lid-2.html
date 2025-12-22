@@ -59,7 +59,7 @@
                     <div class="dropdown-language p-absolute width_100 unvisible text-left">
                         <ul>
                             <li class="">
-                                <a href="/" class="color_gray">
+                                <a href="/EN" class="color_gray">
                                     <svg width="20" height="15" viewBox="0 0 640 480"
                                         xmlns="http://www.w3.org/2000/svg">
                                         <defs>
@@ -510,8 +510,7 @@
                 </div>
                 <div class="login-header">
                     <div class="Login_Information sign-in">
-                        <basis core="call" file="authentication/modal/En"></basis>
-                    </div>
+          <basis core="call" file="authentication/modal" lid="2"></basis>                    </div>
 
                 </div>
             </div>
@@ -539,7 +538,7 @@
                                     </ul>
                                 </layout>
                                 <face level="end" filter="link is null">
-                        <li><a class="width_100" href="/tour-list-en.bc?catid=@catid"> @title</a></li>
+                        <li><a class="width_100" href="/tour-list.bc?lid=2&catid=@catid"> @title</a></li>
                         </face>
                         <face level="end">
                             <li><a class="width_100" href="/@link"> @title</a></li>
@@ -581,7 +580,7 @@
 
                         </li>
                         <li class="menu-item text-center cursor-pointer"><a
-                                href="/article-list-en.bc?catid=152924">News</a></li>
+                                href="/article-list.bc?lid=2&catid=152924">News</a></li>
                         <li class="menu-item text-center cursor-pointer has-sub-menu"><span class="link-text">Services
                                 <i class="fa fa-angle-down"></i></span>
                             <basis core="tree" dataMemberName="article.cat" idCol="catid" parentidCol="ParentID"
@@ -592,7 +591,7 @@
                                     </ul>
                                 </layout>
                                 <face level="end" filter="link is null">
-                        <li><a class="width_100" href="/article-list-en.bc?catid=@catid"> @title</a></li>
+                        <li><a class="width_100" href="/article-list.bc?lid=2&catid=@catid"> @title</a></li>
                         </face>
                         <face level="end">
                             <li><a class="width_100" href="/@link"> @title</a></li>
@@ -661,7 +660,7 @@
                                             </ul>
                                         </layout>
                                         <face level="end" filter="link is null">
-                                <li><a href="/tour-list-en.bc?catid=@catid"><i class="fa fa-link"></i> @title</a></li>
+                                <li><a href="/tour-list.bc?lid=2&catid=@catid"><i class="fa fa-link"></i> @title</a></li>
                                 </face>
                                 <face level="end">
                                     <li><a href="/@link"> @title</a></li>
@@ -698,7 +697,7 @@
                                 </basis>
                                 </a>
                                 </li>
-                                <li><a href="/article-list-en.bc?catid=152924"><i class="fa fa-link"></i>News</a>
+                                <li><a href="/article-list.bc?lid=2&catid=152924"><i class="fa fa-link"></i>News</a>
                                 </li>
                                 <li><i class="fa fa-link"></i><span>Services</span>
                                     <basis core="tree" dataMemberName="article.cat" idCol="catid" parentidCol="ParentID"
@@ -709,7 +708,7 @@
                                             </ul>
                                         </layout>
                                         <face level="end" filter="link is null">
-                                <li><a href="/article-list-en.bc?catid=@catid"><i class="fa fa-link"></i> @title</a>
+                                <li><a href="/article-list.bc?lid=2&catid=@catid"><i class="fa fa-link"></i> @title</a>
                                 </li>
                                 </face>
                                 <face level="end">
