@@ -745,7 +745,7 @@ transition: left 1s cubic-bezier(0, 0, 0.25, 1) 0s, opacity 0.1s ease 0s;}
 }
 
         .searchList.w-60{
-            min-width: 210px !important;
+            min-width: 220px !important;
         }
 
 

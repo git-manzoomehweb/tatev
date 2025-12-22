@@ -1033,14 +1033,14 @@ label.label-passengers.label-passengers-flight.float-right.w-full.cursor-pointer
     line-height: 37px !important
 }
 
-.ul-list li:not(:first-child)::before {
+/* .ul-list li:not(:first-child)::before {
     content: "\f041";
     position: absolute;
     font-family: "fontawesome";
     left: .2em;
     top: 0 !important;
     color: #2d348e
-}
+} */
 
 .exchangeRoute {
     background: var(--primary-500) !important;
@@ -1219,8 +1219,9 @@ select.select-age.leading-8 {
     content: "\f041";
     position: absolute;
     font-family: "fontawesome";
-    left: .2em;
-    top: 1.2em;
+    right: .2em;
+    margin-left: auto;
+    top: 0.2em;
     color: #2d348e;
 }
 
