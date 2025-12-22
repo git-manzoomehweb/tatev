@@ -613,7 +613,7 @@ transition: left 1s cubic-bezier(0, 0, 0.25, 1) 0s, opacity 0.1s ease 0s;}
 }
 
 /* new desktop search engine */
-.search-box-container {
+.search-box-container-bg {
     min-height: 590px !important;
     background-image: url(../images/search-bg.jpg);
     background-position: center;
@@ -726,7 +726,7 @@ select.select-age {
     border-radius: 1em;
     padding: 5px !important;
     box-shadow: 1px 1px 7px #CCC;
-    max-width: 320px !important;
+    /* max-width: 320px !important; */
     width: 100% !important
 }
 
