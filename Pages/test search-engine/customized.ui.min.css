@@ -982,7 +982,7 @@ button,
 
 @font-face {
   font-display: swap;
-  font-family: "FontAwesome";
+  font-family: "fontawesome";
   font-style: normal;
   src: url(../_fonts/fontawesome-webfont.woff) format("woff"), url(../_fonts/fontawesome-webfont.woff2) format("woff2"), url(../_fonts/fontawesome-webfont.otf) format("opentype"), url(../_fonts/fontawesome-webfont.ttf) format("typetrue")
 }
@@ -995,7 +995,7 @@ button,
 .fa,
 .fas,
 .fab {
-  font-family: "FontAwesome" !important;
+  font-family: "fontawesome" !important;
   font-style: normal;
   font-weight: 900
 }
@@ -4178,7 +4178,13 @@ nav.rtl-menu.mm-spn > ul.mm-spn--open{
 /*<!--------------------------------END CSS OWL-------------------------------*/
 
 
-
-.tour-btn{color: white;}
+.fa-arrow-up:before {
+  content: "\f062";
+}
+.fa-phone-alt:before
+ {
+    content: "\f879";
+}
+.tour-details-item .tour-btn{color: white;}
 .searched-item{cursor: pointer;padding: 0;overflow: hidden;}
 .search-item > button{width: 100%;height: 100%;}
