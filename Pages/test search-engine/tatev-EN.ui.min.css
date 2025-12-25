@@ -741,9 +741,9 @@ transition: left 1s cubic-bezier(0, 0, 0.25, 1) 0s, opacity 0.1s ease 0s;}
         }
 
 
-        #picker {
+        /* #picker {
   margin-left: 561px !important;
-}
+} */
 
 .FlightClass{
     border-radius: 1em !important;
