@@ -4186,5 +4186,5 @@ nav.rtl-menu.mm-spn > ul.mm-spn--open{
     content: "\f879";
 }
 .tour-details-item .tour-btn{color: white;}
-.searched-item{cursor: pointer;padding: 0;overflow: hidden;}
+.searched-item{cursor: pointer;padding: 0;}
 .search-item > button{width: 100%;height: 100%;}
