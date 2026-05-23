@@ -43,7 +43,15 @@
 
             </div>
             <div class="width_50 float-right">
-                <div class="language-section p-relative float-right cursor-pointer" onclick="show_language(this)">
+                <div class="language-section p-relative float-right cursor-pointer" 
+                onclick="show_language(this)"
+                
+                    data-link-page="[##cms.cms.link_page##]"
+    data-id="[##cms.query.id|(0)##]"
+    data-catid="[##cms.query.catid|(0)##]"
+
+                
+                >
                     <div class="default-language">
                         <?xml version="1.0" encoding="UTF-8"?>
                         <svg width="25" height="18" viewBox="0 0 640 480" xmlns="http://www.w3.org/2000/svg">
@@ -70,7 +78,7 @@
                     <div class="dropdown-language p-absolute width_100 unvisible text-left">
                         <ul>
                             <li class="">
-                                <a href="/?lid=2" class="color_gray">
+                                <a href="/EN" class="color_gray">
                                     <svg width="20" height="15" viewBox="0 0 640 480"
                                         xmlns="http://www.w3.org/2000/svg">
                                         <defs>
@@ -97,7 +105,7 @@
                                 </a>
                             </li>
                             <li class="">
-                                <a href="/?lid=1" class="color_gray">
+                                <a href="/FA" class="color_gray">
                                     <svg width="20" height="15" viewBox="0 0 640 480"
                                         xmlns="http://www.w3.org/2000/svg">
                                         <defs>

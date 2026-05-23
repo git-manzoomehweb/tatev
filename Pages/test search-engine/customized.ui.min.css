@@ -3064,7 +3064,7 @@ a, i, span, p, h1, h2, h3, h4, input, button{-webkit-transition:all .3s ease-in-
 .section-box { background: none !important; box-shadow: none !important; height: auto !important; text-align: center !important; }
 .captcha-input { width: 40% !important;}
 .Wrapper h3, .Wrapper-registerinfo h3 { font-size: 15px; text-align: center; padding: 15px 0;color: #444449;}
-#login .mm-spn--open { margin-top: 30px !important; }
+/* #login .mm-spn--open { margin-top: 30px !important; } */
 .section-login::before {display: none !important;}
 .captcha_img { width: 30%; text-align: left; }
 .section-login .captcha_img img{width: 100% !important;height: 38px;}
@@ -3708,7 +3708,7 @@ margin-right: 2em;
 .font_18{font-size: 17px;}
 .font_19{font-size: 17px;}
 .font_20{font-size: 17px;}
-.footer-top{display: initial;margin-bottom: 0;}
+.footer-top{display: initial !important ;margin-bottom: 0;}
 .footer-item {max-width: 100%;width: 100%;text-align: center;margin-bottom: 1.5em;}
 .footer-item .inner{width: 100%;float: none;}
 .footer .title {margin-bottom: .5em;}
@@ -4188,3 +4188,18 @@ nav.rtl-menu.mm-spn > ul.mm-spn--open{
 .tour-details-item .tour-btn{color: white;}
 .searched-item{cursor: pointer;padding: 0;}
 .search-item > button{width: 100%;height: 100%;}
+
+.reserve-search button.bg-bgColor-100 {
+    background-color: unset !important;
+}
+
+
+.fa-angle-down::before {
+  content: "\f107";
+}
+
+.fa-angle-right::before {
+  content: "\f105";
+
+}
+
